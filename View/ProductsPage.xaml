@@ -1,0 +1,48 @@
+﻿<Page x:Class="Seiya.ProductsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seiya"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:ProductsPageViewModel}"
+      d:DesignHeight="300" d:DesignWidth="300"
+      Title="ProductsPage">
+
+    <Grid Background="White" ShowGridLines="True">
+         <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Button Grid.Row="0" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[0]}" Content="{Binding Products[0]}"></Button>
+        <Button Grid.Row="0" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[1]}" Content="{Binding Products[1]}"></Button>
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[2]}" Content="{Binding Products[2]}"></Button>
+        <Button Grid.Row="0" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[3]}" Content="{Binding Products[3]}"></Button>
+        <Button Grid.Row="1" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[4]}" Content="{Binding Products[4]}"></Button>
+        <Button Grid.Row="1" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[5]}" Content="{Binding Products[5]}"></Button>
+        <Button Grid.Row="1" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[6]}" Content="{Binding Products[6]}"></Button>
+        <Button Grid.Row="1" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[7]}" Content="{Binding Products[7]}"></Button>
+        <Button Grid.Row="2" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[8]}" Content="{Binding Products[8]}"></Button>
+        <Button Grid.Row="2" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[9]}" Content="{Binding Products[9]}"></Button>
+        <Button Grid.Row="2" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[10]}" Content="{Binding Products[10]}"></Button>
+        <Button Grid.Row="2" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[11]}" Content="{Binding Products[11]}"></Button>
+        <Button Grid.Row="3" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[12]}" Content="{Binding Products[12]}"></Button>
+        <Button Grid.Row="3" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[13]}" Content="{Binding Products[13]}"></Button>
+        <Button Grid.Row="3" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[14]}" Content="{Binding Products[14]}"></Button>
+        <Button Grid.Row="3" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[15]}" Content="{Binding Products[15]}"></Button>
+        <Button Grid.Row="4" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[16]}" Content="{Binding Products[16]}"></Button>
+        <Button Grid.Row="4" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[17]}" Content="{Binding Products[17]}"></Button>
+        <Button Grid.Row="4" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[18]}" Content="{Binding Products[18]}"></Button>
+        <Button Grid.Row="4" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding Products[19]}" Content="{Binding Products[19]}"></Button>
+    </Grid>
+</Page>

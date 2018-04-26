@@ -1,0 +1,28 @@
+[InventoryFilePath]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\Inventario.csv
+[InventoryBackUpDirectory]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\InventarioBackUp\
+[CategoryFilePath]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\CategoryCatalog.txt
+[ReceiptCustomerBackUpFileDirectory]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\ReceiptCustomerBackUp\
+[ReceiptMasterBackUpFileDirectory]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\ReceiptMasterBackUp\
+[SystemDataFilePath]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\SystemData.txt
+[TransactionFilePath]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\Transacciones.csv
+[TransactionBackUpDirectory]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\TransactionBackUp\
+[TransactionTypesFilePath]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\TransactionTypes.txt
+[CustomersFilePath]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\Clientes.csv
+[VendorsFilePath]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\Proveedores.csv
+[UsersFilePath]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\Users.csv
+[OrdersFilePath]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\Pedidos.csv
+[CorteZFileDirectory]
+C:\Users\amorales\Documents\Visual Studio 2015\Projects\mxPOS\mxPOS\Data\CorteZ.csv

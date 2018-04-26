@@ -1,0 +1,17 @@
+NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
+8019,,0,Merceria,Silicon chico pieza,25,1,25,14/01/2018 11:36:56 a. m.,,LLuvia,No,Regular,Cash,0
+8020,ESF7Ux,1251,Unicel,Esfera 7,9,5,45,14/01/2018 11:48:44 a. m.,,LLuvia,No,Regular,Cash,0
+8020,,0,Regalos,,12,2,24,14/01/2018 11:48:44 a. m.,,LLuvia,No,Regular,Cash,0
+8021,1x,809,Envoltura,Envoltura Caja ,45,1,45,14/01/2018 01:06:06 p. m.,,LLuvia,No,Regular,Cash,0
+8022,,0,Regalos,,6,1,6,14/01/2018 01:23:29 p. m.,,LLuvia,No,Regular,Cash,0
+8023,,0,Liston,Liston Metro Otro L20,20,1,20,14/01/2018 01:25:58 p. m.,,LLuvia,No,Regular,Cash,0
+8023,5722SIN2Mx,127,Merceria,Broche metal 1in 12 pzas,24,1,24,14/01/2018 01:25:58 p. m.,,LLuvia,No,Regular,Cash,0
+8023,,0,Merceria,,6,1,6,14/01/2018 01:25:58 p. m.,,LLuvia,No,Regular,Cash,0
+8024,,0,Regalos,,200,1,200,14/01/2018 01:32:25 p. m.,,LLuvia,No,Regular,Cash,0
+8024,,0,Regalos,,9,6,54,14/01/2018 01:32:25 p. m.,,LLuvia,No,Regular,Cash,0
+8025,809726054225x,1468,Merceria,Invitacion en Blanco Corte Laser 5x7in 8pzs,120,2,240,14/01/2018 01:50:20 p. m.,,LLuvia,No,Regular,Cash,0
+8025,,0,Merceria,,-192,-1,-192,14/01/2018 01:51:36 p. m.,,LLuvia,No,Devolucion,Cash,0
+8026,,0,Merceria,,18,1,18,14/01/2018 02:00:38 p. m.,,LLuvia,No,Regular,Cash,0
+8027,1x,809,Envoltura,Envoltura Caja ,40,1,40,14/01/2018 02:03:55 p. m.,,LLuvia,No,Regular,Cash,0
+8027,,0,Regalos,Bolsa Premium M,25,1,25,14/01/2018 02:03:55 p. m.,,LLuvia,No,Regular,Cash,0
+8028,,0,Merceria,hidro gel,8,2,16,14/01/2018 02:06:15 p. m.,,LLuvia,No,Regular,Cash,0
