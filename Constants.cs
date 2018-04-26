@@ -8,7 +8,7 @@ namespace Seiya
 {
     public static class Constants
     {
-        public const string DataFolderPath = @"C:\Users\armoag\source\repos\Seiya\Seiya\Data\";// @"C:\Users\armoag\source\repos\seiya\seiya\Data\";
+        public const string DataFolderPath = @"C:\Projects\seiya-pos\Data\";// @"C:\Users\armoag\source\repos\seiya\seiya\Data\";
         public const string InventoryFileName = "Inventario.csv";
         public const string UsersFileName = "";
         public const string TransactionsFileName = "";
