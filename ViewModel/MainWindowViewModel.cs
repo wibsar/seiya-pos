@@ -21,6 +21,7 @@ namespace Seiya
         private Product _currentProduct;
 
         private static Inventory _inventory = null;
+        private static MainWindowViewModel _appInstance = null;
 
         private string _currentPage;
         private int _currentCartNumber;
@@ -44,12 +45,19 @@ namespace Seiya
 
         #region Constructors
 
-        public MainWindowViewModel()
+        private MainWindowViewModel()
         {
             //Initialize current cart
             CurrentCartNumber = 1;
             //Initialize inventory and Pos data files
             _inventory = new Inventory(Constants.DataFolderPath + Constants.InventoryFileName);
+        }
+
+        public static MainWindowViewModel GetInstance()
+        {
+            if (_appInstance == null)
+                _appInstance = new MainWindowViewModel();
+            return _appInstance;
         }
 
         #endregion
@@ -159,7 +167,10 @@ namespace Seiya
                     CurrentPage = "\\View\\ProductsPage.xaml";
                     break;
                 case "Menu":
-                    CurrentPage = "\\View\\PosMenuFramePage.xaml";
+                    CurrentPage = "\\View\\PosMenuPage.xaml";
+                    break;
+                case "Inventario":
+                    CurrentPage = "\\View\\PosGeneralPage.xaml";
                     break;
             }
         }

@@ -23,7 +23,7 @@ namespace Seiya
         public PosMenuPage()
         {
             InitializeComponent();
-            this.DataContext = new PosMenuPageViewModel();
+            this.DataContext = MainWindowViewModel.GetInstance();
         }
     }
 }
