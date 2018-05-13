@@ -67,7 +67,6 @@
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\Pos.cs" />
-    <Compile Include="ViewModel\PosMenuFramePageViewModel.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\SalesReceipt.cs" />
@@ -79,13 +78,13 @@
     <Compile Include="ViewModel\InventoryMainPageViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\PosGeneralPageViewModel.cs" />
-    <Compile Include="View\PosMenuFramePage.xaml.cs">
-      <DependentUpon>PosMenuFramePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModel\PosMenuPageViewModel.cs" />
     <Compile Include="ViewModel\ProductsPageViewModel.cs" />
     <Compile Include="View\EndSalesPage.xaml.cs">
       <DependentUpon>EndSalesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\InventoryItemPage.xaml.cs">
+      <DependentUpon>InventoryItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InventoryMainPage.xaml.cs">
       <DependentUpon>InventoryMainPage.xaml</DependentUpon>
@@ -116,11 +115,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="View\PosMenuFramePage.xaml">
+    <Page Include="View\EndSalesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\EndSalesPage.xaml">
+    <Page Include="View\InventoryItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

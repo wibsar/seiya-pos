@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Seiya.ViewModel
+namespace Seiya
 {
     public class EndSalesPageViewModel : BaseViewModel
     {
@@ -16,6 +16,7 @@ namespace Seiya.ViewModel
         private int _mxnPeso100;
         private int _mxnPeso200;
         private int _mxnPeso500;
+        private int _mxnPeso1000;
         private decimal _mxnPesoCoinsTotal;
         private int _usdDollar1;
         private int _usdDollar5;
@@ -119,6 +120,19 @@ namespace Seiya.ViewModel
             {
                 _mxnPeso500 = value;
                 OnPropertyChanged("MxnPeso500");
+            }
+        }
+
+        public int MxnPeso1000
+        {
+            get
+            {
+                return _mxnPeso100;
+            }
+            set
+            {
+                _mxnPeso100 = value;
+                OnPropertyChanged("MxnPeso100");
             }
         }
 

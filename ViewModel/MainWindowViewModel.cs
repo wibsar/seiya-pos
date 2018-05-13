@@ -160,17 +160,53 @@ namespace Seiya
             //Change main frame page based on the parameter
             switch ((string)parameter)
             {
-                case "General":
+                case "general":
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     break;
-                case "Product":
+                case "product_list":
                     CurrentPage = "\\View\\ProductsPage.xaml";
                     break;
-                case "Menu":
+                case "menu":
                     CurrentPage = "\\View\\PosMenuPage.xaml";
                     break;
-                case "Inventario":
-                    CurrentPage = "\\View\\PosGeneralPage.xaml";
+                case "inventory":
+                    CurrentPage = "\\View\\InventoryMainPage.xaml";
+                    break;
+                case "sales_report":
+                    CurrentPage = "\\View\\EndSalesPage.xaml";
+                    break;
+                case "analysis":
+                    CurrentPage = "";
+                    break;
+                case "system":
+                    CurrentPage = "";
+                    break;
+                case "returns":
+                    CurrentPage = "";
+                    break;
+                case "clients":
+                    CurrentPage = "";
+                    break;
+                case "vendors":
+                    CurrentPage = "";
+                    break;
+                case "users":
+                    CurrentPage = "";
+                    break;
+                case "orders":
+                    CurrentPage = "";
+                    break;
+                case "calculator":
+                    CurrentPage = "";
+                    break;
+                case "users_guide":
+                    CurrentPage = "";
+                    break;
+                case "support":
+                    CurrentPage = "";
+                    break;
+                case "information":
+                    CurrentPage = "";
                     break;
             }
         }

@@ -5,14 +5,125 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
       mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:EndSalesPageViewModel}"
       d:DesignHeight="450" d:DesignWidth="800"
       Title="EndSalesPage">
 
     <Grid ShowGridLines="True" Background="White">
-        <StackPanel>
-            <TextBlock>
-                Realizar Corte Z
-            </TextBlock>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- User info and dates -->
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <TextBlock>Usuario: </TextBlock>
+            <TextBlock>Fecha Inicio</TextBlock>
+            <TextBlock>Fecha Cierre</TextBlock>
         </StackPanel>
+
+        <!-- Users input for quantities -->
+        <Grid Grid.Row="1" Grid.Column="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <!-- Pesos panel -->
+            <StackPanel Grid.Column="0" Grid.Row="0">
+                <TextBlock Text="Moneda Nacional MXN"></TextBlock>
+                <TextBlock Text="1000"></TextBlock>
+                <TextBlock Text="500"></TextBlock>
+                <TextBlock Text="200"></TextBlock>
+                <TextBlock Text="100"></TextBlock>
+                <TextBlock Text="50"></TextBlock>
+                <TextBlock Text="20"></TextBlock>
+                <TextBlock Text="Monedas"></TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="0">
+                <TextBlock Text="Cantidad"></TextBlock>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+            </StackPanel>
+            <!-- USD panel -->
+            <StackPanel Grid.Column="0" Grid.Row="1">
+                <TextBlock Text="Dolares Americanos USD"></TextBlock>
+                <TextBlock Text="100"></TextBlock>
+                <TextBlock Text="50"></TextBlock>
+                <TextBlock Text="20"></TextBlock>
+                <TextBlock Text="10"></TextBlock>
+                <TextBlock Text="5"></TextBlock>
+                <TextBlock Text="1"></TextBlock>
+                <TextBlock Text="Monedas"></TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1" Grid.Row="1">
+                <TextBlock Text="Cantidad"></TextBlock>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+            </StackPanel>
+        </Grid>
+        
+        <!-- Sales data based on sales by type and expenses -->
+        <Grid Grid.Row="1" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <StackPanel Grid.Column="0">
+                <TextBlock Text="Tarjeta"></TextBlock>
+                <TextBlock Text="Otro Metodo"></TextBlock>
+                <TextBlock Text="Efectivo"></TextBlock>
+                <TextBlock Text="Gastos"></TextBlock>
+                <TextBlock Text="Caja"></TextBlock>
+                <TextBlock Text="Diferencia"></TextBlock>
+                <TextBlock Text="Total Ventas"></TextBlock>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+                <TextBox Text=""></TextBox>
+            </StackPanel>
+        </Grid>
+
+        <!-- User Comments field -->
+        <StackPanel Grid.Row="2" Grid.Column="0">
+            <TextBlock Text="Comments"></TextBlock>
+            <TextBox Text="Comments here"></TextBox>
+        </StackPanel>
+
+        <!-- Buttons for sales report type -->
+        <Grid Grid.Row="2" Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            
+            <Button Grid.Column="0">Corte X</Button>
+            <Button Grid.Column="1">Corte Z</Button>
+        </Grid>
+
     </Grid>
 </Page>

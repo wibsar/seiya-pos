@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace Seiya
 {
     /// <summary>
-    /// Interaction logic for PosMenuFramePagexaml.xaml
+    /// Interaction logic for InventoryItemPage.xaml
     /// </summary>
-    public partial class PosMenuFramePage : Page
+    public partial class InventoryItemPage : Page
     {
-        public PosMenuFramePage()
+        public InventoryItemPage()
         {
             InitializeComponent();
-            this.DataContext = new PosMenuFramePageViewModel();
+            this.DataContext = new InventoryMainPageViewModel();
         }
     }
 }
