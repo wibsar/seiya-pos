@@ -25,7 +25,10 @@
 
         <!-- Grid for quantity-->
         <Grid Column="0" Row="0">
-            <TextBox Text="{Binding Description}"></TextBox>
+            <StackPanel>
+                <TextBlock Text="Descripción"></TextBlock>
+                <TextBox Text="{Binding Description}"></TextBox>
+            </StackPanel>
         </Grid>
 
         <!-- Grid for Product Description-->
@@ -33,9 +36,10 @@
             <Grid ShowGridLines="True">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
-
-                <TextBox Grid.Row="0" Text="{Binding Price , Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False"  >
+                <TextBlock Text="Precio"></TextBlock>
+                <TextBox Grid.Row="1" Text="{Binding Price , Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False"  >
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding SomeCommand}" Key="Return" />
                         <KeyBinding Command="{Binding SomeCommand}" Key="Enter" />

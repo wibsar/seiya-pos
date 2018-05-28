@@ -16,17 +16,19 @@ namespace Seiya
     public class ProductsPageViewModel : ObservableObject
     {
         #region Fields
-
         private static ObservableCollection<string> _products;
-
+        private static string _pageOneButtonTitle;
+        private static string _pageTwoButtonTitle;
+        private static string _pageThreeButtonTitle;
+        private static string _pageFourButtonTitle;
+        private static string _pageFiveButtonTitle;
         #endregion
 
         #region Constructors
 
         public ProductsPageViewModel()
         {
-            var temp = CategoryCatalog.GetList(Constants.DataFolderPath + Constants.ProductPageList);
-            _products = new ObservableCollection<string>(temp);
+            Products = this.GetPageItemsList(MainWindowViewModel.LastSelectedProductsPage);
         }  
 
         #endregion
@@ -36,7 +38,76 @@ namespace Seiya
         public ObservableCollection<string> Products
         {
             get { return _products; }
-            set { _products = value; OnPropertyChanged("Products");}
+            set
+            {
+                _products = value;
+                OnPropertyChanged("Products");
+            }
+        }
+
+        public string PageOneButtonTitle
+        {
+            get
+            {
+                return _pageOneButtonTitle;
+            }
+            set
+            {
+                _pageOneButtonTitle = value;
+                OnPropertyChanged("PageOneButtonTitle");
+            }
+        }
+
+        public string PageTwoButtonTitle
+        {
+            get
+            {
+                return _pageTwoButtonTitle;
+            }
+            set
+            {
+                _pageTwoButtonTitle = value;
+                OnPropertyChanged("PageTwoButtonTitle");
+            }
+        }
+
+        public string PageThreeButtonTitle
+        {
+            get
+            {
+                return _pageThreeButtonTitle;
+            }
+            set
+            {
+                _pageThreeButtonTitle = value;
+                OnPropertyChanged("PageThreeButtonTitle");
+            }
+        }
+
+        public string PageFourButtonTitle
+        {
+            get
+            {
+                return _pageFourButtonTitle;
+            }
+            set
+            {
+                _pageFourButtonTitle = value;
+                OnPropertyChanged("PageFourButtonTitle");
+            }
+        }
+
+        public string PageFiveButtonTitle
+        {
+            get
+            {
+                return _pageFiveButtonTitle;
+            }
+            set
+            {
+                _pageFiveButtonTitle = value;
+                OnPropertyChanged("PageFiveButtonTitle");
+            }
         }
 
         #endregion
@@ -69,7 +140,7 @@ namespace Seiya
         internal void Execute_LoadProductsListCommand(object parameter)
         {
             //Re-loads the list of products to be shown in the page
-            var temp = CategoryCatalog.GetList(Constants.DataFolderPath + Constants.ProductPageList);
+            var temp = CategoryCatalog.GetList(Constants.DataFolderPath + Constants.ProductPageOne);
             _products = new ObservableCollection<string>(temp);
         }
 
@@ -80,5 +151,64 @@ namespace Seiya
         }
         #endregion
 
+        #region Methods
+        /// <summary>
+        /// Get items list and title for the pages
+        /// </summary>
+        /// <param name="pageNumber"></param>
+        /// <returns></returns>
+        public ObservableCollection<string> GetPageItemsList(int pageNumber)
+        {
+            List<string> items;
+
+            switch (pageNumber)
+            {
+                case 1:
+                    {
+                        items = CategoryCatalog.GetList(Constants.DataFolderPath + Constants.ProductPageOne);
+                        _pageOneButtonTitle = items.First();
+                        items.RemoveAt(0);
+                        break;
+                    }
+
+                case 2:
+                    {
+                        items = CategoryCatalog.GetList(Constants.DataFolderPath + Constants.ProductPageTwo);
+                        _pageTwoButtonTitle = items.First();
+                        items.RemoveAt(0);
+                        break;
+                    }
+
+                case 3:
+                    {
+                        items = CategoryCatalog.GetList(Constants.DataFolderPath + Constants.ProductPageThree);
+                        _pageThreeButtonTitle = items.First();
+                        items.RemoveAt(0);
+                        break;
+                    }
+                case 4:
+                    {
+                        items = CategoryCatalog.GetList(Constants.DataFolderPath + Constants.ProductPageFour);
+                        _pageFourButtonTitle = items.First();
+                        items.RemoveAt(0);
+                        break;
+                    }
+                case 5:
+                    {
+                        items = CategoryCatalog.GetList(Constants.DataFolderPath + Constants.ProductPageFive);
+                        _pageFiveButtonTitle = items.First();
+                        items.RemoveAt(0);
+                        break;
+                    }
+                default:
+                    {
+                        items = null;
+                        break;
+                    }
+            }
+            return new ObservableCollection<string>(items);
+        }
+
+        #endregion
     }
 }

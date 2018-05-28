@@ -8,14 +8,46 @@ namespace Seiya
 {
     public static class Constants
     {
+        //Main data path
         public const string DataFolderPath = @"C:\Projects\seiya-pos\Data\";// @"C:\Users\armoag\source\repos\seiya\seiya\Data\";
-        public const string InventoryFileName = "Inventario.csv";
-        public const string UsersFileName = "";
-        public const string TransactionsFileName = "";
-        public const string EndOfDaySalesFileName = "";
-        public const string BackupFolderPath = "";
-        public const string CategoryListFileName = "CategoryCatalog.txt";
-        public const string ProductPageList = "Merceria.txt";
+        public const string PosDataFileName = "PosData.csv";
+        public const string ReceiptBackupFolderPath = @"ReceiptCustomerBackUp\";
+        public const string MasterReceiptBackupFolderPath = @"MasterReceiptCustomerBackUp\";
 
+        //Inventory
+        public const string InventoryBackupFolderPath = @"InventoryBackUp\";
+        public const string InventoryFileName = "Inventario.csv";
+
+        //Transactions Files
+        public const string TransactionsBackupFolderPath = @"TransactionBackUp\";
+        public const string TransactionsFileName = "Transacciones.csv";
+        public const string MasterTransactionsFileName = "TransaccionesMaster.csv";
+        public const string HistoryTransactionsFileName = "TransaccionesHistorial.csv";
+        public const string TransactionsTypesFileName = "TransactionTypes.txt";
+
+        //End of day reports
+        public const string EndOfDaySalesFileName = "CorteZ.csv";
+        public const string MasterEndOfDaySalesFileName = "CorteZMaster.csv";
+        public const string EndOfDaySalesBackupFolderPath = @"CorteZBackUp\";
+
+        //Product pages by categories
+        public const string CategoryListFileName = "CategoryCatalog.txt";
+        public const string ProductPageOne = @"ProductPages\ProductsPage1.txt";
+        public const string ProductPageTwo = @"ProductPages\ProductsPage2.txt";
+        public const string ProductPageThree = @"ProductPages\ProductsPage3.txt";
+        public const string ProductPageFour = @"ProductPages\ProductsPage4.txt";
+        public const string ProductPageFive = @"ProductPages\ProductsPage5.txt";
+
+        //Orders Files
+        public const string OrdersFolderPath = @"Orders\";
+        public const string OrdersFileName = "Pedidos.csv";
+
+        //Users and clients
+        public const string UsersFileName = "Users.csv";
+        public const string ClientsFileName = "Clientes.csv";
+        public const string VendorsFileName = "Proveedores.csv";
+
+        //Constants
+        public const int MaxNumberListItems = 20;
     }
 }

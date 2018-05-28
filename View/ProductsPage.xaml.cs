@@ -23,7 +23,7 @@ namespace Seiya
         public ProductsPage()
         {
             InitializeComponent();
-            this.DataContext = new ProductsPageViewModel();           
+            this.DataContext = MainWindowViewModel.GetInstance();           
         }
     }
 }

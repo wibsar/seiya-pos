@@ -7,10 +7,17 @@
         xmlns:m="using:Seiya"    
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
-        Title="MainWindow" Height="700" Width="1050">
+        Title="MainWindow" Height="700" Width="1050" FontFamily=".\Resources\Fonts\#Comfortaa">
 
     <Window.Resources>
-
+        <Style TargetType="Window">
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
+        <Style TargetType="Button" >
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="FontSize" Value="16" />
+        </Style>
     </Window.Resources>
 
     <!-- Main Window Grid -->
@@ -35,7 +42,7 @@
                     <ColumnDefinition Width="4*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content ="Menu" Command="{Binding ChangePageCommand}" CommandParameter="menu" Background="#FFDDDDDD"/>
+                <Button Grid.Column="0" Content ="Menu" Command="{Binding ChangePageCommand}" CommandParameter="menu" Background="#FFDDDDDD" Grid.ColumnSpan="2" Height="56" Margin="0,0,99,0" VerticalAlignment="Top"></Button>
             </Grid>
         </Grid>
 
@@ -131,11 +138,27 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Column="0">
-                        <TextBox Text="{Binding CheckoutTotal}"></TextBox>
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <!-- Total in MXN -->
+                            <TextBlock Grid.Row ="0" Grid.Column="0" Text="MXN"></TextBlock>
+                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CheckoutTotal}"></TextBox>
+                            <!-- Total in USD -->
+                            <TextBlock Grid.Row ="1" Grid.Column="0" Text="USD"></TextBlock>
+                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CheckoutTotalUSD}" Height="40" VerticalAlignment="Bottom"></TextBox>
+                        </Grid>
+
                     </Grid>
 
                     <Grid Column="1">
-                        <Button Content="PayNow" Command="{Binding StartCheckoutCommand}"></Button>
+                        <Button Content="Pagar" Command="{Binding StartCheckoutCommand}"></Button>
                     </Grid>
                 </Grid>
             </Grid>
@@ -159,23 +182,23 @@
                 </Grid>
 
                 <Grid Column="1" Margin="2,2,0,2">
-                    <Button Content ="Categoria 1" Command="{Binding ChangePageCommand}" CommandParameter="product_list"></Button>
+                    <Button Content ="{Binding PageOneTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_1"></Button>
                 </Grid>
 
                 <Grid Column="2" Margin="2,2,0,2">
-                    <Button Content ="Categoria 2" Command="{Binding ChangePageCommand}" CommandParameter="product_list"></Button>
+                    <Button Content ="{Binding PageTwoTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_2"></Button>
                 </Grid>
 
                 <Grid Column="3" Margin="2,2,0,2">
-                    <Button Content ="Categoria 3" Command="{Binding ChangePageCommand}" CommandParameter="product_list"></Button>
+                    <Button Content ="{Binding PageThreeTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_3"></Button>
                 </Grid>
 
                 <Grid Column="4" Margin="2,2,0,2">
-                    <Button Content ="Categoria 4" Command="{Binding ChangePageCommand}" CommandParameter="product_list "></Button>
+                    <Button Content ="{Binding PageFourTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_4"></Button>
                 </Grid>
 
                 <Grid Column="5" Margin="2,2,0,2">
-                    <Button Content ="Categoria 5" Command="{Binding ChangePageCommand}" CommandParameter="product_list"></Button>
+                    <Button Content ="{Binding PageFiveTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_5"></Button>
                 </Grid>
             </Grid>
         </Grid>
@@ -184,13 +207,17 @@
         <Grid Column="1" Row="2">
             <Grid ShowGridLines="True">
                 <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBox x:Name="txtCode" Grid.Column="0" Grid.Row="0" Text="{Binding Code}"></TextBox>
+                <TextBlock Text="Codigo o Busqueda"></TextBlock>
+                <TextBox x:Name="txtCode" Grid.Column="0" Grid.Row="1" Text="{Binding Code}"></TextBox>
+                <Button Grid.Column="1" Grid.Row ="0"  Grid.RowSpan="2" Content="Lupa"></Button>
 
             </Grid>
         </Grid>

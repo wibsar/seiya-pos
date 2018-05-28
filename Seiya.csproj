@@ -72,6 +72,7 @@
     <Compile Include="Model\SalesReceipt.cs" />
     <Compile Include="Model\SalesSummaryReport.cs" />
     <Compile Include="Model\Transaction.cs" />
+    <Compile Include="Model\Utilities.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\EndSalesPageViewModel.cs" />
@@ -97,6 +98,9 @@
     </Compile>
     <Compile Include="View\ProductListControl.xaml.cs">
       <DependentUpon>ProductListControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ProductsListEditPage.xaml.cs">
+      <DependentUpon>ProductsListEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\ProductsPage.xaml.cs">
       <DependentUpon>ProductsPage.xaml</DependentUpon>
@@ -139,9 +143,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="View\ProductsPage.xaml">
+    <Page Include="View\ProductsListEditPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ProductsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -168,10 +176,19 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Resource Include="Resources\Fonts\Comfortaa-Regular.ttf" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Resources\Images\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Icons\Categoria icon.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

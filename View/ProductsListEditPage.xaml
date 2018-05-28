@@ -1,0 +1,119 @@
+﻿<Page x:Class="Seiya.ProductsListEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seiya"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ProductsListEditPage">
+
+    <Grid ShowGridLines="True" Background="White">
+        <!--Main Grid definition-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- Header product list selection buttons -->
+        <Grid ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Lista 1" Command="{Binding SelectProductsListCommand}" CommandParameter="1" Foreground="#FF052D3B"/>
+            <Button Grid.Column="1" Content="Lista 2" Command="{Binding SelectProductsListCommand}" CommandParameter="2"/>
+            <Button Grid.Column="2" Content="Lista 3" Command="{Binding SelectProductsListCommand}" CommandParameter="3"/>
+            <Button Grid.Column="3" Content="Lista 4" Command="{Binding SelectProductsListCommand}" CommandParameter="4"/>
+            <Button Grid.Column="4" Content="Lista 5" Command="{Binding SelectProductsListCommand}" CommandParameter="5"/>
+
+            <!-- Button to open details page -->
+        </Grid>
+
+        <!-- Table of inventory items found based on the search -->
+        <Grid Grid.Row="1" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!-- List of products -->
+            <ListBox x:Name ="ProductListBox" Grid.Row="1" Margin="5" ItemsSource="{Binding CurrentPageListProducts}" SelectedItem="{Binding SelectedPageListProduct, Mode=TwoWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel>
+                            <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch"></TextBlock>
+                            <TextBlock Text="{Binding Category}" HorizontalAlignment="Stretch"></TextBlock>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{Binding Price}"></TextBlock>
+                                <TextBlock Text="    "></TextBlock>
+                                <TextBlock Text="{Binding PriceCurrency}"></TextBlock>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+
+            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <!-- List of Product properties -->
+                <StackPanel Grid.Column="0" Grid.Row="1">
+                    <TextBlock>Codigo</TextBlock>
+                    <TextBlock>Descripcion</TextBlock>
+                    <TextBlock>Categoria</TextBlock>
+                    <TextBlock>Precio</TextBlock>
+                    <TextBlock>Moneda de Precio</TextBlock>
+                </StackPanel>
+
+                <!-- Inputs for Product properties -->
+                <StackPanel Grid.Column="1" Grid.Row="1">
+                    <TextBox Text="{Binding SelectedPageListProduct.Code}"></TextBox>
+                    <TextBox Text="{Binding SelectedPageListProduct.Description}"></TextBox>
+                    <TextBox Text="{Binding SelectedPageListProduct.Category}"></TextBox>
+                    <TextBox Text="{Binding SelectedPageListProduct.Price}"></TextBox>
+                    <TextBox Text="{Binding SelectedPageListProduct.PriceCurrency}"></TextBox>
+                </StackPanel>
+
+                <!-- Search item textbox-->
+                <TextBox Name="AddToListTxtBox" HorizontalAlignment="Left" Height="23" Margin="45,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
+                <!-- Add to list button-->
+                <Button Content="Agregar a Lista" Command="{Binding AddListItemCommand}" CommandParameter="{Binding Text, ElementName=AddToListTxtBox}" Grid.Column="1" HorizontalAlignment="Left" Margin="43,98,0,0" VerticalAlignment="Top" Width="122"/>
+                <!-- List name-->
+                <TextBox Name="ListNameTxtBox" HorizontalAlignment="Left" Height="23" Margin="45,40,0,0" TextWrapping="Wrap" Text="{Binding CurrentPageListTitle}" VerticalAlignment="Top" Width="120"/>
+            </Grid>
+        </Grid>
+
+
+        <!-- Inventory options -->
+        <Grid Grid.Row="2" ShowGridLines="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Button Grid.Column="0" Content="Subir" Command="{Binding MoveUpListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}"></Button>
+            <Button Grid.Column="1" Content="Bajar" Command="{Binding MoveDownListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}"></Button>
+            <Button Grid.Column="2" Content="Eliminar" Command="{Binding DeleteListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}"></Button>
+            <Button Grid.Column="3" Content="Guardar" Command="{Binding SaveChangesProductListCommand}" CommandParameter="{Binding CurrentSelectedItemsListPageFileName}"></Button>
+        </Grid>
+    </Grid>
+
+</Page>

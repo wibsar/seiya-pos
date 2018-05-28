@@ -9,32 +9,34 @@ using GenericParsing;
 
 namespace Seiya
 {
+    /// <summary>
+    /// Contains folder file paths and pos information such as current receipt number
+    /// </summary>
     public class Pos
     {
-        //TODO: move internal files to different directory
-
         #region Fields
         private readonly string _systemDataFilePath;
         private DataTable _dictofdata;
         #endregion
 
         #region FilePaths
-        private const string _clientsDataFilePath = @"C:\Users\Public\Documents\mxData\Data\Clientes.csv";
-        private const string _categoryCatalog = @"C:\Users\Public\Documents\mxData\Data\CategoryCatalog.txt";
-        private const string _corteZDataFilePath = @"C:\Users\Public\Documents\mxData\Data\CorteZ.csv";
-        private const string _inventoryDataFilePath = @"C:\Users\Public\Documents\mxData\Data\Inventario.csv";
-        private const string _ordersDataFilePath = @"C:\Users\Public\Documents\mxData\Data\Pedidos.csv";
-        private const string _posDataFilePath = @"C:\Users\Public\Documents\mxData\Data\PosData.csv";
-        private const string _vendorsDatafilePath = @"C:\Users\Public\Documents\mxData\Data\Provedores.csv";
-        private const string _transactionsDataFilePath = @"C:\Users\Public\Documents\mxData\Data\Transacciones.csv";
-        private const string _transactionMasterDataFilePath = @"C:\Users\Public\Documents\mxData\Data\TransaccionesMaster.csv";
-        private const string _transactionHistoryDataFilePath = @"C:\Users\Public\Documents\mxData\Data\TransaccionesHistorial.csv";
-        private const string _transactionTypes = @"C:\Users\Public\Documents\mxData\Data\TransactionTypes.txt";
-        private const string _users = @"C:\Users\Public\Documents\mxData\Data\Users.csv";
-        private const string _inventoryBackUpPath = @"C:\Users\Public\Documents\mxData\Data\InventoryBackUp\";
-        private const string _receiptCustomerBackUpPath = @"C:\Users\Public\Documents\mxData\Data\ReceiptCustomerBackUp\";
-        private const string _receiptMasterBackUpPath = @"C:\Users\Public\Documents\mxData\Data\ReceiptMasterBackUp\";
-        private const string _transactionBackUpPath = @"C:\Users\Public\Documents\mxData\Data\TransactionBackUp\";
+
+        private const string _clientsDataFilePath = Constants.DataFolderPath + Constants.ClientsFileName;
+        private const string _categoryCatalog = Constants.DataFolderPath + Constants.CategoryListFileName;
+        private const string _corteZDataFilePath = Constants.DataFolderPath + Constants.EndOfDaySalesFileName;
+        private const string _inventoryDataFilePath = Constants.DataFolderPath + Constants.InventoryFileName;
+        private const string _ordersDataFilePath = Constants.DataFolderPath + Constants.OrdersFileName;
+        private const string _posDataFilePath = Constants.DataFolderPath + Constants.PosDataFileName;
+        private const string _vendorsDatafilePath = Constants.DataFolderPath + Constants.VendorsFileName;
+        private const string _transactionsDataFilePath = Constants.DataFolderPath + Constants.TransactionsFileName;
+        private const string _transactionMasterDataFilePath = Constants.DataFolderPath + Constants.MasterTransactionsFileName;
+        private const string _transactionHistoryDataFilePath = Constants.DataFolderPath + Constants.HistoryTransactionsFileName;
+        private const string _transactionTypes = Constants.DataFolderPath + Constants.TransactionsTypesFileName;
+        private const string _transactionBackUpPath = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath;
+        private const string _users = Constants.DataFolderPath + Constants.UsersFileName;
+        private const string _inventoryBackUpPath = Constants.DataFolderPath + Constants.InventoryBackupFolderPath;
+        private const string _receiptCustomerBackUpPath = Constants.DataFolderPath + Constants.ReceiptBackupFolderPath;
+        private const string _receiptMasterBackUpPath = Constants.DataFolderPath + Constants.MasterReceiptBackupFolderPath;
 
         #endregion
 
@@ -49,8 +51,7 @@ namespace Seiya
         public int LastTransactionNumber { get; set; }
         public int LastInternalNumber { get; set; }
         public int LastOrderNumber { get; set; }
-
-
+       
         public string TransactionBackUpPath
         {
             get { return _transactionBackUpPath; }
@@ -145,6 +146,9 @@ namespace Seiya
 
         #region Methods
 
+        /// <summary>
+        /// Gets data from csv database and saves it in a data dictionary
+        /// </summary>
         private void InitializeData()
         {
             using (var parser = new GenericParserAdapter(_systemDataFilePath))
@@ -174,6 +178,9 @@ namespace Seiya
             }
         }
 
+        /// <summary>
+        /// Method to write pos data from memory to csv file
+        /// </summary>
         public void UpdateAllData()
         {
             StringBuilder sb = new StringBuilder();
@@ -190,6 +197,10 @@ namespace Seiya
             File.WriteAllText(_systemDataFilePath, sb.ToString());
         }
 
+        /// <summary>
+        /// Method to get the next receipt number assigned
+        /// </summary>
+        /// <returns></returns>
         public int GetNextReceiptNumber()
         {
             var row = _dictofdata.Rows[0];
@@ -198,14 +209,23 @@ namespace Seiya
             return LastReceiptNumber;
         }
 
+        /// <summary>
+        /// Method to get the next end of sales receipt number
+        /// </summary>
+        /// <returns></returns>
         public int GetNextCorteZNumber()
         {
+            //TODO: Change method name to use End of Sales instead of CorteZ
             var row = _dictofdata.Rows[0];
             LastCorteZNumber = LastCorteZNumber + 1;
             row["UltimoCorteZNumero"] = LastCorteZNumber;
             return LastCorteZNumber;
         }
 
+        /// <summary>
+        /// Get next transaction number
+        /// </summary>
+        /// <returns></returns>
         public int GetNextTransactionNumber()
         {
             var row = _dictofdata.Rows[0];
@@ -214,6 +234,10 @@ namespace Seiya
             return LastTransactionNumber;
         }
 
+        /// <summary>
+        /// Get next internal transaction number
+        /// </summary>
+        /// <returns></returns>
         public int GetNextInternalNumber()
         {
             var row = _dictofdata.Rows[0];
@@ -222,6 +246,10 @@ namespace Seiya
             return LastInternalNumber;
         }
 
+        /// <summary>
+        /// Returns next order number
+        /// </summary>
+        /// <returns></returns>
         public int GetNextOrderNumber()
         {
             var row = _dictofdata.Rows[0];
@@ -230,6 +258,10 @@ namespace Seiya
             return LastOrderNumber;
         }
 
+        /// <summary>
+        /// Updates exchange rate in memory
+        /// </summary>
+        /// <param name="newExchangeRate"></param>
         public void UpdateExchangeRate(decimal newExchangeRate)
         {
             var row = _dictofdata.Rows[0];
@@ -237,6 +269,10 @@ namespace Seiya
             row["TipoCambio"] = ExchangeRate;
         }
 
+        /// <summary>
+        /// Updates printer name in memory
+        /// </summary>
+        /// <param name="newPrinterName"></param>
         public void UpdatePrinterName(string newPrinterName)
         {
             var row = _dictofdata.Rows[0];
@@ -244,6 +280,5 @@ namespace Seiya
             row["NombreImpresora"] = PrinterName;
         }
         #endregion
-
     }
 }

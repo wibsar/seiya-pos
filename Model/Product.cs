@@ -3,11 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media.Imaging;
 
 namespace Seiya
 {
+    /// <summary>
+    /// Class for products to be used in the inventory and point of sale system
+    /// </summary>
     public class Product
     {
+        #region Fields
+        private BitmapImage _image;
+        #endregion
+
         #region Properties
 
         public string Name { get; set; }
@@ -24,12 +32,32 @@ namespace Seiya
         public decimal Price { get; set; }
         public string PriceCurrency { get; set; }
         public int MinimumStockQuantity { get; set; }
-        public decimal AmountSold { get; set; } //Cantidad de dinero vendido
-        public int InternalQuantity { get; set; } //Unidades internas
-        public int QuantitySold { get; set; } //Cantidad de unidades vendidas
+        public decimal AmountSold { get; set; }
+        public int InternalQuantity { get; set; }
+        public int QuantitySold { get; set; } 
         public int LocalQuantityAvailable { get; set; }
         public int TotalQuantityAvailable { get; set; }
+        public string ImageName { get; set; }
 
+        public BitmapImage Image
+        {
+            get
+            {
+                BitmapImage bitmap = new BitmapImage();
+                if (ImageName != null)
+                {
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(@"C:\Projects\seiya-pos\Data\Images\" + ImageName);
+                    bitmap.EndInit();
+                    _image = bitmap;
+                }
+                return bitmap;
+            }
+            set
+            {
+                _image = value;
+            }
+        }
         public DateTime LastPurchaseDate { get; set; }
         public DateTime LastSaleDate { get; set; }
         public int LastQuantitySold { get; set; }

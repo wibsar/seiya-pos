@@ -16,7 +16,7 @@ namespace Seiya
     {
         #region Fields
 
-        public readonly static Inventory _inventory = null; 
+        public static Inventory _inventory = null; 
 
         const string cantidadLocalCol = "CantidadLocal";
         DataTable _dictofdata;
@@ -30,8 +30,8 @@ namespace Seiya
         #endregion
 
         #region Constructors
-
-        public Inventory(string filePath)
+        //Singleton pattern
+        private Inventory(string filePath)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             //Read inventory CSV format
@@ -39,6 +39,12 @@ namespace Seiya
             LoadCsvToDataTable();
         }
 
+        public static Inventory GetInstance(string filePath)
+        {
+            if (_inventory == null)
+                _inventory = new Inventory(filePath);
+            return _inventory;
+        }
         #endregion
 
         #region Methods
@@ -181,8 +187,9 @@ namespace Seiya
                             QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
                             LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
                             TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
-                            MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),                   
-                            LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString())
+                            MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),
+                            LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString()),
+                            ImageName = row["Imagen"].ToString()
                         };
                     }
                 }
@@ -229,7 +236,8 @@ namespace Seiya
                             LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
                             TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
                             MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),
-                            LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString())
+                            LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString()),
+                            ImageName = row["Imagen"].ToString()
                         };
                     }
                 }
@@ -296,6 +304,7 @@ namespace Seiya
                     row["CantidadMinima"] = product.MinimumStockQuantity.ToString();
                     row["UltimoPedidoFecha"] = product.LastPurchaseDate.ToString();
                     row["UltimaTransaccionFecha"] = product.LastSaleDate.ToString();
+                    row["Imagen"] = product.ImageName;
                 }
             }
 
@@ -329,6 +338,7 @@ namespace Seiya
             row["CantidadMinima"] = product.MinimumStockQuantity.ToString();
             row["UltimoPedidoFecha"] = product.LastPurchaseDate.ToString();
             row["UltimaTransaccionFecha"] = product.LastSaleDate.ToString();
+            row["Imagen"] = product.ImageName;
 
             return true;
         }

@@ -13,6 +13,7 @@ namespace Seiya
     {
         #region Fields
         private ObservableCollection<Product> _currentProductItemsList = new ObservableCollection<Product>();
+        private string _currentPage;
         #endregion
 
         //_inventory
@@ -39,6 +40,19 @@ namespace Seiya
             {
                 _currentProductItemsList = value;
                 OnPropertyChanged("CurrentProductItemsList");
+            }
+        }
+
+        /// <summary>
+        /// Holds current page
+        /// </summary>
+        public string CurrentPage
+        {
+            get { return _currentPage; }
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged("CurrentPage");
             }
         }
 
@@ -70,10 +84,32 @@ namespace Seiya
 
         #region Commands
 
-        #endregion  
-
         #region ChangePageCommand
 
+        public ICommand ChangePageCommand { get { return _changePageCommand ?? (_changePageCommand = new DelegateCommand(Execute_ChangePageCommand, CanExecute_ChangePageCommand)); } }
+        private ICommand _changePageCommand;
+
+        internal void Execute_ChangePageCommand(object parameter)
+        {
+            //Change main frame page based on the parameter
+            switch ((string)parameter)
+            {
+                case "inventory_details":
+                    CurrentPage = "\\View\\InventoryItemPage.xaml";
+                    break;
+                case "inventory":
+                    CurrentPage = "\\View\\InventoryMainPage.xaml";
+                    break;
+            }
+        }
+
+        internal bool CanExecute_ChangePageCommand(object parameter)
+        {
+            return true;
+        }
         #endregion
+
+        #endregion  
+
     }
 }

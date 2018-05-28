@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Seiya
 {
     /// <summary>
-    /// Interaction logic for InventoryItemPage.xaml
+    /// Interaction logic for ProductsListEditPage.xaml
     /// </summary>
-    public partial class InventoryItemPage : Page
+    public partial class ProductsListEditPage : Page
     {
-        public InventoryItemPage()
+        public ProductsListEditPage()
         {
             InitializeComponent();
             this.DataContext = MainWindowViewModel.GetInstance();

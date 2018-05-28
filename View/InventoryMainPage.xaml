@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
       mc:Ignorable="d" 
-      d:DataContext="{d:DesignInstance local:InventoryMainPageViewModel}"
+      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
       d:DesignHeight="600" d:DesignWidth="800"
       Title="InventoryMainPage">
 
@@ -29,7 +29,7 @@
             <!-- Search for items in inventory -->
             <TextBox Text="Search"></TextBox>
             <!-- Button to open details page -->
-            <Button Grid.Column="1" Content="Details"></Button>
+            <Button Grid.Column="1" Content="Detalles" Command="{Binding ChangePageCommand}" CommandParameter="inventory_details" ></Button>
         </Grid>
 
         <!-- Table of inventory items found based on the search -->

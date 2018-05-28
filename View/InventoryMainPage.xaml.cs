@@ -23,7 +23,7 @@ namespace Seiya
         public InventoryMainPage()
         {
             InitializeComponent();
-            DataContext = new InventoryMainPageViewModel();
+            DataContext = MainWindowViewModel.GetInstance();
         }
     }
 }

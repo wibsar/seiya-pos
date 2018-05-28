@@ -6,7 +6,7 @@
       xmlns:local="clr-namespace:Seiya"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      d:DataContext="{d:DesignInstance local:InventoryMainPageViewModel}"
+      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
       Title="InventoryItemPage">
 
     <Grid ShowGridLines="True" Background="White">
@@ -21,37 +21,37 @@
             <RowDefinition Height="8*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        
+
         <!-- Header row -->
         <TextBlock Text="Informacion del Producto"></TextBlock>
-        
+
         <!-- List of Product properties -->
         <StackPanel Grid.Column="0" Grid.Row="1">
             <TextBlock>ID</TextBlock>
-                <TextBlock>Codigo</TextBlock>
-                <TextBlock>Codigo Alterno</TextBlock>
-                <TextBlock>Proveedor</TextBlock>
-                <TextBlock>Producto Codigo de Proveedor</TextBlock>
-                <TextBlock>Descripcion</TextBlock>
-                <TextBlock>Marca</TextBlock>
-                <TextBlock>Categoria</TextBlock>
-                <TextBlock>Costo</TextBlock>
-                <TextBlock>Moneda de Costo</TextBlock>
-                <TextBlock>Precio</TextBlock>
-                <TextBlock>Moneda de Precio</TextBlock>
-                <TextBlock>Cantidad Minima en Existencia</TextBlock>
-                <TextBlock>Total Vendido</TextBlock>
-                <TextBlock>Cantidad Interna</TextBlock>
-                <TextBlock>Cantidad Vendida</TextBlock>
-                <TextBlock>Cantidad Local Disponible</TextBlock>
-                <TextBlock>Cantidad Total Disponible</TextBlock>
-                <TextBlock>Fecha Ultima Compra</TextBlock>
-                <TextBlock>Fecha Ultima Venta</TextBlock>
+            <TextBlock>Codigo</TextBlock>
+            <TextBlock>Codigo Alterno</TextBlock>
+            <TextBlock>Proveedor</TextBlock>
+            <TextBlock>Producto Codigo de Proveedor</TextBlock>
+            <TextBlock>Descripcion</TextBlock>
+            <TextBlock>Marca</TextBlock>
+            <TextBlock>Categoria</TextBlock>
+            <TextBlock>Costo</TextBlock>
+            <TextBlock>Moneda de Costo</TextBlock>
+            <TextBlock>Precio</TextBlock>
+            <TextBlock>Moneda de Precio</TextBlock>
+            <TextBlock>Cantidad Minima en Existencia</TextBlock>
+            <TextBlock>Total Vendido</TextBlock>
+            <TextBlock>Cantidad Interna</TextBlock>
+            <TextBlock>Cantidad Vendida</TextBlock>
+            <TextBlock>Cantidad Local Disponible</TextBlock>
+            <TextBlock>Cantidad Total Disponible</TextBlock>
+            <TextBlock>Fecha Ultima Compra</TextBlock>
+            <TextBlock>Fecha Ultima Venta</TextBlock>
         </StackPanel>
-        
+
         <!-- Inputs for Product properties -->
         <StackPanel Grid.Column="1" Grid.Row="1">
-            <TextBox>Text</TextBox>
+            <TextBox>Text2</TextBox>
             <TextBox>Text</TextBox>
             <TextBox>Text</TextBox>
             <TextBox>Text</TextBox>
@@ -69,7 +69,7 @@
             <TextBox>Text</TextBox>
             <TextBox>Text</TextBox>
         </StackPanel>
-        
+
         <!-- Product image holder, cancel and save button -->
         <Grid Grid.Column="2" Grid.Row="1">
             <Grid.RowDefinitions>
@@ -78,12 +78,11 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                
+
             </Grid.ColumnDefinitions>
-            
+
             <!-- Image holder -->
-            <Image Grid.Row="0"></Image>
-            
+
             <!-- Browse or delete a picture buttons-->
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
@@ -93,16 +92,17 @@
                 <Button Grid.Column="0" Content="Borrar Imagen"></Button>
                 <Button Grid.Column="1" Content="Agregar Imagen"></Button>
             </Grid>
-            
+            <Image Grid.Row="0" Visibility="Visible" Stretch="None" Source="{Binding ProductImage}"></Image>
+
         </Grid>
-        
+
         <!-- Browse or take a picture buttons-->
         <Grid Grid.Column="3" Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Cancelar"></Button>
+            <Button Grid.Column="0" Content="Cancelar" Command="{Binding ChangePageCommand}" CommandParameter="inventory"></Button>
             <Button Grid.Column="1" Content="Guardar Cambios"></Button>
         </Grid>
 
