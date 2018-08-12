@@ -1,25 +1,13 @@
 NumeroTransaccion,NumeroInterno,NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
 13958,13958,8018,1x,809,Envoltura,Envoltura Caja ,80,1,80,14/01/2018 11:08:15 a. m.,,LLuvia,No,Interno,Cash,0
-13959,13959,8019,,0,Merceria,Silicon chico pieza,25,1,25,14/01/2018 11:36:56 a. m.,,LLuvia,No,Regular,Cash,0
-13960,13960,8020,ESF7Ux,1251,Unicel,Esfera 7,9,5,45,14/01/2018 11:48:44 a. m.,,LLuvia,No,Regular,Cash,0
-13960,13960,8020,,0,Regalos,,12,2,24,14/01/2018 11:48:44 a. m.,,LLuvia,No,Regular,Cash,0
-13961,13961,8020,400A2Mx,731,Merceria,Estambre facil individual,29,1,29,14/01/2018 12:22:07 p. m.,,LLuvia,No,Interno,Cash,0
-13961,13961,8020,,0,Unicel,,14,1,14,14/01/2018 12:22:07 p. m.,,LLuvia,No,Interno,Cash,0
-13962,13962,8020,,0,Merceria,,20,1,20,14/01/2018 12:29:13 p. m.,,LLuvia,No,Interno,Cash,0
-13963,13963,8020,1x,809,Envoltura,Envoltura Caja ,60,1,60,14/01/2018 12:49:15 p. m.,,LLuvia,No,Interno,Cash,0
-13964,13964,8020,,0,Merceria,,15,1,15,14/01/2018 12:58:01 p. m.,,LLuvia,No,Interno,Cash,0
-13965,13965,8021,1x,809,Envoltura,Envoltura Caja ,45,1,45,14/01/2018 01:06:06 p. m.,,LLuvia,No,Regular,Cash,0
-13966,13966,8022,,0,Regalos,,6,1,6,14/01/2018 01:23:29 p. m.,,LLuvia,No,Regular,Cash,0
-13967,13967,8023,,0,Liston,Liston Metro Otro L20,20,1,20,14/01/2018 01:25:58 p. m.,,LLuvia,No,Regular,Cash,0
-13967,13967,8023,5722SIN2Mx,127,Merceria,Broche metal 1in 12 pzas,24,1,24,14/01/2018 01:25:58 p. m.,,LLuvia,No,Regular,Cash,0
-13967,13967,8023,,0,Merceria,,6,1,6,14/01/2018 01:25:58 p. m.,,LLuvia,No,Regular,Cash,0
-13968,13968,8024,,0,Regalos,,200,1,200,14/01/2018 01:32:25 p. m.,,LLuvia,No,Regular,Cash,0
-13968,13968,8024,,0,Regalos,,9,6,54,14/01/2018 01:32:25 p. m.,,LLuvia,No,Regular,Cash,0
-13969,0,0,1x,809,Envoltura,Envoltura Caja ,50,1,0,14/01/2018 01:48:07 p. m.,,LLuvia,No,Regular,Cash,0
-13969,0,0,,0,Envoltura,,62.5,1,0,14/01/2018 01:48:07 p. m.,,LLuvia,No,Regular,Cash,0
-13970,13970,8025,809726054225x,1468,Merceria,Invitacion en Blanco Corte Laser 5x7in 8pzs,120,2,240,14/01/2018 01:50:20 p. m.,,LLuvia,No,Regular,Cash,0
-13971,13971,8025,,0,Merceria,,-192,-1,-192,14/01/2018 01:51:36 p. m.,,LLuvia,No,Devolucion,Cash,0
-13972,13972,8026,,0,Merceria,,18,1,18,14/01/2018 02:00:38 p. m.,,LLuvia,No,Regular,Cash,0
-13973,13973,8027,1x,809,Envoltura,Envoltura Caja ,40,1,40,14/01/2018 02:03:55 p. m.,,LLuvia,No,Regular,Cash,0
-13973,13973,8027,,0,Regalos,Bolsa Premium M,25,1,25,14/01/2018 02:03:55 p. m.,,LLuvia,No,Regular,Cash,0
-13974,13974,8028,,0,Merceria,hidro gel,8,2,16,14/01/2018 02:06:15 p. m.,,LLuvia,No,Regular,Cash,0
+13975,13975,8029,1261PIN1Rx,14,Regalos,Bolsa Papel Rosa 5.25x8.25x3.25 Agarradera,85,1,85,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,1261CON1Rx,11,Regalos,Bolsa Papel Coral 5.25x8.25x3.25 Agarradera,85,2,170,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,78.75,1,78.75,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,809726059374x,2,Merceria,16mm acrilico diamante 8oz pack,87.5,3,262.5,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,87.5,5,437.5,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,87.5,5,437.5,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,809726059459x,3,Merceria,12.5 x 13x13mm cubo diamante acrilico,87.5,1,87.5,30/06/2018 04:40:54 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,1261BLN1Rx,10,Regalos,Bolsa Papel Azul 5.25x8.25x3.25 Agarradera,85,1,85,30/06/2018 04:40:54 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,,0,Madera,fdf,3,1,3,30/06/2018 04:40:54 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,87.5,1,87.5,30/06/2018 06:44:12 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,1261BLN1Rx,10,Regalos,Bolsa Papel Azul 5.25x8.25x3.25 Agarradera,76.5,3,229.5,30/06/2018 06:44:12 p. m.,Cliente,Estrella,No,Regular,Cash,1

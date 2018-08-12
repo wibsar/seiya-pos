@@ -9,7 +9,7 @@ namespace Seiya
     public static class Constants
     {
         //Main data path
-        public const string DataFolderPath = @"C:\Projects\seiya-pos\Data\";// @"C:\Users\armoag\source\repos\seiya\seiya\Data\";
+        public const string DataFolderPath = @"C:\Projects\seiya-pos\Data\";
         public const string PosDataFileName = "PosData.csv";
         public const string ReceiptBackupFolderPath = @"ReceiptCustomerBackUp\";
         public const string MasterReceiptBackupFolderPath = @"MasterReceiptCustomerBackUp\";
@@ -18,13 +18,15 @@ namespace Seiya
         public const string InventoryBackupFolderPath = @"InventoryBackUp\";
         public const string InventoryFileName = "Inventario.csv";
 
-        //Transactions Files
+        //Transactions and Expenses Files
         public const string TransactionsBackupFolderPath = @"TransactionBackUp\";
         public const string TransactionsFileName = "Transacciones.csv";
-        public const string MasterTransactionsFileName = "TransaccionesMaster.csv";
-        public const string HistoryTransactionsFileName = "TransaccionesHistorial.csv";
+        public const string TransactionsMasterFileName = "TransaccionesMaster.csv";
+        public const string TransactionsHistoryFileName = "TransaccionesHistorial.csv";
         public const string TransactionsTypesFileName = "TransactionTypes.txt";
-
+        public const string TransactionBlankFileName = "TransaccionesBlank.csv";
+        public const string TransactionMasterBlankFileName = "TransaccionesMasterBlank.csv";
+        public const string ExpenseFileName = "Gastos.csv";
         //End of day reports
         public const string EndOfDaySalesFileName = "CorteZ.csv";
         public const string MasterEndOfDaySalesFileName = "CorteZMaster.csv";
@@ -44,10 +46,12 @@ namespace Seiya
 
         //Users and clients
         public const string UsersFileName = "Users.csv";
-        public const string ClientsFileName = "Clientes.csv";
+        public const string CustomersFileName = "Clientes.csv";
         public const string VendorsFileName = "Proveedores.csv";
 
-        //Constants
+        //Items list
         public const int MaxNumberListItems = 20;
+
+
     }
 }

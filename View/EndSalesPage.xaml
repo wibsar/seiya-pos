@@ -6,113 +6,188 @@
       xmlns:local="clr-namespace:Seiya"
       mc:Ignorable="d" 
       d:DataContext="{d:DesignInstance local:EndSalesPageViewModel}"
-      d:DesignHeight="450" d:DesignWidth="800"
-      Title="EndSalesPage">
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="EndSalesPage"
+  >
 
-    <Grid ShowGridLines="True" Background="White">
+
+    <Grid ShowGridLines="false" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="5*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <!-- User info and dates -->
-        <StackPanel Grid.Row="0" Grid.Column="0">
-            <TextBlock>Usuario: </TextBlock>
-            <TextBlock>Fecha Inicio</TextBlock>
-            <TextBlock>Fecha Cierre</TextBlock>
-        </StackPanel>
+        <!-- header -->
+        <TextBlock Grid.Column="0" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458" FontWeight="Bold">CORTE DE CAJA</TextBlock>
+        <TextBlock Grid.Column="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="12" Padding="10,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="LightGray" FontWeight="Bold" Margin="0,21,26,28">Usuario:</TextBlock>
 
         <!-- Users input for quantities -->
-        <Grid Grid.Row="1" Grid.Column="0">
+        <Grid Grid.Row="1" Grid.Column="0" Margin="5,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <!-- Pesos panel -->
-            <StackPanel Grid.Column="0" Grid.Row="0">
-                <TextBlock Text="Moneda Nacional MXN"></TextBlock>
-                <TextBlock Text="1000"></TextBlock>
-                <TextBlock Text="500"></TextBlock>
-                <TextBlock Text="200"></TextBlock>
-                <TextBlock Text="100"></TextBlock>
-                <TextBlock Text="50"></TextBlock>
-                <TextBlock Text="20"></TextBlock>
-                <TextBlock Text="Monedas"></TextBlock>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="0">
-                <TextBlock Text="Cantidad"></TextBlock>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-            </StackPanel>
+            <!-- Pesos GRID -->
+            <Grid Grid.Column="0" Grid.Row="0" Margin="0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(MXN)   PESO" />
+                <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 1,000   X   "></TextBlock>
+                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 500    X   "></TextBlock>
+                <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 200    X   "></TextBlock>
+                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 100    X   "></TextBlock>
+                <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 50     X   "></TextBlock>
+                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 20     X   "></TextBlock>
+                <TextBlock Grid.Row="7" TextAlignment="Right" Text="Monedas " FontWeight="Bold" FontSize="16" ></TextBlock>
+            </Grid>
+            <Grid Grid.Column="1" Grid.Row="0" Margin="0,5">
+                        <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="CANTIDAD"/>
+                <TextBox Grid.Row="1" Text="{Binding MxnPeso1000}"></TextBox>
+                <TextBox Grid.Row="2" Text="{Binding MxnPeso500}" Background="#FFECECEC"></TextBox>
+                <TextBox Grid.Row="3" Text="{Binding MxnPeso200}"></TextBox>
+                <TextBox Grid.Row="4" Text="{Binding MxnPeso100}" Background="#FFECECEC"></TextBox>
+                <TextBox Grid.Row="5" Text="{Binding MxnPeso50}"></TextBox>
+                <TextBox Grid.Row="6" Text="{Binding MxnPeso20}" Background="#FFECECEC"></TextBox>
+                <TextBox Grid.Row="7" Text="{Binding MxnPesoCoinsTotal}"></TextBox>
+            </Grid>
             <!-- USD panel -->
-            <StackPanel Grid.Column="0" Grid.Row="1">
-                <TextBlock Text="Dolares Americanos USD"></TextBlock>
-                <TextBlock Text="100"></TextBlock>
-                <TextBlock Text="50"></TextBlock>
-                <TextBlock Text="20"></TextBlock>
-                <TextBlock Text="10"></TextBlock>
-                <TextBlock Text="5"></TextBlock>
-                <TextBlock Text="1"></TextBlock>
-                <TextBlock Text="Monedas"></TextBlock>
-            </StackPanel>
-            <StackPanel Grid.Column="1" Grid.Row="1">
-                <TextBlock Text="Cantidad"></TextBlock>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-            </StackPanel>
+            <Grid Grid.Column="0" Grid.Row="1" Margin="0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(USD)   DOLAR"/>
+                <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 100   X   "></TextBlock>
+                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 50    X   "></TextBlock>
+                <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 20    X   "></TextBlock>
+                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 10    X   "></TextBlock>
+                <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 5     X   "></TextBlock>
+                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 1     X   "></TextBlock>
+                <TextBlock Grid.Row="7" TextAlignment="Right" Text="Monedas " FontWeight="Bold" FontSize="16" ></TextBlock>
         </Grid>
-        
+            <Grid Grid.Column="1" Grid.Row="1" Margin="0,5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="CANTIDAD"/>
+                <TextBox Grid.Row="1" Text="{Binding UsdDollar100}"></TextBox>
+                <TextBox Grid.Row="2" Text="{Binding UsdDollar50}" Background="#FFECECEC"></TextBox>
+                <TextBox Grid.Row="3" Text="{Binding UsdDollar20}"></TextBox>
+                <TextBox Grid.Row="4" Text="{Binding UsdDollar10}" Background="#FFECECEC"></TextBox>
+                <TextBox Grid.Row="5" Text="{Binding UsdDollar5}"></TextBox>
+                <TextBox Grid.Row="6" Text="{Binding UsdDollar1}" Background="#FFECECEC"></TextBox>
+                <TextBox Grid.Row="7" Text="{Binding UsdDollarCoinsTotal}"></TextBox>
+            </Grid>
+        </Grid>
+
         <!-- Sales data based on sales by type and expenses -->
         <Grid Grid.Row="1" Grid.Column="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
-            <StackPanel Grid.Column="0">
-                <TextBlock Text="Tarjeta"></TextBlock>
-                <TextBlock Text="Otro Metodo"></TextBlock>
-                <TextBlock Text="Efectivo"></TextBlock>
-                <TextBlock Text="Gastos"></TextBlock>
-                <TextBlock Text="Caja"></TextBlock>
-                <TextBlock Text="Diferencia"></TextBlock>
-                <TextBlock Text="Total Ventas"></TextBlock>
-            </StackPanel>
-            <StackPanel Grid.Column="1">
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-                <TextBox Text=""></TextBox>
-            </StackPanel>
+
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Text="Caja Inicial " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" />
+                <TextBlock Grid.Row="1" Text="Corte TPV  " TextAlignment="Right" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
+                <TextBlock Grid.Row="2" Text="Efectivo  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
+                <TextBlock Grid.Row="3" Text="Cheque  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
+                <TextBlock Grid.Row="4" Text="Transferencia  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
+                <TextBlock Grid.Row="5" Text="Puntos Usados  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
+                <TextBlock Grid.Row="6" Text="Total Ventas  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
+                <TextBlock Grid.Row="7" Text="Diferencia  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
+                <TextBlock Grid.Row="8" Text="Caja Nueva " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" />
+
+            </Grid>
+
+            <Grid Grid.Column="1" Margin="5">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0" Margin="5" Text="{Binding RegisterPreviousCash}"></TextBlock>
+                <TextBlock Grid.Row="1" Margin="5" Text="{Binding CardTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="2" Margin="5" Text="{Binding CashTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="3" Margin="5" Text="{Binding CheckTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="4" Margin="5" Text="{Binding BankTransferTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="5" Margin="5" Text="{Binding PointsTotalUsed}"></TextBlock>
+                <TextBlock Grid.Row="6" Margin="5" Text="{Binding TotalSales}"></TextBlock>
+                <TextBlock Grid.Row="7" Margin="5" Text="{Binding Delta}"></TextBlock>
+                <TextBox Grid.Row="8" Margin="5" Text="{Binding RegisterNewCash}"></TextBox>
+
+            </Grid>
         </Grid>
 
         <!-- User Comments field -->
-        <StackPanel Grid.Row="2" Grid.Column="0">
-            <TextBlock Text="Comments"></TextBlock>
-            <TextBox Text="Comments here"></TextBox>
-        </StackPanel>
+        <Grid Grid.Row="2" Grid.Column="0" Margin="5,5,0,5">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White">COMENTARIOS</TextBlock>
+            <TextBox Grid.Row="1"></TextBox>
+        </Grid>
 
         <!-- Buttons for sales report type -->
         <Grid Grid.Row="2" Grid.Column="1">
@@ -120,10 +195,30 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            
-            <Button Grid.Column="0">Corte X</Button>
-            <Button Grid.Column="1">Corte Z</Button>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" BorderBrush="{x:Null}" Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="x">
+                    <Button.Background>
+                        <ImageBrush ImageSource="/Seiya;component/Resources/Images/Cortex.png" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Background="White" Foreground="#FF7E7E7E" HorizontalAlignment="Center">Corte X</TextBlock>
+            </Grid>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Button Grid.Row="0" BorderBrush="{x:Null}" Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="z">
+                    <Button.Background>
+                        <ImageBrush ImageSource="C:\Projects\seiya-pos\Resources\Images\Cortez.png" Stretch="Uniform"/>
+                    </Button.Background>
+                </Button>
+                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Background="White" Foreground="#FF7E7E7E" HorizontalAlignment="Center">Corte Z</TextBlock>
+            </Grid>
         </Grid>
-
     </Grid>
 </Page>

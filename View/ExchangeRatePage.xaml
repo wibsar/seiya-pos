@@ -1,0 +1,105 @@
+﻿<Page x:Class="Seiya.ExchangeRatePage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seiya"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="ExchangeRatePage">
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"/>
+        </Style>
+        <Style TargetType="Button" >
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Background" Value="White" />
+
+
+        </Style>
+        <Style TargetType="TextBlock" >
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+    </Page.Resources>
+
+
+    <Grid ShowGridLines="false" Background="White">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <!-- header -->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"  FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458">TIPO DE CAMBIO</TextBlock>
+            <TextBlock Grid.Column="1"  FontSize="14"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="LightGray" Margin="0,0,5,0">Usuario:</TextBlock>
+        </Grid>
+        <Grid Grid.Row="1" Grid.Column="0" Background="White" Margin="50,10,50,50">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="2*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="Gray" >DOLAR</TextBlock>
+            <Grid Grid.Row="1" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF224458" >Actual:</TextBlock>
+                <TextBlock Grid.Column="1" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="Gray" FontWeight="Bold" Text="{Binding ExchangeRateString}"></TextBlock>
+            </Grid>
+            <Grid Grid.Row="2" Background="White">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="#FF224458">Nuevo:</TextBlock>
+                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="10" Foreground="DarkGreen" FontWeight="Bold" Height="30" Width="100" FontSize="20" Text="{Binding ExchangeRate}"/>
+            </Grid>
+
+        </Grid>
+
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="menu" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png" ></Image>
+                    <TextBlock HorizontalAlignment="Center" Grid.Row="1" Foreground="#FF224458" FontSize="12">Cancelar</TextBlock>
+                </Grid>
+            </Button>
+            <Button Grid.Column="2" Command="{Binding ExchangeRateSaveCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="3*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png"></Image>
+                    <TextBlock Grid.Row="1" Foreground="#FF224458" FontSize="12">Guardar</TextBlock>
+                </Grid>
+            </Button>
+
+        </Grid>
+    </Grid>
+</Page>

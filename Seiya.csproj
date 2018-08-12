@@ -63,8 +63,14 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Constants.cs" />
+    <Compile Include="Model\Interfaces\IBasicEntityInfo.cs" />
     <Compile Include="Model\CategoryCatalog.cs" />
+    <Compile Include="Model\CurrencyTypeEnum.cs" />
     <Compile Include="Model\Customer.cs" />
+    <Compile Include="Model\DataBase.cs" />
+    <Compile Include="Model\Enums\UserAccessLevelEnum.cs" />
+    <Compile Include="Model\Expense.cs" />
+    <Compile Include="Model\Interfaces\IDataBase.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\Pos.cs" />
     <Compile Include="Model\Product.cs" />
@@ -72,6 +78,8 @@
     <Compile Include="Model\SalesReceipt.cs" />
     <Compile Include="Model\SalesSummaryReport.cs" />
     <Compile Include="Model\Transaction.cs" />
+    <Compile Include="Model\Vendor.cs" />
+    <Compile Include="Model\User.cs" />
     <Compile Include="Model\Utilities.cs" />
     <Compile Include="Properties\Annotations.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -81,14 +89,44 @@
     <Compile Include="ViewModel\PosGeneralPageViewModel.cs" />
     <Compile Include="ViewModel\PosMenuPageViewModel.cs" />
     <Compile Include="ViewModel\ProductsPageViewModel.cs" />
+    <Compile Include="View\ExpenseMainPage.xaml.cs">
+      <DependentUpon>ExpenseMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerMainPage.xaml.cs">
+      <DependentUpon>CustomerMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\EndSalesPage.xaml.cs">
       <DependentUpon>EndSalesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ExchangeRatePage.xaml.cs">
+      <DependentUpon>ExchangeRatePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomerDetailPage.xaml.cs">
+      <DependentUpon>CustomerDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\LoginPage.xaml.cs">
+      <DependentUpon>LoginPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrderPage.xaml.cs">
+      <DependentUpon>OrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VendorDetailPage.xaml.cs">
+      <DependentUpon>VendorDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserDetailPage.xaml.cs">
+      <DependentUpon>UserDetailPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\ExpenseDetailPage.xaml.cs">
+      <DependentUpon>ExpenseDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InventoryItemPage.xaml.cs">
       <DependentUpon>InventoryItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\InventoryMainPage.xaml.cs">
       <DependentUpon>InventoryMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\PaymentPage.xaml.cs">
+      <DependentUpon>PaymentPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PosGeneralPage.xaml.cs">
       <DependentUpon>PosGeneralPage.xaml</DependentUpon>
@@ -105,6 +143,18 @@
     <Compile Include="View\ProductsPage.xaml.cs">
       <DependentUpon>ProductsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\ReturnsPage.xaml.cs">
+      <DependentUpon>ReturnsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\SystemPage.xaml.cs">
+      <DependentUpon>SystemPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\UserMainPage.xaml.cs">
+      <DependentUpon>UserMainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\VendorMainPage.xaml.cs">
+      <DependentUpon>VendorMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WpfBindingUtilities\DelegateCommand.cs" />
     <Compile Include="WpfBindingUtilities\ObservableObject.cs" />
     <Page Include="MainWindow.xaml">
@@ -119,15 +169,55 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\ExpenseMainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerMainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\EndSalesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\ExchangeRatePage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomerDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\LoginPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OrderPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VendorDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UserDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\ExpenseDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\InventoryItemPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\InventoryMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaymentPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -151,9 +241,25 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="View\ReturnsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\SystemPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\UserMainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\VendorMainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Person.cs" />
+    <Compile Include="Model\BasicEntityInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -182,13 +288,66 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Resources\Images\" />
+    <Resource Include="Resources\Images\agregar.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\printer.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\Categoria icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\1 inactivo.png" />
+    <Resource Include="Resources\Images\2 inactivo.png" />
+    <Resource Include="Resources\Images\3 Inactivo.png" />
+    <Resource Include="Resources\Images\Analisis.png" />
+    <Resource Include="Resources\Images\Calculadora.png" />
+    <Resource Include="Resources\Images\Categorias.png" />
+    <Resource Include="Resources\Images\Clientes.png" />
+    <Resource Include="Resources\Images\Corte.png" />
+    <Resource Include="Resources\Images\Devolucion.png" />
+    <Resource Include="Resources\Images\Gastos.png" />
+    <Resource Include="Resources\Images\inventario.png" />
+    <Resource Include="Resources\Images\linea amarilla.png" />
+    <Resource Include="Resources\Images\linea azul.png" />
+    <Resource Include="Resources\Images\linea inactiva.png" />
+    <Resource Include="Resources\Images\linea morada.png" />
+    <Resource Include="Resources\Images\linea naranja.png" />
+    <Resource Include="Resources\Images\linea roja.png" />
+    <Resource Include="Resources\Images\linea verde.png" />
+    <Resource Include="Resources\Images\lupa inactiva.png" />
+    <Resource Include="Resources\Images\Manual.png" />
+    <Resource Include="Resources\Images\menu.png" />
+    <Resource Include="Resources\Images\Otros.png" />
+    <Resource Include="Resources\Images\Pedidos.png" />
+    <Resource Include="Resources\Images\Proveedores.png" />
+    <Resource Include="Resources\Images\Sistema.png" />
+    <Resource Include="Resources\Images\Soporte.png" />
+    <Resource Include="Resources\Images\tc.png" />
+    <Resource Include="Resources\Images\Usuario.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Detalles.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Cortex.png" />
+    <Resource Include="Resources\Images\Cortez.png" />
+    <Resource Include="Resources\Images\Guardar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\AddPhoto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Cancel.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\DeletePhoto.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\ActivarCamara.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Captura.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

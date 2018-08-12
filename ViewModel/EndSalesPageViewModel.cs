@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -11,6 +12,7 @@ namespace Seiya
     public class EndSalesPageViewModel : BaseViewModel
     {
         #region Fields
+
         private int _mxnPeso20;
         private int _mxnPeso50;
         private int _mxnPeso100;
@@ -27,7 +29,17 @@ namespace Seiya
         private decimal _usdDollarCoinsTotal;
         private decimal _totalSales;
         private int _totalItemsSold;
+        private decimal _cardTotalSales;
+        private decimal _cashTotalSales;
+        private decimal _checkTotalSales;
+        private decimal _bankTransferTotalSales;
+        private int _pointsTotalUsed;
+        private decimal _expensesTotal;
+        private decimal _registerPreviousCash;
+        private decimal _registerNewCash;
+        private decimal _delta;
 
+        private Pos _pos;
         #endregion
 
         #region Observable Properties
@@ -54,9 +66,111 @@ namespace Seiya
             set
             {
                 _totalItemsSold = value;
-                OnPropertyChanged("TotalITemsSold");
+                OnPropertyChanged();
             }
         }
+
+        public decimal CardTotalSales
+        {
+            get
+            {
+                return _cardTotalSales;
+            }
+            set
+            {
+                _cardTotalSales = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal CashTotalSales
+        {
+            get
+            {
+                return _cashTotalSales;
+            }
+            set
+            {
+                _cashTotalSales = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal CheckTotalSales
+        {
+            get { return _checkTotalSales; }
+            set
+            {
+                _checkTotalSales = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal BankTransferTotalSales
+        {
+            get { return _bankTransferTotalSales; }
+            set
+            {
+                _bankTransferTotalSales = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal ExpensesTotal
+        {
+            get { return _expensesTotal; }
+            set
+            {
+                _expensesTotal = value;
+                OnPropertyChanged(); 
+            }
+        }
+
+        public int PointsTotalUsed
+        {
+            get
+            {
+                return _pointsTotalUsed;
+            }
+            set
+            {
+                _pointsTotalUsed = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal RegisterPreviousCash
+        {
+            get { return _registerPreviousCash; }
+            set
+            {
+                _registerPreviousCash = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal RegisterNewCash
+        {
+            get { return _registerNewCash; }
+            set
+            {
+                _registerNewCash = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal Delta
+        {
+            get { return _delta; }
+            set
+            {
+                _delta = value;
+                OnPropertyChanged();
+            }
+        }
+
+
+        #region Bills and Coins Properties
 
         public int MxnPeso20
         {
@@ -127,12 +241,12 @@ namespace Seiya
         {
             get
             {
-                return _mxnPeso100;
+                return _mxnPeso1000;
             }
             set
             {
-                _mxnPeso100 = value;
-                OnPropertyChanged("MxnPeso100");
+                _mxnPeso1000 = value;
+                OnPropertyChanged("MxnPeso1000");
             }
         }
 
@@ -242,11 +356,16 @@ namespace Seiya
 
         #endregion
 
+        #endregion
+
         #region Constructors
 
         public EndSalesPageViewModel()
         {
-
+            _pos = Pos.GetInstance(Constants.DataFolderPath + Constants.PosDataFileName);
+            //Calculate sales from transactions
+            CalculateSales();
+            CalculateExpenses();
         }
 
         #endregion
@@ -268,6 +387,22 @@ namespace Seiya
 
         }
 
+        private void CalculateSales()
+        {
+            CashTotalSales = 10;
+            CardTotalSales = 20;
+            BankTransferTotalSales = 30;
+            CheckTotalSales = 40;
+            PointsTotalUsed = 100;
+            Delta = -1;
+            TotalSales = CashTotalSales + CardTotalSales + BankTransferTotalSales + CheckTotalSales;
+        }
+
+        private void CalculateExpenses()
+        {
+            ExpensesTotal = 10;
+        }
+
         #endregion
 
         #region Commands
@@ -275,17 +410,21 @@ namespace Seiya
         #region GenerateEndOfDaySalesReportCommand
 
         public ICommand GenerateEndOfDaySalesReportCommand { get { return _generateEndOfDaySalesReportCommand ?? (_generateEndOfDaySalesReportCommand = new DelegateCommand(Execute_GenerateEndOfDaySalesReportCommand, CanExecute_GenerateEndOfDaySalesReportCommand)); } }
+
         private ICommand _generateEndOfDaySalesReportCommand;
 
         internal void Execute_GenerateEndOfDaySalesReportCommand(object parameter)
         {
-            if ((string)parameter == EndOfSaleReportTypeEnum.IntraDayReport.ToString())
+            switch ((string)parameter)
             {
-                GenerateCurrentSalesReport();
-            }
-            else if ((string)parameter == EndOfSaleReportTypeEnum.EndOfDayReport.ToString())
-            {
-                GenerateEndOfDaySalesReport();
+                case "x":
+                    GenerateCurrentSalesReport();
+                    break;
+                case "z":
+                    GenerateEndOfDaySalesReport();
+                    break;
+                default:
+                    break;
             }
         }
 
@@ -304,5 +443,5 @@ namespace Seiya
         EndOfDayReport
     }
 
-    
+
 }

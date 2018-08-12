@@ -1,20 +1,6 @@
 NumeroProducto,Codigo,CodigoAlterno,ProveedorProductoId,Descripcion,Proveedor,Categoria,UltimoPedidoFecha,Costo,CostoMoneda,Precio,PrecioMoneda,CantidadInternoHistorial,CantidadVendidoHistorial,VendidoHistorial,CantidadLocal,CantidadDisponibleTotal,CantidadMinima,UltimaTransaccionFecha,Imagen
-1,809726059329x,NA,1067-Clear,14mm acrilico beads 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,2.5,0,1,7,7,19,0,9/10/2017,coca.jpg
-2,809726059374x,NA,1072-Clear,16mm acrilico diamante 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,2.5,0,3,11,11,17,0,16/11/2017,NA.jpg
-3,809726059459x,NA,1080-Clear,12.5 x 13x13mm cubo diamante acrilico,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,2.5,0,1,11,11,19,0,15/07/2017,bibi.jpg
-4,809726063180x,NA,1081-Clear,10x14x14mm acrilico beads 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,2.5,0,0,13,13,20,0,28/04/2017,bibi.jpg
-5,809726062671x,NA,1087-Blue,Chupon Azul 28.5x41x28 mm acrilico,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,2.5,0,2,10,10,18,0,30/12/2017,bibi.jpg
-6,809726062688x,NA,1087-Pink,Chupon Rosa 28.5x41x28 mm acrilico,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,2.5,0,2,10,10,18,0,30/12/2017,coca.jpg
-7,809726073806x,NA,1131-Clear,29x70mm acrilico gota 8oz pack,Naturalstar,Merceria,28/04/2017,1.9,USD,95,2.5,0,1,10,10,19,0,15/11/2017,esfera.jpg
-8,1152CLN1Mx,NA,1152-Clear,48x18x18mm acrilico gota 8oz pack,Naturalstar,Merceria,28/04/2017,1.9,USD,95,2.5,0,2,10,10,18,0,28/10/2017,flor.jpg
-9,1261AQN1Rx,NA,1261-Aqua,Bolsa Papel Aqua 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,0,2,10,10,22,0,2/12/2017,esfera.jpg
-10,1261BLN1Rx,NA,1261-Blue,Bolsa Papel Azul 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,0,6,6,6,18,0,24/12/2017,letra_unicel.jpg
-11,1261CON1Rx,NA,1261-Coral,Bolsa Papel Coral 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,0,0,0,0,24,0,28/04/2017,esfera.jpg
-12,1261FUN1Rx,NA,1261-Fuchsia,Bolsa Papel Fuchsia 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,0,1,0,0,23,0,25/10/2017,bibi.jpg
-13,1261NAN1Rx,NA,1261-Natural,Bolsa Papel Natural 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,0,7,0,0,17,0,25/10/2017,esfera.jpg
-14,1261PIN1Rx,NA,1261-Pink,Bolsa Papel Rosa 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,0,11,1,1,13,0,24/12/2017,bibi.jpg
-15,1261RBN1Rx,NA,1261-R.Blue,Bolsa Papel Azul F 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,0,0,12,12,24,0,28/04/2017,bibi.jpg
-16,1261REN1Rx,NA,1261-Red,Bolsa Papel Rojo 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,0,5,7,7,19,0,16/12/2017,mdf_3.jpg
-17,1261TUN1Rx,NA,1261-Turquoise,Bolsa Papel Tur 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,0,0,0,0,24,0,28/04/2017,mdf_3.jpg
-18,1261WHN1Rx,NA,1261-White,Bolsa Papel Blanca 5.25x8.25x3.25 Agarradera,Naturalstar,Regalos,28/04/2017,1.25,USD,85,3.4,1,23,0,0,103,0,30/11/2017,mdf_3.jpg
-19,1263AQN1Rx,NA,1263-Aqua,Bolsa papel Aqua 5x9.5x3 12pack,Naturalstar,Regalos,28/04/2017,1,USD,69,3.45,0,8,7,7,16,0,8/11/2017,flor.jpg
+1,809726059329x,NA,1067-Clear,ArturoM,Naturalstar,Merceria,28/04/2017 12:00:00 a. m.,1.75,USD,87.5,MXN,0,16,87.5,0,16,0,30/06/2018 12:00:00 a. m.,esfera.jpg
+2,809726059374x,NA,1072-Clear,16mm acrilico diamante 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,10,787.5,4,10,2,30/06/2018,NA.jpg
+3,809726059459x,NA,1080-Clear,12.5 x 13x13mm cubo diamante acrilico,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,6,87.5,6,14,0,30/06/2018,bibi.jpg
+4,809726063180x,NA,1081-Clear,10x14x14mm acrilico beads 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,1,87.5,12,19,45,20/06/2018,bibi.jpg
+5,12354x,12340948x,estrella-1,desc,estrella,cat,08/07/2018 02:05:00 p. m.,190,MXN,400,MXN,0,0,0,24,100,5,08/07/2018 02:05:00 p. m.,coca.jpg

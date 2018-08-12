@@ -58,6 +58,7 @@ namespace Seiya
                 _image = value;
             }
         }
+
         public DateTime LastPurchaseDate { get; set; }
         public DateTime LastSaleDate { get; set; }
         public int LastQuantitySold { get; set; }

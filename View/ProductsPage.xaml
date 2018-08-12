@@ -6,10 +6,16 @@
       xmlns:local="clr-namespace:Seiya"
       mc:Ignorable="d" 
       d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
-      d:DesignHeight="300" d:DesignWidth="300"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="ProductsPage">
-
-    <Grid Background="White" ShowGridLines="True">
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>                   
+        </Style>
+    </Page.Resources>
+    <Grid>
          <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -24,7 +30,7 @@
                 <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Button Grid.Row="0" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[0]}">
+        <Button Grid.Row="0" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[0]}" Background="White" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -34,7 +40,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[0].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="0" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[1]}" >
+        <Button Grid.Row="0" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[1]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -44,7 +50,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[1].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="0" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[2]}" >
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[2]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -54,7 +60,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[2].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="0" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[3]}" >
+        <Button Grid.Row="0" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[3]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -64,7 +70,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[3].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[4]}" >
+        <Button Grid.Row="1" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[4]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -74,7 +80,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[4].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[5]}" >
+        <Button Grid.Row="1" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[5]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -84,7 +90,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[5].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[6]}" >
+        <Button Grid.Row="1" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[6]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -94,7 +100,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[6].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[7]}" >
+        <Button Grid.Row="1" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[7]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -104,7 +110,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[7].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[8]}" >
+        <Button Grid.Row="2" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[8]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -114,7 +120,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[8].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[9]}" >
+        <Button Grid.Row="2" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[9]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -124,7 +130,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[9].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[10]}" >
+        <Button Grid.Row="2" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[10]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -134,7 +140,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[10].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[11]}" >
+        <Button Grid.Row="2" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[11]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -144,7 +150,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[11].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="3" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[12]}" >
+        <Button Grid.Row="3" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[12]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -154,7 +160,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[12].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="3" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[13]}" >
+        <Button Grid.Row="3" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[13]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -164,7 +170,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[13].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="3" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[14]}" >
+        <Button Grid.Row="3" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[14]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -174,7 +180,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[14].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="3" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[15]}" >
+        <Button Grid.Row="3" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[15]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -184,7 +190,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[15].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="4" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[16]}" >
+        <Button Grid.Row="4" Grid.Column="0" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[16]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -194,7 +200,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[16].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="4" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[17]}" >
+        <Button Grid.Row="4" Grid.Column="1" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[17]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -204,7 +210,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[17].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="4" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[18]}" >
+        <Button Grid.Row="4" Grid.Column="2" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[18]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
@@ -214,7 +220,7 @@
                 <TextBlock Grid.Row="1" Text="{Binding ProductObjects[18].Description}"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="4" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[19]}" >
+        <Button Grid.Row="4" Grid.Column="3" Command="{Binding SelectItemCommand}" CommandParameter="{Binding ProductObjects[19]}" Background="White" BorderBrush="{x:Null}" >
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>

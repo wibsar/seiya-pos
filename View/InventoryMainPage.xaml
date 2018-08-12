@@ -9,31 +9,34 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="InventoryMainPage">
 
-    <Grid ShowGridLines="True" Background="White">
+    <Grid ShowGridLines="False" Background="White">
         <!--Main Grid definition-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+
         </Grid.RowDefinitions>
 
-        <!-- Header with search product and product details -->
-        <Grid ShowGridLines="True">
+        <!-- Header with search product -->
+        <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="8*"></ColumnDefinition>
+                <ColumnDefinition Width="6*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!-- Search for items in inventory -->
-            <TextBox Text="Search"></TextBox>
-            <!-- Button to open details page -->
-            <Button Grid.Column="1" Content="Detalles" Command="{Binding ChangePageCommand}" CommandParameter="inventory_details" ></Button>
+            <TextBlock FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458">INVENTARIO</TextBlock>
+            <TextBox Grid.Column="1" Text="{Binding InventorySearchText, Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="6,0" VerticalContentAlignment="Center"/>
+            <Button Grid.Column="3" Command="{Binding InventoryStartSearchCommand}" CommandParameter="{Binding InventorySearchText}">
+                <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa inactiva.png"></Image>
+            </Button>
         </Grid>
 
         <!-- Table of inventory items found based on the search -->
-        <DataGrid Grid.Row="1" HeadersVisibility="Column" ItemsSource="{Binding CurrentCartProducts}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False">
+        <DataGrid x:Name="Data" Grid.Row="1" Margin="0,6,0,0" HeadersVisibility="Column" ItemsSource="{Binding InventorySearchedProducts}" SelectedItem="{Binding SelectedInventoryProduct, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Code}" ClipboardContentBinding="{x:Null}" Header="Codigo" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Description}" ClipboardContentBinding="{x:Null}" Header="Descripcion" IsReadOnly="True"/>
@@ -46,18 +49,50 @@
         </DataGrid>
 
         <!-- Inventory options -->
-        <Grid Grid.Row="2" ShowGridLines="True">
+        <Grid Grid.Row="3" ShowGridLines="False" Margin="0,3,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="4*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <Button Grid.Column="0" Content="Nuevo"></Button>
-            <Button Grid.Column="1" Content="Nuevo Con Base"></Button>
-            <Button Grid.Column="2" Content="Modificar"></Button>
-            <Button Grid.Column="3" Content="Eliminar"></Button>
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding InventoryAddItemToCartCommand}" CommandParameter="{Binding SelectedInventoryProduct}">
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Add Cart.png"></Image>
+                </Button>
+                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#FF7E7E7E" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" >al carrito</TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="17"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding InventoryAddNewItemCommand}" CommandParameter="inventory_add">
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
+                </Button>
+                <TextBlock TextAlignment="Center" Grid.Row="1" Text="nuevo" Foreground="#FF7E7E7E" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" ></TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="3">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding InventorModifyItemCommand}" CommandParameter="inventory_details">
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Detalles.png"></Image>
+                </Button>
+                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#FF7E7E7E" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" >detalle</TextBlock>
+            </Grid>
+
         </Grid>
     </Grid>
 </Page>

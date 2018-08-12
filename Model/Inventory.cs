@@ -321,6 +321,7 @@ namespace Seiya
             _dictofdata.Rows.Add();
             var row = _dictofdata.Rows[_dictofdata.Rows.Count - 1];
             row["NumeroProducto"] = product.Id.ToString();
+            row["Codigo"] = product.Code;
             row["CodigoAlterno"] = product.AlternativeCode;
             row["ProveedorProductoId"] = product.ProviderProductId;
             row["Descripcion"] = product.Description;
@@ -334,7 +335,7 @@ namespace Seiya
             row["CantidadVendidoHistorial"] = product.QuantitySold.ToString();
             row["CantidadLocal"] = product.LocalQuantityAvailable.ToString();
             row["CantidadDisponibleTotal"] = product.TotalQuantityAvailable.ToString();
-            row["VendidioHistorial"] = product.AmountSold.ToString();
+            row["VendidoHistorial"] = product.AmountSold.ToString();
             row["CantidadMinima"] = product.MinimumStockQuantity.ToString();
             row["UltimoPedidoFecha"] = product.LastPurchaseDate.ToString();
             row["UltimaTransaccionFecha"] = product.LastSaleDate.ToString();
@@ -356,6 +357,116 @@ namespace Seiya
             string InventoryFileBackUpCopyName = @"C:\Users\Public\Documents\mxData\Data\InventoryBackUp\" + "Inventario" + currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") + currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".csv";
 
             File.Copy(filePath, InventoryFileBackUpCopyName);
+        }
+
+        /// <summary>
+        /// Search and returns a list of products
+        /// </summary>
+        /// <param name="input"></param>
+        /// <returns></returns>
+        public List<Product> Search(string input)
+        {
+            var products = new List<Product>();
+
+            //Return empty list if invalid inputs are entered for the search
+            if (string.IsNullOrWhiteSpace(input) || input == "x")
+                return products;            
+
+            if (input == "*")
+            {
+                var allProducts = _dictofdata.AsEnumerable();
+                foreach (var row in allProducts)
+                {
+                    var product = new Product()
+                    {
+                        Id = Int32.Parse(row["NumeroProducto"].ToString()),
+                        Code = row["Codigo"].ToString(),
+                        AlternativeCode = row["CodigoAlterno"].ToString(),
+                        ProviderProductId = row["ProveedorProductoId"].ToString(),
+                        Description = row["Descripcion"].ToString(),
+                        Provider = row["Proveedor"].ToString(),
+                        Category = row["Categoria"].ToString(),
+                        LastPurchaseDate = Convert.ToDateTime(row["UltimoPedidoFecha"].ToString()),
+                        Cost = Decimal.Parse(row["Costo"].ToString()),
+                        CostCurrency = row["CostoMoneda"].ToString(),
+                        Price = decimal.Parse(row["Precio"].ToString()),
+                        PriceCurrency = row["PrecioMoneda"].ToString(),
+                        InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
+                        QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
+                        LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
+                        TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
+                        MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),
+                        LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString()),
+                        ImageName = row["Imagen"].ToString()
+                    };
+                    products.Add(product);
+                }
+
+                return products;
+            }
+
+            var descriptionFilter = _dictofdata.AsEnumerable().Where(r => r.Field<string>("Descripcion").ToLower().Contains(input));
+            var codeFilter = _dictofdata.AsEnumerable().Where(r => r.Field<string>("Codigo").ToLower().Contains(input));
+
+            foreach (var row in codeFilter)
+            {
+                var product = new Product()
+                {
+                    Id = Int32.Parse(row["NumeroProducto"].ToString()),
+                    Code = row["Codigo"].ToString(),
+                    AlternativeCode = row["CodigoAlterno"].ToString(),
+                    ProviderProductId = row["ProveedorProductoId"].ToString(),
+                    Description = row["Descripcion"].ToString(),
+                    Provider = row["Proveedor"].ToString(),
+                    Category = row["Categoria"].ToString(),
+                    LastPurchaseDate = Convert.ToDateTime(row["UltimoPedidoFecha"].ToString()),
+                    Cost = Decimal.Parse(row["Costo"].ToString()),
+                    CostCurrency = row["CostoMoneda"].ToString(),
+                    Price = decimal.Parse(row["Precio"].ToString()),
+                    PriceCurrency = row["PrecioMoneda"].ToString(),
+                    InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
+                    QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
+                    LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
+                    TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
+                    MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),
+                    LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString()),
+                    ImageName = row["Imagen"].ToString()
+                };
+
+                products.Add(product);
+            }
+
+            foreach(var row in descriptionFilter)
+            {
+                var product = new Product()
+                {
+                    Id = Int32.Parse(row["NumeroProducto"].ToString()),
+                    Code = row["Codigo"].ToString(),
+                    AlternativeCode = row["CodigoAlterno"].ToString(),
+                    ProviderProductId = row["ProveedorProductoId"].ToString(),
+                    Description = row["Descripcion"].ToString(),
+                    Provider = row["Proveedor"].ToString(),
+                    Category = row["Categoria"].ToString(),
+                    LastPurchaseDate = Convert.ToDateTime(row["UltimoPedidoFecha"].ToString()),
+                    Cost = Decimal.Parse(row["Costo"].ToString()),
+                    CostCurrency = row["CostoMoneda"].ToString(),
+                    Price = decimal.Parse(row["Precio"].ToString()),
+                    PriceCurrency = row["PrecioMoneda"].ToString(),
+                    InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
+                    QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
+                    LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
+                    TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
+                    MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),
+                    LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString()),
+                    ImageName = row["Imagen"].ToString()
+                };
+
+                //Add if it does not exist already
+                if(!products.Exists(x => x.Code == product.Code))
+                    products.Add(product);
+            }
+
+            return products;
         }
 
         #endregion  

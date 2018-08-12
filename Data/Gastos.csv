@@ -1,0 +1,5 @@
+Id,Usuario,Proveedor,NumeroTicket,Descripcion,Monto,Moneda,MetodoPago,CategoriaGasto,Fecha
+1,armoag,Natura,4452,navidad,200,USD,Tarjeta,Merceria,7/1/2018
+2,yadis,Landys,dfd4,papel regalo,1000,MXN,Efectivo,Regalos,7/11/2018
+3,armoag,General,213f,agua,40,MXN,Tarjeta,General,1/1/2018
+4,michelle,Comex,1234,Gastos a lo wey,100,USD,Cash,General,15/07/2018 08:00:51 p. m.

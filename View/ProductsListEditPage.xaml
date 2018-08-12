@@ -6,10 +6,25 @@
       xmlns:local="clr-namespace:Seiya"
       mc:Ignorable="d" 
       d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="800"
       Title="ProductsListEditPage">
 
-    <Grid ShowGridLines="True" Background="White">
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Background" Value="White" ></Setter>
+            <Setter Property="Foreground" Value="#2C5066"/>
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="White">
         <!--Main Grid definition-->
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -17,11 +32,10 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- Header product list selection buttons -->
-        <Grid ShowGridLines="True">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -29,24 +43,77 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Lista 1" Command="{Binding SelectProductsListCommand}" CommandParameter="1" Foreground="#FF052D3B"/>
-            <Button Grid.Column="1" Content="Lista 2" Command="{Binding SelectProductsListCommand}" CommandParameter="2"/>
-            <Button Grid.Column="2" Content="Lista 3" Command="{Binding SelectProductsListCommand}" CommandParameter="3"/>
-            <Button Grid.Column="3" Content="Lista 4" Command="{Binding SelectProductsListCommand}" CommandParameter="4"/>
-            <Button Grid.Column="4" Content="Lista 5" Command="{Binding SelectProductsListCommand}" CommandParameter="5"/>
+            <Button Grid.Column="0" Command="{Binding SelectProductsListCommand}" CommandParameter="1">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Lista 1" HorizontalAlignment="Center" VerticalAlignment="Top" ></TextBlock>
+                    <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea amarilla.png"></Image>
+                </Grid>
+            </Button>
+            <Button Grid.Column="1" Command="{Binding SelectProductsListCommand}" CommandParameter="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Lista 2" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                    <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea morada.png"></Image>
+                </Grid>
+            </Button>
+            <Button Grid.Column="2" Command="{Binding SelectProductsListCommand}" CommandParameter="3">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Lista 3" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                    <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea verde.png"></Image>
+                </Grid>
+            </Button>
+
+            <Button Grid.Column="3" Command="{Binding SelectProductsListCommand}" CommandParameter="4">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Lista 4" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                    <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea naranja.png"></Image>
+                </Grid>
+            </Button>
+
+            <Button Grid.Column="4" Command="{Binding SelectProductsListCommand}" CommandParameter="5">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Lista 5" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                    <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea azul.png"></Image>
+                </Grid>
+            </Button>
 
             <!-- Button to open details page -->
         </Grid>
 
         <!-- Table of inventory items found based on the search -->
-        <Grid Grid.Row="1" ShowGridLines="True">
+        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <!-- List of products -->
-            <ListBox x:Name ="ProductListBox" Grid.Row="1" Margin="5" ItemsSource="{Binding CurrentPageListProducts}" SelectedItem="{Binding SelectedPageListProduct, Mode=TwoWay}">
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ListBox x:Name ="ProductListBox" Grid.Row="0" Margin="5" ItemsSource="{Binding CurrentPageListProducts}" SelectedItem="{Binding SelectedPageListProduct, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
@@ -61,58 +128,136 @@
                     </DataTemplate>
                 </ListBox.ItemTemplate>
             </ListBox>
-
-            <Grid Grid.Row="1" Grid.Column="1">
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Command="{Binding MoveUpListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="5,0,2.5,2.5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha arriba.png" VerticalAlignment="Center" Margin="5"></Image>
+                            <TextBlock Grid.Column="1" Text="Subir" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button Grid.Column="1" Command="{Binding MoveDownListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="2.5,0,5,2.5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha abajo.png" Margin="5"></Image>
+                            <TextBlock Grid.Column="1" Text="Bajar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
+                        </Grid>
+                    </Button>
+                </Grid>
+                <Grid Grid.Row="3">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Command="{Binding DeleteListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="5,2.5,2.5,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png" Margin="5"></Image>
+                            <TextBlock Grid.Column="1" Text="Eliminar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button Grid.Column="1" Command="{Binding SaveChangesProductListCommand}" CommandParameter="{Binding CurrentSelectedItemsListPageFileName}" Margin="2.5,2.5,5,5">
+                        <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png" Margin="5"></Image>
+                            <TextBlock Grid.Column="1" Text="Guardar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
+                        </Grid>
+                    </Button>
+
+                </Grid>
+
+            </Grid>
+
+
+            <Grid Grid.Row="1" Grid.Column="1" Margin="10,0,5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <!-- List of Product properties -->
-                <StackPanel Grid.Column="0" Grid.Row="1">
-                    <TextBlock>Codigo</TextBlock>
-                    <TextBlock>Descripcion</TextBlock>
-                    <TextBlock>Categoria</TextBlock>
-                    <TextBlock>Precio</TextBlock>
-                    <TextBlock>Moneda de Precio</TextBlock>
-                </StackPanel>
+                <Grid Grid.Column="0" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="1" Text="Codigo" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Row="2" Text="Descripcion" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Row="3" Text="Categoria" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Row="4" Text="Precio" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Row="5" Text="Moneda" VerticalAlignment="Center"></TextBlock>
+                </Grid>
 
                 <!-- Inputs for Product properties -->
-                <StackPanel Grid.Column="1" Grid.Row="1">
-                    <TextBox Text="{Binding SelectedPageListProduct.Code}"></TextBox>
-                    <TextBox Text="{Binding SelectedPageListProduct.Description}"></TextBox>
-                    <TextBox Text="{Binding SelectedPageListProduct.Category}"></TextBox>
-                    <TextBox Text="{Binding SelectedPageListProduct.Price}"></TextBox>
-                    <TextBox Text="{Binding SelectedPageListProduct.PriceCurrency}"></TextBox>
-                </StackPanel>
-
-                <!-- Search item textbox-->
-                <TextBox Name="AddToListTxtBox" HorizontalAlignment="Left" Height="23" Margin="45,98,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="120"/>
-                <!-- Add to list button-->
-                <Button Content="Agregar a Lista" Command="{Binding AddListItemCommand}" CommandParameter="{Binding Text, ElementName=AddToListTxtBox}" Grid.Column="1" HorizontalAlignment="Left" Margin="43,98,0,0" VerticalAlignment="Top" Width="122"/>
-                <!-- List name-->
-                <TextBox Name="ListNameTxtBox" HorizontalAlignment="Left" Height="23" Margin="45,40,0,0" TextWrapping="Wrap" Text="{Binding CurrentPageListTitle}" VerticalAlignment="Top" Width="120"/>
+                <Grid Grid.Column="1" Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="1" Margin="5,5,5,2.5" Text="{Binding SelectedPageListProduct.Code}"></TextBox>
+                    <TextBox Grid.Row="2" Margin="5,2.5,5,2.5" Text="{Binding SelectedPageListProduct.Description}"></TextBox>
+                    <TextBox Grid.Row="3" Margin="5,2.5,5,2.5" Text="{Binding SelectedPageListProduct.Category}"></TextBox>
+                    <TextBox Grid.Row="4" Margin="5,2.5,5,2.5" Text="{Binding SelectedPageListProduct.Price}"></TextBox>
+                    <TextBox Grid.Row="5" Margin="5,2.5,5,5" Text="{Binding SelectedPageListProduct.PriceCurrency}"></TextBox>
             </Grid>
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nombre de la lista"></TextBlock>
+                    <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Agregar Codigo"></TextBlock>
         </Grid>
 
-
-        <!-- Inventory options -->
-        <Grid Grid.Row="2" ShowGridLines="True">
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Name="ListNameTxtBox" Text="{Binding CurrentPageListTitle}" Height="30" Margin="5"/>
+                    <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-
-            <Button Grid.Column="0" Content="Subir" Command="{Binding MoveUpListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}"></Button>
-            <Button Grid.Column="1" Content="Bajar" Command="{Binding MoveDownListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}"></Button>
-            <Button Grid.Column="2" Content="Eliminar" Command="{Binding DeleteListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}"></Button>
-            <Button Grid.Column="3" Content="Guardar" Command="{Binding SaveChangesProductListCommand}" CommandParameter="{Binding CurrentSelectedItemsListPageFileName}"></Button>
+                        <Button Grid.Column="1" Command="{Binding AddListItemCommand}" CommandParameter="{Binding Text, ElementName=AddToListTxtBox}" Margin="10,0,10,0">
+                            <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
+                        </Button>
+                        <TextBox Grid.Column="0" Name="AddToListTxtBox" Height="30" Margin="5"/>
+                    </Grid>
+                </Grid>
+            </Grid>
         </Grid>
     </Grid>
 

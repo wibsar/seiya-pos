@@ -1,0 +1,194 @@
+﻿<Page x:Class="Seiya.PaymentPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seiya"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="PaymentPage"
+      FontFamily="C:\Projects\seiya-pos\Resources\Fonts\#Comfortaa">
+
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+        </Style>
+        <Style TargetType="Button" >
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Background" Value="White" />
+            
+
+        </Style>
+        <Style TargetType="TextBlock" >
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextAlignment" Value="Center" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="White">
+        <!--Main Grid definition-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--Display client information-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width=".5*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Text="Arturo Morales" Foreground="LightGray" HorizontalAlignment="Left" FontSize="12" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
+            <TextBlock Grid.Column="1" Text="Puntos: 1392" Foreground="Green" HorizontalAlignment="Left" FontSize="12" VerticalAlignment="Center"></TextBlock>
+            <TextBox Grid.Column="2" ToolTip="Numero de Cliente" Text="12" Margin="0,5,0,5"></TextBox>
+            <Button Grid.Column="3" BorderBrush="{x:Null}">
+                <Image Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png" ></Image>
+            </Button>
+        </Grid>
+        <!--Separador-->
+        <TextBlock Grid.Row="1" Background="LightGray" Height="2"></TextBlock>
+        
+        <!--Diplay Totals-->
+        <Grid Grid.Row="2" ShowGridLines="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="2*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Column="0" Grid.Row="0" Text="Total Pesos" Foreground="Gray" FontSize="14"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="0" Text="Total Dolar" Foreground="Gray" FontSize="14"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" FontSize="16" Foreground="#FFD10202" Margin="5,5,2.5,5" Text="{Binding PaymentTotalMXN}"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1" FontSize="16" Foreground="#FF009E2B" Margin="2.5,5,5,5" Text="{Binding PaymentTotalUSD}"></TextBlock>
+        </Grid>
+        <!--Separador-->
+        <TextBlock Grid.Row="3" Background="LightGray" Height="2"></TextBlock>
+        <!--Quantity paid shortcuts-->
+        <Grid Grid.Row="5" ShowGridLines="False">
+            <!--Main Grid definition-->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="5*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+
+            <!-- Paid Amount and process payment in MXN-->
+            <Grid Grid.Row="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+
+                <!--Cash payment shortcuts-->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Pesos Recibidos"></TextBlock>
+                    <TextBox Grid.Row="1" Margin="5,5,5,5" FontSize="16" Text="{Binding PaymentReceivedMXN, Mode=TwoWay}" Height="30" VerticalAlignment="Top"></TextBox>
+
+                </Grid>
+
+                <!--Cash payment shortcuts-->
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Grid.Column="0" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="20" Foreground="Black"    Margin="5,5,2.5,2.5"   Content="{Binding PaymentTotalMXN}" Command="{Binding PaymentBillClickCommand}" CommandParameter="exact_mxn"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="20" Foreground="#FF0074FF" Margin="2.5,5,2.5,2.5" Content="20" Command="{Binding PaymentBillClickCommand}" CommandParameter="20_mxn"></Button>
+                    <Button Grid.Row="0" Grid.Column="2" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="20" Foreground="#FFB60000"  Margin="2.5,5,5,2.5"   Content="50" Command="{Binding PaymentBillClickCommand}" CommandParameter="50_mxn"></Button>
+                    <Button Grid.Row="1" Grid.Column="0" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="20" Foreground="#FFC19F00"  Margin="5,2.5,2.5,5"   Content="100" Command="{Binding PaymentBillClickCommand}" CommandParameter="100_mxn"></Button>
+                    <Button Grid.Row="1" Grid.Column="1" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="20" Foreground="#FF009B00"      Margin="2.5,2.5,2.5,5" Content="200" Command="{Binding PaymentBillClickCommand}" CommandParameter="200_mxn"></Button>
+                    <Button Grid.Row="1" Grid.Column="2" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="20" Foreground="#FF5F0000"     Margin="2.5,2.5,5,5"   Content="500" Command="{Binding PaymentBillClickCommand}" CommandParameter="500_mxn"></Button>
+                </Grid>
+                <!-- Paid Amount and process payment in USD-->
+
+            </Grid>
+            <!-- Paid Amount and process payment in USD-->
+            <Grid Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    
+                </Grid.ColumnDefinitions>
+                <!--Received amount in USD-->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                        
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Dolares Recibidos"></TextBlock>
+                    <TextBox Grid.Row="1" Margin="5,5,5,5" FontSize="16" Height="30" VerticalAlignment="Top" Text="{Binding PaymentReceivedUSD, Mode=TwoWay}"></TextBox>
+                </Grid>
+
+                <!--Cash payment shortcuts-->
+                <Grid Grid.Column="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>                        
+                    </Grid.RowDefinitions>
+
+                    <Button Grid.Row="0" Grid.Column="0" Background="#FFF3F3F3" Foreground="Black" FontSize="20" BorderBrush="{x:Null}"  Margin="5,5,2.5,2.5"   Content="{Binding PaymentTotalUSD}" Command="{Binding PaymentBillClickCommand}" CommandParameter="exact_usd"></Button>
+                    <Button Grid.Row="0" Grid.Column="1" Background="#FFF3F3F3" Foreground="#FF005F11" FontSize="20" BorderBrush="{x:Null}" Margin="2.5,5,2.5,2.5" Content="1" Command="{Binding PaymentBillClickCommand}" CommandParameter="1_usd"></Button>
+                    <Button Grid.Row="0" Grid.Column="2" Background="#FFF3F3F3" Foreground="#FF005F11" FontSize="20" BorderBrush="{x:Null}" Margin="2.5,5,5,2.5"   Content="5" Command="{Binding PaymentBillClickCommand}" CommandParameter="5_usd"></Button>
+                    <Button Grid.Row="1" Grid.Column="0" Background="#FFF3F3F3" Foreground="#FF005F11" FontSize="20" BorderBrush="{x:Null}" Margin="5,2.5,2.5,5"   Content="10" Command="{Binding PaymentBillClickCommand}" CommandParameter="10_usd"></Button>
+                    <Button Grid.Row="1" Grid.Column="1" Background="#FFF3F3F3" Foreground="#FF005F11" FontSize="20" BorderBrush="{x:Null}" Margin="2.5,2.5,2.5,5" Content="20" Command="{Binding PaymentBillClickCommand}" CommandParameter="20_usd"></Button>
+                    <Button Grid.Row="1" Grid.Column="2" Background="#FFF3F3F3" Foreground="#FF005F11" FontSize="20" BorderBrush="{x:Null}" Margin="2.5,2.5,5,5"   Content="50" Command="{Binding PaymentBillClickCommand}" CommandParameter="50_usd"></Button>
+                </Grid>
+                <!-- Paid Amount and process payment in USD-->
+            </Grid>
+        </Grid>
+        <Button Grid.Row="6" FontSize="18" FontWeight="Bold" Foreground="DarkGreen" Margin="0,0,0,5" Content="Pagar en Efectivo" Command="{Binding PaymentProcessCommand}" Background="#FF8BD48B" BorderBrush="{x:Null}"></Button>
+        <!--Payment Options-->
+        <Grid Grid.Row="4" ShowGridLines="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Row="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Metodo de Pago"></TextBlock>
+            <Button Grid.Column="1" Margin="5,5,2.5,5" FontSize="12" Content="Tarjeta" Background="#FFDEF7FF" Command="{Binding StartCheckoutCommand}" CommandParameter="cash" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="2" Margin="2.5,5,2.5,5" FontSize="12" Content="Puntos" Background="#FFEEE2FF" Command="{Binding StartCheckoutCommand}" CommandParameter="card" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="3" Margin="2.5,5,2.5,5" FontSize="12" Content="Transfer" Command="{Binding StartCheckoutCommand}" CommandParameter="check" Background="#FFFFFFE6" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="4" Margin="2.5,5,5,5" FontSize="12" Content="Cheque" Command="{Binding StartCheckoutCommand}" CommandParameter="other" Background="#FFFFCFCF" BorderBrush="{x:Null}"></Button>
+        </Grid>
+    </Grid>
+</Page>

@@ -1,0 +1,86 @@
+﻿<Page x:Class="Seiya.ExpenseMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seiya"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="ExpenseMainPage">
+
+    <Grid ShowGridLines="False" Background="White">
+        <!--Main Grid definition-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- Header with search product -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"></ColumnDefinition>
+                <ColumnDefinition Width="6*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458">GASTOS</TextBlock>
+            <TextBox Grid.Column="1" Text="{Binding ExpensesSearchText, Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="6,0" VerticalContentAlignment="Center"/>
+            <Button Grid.Column="3" Command="{Binding ExpenseStartSearchCommand}" CommandParameter="{Binding ExpensesSearchText}">
+                <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa inactiva.png"></Image>
+            </Button>
+        </Grid>
+
+        <!-- Table of user items found based on the search -->
+        <DataGrid x:Name="VendorData" Grid.Row="1" Margin="0,6,0,0" HeadersVisibility="Column" ItemsSource="{Binding ExpensesSearchedEntries}" SelectedItem="{Binding SelectedExpense, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header="Id" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding User}" ClipboardContentBinding="{x:Null}" Header="Usuario" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Vendor}" ClipboardContentBinding="{x:Null}" Header="Proveedor" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TicketNumber}" ClipboardContentBinding="{x:Null}" Header="Numero de Ticket" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Description}" ClipboardContentBinding="{x:Null}" Header="Descripcion" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Amount}" ClipboardContentBinding="{x:Null}" Header="Monto" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding CurrencyType}" ClipboardContentBinding="{x:Null}" Header="Moneda" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PaymentType}" ClipboardContentBinding="{x:Null}" Header="Metodo de Pago" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ExpenseCategory}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Fecha de Registro" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Inventory options -->
+        <Grid Grid.Row="3" ShowGridLines="False" Margin="0,3,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ExpenseAddNewItemCommand}" CommandParameter="expense_add">
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
+                </Button>
+                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#FF7E7E7E" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" >nuevo</TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ExpenseUpdateCommand}" CommandParameter="expense_details">
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Detalles.png"></Image>
+                </Button>
+                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#FF7E7E7E" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" >detalle</TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

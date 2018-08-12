@@ -15,13 +15,16 @@
             <Setter Property="FontSize" Value="16" />
         </Style>
         <Style TargetType="Button" >
+            <Setter Property="BorderThickness" Value="0"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
             <Setter Property="Foreground" Value="#FF0E2D3B" />
             <Setter Property="FontSize" Value="16" />
+
         </Style>
     </Window.Resources>
 
     <!-- Main Window Grid -->
-    <Grid ShowGridLines="True">
+    <Grid ShowGridLines="False" Margin="5">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -34,31 +37,44 @@
 
         <!-- Grid for header section -->
         <Grid Column="0" Row="0">
-            <Grid ShowGridLines="True">
+            <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="4*"></ColumnDefinition>
+                    <ColumnDefinition Width="8*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Button Grid.Column="0" Content ="Menu" Command="{Binding ChangePageCommand}" CommandParameter="menu" Background="#FFDDDDDD" Grid.ColumnSpan="2" Height="56" Margin="0,0,99,0" VerticalAlignment="Top"></Button>
+                <Button Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="menu">
+                    <Grid>
+
+                        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\menu.png" Margin="5"></Image>
+
+                    </Grid>
+                </Button>
+                <Button Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="login">
+                    <Grid>
+
+                        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Usuario.png" Margin="10"></Image>
+
+                    </Grid>
+                </Button>
+                <TextBlock Grid.Column="3" Text="Arturo Morales" Foreground="Gray" VerticalAlignment="Center"  ></TextBlock>
             </Grid>
         </Grid>
 
         <!-- Grid for category boxes -->
-        <Grid Column="0" Row="1">
+        <Grid Column="0" Row="1" >
             <!-- Need to bind the source to choose page depending on selection-->
-            <Frame x:Name="Main" Source="{Binding CurrentPage}" NavigationUIVisibility="Hidden" Margin="-1,0,1.2,0">
-
-            </Frame>
-
+            <Border BorderBrush="LightBlue" >
+                <Frame x:Name="Main" Source="{Binding CurrentPage}"  NavigationUIVisibility="Hidden" Margin="-1,0,1.2,0">
+                </Frame>
+            </Border>
         </Grid>
-
+        <TextBlock Grid.Column="1" Grid.Row="0" ></TextBlock>
         <!-- Grid for checkout section -->
         <Grid Column="1" Row="1">
 
-            <Grid ShowGridLines="True">
+            <Grid >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
@@ -71,7 +87,7 @@
                 </Grid.RowDefinitions>
 
                 <!-- Top for cart selection-->
-                <Grid Row="0" ShowGridLines="True">
+                <Grid Row="0" >
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -79,18 +95,24 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Column="0">
-                        <Button Content ="1" Command="{Binding CartNumberClickCommand}" CommandParameter="1"></Button>
+                        <Button Command="{Binding CartNumberClickCommand}" CommandParameter="1">
+                            <Image Source="C:\Projects\seiya-pos\Resources\Images\1 inactivo.png"></Image>
+                        </Button>
                     </Grid>
                     <Grid Column="1">
-                        <Button Content ="2" Command="{Binding CartNumberClickCommand}" CommandParameter="2"></Button>
+                        <Button Command="{Binding CartNumberClickCommand}" CommandParameter="2">
+                            <Image Source="C:\Projects\seiya-pos\Resources\Images\2 inactivo.png"></Image>
+                        </Button>
                     </Grid>
                     <Grid Column="2">
-                        <Button Content ="3" Command="{Binding CartNumberClickCommand}" CommandParameter="3"></Button>
+                        <Button Command="{Binding CartNumberClickCommand}" CommandParameter="3">
+                            <Image Source="C:\Projects\seiya-pos\Resources\Images\3 Inactivo.png"></Image>
+                        </Button>
                     </Grid>
                 </Grid>
 
                 <!-- List of products -->
-                <ListBox x:Name ="ProductListBox" Grid.Row="1" Margin="5" ItemsSource="{Binding CurrentCartProducts}" SelectedItem="{Binding SelectedCartProduct, Mode=TwoWay}">
+                <ListBox x:Name ="ProductListBox" Grid.Row="1" BorderBrush="LightBlue" Margin="0" Foreground="#FF0E2D3B" ItemsSource="{Binding CurrentCartProducts}" SelectedItem="{Binding SelectedCartProduct, Mode=TwoWay}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
@@ -108,7 +130,7 @@
                     </ListBox.ItemTemplate>
                 </ListBox>
 
-                <Grid Row="2" ShowGridLines="True">
+                <Grid Row="2">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
@@ -117,57 +139,44 @@
                     </Grid.ColumnDefinitions>
 
                     <Grid Column="0">
-                        <Button Content ="-" Command="{Binding SubtractFromProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem, Mode=TwoWay}" ></Button>
+                        <Button Content ="-" FontSize="30" Command="{Binding SubtractFromProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem, Mode=TwoWay}" ></Button>
                     </Grid>
                     <Grid Column="1">
-                        <Button Content ="+" Command="{Binding AddToProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem}" ></Button>
+                        <Button Content ="+" FontSize="30" Command="{Binding AddToProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem}" ></Button>
                     </Grid>
                     <Grid Column="2">
-                        <Button Content ="%" Command="{Binding ApplyDiscountToProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem}" ></Button>
+                        <Button Content ="%" FontSize="20" Command="{Binding ApplyDiscountToProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem}" ></Button>
                     </Grid>
                     <Grid Column="3">
-                        <Button Content ="Editar"></Button>
+                        <Button Content ="Limpiar" Command="{Binding ClearCurrentProductListCommand}"></Button>
                     </Grid>
                 </Grid>
                 <!-- Bottom for price display and payment -->
                 <Grid Row="3" ShowGridLines="True">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
-
-                    </Grid.ColumnDefinitions>
-
-                    <Grid Column="0">
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" Margin="0,0,0,10" BorderBrush="{x:Null}" Foreground="White" FontSize="24">
+                        <Button.Background>
+                            <RadialGradientBrush>
+                                <GradientStop Color="Red" Offset="0"/>
+                                <GradientStop Color="#FFCD0000" Offset="1"/>
+                            </RadialGradientBrush>
+                        </Button.Background>
                         <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="2*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <!-- Total in MXN -->
-                            <TextBlock Grid.Row ="0" Grid.Column="0" Text="MXN"></TextBlock>
-                            <TextBox Grid.Row="0" Grid.Column="1" Text="{Binding CheckoutTotal}"></TextBox>
-                            <!-- Total in USD -->
-                            <TextBlock Grid.Row ="1" Grid.Column="0" Text="USD"></TextBlock>
-                            <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding CheckoutTotalUSD}" Height="40" VerticalAlignment="Bottom"></TextBox>
+                            <TextBlock Grid.Column="0" Text="Pagar: $" VerticalAlignment="Center" FontSize="18"></TextBlock>
+                            <TextBlock Grid.Column="1" Text="{Binding PaymentTotalMXN}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="5" ></TextBlock>
                         </Grid>
-
-                    </Grid>
-
-                    <Grid Column="1">
-                        <Button Content="Pagar" Command="{Binding StartCheckoutCommand}"></Button>
-                    </Grid>
+                    </Button>
                 </Grid>
             </Grid>
-
         </Grid>
 
         <!-- Grid for categories selection -->
         <Grid Column="0" Row="2" >
-            <Grid ShowGridLines="True">
+
+            <Grid ShowGridLines="False" Margin="0,0,5,0">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
@@ -177,47 +186,101 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <Grid Column="0" Margin="2,2,0,2">
-                    <Button Content ="General" Command="{Binding ChangePageCommand}" CommandParameter="general"></Button>
+
+                <Grid Column="0" Margin="0,0,2,0">
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="general">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea roja.png"></Image>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="General" FontSize="14"/>
+                        </Grid>
+                    </Button>
                 </Grid>
 
-                <Grid Column="1" Margin="2,2,0,2">
-                    <Button Content ="{Binding PageOneTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_1"></Button>
+                <Grid Column="1" Margin="2,0,2,0">
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="product_list_1">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea amarilla.png"></Image>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageOneTitle}" FontSize="14"/>
+                        </Grid>
+                    </Button>
                 </Grid>
 
-                <Grid Column="2" Margin="2,2,0,2">
-                    <Button Content ="{Binding PageTwoTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_2"></Button>
+                <Grid Column="2" Margin="2,0,2,0">
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="product_list_2">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea morada.png"></Image>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageTwoTitle}" FontSize="14"/>
+                        </Grid>
+                    </Button>
                 </Grid>
 
-                <Grid Column="3" Margin="2,2,0,2">
-                    <Button Content ="{Binding PageThreeTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_3"></Button>
+                <Grid Column="3" Margin="2,0,2,0">
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="product_list_3">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea verde.png"></Image>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageThreeTitle}" FontSize="14"/>
+                        </Grid>
+                    </Button>
                 </Grid>
 
-                <Grid Column="4" Margin="2,2,0,2">
-                    <Button Content ="{Binding PageFourTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_4"></Button>
+                <Grid Column="4" Margin="2,0,2,0">
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="product_list_4">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea naranja.png"></Image>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFourTitle}" FontSize="14"/>
+                        </Grid>
+                    </Button>
                 </Grid>
 
-                <Grid Column="5" Margin="2,2,0,2">
-                    <Button Content ="{Binding PageFiveTitle}" Command="{Binding ChangePageCommand}" CommandParameter="product_list_5"></Button>
+                <Grid Column="5" Margin="2,0,2,0">
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="product_list_5">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="10"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea azul.png"></Image>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFiveTitle}" FontSize="14"/>
+                        </Grid>
+                    </Button>
                 </Grid>
             </Grid>
         </Grid>
 
         <!-- Grid for scan or search code box -->
         <Grid Column="1" Row="2">
-            <Grid ShowGridLines="True">
+            <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
-
-                <TextBlock Text="Codigo o Busqueda"></TextBlock>
-                <TextBox x:Name="txtCode" Grid.Column="0" Grid.Row="1" Text="{Binding Code}"></TextBox>
-                <Button Grid.Column="1" Grid.Row ="0"  Grid.RowSpan="2" Content="Lupa"></Button>
+                <TextBox x:Name="txtCode" Grid.Column="0" Text="{Binding Code}" VerticalAlignment="Center" Height="30"></TextBox>
+                <Button Command="{Binding SearchCodeCommand}" CommandParameter="{Binding Code}" Grid.Column="1" Grid.Row ="1" >
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\lupa inactiva.png" Margin="5"></Image>
+                </Button>
 
             </Grid>
         </Grid>

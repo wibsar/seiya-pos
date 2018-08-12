@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using GenericParsing;
+using Seiya;
 
 namespace Seiya
 {
@@ -17,11 +18,22 @@ namespace Seiya
         #region Fields
         private readonly string _systemDataFilePath;
         private DataTable _dictofdata;
+        private static Pos _posInstance = null;
+        private string _fiscalNumber;
+        private string _fiscalStreetAddress;
+        private string _fiscalCityAndZipCode;
+        private string _fiscalName;
+        private string _fiscalPhoneNumber;
+        private string _fiscalEmail;
+        private string _fiscalType;
+        private string _businessName;
+        private string _system;
+        private string _license;
         #endregion
 
         #region FilePaths
 
-        private const string _clientsDataFilePath = Constants.DataFolderPath + Constants.ClientsFileName;
+        private const string _clientsDataFilePath = Constants.DataFolderPath + Constants.CustomersFileName;
         private const string _categoryCatalog = Constants.DataFolderPath + Constants.CategoryListFileName;
         private const string _corteZDataFilePath = Constants.DataFolderPath + Constants.EndOfDaySalesFileName;
         private const string _inventoryDataFilePath = Constants.DataFolderPath + Constants.InventoryFileName;
@@ -29,14 +41,15 @@ namespace Seiya
         private const string _posDataFilePath = Constants.DataFolderPath + Constants.PosDataFileName;
         private const string _vendorsDatafilePath = Constants.DataFolderPath + Constants.VendorsFileName;
         private const string _transactionsDataFilePath = Constants.DataFolderPath + Constants.TransactionsFileName;
-        private const string _transactionMasterDataFilePath = Constants.DataFolderPath + Constants.MasterTransactionsFileName;
-        private const string _transactionHistoryDataFilePath = Constants.DataFolderPath + Constants.HistoryTransactionsFileName;
+        private const string _transactionMasterDataFilePath = Constants.DataFolderPath + Constants.TransactionsMasterFileName;
+        private const string _transactionHistoryDataFilePath = Constants.DataFolderPath + Constants.TransactionsHistoryFileName;
         private const string _transactionTypes = Constants.DataFolderPath + Constants.TransactionsTypesFileName;
         private const string _transactionBackUpPath = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath;
         private const string _users = Constants.DataFolderPath + Constants.UsersFileName;
         private const string _inventoryBackUpPath = Constants.DataFolderPath + Constants.InventoryBackupFolderPath;
         private const string _receiptCustomerBackUpPath = Constants.DataFolderPath + Constants.ReceiptBackupFolderPath;
         private const string _receiptMasterBackUpPath = Constants.DataFolderPath + Constants.MasterReceiptBackupFolderPath;
+
 
         #endregion
 
@@ -51,7 +64,119 @@ namespace Seiya
         public int LastTransactionNumber { get; set; }
         public int LastInternalNumber { get; set; }
         public int LastOrderNumber { get; set; }
-       
+        public string FiscalNumber
+        {
+            get
+            {
+                return _fiscalNumber;
+            }
+            set
+            {
+                _fiscalNumber = value;
+            }
+        }
+        public string FiscalStreetAddress
+        {
+            get
+            {
+                return _fiscalStreetAddress;
+            }
+            set
+            {
+                _fiscalStreetAddress = value;
+            }
+        }
+        public string FiscalCityAndZipCode
+        {
+            get
+            {
+                return _fiscalCityAndZipCode;
+            }
+            set
+            {
+                _fiscalCityAndZipCode = value;
+            }
+        }
+        public string FiscalName
+        {
+            get
+            {
+                return _fiscalName;
+            }
+            set
+            {
+                _fiscalName = value;
+            }
+        }
+        public string FiscalPhoneNumber
+        {
+            get
+            {
+                return _fiscalPhoneNumber;
+            }
+            set
+            {
+                _fiscalPhoneNumber = value;
+            }
+        }
+        public string FiscalEmail
+        {
+            get
+            {
+                return _fiscalEmail;
+            }
+            set
+            {
+                _fiscalEmail = value;
+            }
+        }
+        public string FiscalType
+        {
+            get
+            {
+                return _fiscalType;
+            }
+            set
+            {
+                _fiscalType = value;
+            }
+        }
+        public string BusinessName
+        {
+            get
+            {
+                return _businessName;
+            }
+            set
+            {
+                _businessName = value;
+            }
+        }
+
+        public string System
+        {
+            get
+            {
+                return _system;
+            }
+            set
+            {
+                _system = value;
+            }
+        }
+
+        public string License
+        {
+            get
+            {
+                return _license;
+            }
+            set
+            {
+                _license = value;
+            }
+        }
+
         public string TransactionBackUpPath
         {
             get { return _transactionBackUpPath; }
@@ -136,10 +261,17 @@ namespace Seiya
 
         #region Constructor
 
-        public Pos(string systemDataFilePath)
+        private Pos(string systemDataFilePath)
         {
             _systemDataFilePath = systemDataFilePath;
-            InitializeData();
+            this.InitializeData();
+        }
+
+        public static Pos GetInstance(string systemDataFilePath)
+        {
+            if (_posInstance == null)
+                _posInstance = new Pos(systemDataFilePath);
+            return _posInstance;
         }
 
         #endregion
@@ -175,6 +307,16 @@ namespace Seiya
                 LastInternalNumber = Int32.Parse(row["UltimoNumeroInterno"].ToString());
                 LastOrderNumber = Int32.Parse(row["UltimoNumeroPedido"].ToString());
                 PrinterName = row["NombreImpresora"].ToString();
+                BusinessName = row["NombreNegocio"].ToString();
+                FiscalStreetAddress = row["DireccionCalleFiscal"].ToString();
+                FiscalCityAndZipCode = row["CiudadCodigoFiscal"].ToString();
+                FiscalNumber = row["RFC"].ToString();
+                FiscalName = row["NombreFiscal"].ToString();
+                FiscalPhoneNumber = row["NumeroTelefono"].ToString();
+                FiscalEmail = row["Email"].ToString();
+                FiscalType = row["RazonSocial"].ToString();
+                System = row["Sistema"].ToString();
+                License = row["Licencia"].ToString();
             }
         }
 

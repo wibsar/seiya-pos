@@ -23,6 +23,8 @@ namespace Seiya
         public EndSalesPage()
         {
             InitializeComponent();
+
+            DataContext = new EndSalesPageViewModel();
         }
     }
 }

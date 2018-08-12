@@ -28,7 +28,6 @@ namespace Seiya
 
         #endregion
 
-
         #region Constructors
         /// <summary>
         /// Constructor; loads the product if there was one as input but did not clear before closing page
@@ -60,7 +59,14 @@ namespace Seiya
             get { return _price; }
             set
             {
-                _price = value;
+                //Check if price has something other than digits
+                decimal number;
+                decimal.TryParse(value, out number);
+                if (number > 0)
+                    _price = number.ToString();
+                else
+                    _price = "0";
+                
                 OnPropertyChanged("Price");
             }
         }
@@ -80,7 +86,21 @@ namespace Seiya
         public string Description
         {
             get { return _description; }
-            set { _description = value; OnPropertyChanged("Description"); }
+            set
+            {
+                _description = string.Empty;
+                if(value != null)
+                {
+                    var desc = value.ToCharArray();
+                    for (var index = 0; index < desc.Length; ++index)
+                    {
+                        if (desc[index] == ',')
+                            desc[index] = '.';
+                        _description += desc[index];
+                    }
+                }
+                OnPropertyChanged("Description");
+            }
         }
 
         /// <summary>
@@ -159,7 +179,9 @@ namespace Seiya
         internal void Execute_ClickEnterCommand(object parameter)
         {
             ManualProduct = Product.Add(Description, Category, decimal.Parse(Price), Quantity);
-            MainWindowViewModel.AddManualProductToCart(ManualProduct);
+            //MainWindowViewModel.AddManualProductToCart(ManualProduct); Changed from static
+            var main = MainWindowViewModel.GetInstance();
+            main.AddManualProductToCart(ManualProduct);
             Clear = true;
         }
 
@@ -167,8 +189,7 @@ namespace Seiya
         {
             //Add logic to check if the command can be executed (if any)
             //TODO: Check that there is something for quantity, price, and category
-            return Price != string.Empty;
-
+            return Price != string.Empty && Price != "0" && Category != null;
         }
         #endregion
 
