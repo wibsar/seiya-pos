@@ -2804,11 +2804,6 @@ namespace Seiya
         #endregion
 
         #endregion
-<<<<<<< HEAD
-        //pipi-caca
-=======
 
-        //testing 
->>>>>>> 132c74492e1103e23e32d940fad0224cb8cb37ca
     }
 }
