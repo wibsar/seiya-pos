@@ -153,13 +153,7 @@
                 </Grid>
                 <!-- Bottom for price display and payment -->
                 <Grid Row="3" ShowGridLines="True">
-                    <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" Margin="0,0,0,10" BorderBrush="{x:Null}" Foreground="White" FontSize="24">
-                        <Button.Background>
-                            <RadialGradientBrush>
-                                <GradientStop Color="Red" Offset="0"/>
-                                <GradientStop Color="#FFCD0000" Offset="1"/>
-                            </RadialGradientBrush>
-                        </Button.Background>
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" Margin="0,0,0,10" BorderBrush="{x:Null}" Foreground="White" FontSize="24" Background="Red">                        
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
