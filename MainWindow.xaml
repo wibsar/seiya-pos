@@ -58,7 +58,7 @@
 
                     </Grid>
                 </Button>
-                <TextBlock Grid.Column="3" Text="Arturo Morales" Foreground="Gray" VerticalAlignment="Center"  ></TextBlock>
+                <TextBlock Grid.Column="2" Text="Arturo" Foreground="Gray" VerticalAlignment="Center"  ></TextBlock>
             </Grid>
         </Grid>
 
