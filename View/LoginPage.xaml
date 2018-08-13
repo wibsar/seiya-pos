@@ -28,6 +28,7 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="0.5*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -50,6 +51,7 @@
             <TextBlock Text="Contraseña:" Foreground="#2C5066" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18"></TextBlock>
             <TextBox Grid.Column="1" Margin="5" HorizontalAlignment="Left" Width="200"/>
         </Grid>
-        <Button Grid.Row="4" Background="#2C5066" Foreground="White" Content="entrar" Width="150" Height="30" FontSize="18" BorderBrush="{x:Null}"></Button>
+        <TextBlock Grid.Row="4" Text="Ingresar usuario y contraseña (dinamico)" HorizontalAlignment="Center"></TextBlock>
+        <Button Grid.Row="5" Background="#2C5066" Foreground="White" Content="entrar" Width="150" Height="30" FontSize="18" BorderBrush="{x:Null}"></Button>
     </Grid>
 </Page>

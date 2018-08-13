@@ -2406,6 +2406,23 @@ namespace Seiya
 
         #endregion
 
+        #region Login Commands
+
+        #region UserSignInCommand
+        public ICommand UserSignInCommand { get { return _userSignInCommand ?? (_userSignInCommand = new DelegateCommand(Execute_UserSignInCommand, CanExecute_UserSignInCommand)); } }
+        private ICommand _userSignInCommand;
+
+        internal void Execute_UserSignInCommand(object parameter)
+        {
+            ///TODO: Implement Log in verification
+        }
+        internal bool CanExecute_UserSignInCommand(object parameter)
+        {
+            ///TODO: Block if username or password is empty
+            return true;
+        }
+        #endregion
+
         #endregion
 
         #region Methods

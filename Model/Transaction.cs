@@ -489,7 +489,7 @@ namespace Seiya
 
                         //Add all points used
                         ///TODO: Add once the Puntos Usados Column is added to the transfer list, if needed
-                        //                   pointsTotal = int.Parse(row["PuntosUsados"].ToString());
+                        // pointsTotal = int.Parse(row["PuntosUsados"].ToString());
                     }
                 }
 
