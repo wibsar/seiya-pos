@@ -2467,7 +2467,7 @@ namespace Seiya
 
             RecordTransaction(out currentTransaction);
             
-            PrintReceipt(currentTransaction);
+            PrintReceipt(currentTransaction, true);
             //Update POS file ticket info
             //Clean Current Cart
             return true;
@@ -2477,7 +2477,7 @@ namespace Seiya
         /// Method to record transaction
         /// </summary>
         /// <returns></returns>
-        bool RecordTransaction(out Transaction transaction)
+        private bool RecordTransaction(out Transaction transaction)
         {
             //Create new instance
             transaction = new Transaction(Constants.DataFolderPath + Constants.TransactionsFileName,
@@ -2600,6 +2600,7 @@ namespace Seiya
         /// <returns></returns>
         bool PrintReceipt(Transaction transaction, bool printToFileOnly = false)
         {
+            //Receipt for individual sale
             var receipt = new Receipt(_posInstance, transaction, ReceiptType.RegularSale, CurrentCartProducts);
             receipt.PrintSalesReceipt();
             return true;

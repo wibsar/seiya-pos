@@ -1,13 +1,14 @@
 NumeroTransaccion,NumeroInterno,NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
 13958,13958,8018,1x,809,Envoltura,Envoltura Caja ,80,1,80,14/01/2018 11:08:15 a. m.,,LLuvia,No,Interno,Cash,0
-13975,13975,8029,1261PIN1Rx,14,Regalos,Bolsa Papel Rosa 5.25x8.25x3.25 Agarradera,85,1,85,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
-13975,13975,8029,1261CON1Rx,11,Regalos,Bolsa Papel Coral 5.25x8.25x3.25 Agarradera,85,2,170,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
-13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,78.75,1,78.75,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,1261PIN1Rx,14,Regalos,Bolsa Papel Rosa 5.25x8.25x3.25 Agarradera,85,1,85,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Card,1
+13975,13975,8029,1261CON1Rx,11,Regalos,Bolsa Papel Coral 5.25x8.25x3.25 Agarradera,85,2,170,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Card,1
+13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,78.75,1,78.75,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Transferencia,1
 13975,13975,8029,809726059374x,2,Merceria,16mm acrilico diamante 8oz pack,87.5,3,262.5,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
-13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,87.5,5,437.5,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,87.5,5,437.5,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Check,1
 13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,87.5,5,437.5,30/06/2018 04:36:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
 13975,13975,8029,809726059459x,3,Merceria,12.5 x 13x13mm cubo diamante acrilico,87.5,1,87.5,30/06/2018 04:40:54 p. m.,Cliente,Estrella,No,Regular,Cash,1
 13975,13975,8029,1261BLN1Rx,10,Regalos,Bolsa Papel Azul 5.25x8.25x3.25 Agarradera,85,1,85,30/06/2018 04:40:54 p. m.,Cliente,Estrella,No,Regular,Cash,1
-13975,13975,8029,,0,Madera,fdf,3,1,3,30/06/2018 04:40:54 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,,0,Madera,fdf,3,1,3,30/06/2018 04:40:54 p. m.,Cliente,Estrella,No,Regular,Other,1
 13975,13975,8029,809726062688x,6,Merceria,Chupon Rosa 28.5x41x28 mm acrilico,87.5,1,87.5,30/06/2018 06:44:12 p. m.,Cliente,Estrella,No,Regular,Cash,1
 13975,13975,8029,1261BLN1Rx,10,Regalos,Bolsa Papel Azul 5.25x8.25x3.25 Agarradera,76.5,3,229.5,30/06/2018 06:44:12 p. m.,Cliente,Estrella,No,Regular,Cash,1
+13975,13975,8029,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,12/08/2018 04:47:54 p. m.,Cliente,Estrella,No,Regular,Cash,1

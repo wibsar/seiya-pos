@@ -138,7 +138,8 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Text="Caja Inicial " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" />
@@ -146,15 +147,19 @@
                 <TextBlock Grid.Row="2" Text="Efectivo  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
                 <TextBlock Grid.Row="3" Text="Cheque  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
                 <TextBlock Grid.Row="4" Text="Transferencia  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
-                <TextBlock Grid.Row="5" Text="Puntos Usados  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
-                <TextBlock Grid.Row="6" Text="Total Ventas  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
-                <TextBlock Grid.Row="7" Text="Diferencia  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
-                <TextBlock Grid.Row="8" Text="Caja Nueva " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" />
+                <TextBlock Grid.Row="5" Text="Otro Metodo de Pago  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
+                <TextBlock Grid.Row="6" Text="Puntos Usados  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
+                <TextBlock Grid.Row="7" Text="Total Ventas  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
+                <TextBlock Grid.Row="8" Text="Gastos " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
+                <TextBlock Grid.Row="9" Text="Diferencia  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
+                <TextBlock Grid.Row="10" Text="Caja Nueva " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" />
 
             </Grid>
 
             <Grid Grid.Column="1" Margin="5">
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -171,10 +176,12 @@
                 <TextBlock Grid.Row="2" Margin="5" Text="{Binding CashTotalSales}"></TextBlock>
                 <TextBlock Grid.Row="3" Margin="5" Text="{Binding CheckTotalSales}"></TextBlock>
                 <TextBlock Grid.Row="4" Margin="5" Text="{Binding BankTransferTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="5" Margin="5" Text="{Binding PointsTotalUsed}"></TextBlock>
-                <TextBlock Grid.Row="6" Margin="5" Text="{Binding TotalSales}"></TextBlock>
-                <TextBlock Grid.Row="7" Margin="5" Text="{Binding Delta}"></TextBlock>
-                <TextBox Grid.Row="8" Margin="5" Text="{Binding RegisterNewCash}"></TextBox>
+                <TextBlock Grid.Row="5" Margin="5" Text="{Binding OtherTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="6" Margin="5" Text="{Binding PointsTotalUsed}"></TextBlock>
+                <TextBlock Grid.Row="7" Margin="5" Text="{Binding TotalSales}"></TextBlock>
+                <TextBlock Grid.Row="8" Margin="5" Text="{Binding ExpensesTotal}"></TextBlock>
+                <TextBlock Grid.Row="9" Margin="5" Text="{Binding Delta}"></TextBlock>
+                <TextBox Grid.Row="10" Margin="5" Text="{Binding RegisterNewCash}"></TextBox>
 
             </Grid>
         </Grid>

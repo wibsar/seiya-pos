@@ -187,8 +187,8 @@
             <TextBlock Grid.Row="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Metodo de Pago"></TextBlock>
             <Button Grid.Column="1" Margin="5,5,2.5,5" FontSize="12" Content="Tarjeta" Background="#FFDEF7FF" Command="{Binding StartCheckoutCommand}" CommandParameter="cash" BorderBrush="{x:Null}"></Button>
             <Button Grid.Column="2" Margin="2.5,5,2.5,5" FontSize="12" Content="Puntos" Background="#FFEEE2FF" Command="{Binding StartCheckoutCommand}" CommandParameter="card" BorderBrush="{x:Null}"></Button>
-            <Button Grid.Column="3" Margin="2.5,5,2.5,5" FontSize="12" Content="Transfer" Command="{Binding StartCheckoutCommand}" CommandParameter="check" Background="#FFFFFFE6" BorderBrush="{x:Null}"></Button>
-            <Button Grid.Column="4" Margin="2.5,5,5,5" FontSize="12" Content="Cheque" Command="{Binding StartCheckoutCommand}" CommandParameter="other" Background="#FFFFCFCF" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="3" Margin="2.5,5,2.5,5" FontSize="12" Content="Transfer" Command="{Binding StartCheckoutCommand}" CommandParameter="transfer" Background="#FFFFFFE6" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="4" Margin="2.5,5,5,5" FontSize="12" Content="Cheque" Command="{Binding StartCheckoutCommand}" CommandParameter="check" Background="#FFFFCFCF" BorderBrush="{x:Null}"></Button>
         </Grid>
     </Grid>
 </Page>

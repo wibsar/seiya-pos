@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using GenericParsing;
 
 namespace Seiya
 {
@@ -290,7 +291,224 @@ namespace Seiya
                 Constants.DataFolderPath + Constants.TransactionsMasterFileName, true);
         }
         #endregion
+
+        //Get transactions data per payment type
+        public static List<Tuple<string, int, decimal>> GetTransactionsData2(TransactionType transactionType,
+            Pos posData, out int firstReceiptNumber, out int lastReceiptNumber, out int totalItemsSold, out decimal totalAmountSold,
+            out decimal cashTotal, out decimal cardTotal, out decimal checkTotal, out decimal bankTotal, 
+            out decimal otherTotal, out int pointsTotal)
+        {
+            System.Data.DataTable data;
+            totalAmountSold = 0;
+            totalItemsSold = 0;
+            cashTotal = 0;
+            cardTotal = 0;
+            checkTotal = 0;
+            bankTotal = 0;
+            otherTotal = 0;
+            pointsTotal = 0;
+
+            string selectedFilePath = String.Empty;
+
+            var categoryData = new List<Tuple<string, int, decimal>>();
+
+            //Open current transaction file and get data
+            if (transactionType == TransactionType.Internal)
+            {
+                selectedFilePath = posData.TransactionMasterDataFilePath;
+            }
+            else if (transactionType == TransactionType.Regular)
+            {
+                selectedFilePath = posData.TransactionsDataFilePath;
+            }
+
+            using (var parser = new GenericParserAdapter(selectedFilePath))
+            {
+                parser.ColumnDelimiter = ',';
+                parser.FirstRowHasHeader = true;
+                parser.SkipStartingDataRows = 0;
+                parser.SkipEmptyRows = true;
+                parser.MaxBufferSize = 4096;
+                parser.MaxRows = 8000;
+
+                data = parser.GetDataTable();
+            }
+
+            var categories = CategoryCatalog.GetList(posData.Catalog);
+
+            //Get each category
+            foreach (var category in categories)
+            {
+                var amount = 0M;
+                var itemsNumber = 0;
+
+                for (var index = 0; index < data.Rows.Count; index++)
+                {
+                    var row = data.Rows[index];
+                    //Separate categories
+                    if (row["CategoriaProducto"].ToString() == category)
+                    {
+                        amount += decimal.Parse(row["TotalVendido"].ToString());
+                        itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
+
+                        //Get payment method
+                        switch (row["MetodoPago"].ToString())
+                        {
+                            case "Cash":
+                            case "Efectivo":
+                                cashTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            case "Card":
+                            case "Tarjeta":
+                                cardTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            case "Check":
+                            case "Cheque":
+                                checkTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            case "BankTransfer":
+                            case "Transferencia":
+                                bankTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            case "Other":
+                            case "Otro":
+                                otherTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            default:
+                                otherTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                        }
+
+                        //Add all points used
+                        ///TODO: Add once the Puntos Usados Column is added to the transfer list, if needed
+                        //                   pointsTotal = int.Parse(row["PuntosUsados"].ToString());
+                    }
+                }
+
+                categoryData.Add(new Tuple<string, int, decimal>(category.ToString(), itemsNumber, amount));
+                totalAmountSold += amount;
+                totalItemsSold += itemsNumber;
+            }
+
+            //Get first and last receipt number
+            var firstRow = data.Rows[0];
+            var lastRow = data.Rows[data.Rows.Count - 1];
+            firstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
+            lastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+
+            return categoryData;
+        }
+
+        //Get transactions data per payment type
+        public static List<Tuple<string, int, decimal>> GetTransactionsData(TransactionType transactionType,
+            Pos posData, out TransactionDataStruct transactionData)
+        {
+            System.Data.DataTable data;
+            transactionData = new TransactionDataStruct
+            {
+                TotalAmountSold = 0,
+                TotalItemsSold = 0,
+                CashTotal = 0,
+                CardTotal = 0,
+                CheckTotal = 0,
+                BankTotal = 0,
+                OtherTotal = 0,
+                PointsTotal = 0
+            };
+
+            string selectedFilePath = String.Empty;
+
+            var categoryData = new List<Tuple<string, int, decimal>>();
+
+            //Open current transaction file and get data
+            if (transactionType == TransactionType.Internal)
+            {
+                selectedFilePath = posData.TransactionMasterDataFilePath;
+            }
+            else if (transactionType == TransactionType.Regular)
+            {
+                selectedFilePath = posData.TransactionsDataFilePath;
+            }
+
+            using (var parser = new GenericParserAdapter(selectedFilePath))
+            {
+                parser.ColumnDelimiter = ',';
+                parser.FirstRowHasHeader = true;
+                parser.SkipStartingDataRows = 0;
+                parser.SkipEmptyRows = true;
+                parser.MaxBufferSize = 4096;
+                parser.MaxRows = 8000;
+
+                data = parser.GetDataTable();
+            }
+
+            var categories = CategoryCatalog.GetList(posData.Catalog);
+
+            //Get each category
+            foreach (var category in categories)
+            {
+                var amount = 0M;
+                var itemsNumber = 0;
+
+                for (var index = 0; index < data.Rows.Count; index++)
+                {
+                    var row = data.Rows[index];
+                    //Separate categories
+                    if (row["CategoriaProducto"].ToString() == category)
+                    {
+                        amount += decimal.Parse(row["TotalVendido"].ToString());
+                        itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
+
+                        //Get payment method
+                        switch (row["MetodoPago"].ToString())
+                        {
+                            case "Cash":
+                            case "Efectivo":
+                                transactionData.CashTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            case "Card":
+                            case "Tarjeta":
+                                transactionData.CardTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            case "Check":
+                            case "Cheque":
+                                transactionData.CheckTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            case "BankTransfer":
+                            case "Transferencia":
+                                transactionData.BankTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            case "Other":
+                            case "Otro":
+                                transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                            default:
+                                transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                break;
+                        }
+
+                        //Add all points used
+                        ///TODO: Add once the Puntos Usados Column is added to the transfer list, if needed
+                        //                   pointsTotal = int.Parse(row["PuntosUsados"].ToString());
+                    }
+                }
+
+                categoryData.Add(new Tuple<string, int, decimal>(category.ToString(), itemsNumber, amount));
+                transactionData.TotalAmountSold += amount;
+                transactionData.TotalItemsSold += itemsNumber;
+            }
+
+            //Get first and last receipt number
+            var firstRow = data.Rows[0];
+            var lastRow = data.Rows[data.Rows.Count - 1];
+            transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
+            transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+            transactionData.SalesInfoPerCategory = categoryData;
+            return categoryData;
+        }
     }
+
+
 
     public enum PaymentTypeEnum
     {

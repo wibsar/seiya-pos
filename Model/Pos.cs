@@ -177,6 +177,10 @@ namespace Seiya
             }
         }
 
+        public decimal RegisterCashUSD { get; set; }
+
+        public decimal RegisterCashMXN { get; set; }
+
         public string TransactionBackUpPath
         {
             get { return _transactionBackUpPath; }
@@ -401,6 +405,23 @@ namespace Seiya
         }
 
         /// <summary>
+        /// Returns register cash amount
+        /// </summary>
+        /// <param name="mxn"></param>
+        /// <returns></returns>
+        public decimal GetRegisterCashAmount(bool mxn = true)
+        {
+            var row = _dictofdata.Rows[0];
+            if (mxn)
+            {
+                RegisterCashMXN = decimal.Parse(row["CantidadPesosCaja"].ToString());
+                return RegisterCashMXN;
+            }
+            RegisterCashUSD = decimal.Parse(row["CantidadDolarCaja"].ToString());
+            return RegisterCashUSD;
+        }
+
+        /// <summary>
         /// Updates exchange rate in memory
         /// </summary>
         /// <param name="newExchangeRate"></param>
@@ -409,6 +430,26 @@ namespace Seiya
             var row = _dictofdata.Rows[0];
             ExchangeRate = newExchangeRate;
             row["TipoCambio"] = ExchangeRate;
+        }
+
+        /// <summary>
+        /// Update register cash amount in memory
+        /// </summary>
+        /// <param name="cashAmount"></param>
+        /// <param name="mxn"></param>
+        public void UpdateRegisterCashAmount(decimal cashAmount, bool mxn = true)
+        {
+            var row = _dictofdata.Rows[0];
+            if (mxn)
+            {
+                RegisterCashMXN = cashAmount;
+                row["CantidadPesosCaja"] = RegisterCashMXN;
+            }
+            else
+            {
+                RegisterCashUSD = cashAmount;
+                row["CantidadDolarCaja"] = RegisterCashUSD;
+            }
         }
 
         /// <summary>
