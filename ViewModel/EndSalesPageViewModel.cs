@@ -1,6 +1,7 @@
 ﻿using Seiya.WpfBindingUtilities;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -401,7 +402,16 @@ namespace Seiya
             CalculateDelta();
             CalculateSales();
             //Record End Of Sales Transaction in db
-            ///TODO: Record Transactoin Record and BackUp Files after it is done
+            Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.MasterEndOfDaySalesFileName,
+                _pos.GetNextCorteZNumber(), TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
+                TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.OtherTotal,
+                TransactionData.TotalAmountSold, DateTime.Now.ToString(CultureInfo.CurrentCulture));
+            //BackUp Files and Clear
+            Transaction.BackUpTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
+            Transaction.BackUpTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
+            Transaction.ClearTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
+            Transaction.ClearTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
+            Inventory.InventoryBackUp(Constants.DataFolderPath + Constants.InventoryFileName);
             //Print Receipt
             PrintReceipt();
         }

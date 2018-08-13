@@ -257,7 +257,7 @@ namespace Seiya
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             var currentTime = DateTime.Now;
             //Load inventory csv file and create a backup copy
-            string TransactionFileBackUpCopyName = @"C:\Users\Public\Documents\mxData\Data\TransactionBackUp\" + "Transacciones" +
+            string TransactionFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + "Transacciones" +
                 currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") +
                 currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".csv";
 
@@ -270,7 +270,7 @@ namespace Seiya
             var currentTime = DateTime.Now;
             //Load inventory csv file and create a backup copy
             string TransactionFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath +
-                Constants.TransactionsMasterFileName + currentTime.Day.ToString("00") + currentTime.Month.ToString("00") +
+                "TransaccionesMaster" + currentTime.Day.ToString("00") + currentTime.Month.ToString("00") +
                 currentTime.Year.ToString("0000") + currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") +
                 currentTime.Second.ToString("00") + ".csv";
 
@@ -499,12 +499,26 @@ namespace Seiya
             }
 
             //Get first and last receipt number
-            var firstRow = data.Rows[0];
-            var lastRow = data.Rows[data.Rows.Count - 1];
-            transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
-            transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+            if (data.Rows.Count > 1)
+            {
+                var firstRow = data.Rows[0];
+                var lastRow = data.Rows[data.Rows.Count - 1];
+                transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
+                transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+            }
             transactionData.SalesInfoPerCategory = categoryData;
             return categoryData;
+        }
+
+        public static void RecordEndOfDaySalesTransaction(string filePath, int endOfDayReceiptNumber, int firstReceipt, int lastReceipt,
+            int totalUnitsSold, int totalPointsUsed, decimal totalCashSold, decimal totalCardSold, decimal totalOthersSold, 
+            decimal totalAmountSold, string date)
+        {
+            var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}", endOfDayReceiptNumber, firstReceipt, lastReceipt, totalUnitsSold,
+                              totalPointsUsed, totalCashSold, totalCardSold, totalOthersSold, totalAmountSold, date) + Environment.NewLine;
+
+            //Append to daily receipt
+            File.AppendAllText(filePath, data);
         }
     }
 

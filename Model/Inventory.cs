@@ -345,7 +345,7 @@ namespace Seiya
         }
         
         /// <summary>
-        /// Create a copy of the inventory file
+        /// Create a backup copy of the inventory file
         /// </summary>
         /// <param name="filePath"></param>
         public static void InventoryBackUp(string filePath)
@@ -354,9 +354,11 @@ namespace Seiya
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             var currentTime = DateTime.Now;
             //Load inventory csv file and create a backup copy
-            string InventoryFileBackUpCopyName = @"C:\Users\Public\Documents\mxData\Data\InventoryBackUp\" + "Inventario" + currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") + currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".csv";
+            var inventoryFileBackUpCopyName = Constants.DataFolderPath + Constants.InventoryBackupFolderPath + "Inventario" + 
+                                                 currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") +
+                                                 currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".csv";
 
-            File.Copy(filePath, InventoryFileBackUpCopyName);
+            File.Copy(filePath, inventoryFileBackUpCopyName);
         }
 
         /// <summary>
