@@ -2425,6 +2425,8 @@ namespace Seiya
 
         #endregion
 
+        #endregion
+
         #region Methods
 
         #region CartMethods
