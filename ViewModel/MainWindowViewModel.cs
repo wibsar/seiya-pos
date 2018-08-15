@@ -23,7 +23,9 @@ namespace Seiya
         private static Pos _posInstance = null;
         private static User _userInstance = null;
         private static Expense _expenseInstance = null;
-
+        private static UserAccessLevelEnum _accessLevelGranted;
+        private static bool _systemUnlock = false;
+        private static User _currentUser;
 
         //Products page list related fields
         private static ObservableCollection<string> _products;
@@ -133,6 +135,27 @@ namespace Seiya
             }
         }
 
+        public UserAccessLevelEnum AccessLevelGranted
+        {
+            get { return _accessLevelGranted; }
+            set { _accessLevelGranted = value; }
+        }
+
+        private bool SystemUnlock
+        {
+            get { return _systemUnlock; }
+            set { _systemUnlock = value; }
+        }
+
+        public User CurrentUser
+        {
+            get { return _currentUser; }
+            set
+            {
+                _currentUser = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Observable Properties
@@ -163,6 +186,7 @@ namespace Seiya
                 OnPropertyChanged("SelectedCartProduct");
             }
         }
+
 
         /// <summary>
         /// Holds currently selected item for the product page list
@@ -763,6 +787,51 @@ namespace Seiya
         }
         #endregion
 
+        #region Login Related Properties
+
+        private string _loginUserNameText;
+        public string LoginUserNameText
+        {
+            get
+            {
+                return _loginUserNameText;
+            }
+            set
+            {
+                _loginUserNameText = value.ToLower();
+                OnPropertyChanged("LoginUserNameText");
+            }
+        }
+
+        private string _loginPasswordText;
+        public string LoginPasswordText
+        {
+            get
+            {
+                return _loginPasswordText;
+            }
+            set
+            {
+                _loginPasswordText = value.ToLower();
+                OnPropertyChanged("UserLoginText");
+            }
+        }
+
+        private string _loginMessage;
+        public string LoginMessage
+        {
+            get
+            {
+                return _loginMessage;
+            }
+            set
+            {
+                _loginMessage = value.ToLower();
+                OnPropertyChanged("LoginMessage");
+            }
+        }
+
+        #endregion
 
         #endregion
 
@@ -880,6 +949,8 @@ namespace Seiya
                     CurrentPage = "\\View\\ReturnsPage.xaml";
                     break;
                 case "login":
+                    CurrentUser = null;
+                    SystemUnlock = false;
                     CurrentPage = "\\View\\LoginPage.xaml";
                     break;
             }
@@ -887,7 +958,7 @@ namespace Seiya
 
         internal bool CanExecute_ChangePageCommand(object parameter)
         {
-            return true;
+            return SystemUnlock;
         }
         #endregion
 
@@ -2408,18 +2479,33 @@ namespace Seiya
 
         #region Login Commands
 
-        #region UserSignInCommand
-        public ICommand UserSignInCommand { get { return _userSignInCommand ?? (_userSignInCommand = new DelegateCommand(Execute_UserSignInCommand, CanExecute_UserSignInCommand)); } }
-        private ICommand _userSignInCommand;
+        #region LoginCheckCommand
+        public ICommand LoginCheckCommand { get { return _loginCheckCommand ?? (_loginCheckCommand = new DelegateCommand(Execute_LoginCheckCommand, CanExecute_LoginCheckCommand)); } }
+        private ICommand _loginCheckCommand;
 
-        internal void Execute_UserSignInCommand(object parameter)
+        internal void Execute_LoginCheckCommand(object parameter)
         {
-            ///TODO: Implement Log in verification
+            var userFound = new User(Constants.DataFolderPath + Constants.UsersFileName).GetByUserName(LoginUserNameText);
+            if (userFound.Password == LoginPasswordText)
+            {
+                AccessLevelGranted = userFound.Rights;
+                LoginMessage = String.Format("Welcome {0}", userFound.Name);
+                SystemUnlock = true;
+                CurrentUser = userFound;
+                CurrentPage = "\\View\\PosGeneralPage.xaml";
+                LoginMessage = "Bienvenido a Wibsar Retail";
+                LoginUserNameText = "";
+                LoginPasswordText = "";
+            }
+            else
+            {
+                SystemUnlock = false;
+                LoginMessage = "Usuario o contraseña incorrecto! Intente de nuevo";
+            }
         }
-        internal bool CanExecute_UserSignInCommand(object parameter)
+        internal bool CanExecute_LoginCheckCommand(object parameter)
         {
-            ///TODO: Block if username or password is empty
-            return true;
+            return LoginUserNameText != null && LoginPasswordText != null && LoginPasswordText != "" && LoginPasswordText != "";
         }
         #endregion
 
