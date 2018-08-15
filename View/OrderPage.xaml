@@ -152,25 +152,37 @@
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Grid.Row="1" Command="{Binding ChangePageCommand}" CommandParameter="inventory" Background="{x:Null}" BorderBrush="{x:Null}">
+
+                    <Button Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="customers" Background="{x:Null}" BorderBrush="{x:Null}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png" ></Image>
-                            <TextBlock Grid.Row="1" Foreground="#FF224458" FontSize="12">cancelar</TextBlock>
+                            <TextBlock HorizontalAlignment="Center" Grid.Row="1" Foreground="#FF224458">Cancelar</TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Grid.Row="1" Command="{Binding InventorySaveChangesCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
+                    <Button Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="3*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
+                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png"></Image>
+                            <TextBlock Grid.Row="1" Text="Eliminar" Foreground="#FF224458" Margin="16,0,0,0"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button Grid.Column="2" Background="{x:Null}" BorderBrush="{x:Null}">
                         <Grid>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="3*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png"></Image>
-                            <TextBlock Grid.Row="1" Foreground="#FF224458" FontSize="12" >guardar</TextBlock>
+                            <TextBlock Grid.Row="1" Foreground="#FF224458" HorizontalAlignment="Center" >Guardar</TextBlock>
                         </Grid>
                     </Button>
                 </Grid>

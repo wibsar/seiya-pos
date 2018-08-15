@@ -165,7 +165,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png" Margin="5"></Image>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png" Margin="5"></Image>
                             <TextBlock Grid.Column="1" Text="Eliminar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>

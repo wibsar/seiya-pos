@@ -39,14 +39,8 @@
             <RowDefinition Height="1.5*"></RowDefinition>
         </Grid.RowDefinitions>
         <!-- header -->
-        <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-            <TextBlock Grid.Column="0"  FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458">TIPO DE CAMBIO</TextBlock>
-            <TextBlock Grid.Column="1"  FontSize="14"  HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="LightGray" Margin="0,0,5,0">Usuario:</TextBlock>
-        </Grid>
+        <TextBlock Grid.Row="0" Text="TIPO DE CAMBIO" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458"></TextBlock>
+
         <Grid Grid.Row="1" Grid.Column="0" Background="White" Margin="50,10,50,50">
             <Grid.RowDefinitions>
                 <RowDefinition Height="2*"></RowDefinition>
