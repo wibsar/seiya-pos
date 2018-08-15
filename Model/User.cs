@@ -257,10 +257,10 @@ namespace Seiya
                     row["Nombre"] = user.Name;
                     row["Email"] = user.Email;
                     row["Telefono"] = user.Phone;
-                    row["FechaRegistro"] = user.RegistrationDate;
+                    row["FechaRegistro"] = user.RegistrationDate.ToString("d");
                     row["Usuario"] = user.UserName;
                     row["Password"] = user.Password;
-                    row["UltimaSession"] = user.LastLogin;
+                    row["UltimaSession"] = user.LastLogin.ToString("d");
                     row["NivelAcceso"] = user.Rights;
                 }
             }
