@@ -167,10 +167,27 @@ namespace Seiya
             //TODO: Check if exists, and update if valid
         }
 
-        public User GetByUserName()
+        public User GetByUserName(string userName)
         {
-            //Look for user by username
-            return new User("a");
+            var allFields = base.DataTable.AsEnumerable();
+            foreach (var row in allFields)
+            {
+                var user = new User(base.FilePath)
+                {
+                    Id = Int32.Parse(row["Id"].ToString()),
+                    Name = row["Nombre"].ToString(),
+                    Email = row["Email"].ToString(),
+                    Phone = row["Telefono"].ToString(),
+                    RegistrationDate = Convert.ToDateTime(row["FechaRegistro"].ToString()),
+                    UserName = row["Usuario"].ToString(),
+                    Password = row["Password"].ToString(),
+                    LastLogin = Convert.ToDateTime(row["UltimaSession"].ToString())
+                };
+
+                if (row["Usuario"].ToString() == userName)
+                return user;
+            }
+            return new User(base.FilePath);
         }
 
         public User GetByID()
