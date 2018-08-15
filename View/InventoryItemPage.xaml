@@ -113,7 +113,7 @@
                 <TextBox Grid.Row="3" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.ProviderProductId}"></TextBox>
                 <TextBox Grid.Row="4" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.Description}"></TextBox>
                 <TextBox Grid.Row="5" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.Category}"></TextBox>
-                    <TextBlock Grid.Row="6" Background="LightGray" Height="2" Margin="0"></TextBlock>
+                <TextBlock Grid.Row="6" Background="LightGray" Height="2" Margin="0"></TextBlock>
                 <TextBox Grid.Row="7" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.Cost}"></TextBox>
                 <TextBox Grid.Row="8" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.CostCurrency}"></TextBox>
                 <TextBox Grid.Row="9" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.Price}"></TextBox>
@@ -125,7 +125,7 @@
                 <TextBox Grid.Row="15" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.TotalQuantityAvailable}"></TextBox>
                 <TextBox Grid.Row="16" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.MinimumStockQuantity}"></TextBox>
                 <TextBox Grid.Row="17" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.LastPurchaseDate}"></TextBox>
-                <TextBox Grid.Row="18" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.LastSaleDate}"></TextBox>
+                <TextBlock Grid.Row="18" Margin="2" FontSize="10" Text="{Binding InventoryTemporalItem.LastSaleDateString}"></TextBlock>
                 </Grid>
 
            
@@ -138,9 +138,6 @@
                     <RowDefinition Height="3*"></RowDefinition>
                     <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-
-            </Grid.ColumnDefinitions>
 
             <!-- Image holder -->
 
