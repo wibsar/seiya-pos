@@ -24,7 +24,7 @@ namespace Seiya
         private static User _userInstance = null;
         private static Expense _expenseInstance = null;
         private static UserAccessLevelEnum _accessLevelGranted;
-        private static bool _systemUnlock = false;
+        private static bool _systemUnlock = true;
         private static User _currentUser;
 
         //Products page list related fields
