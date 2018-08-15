@@ -14,6 +14,8 @@ namespace Seiya
     {
         #region Fields
         private BitmapImage _image;
+        private DateTime _lastPurchaseDate;
+        private DateTime _lastSaleDate;
         #endregion
 
         #region Properties
@@ -59,8 +61,28 @@ namespace Seiya
             }
         }
 
-        public DateTime LastPurchaseDate { get; set; }
-        public DateTime LastSaleDate { get; set; }
+        public DateTime LastPurchaseDate
+        {
+            get { return _lastPurchaseDate; }
+            set { _lastPurchaseDate = value; }
+        }
+
+        public DateTime LastSaleDate
+        {
+            get { return _lastSaleDate; }
+            set { _lastSaleDate = value; }
+        }
+
+        public string LastPurchaseDateString
+        {
+            get { return _lastPurchaseDate.ToString("d"); }
+        }
+
+        public string LastSaleDateString
+        {
+            get { return _lastSaleDate.ToString("d"); }
+        }
+
         public int LastQuantitySold { get; set; }
 
         public decimal LastAmountSold
