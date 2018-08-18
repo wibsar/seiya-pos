@@ -9,6 +9,26 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="EndSalesPage"
   >
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"/>
+            
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"/>
+        </Style>
+
+        <Style TargetType="TextBlock">
+            <Setter Property="Foreground" Value="#FF0E2D3B" />
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="14" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"/>                     
+        </Style>
+    </Page.Resources>
 
 
     <Grid ShowGridLines="false" Background="White">
@@ -23,8 +43,8 @@
         </Grid.RowDefinitions>
 
         <!-- header -->
-        <TextBlock Grid.Column="0" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458" FontWeight="Bold">CORTE DE CAJA</TextBlock>
-        <TextBlock Grid.Column="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="12" Padding="10,0,0,0" HorizontalAlignment="Right" VerticalAlignment="Center" Foreground="LightGray" FontWeight="Bold" Margin="0,21,26,28">Usuario:</TextBlock>
+        <TextBlock Grid.Column="0" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458" FontWeight="Bold">CORTE DE CAJA</TextBlock>
+      
 
         <!-- Users input for quantities -->
         <Grid Grid.Row="1" Grid.Column="0" Margin="5,5,0,0">
@@ -48,26 +68,26 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(MXN)   PESO" />
-                <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 1,000   X   "></TextBlock>
-                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 500    X   "></TextBlock>
-                <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 200    X   "></TextBlock>
-                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 100    X   "></TextBlock>
-                <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 50     X   "></TextBlock>
-                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 20     X   "></TextBlock>
-                <TextBlock Grid.Row="7" TextAlignment="Right" Text="Monedas " FontWeight="Bold" FontSize="16" ></TextBlock>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(MXN)   PESO" FontSize="14"/>
+                <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 1,000   X   " FontSize="12"></TextBlock>
+                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 500    X   " FontSize="12"></TextBlock>
+                <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 200    X   " FontSize="12"></TextBlock>
+                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 100    X   " FontSize="12"></TextBlock>
+                <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 50     X   " FontSize="12"></TextBlock>
+                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 20     X   " FontSize="12"></TextBlock>
+                <TextBlock Grid.Row="7" TextAlignment="Right" Text="Monedas " FontWeight="Bold" FontSize="14" ></TextBlock>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Margin="0,5">
-                        <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="CANTIDAD"/>
                 <TextBox Grid.Row="1" Text="{Binding MxnPeso1000}"></TextBox>
                 <TextBox Grid.Row="2" Text="{Binding MxnPeso500}" Background="#FFECECEC"></TextBox>
@@ -89,15 +109,15 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(USD)   DOLAR"/>
-                <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 100   X   "></TextBlock>
-                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 50    X   "></TextBlock>
-                <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 20    X   "></TextBlock>
-                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 10    X   "></TextBlock>
-                <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 5     X   "></TextBlock>
-                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 1     X   "></TextBlock>
-                <TextBlock Grid.Row="7" TextAlignment="Right" Text="Monedas " FontWeight="Bold" FontSize="16" ></TextBlock>
-        </Grid>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(USD)   DOLAR" FontSize="14"/>
+                <TextBlock Grid.Row="1" FontSize="12" TextAlignment="Right" Text="$ 100   X   "></TextBlock>
+                <TextBlock Grid.Row="2" FontSize="12" TextAlignment="Right" Background="#FFECECEC" Text="$ 50    X   "></TextBlock>
+                <TextBlock Grid.Row="3" FontSize="12" TextAlignment="Right" Text="$ 20    X   "></TextBlock>
+                <TextBlock Grid.Row="4" FontSize="12" TextAlignment="Right" Background="#FFECECEC" Text="$ 10    X   "></TextBlock>
+                <TextBlock Grid.Row="5" FontSize="12" TextAlignment="Right" Text="$ 5     X   "></TextBlock>
+                <TextBlock Grid.Row="6" FontSize="12" TextAlignment="Right" Background="#FFECECEC" Text="$ 1     X   "></TextBlock>
+                <TextBlock Grid.Row="7" FontSize="14" TextAlignment="Right" Text="Monedas " FontWeight="Bold" ></TextBlock>
+            </Grid>
             <Grid Grid.Column="1" Grid.Row="1" Margin="0,5">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -121,9 +141,9 @@
         </Grid>
 
         <!-- Sales data based on sales by type and expenses -->
-        <Grid Grid.Row="1" Grid.Column="1">
+        <Grid Grid.Row="1" Grid.Column="1" Margin="20,0,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
@@ -142,17 +162,17 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Caja Inicial " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" />
-                <TextBlock Grid.Row="1" Text="Corte TPV  " TextAlignment="Right" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
-                <TextBlock Grid.Row="2" Text="Efectivo  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
-                <TextBlock Grid.Row="3" Text="Cheque  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
-                <TextBlock Grid.Row="4" Text="Transferencia  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
-                <TextBlock Grid.Row="5" Text="Otro Metodo de Pago  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
-                <TextBlock Grid.Row="6" Text="Puntos Usados  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14"></TextBlock>
-                <TextBlock Grid.Row="7" Text="Total Ventas  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
-                <TextBlock Grid.Row="8" Text="Gastos " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
-                <TextBlock Grid.Row="9" Text="Diferencia  " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" ></TextBlock>
-                <TextBlock Grid.Row="10" Text="Caja Nueva " TextAlignment="Right" VerticalAlignment="Center"  FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="14" />
+                <TextBlock Grid.Row="0" Text="Caja Turno Anterior:"/>
+                <TextBlock Grid.Row="1" Text="Corte TPV:" ></TextBlock>
+                <TextBlock Grid.Row="2" Text="Efectivo:"></TextBlock>
+                <TextBlock Grid.Row="3" Text="Cheque:" ></TextBlock>
+                <TextBlock Grid.Row="4" Text="Transferencia:" ></TextBlock>
+                <TextBlock Grid.Row="5" Text="Otro Metodo de Pago:" ></TextBlock>
+                <TextBlock Grid.Row="6" Text="Puntos Usados:" ></TextBlock>
+                <TextBlock Grid.Row="7" Text="Total Ventas:"></TextBlock>
+                <TextBlock Grid.Row="8" Text="Gastos:" ></TextBlock>
+                <TextBlock Grid.Row="9" Text="Diferencia:" ></TextBlock>
+                <TextBlock Grid.Row="10" Text="Caja Nueva:"/>
 
             </Grid>
 
@@ -212,7 +232,7 @@
                         <ImageBrush ImageSource="/Seiya;component/Resources/Images/Cortex.png" Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
-                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Background="White" Foreground="#FF7E7E7E" HorizontalAlignment="Center">Corte X</TextBlock>
+                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="12" Background="White" Foreground="#FF7E7E7E" HorizontalAlignment="Center">Corte X</TextBlock>
             </Grid>
             <Grid Grid.Column="1">
                 <Grid.RowDefinitions>
@@ -224,7 +244,7 @@
                         <ImageBrush ImageSource="C:\Projects\seiya-pos\Resources\Images\Cortez.png" Stretch="Uniform"/>
                     </Button.Background>
                 </Button>
-                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Background="White" Foreground="#FF7E7E7E" HorizontalAlignment="Center">Corte Z</TextBlock>
+                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Background="White" Foreground="#FF7E7E7E" HorizontalAlignment="Center" FontSize="12">Corte Z</TextBlock>
             </Grid>
         </Grid>
     </Grid>
