@@ -178,7 +178,10 @@ namespace Seiya
 
         internal void Execute_ClickEnterCommand(object parameter)
         {
-            ManualProduct = Product.Add(Description, Category, decimal.Parse(Price), Quantity);
+            if (Category != null && Price != null && Price != "0")
+            {
+                ManualProduct = Product.Add(Description, Category, decimal.Parse(Price), Quantity);
+            }
             //MainWindowViewModel.AddManualProductToCart(ManualProduct); Changed from static
             var main = MainWindowViewModel.GetInstance();
             main.AddManualProductToCart(ManualProduct);
@@ -189,7 +192,7 @@ namespace Seiya
         {
             //Add logic to check if the command can be executed (if any)
             //TODO: Check that there is something for quantity, price, and category
-            return Price != string.Empty && Price != "0" && Category != null;
+            return Price != string.Empty && Price != "0" && Price != null && Category != null;
         }
         #endregion
 
