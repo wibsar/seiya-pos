@@ -49,6 +49,9 @@ namespace Seiya
         public const string CustomersFileName = "Clientes.csv";
         public const string VendorsFileName = "Proveedores.csv";
 
+        //Images
+        public const string ImagesFolderPath = @"Images\";
+
         //Items list
         public const int MaxNumberListItems = 20;
 

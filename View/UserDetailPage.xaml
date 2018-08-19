@@ -97,7 +97,7 @@
                     <TextBlock HorizontalAlignment="Center" Grid.Row="1" Foreground="#FF224458">Cancelar</TextBlock>
                 </Grid>
             </Button>
-            <Button Grid.Column="2" Command="{Binding UserSaveChangesCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Grid.Column="2" Command="{Binding UserDeleteCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"></RowDefinition>
@@ -107,7 +107,7 @@
                     <TextBlock Grid.Row="1" Text="Eliminar" Foreground="#FF224458" Margin="16,0,0,0"></TextBlock>
                 </Grid>
             </Button>
-            <Button Grid.Column="3" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Grid.Column="3" Command="{Binding UserSaveChangesCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"></RowDefinition>

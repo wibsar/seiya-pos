@@ -102,7 +102,7 @@ namespace Seiya
         }
 
         /// <summary>
-        /// Delete user
+        /// Delete vendor
         /// </summary>
         public void Delete()
         {

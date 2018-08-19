@@ -299,11 +299,6 @@ namespace Seiya
             return Int32.Parse(row["Id"].ToString());
         }
 
-        #endregion
-
-        #region Methods
-
-
         /// <summary>
         /// Update expense in the datatable
         /// </summary>
@@ -353,6 +348,13 @@ namespace Seiya
             return true;
         }
 
+        /// <summary>
+        /// Delete expense
+        /// </summary>
+        public void Delete()
+        {
+            base.RemoveEntryInDataTable(this.Id.ToString(), "Id");
+        }
         #endregion
     }
 }

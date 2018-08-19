@@ -63,6 +63,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Constants.cs" />
+    <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Interfaces\IBasicEntityInfo.cs" />
     <Compile Include="Model\CategoryCatalog.cs" />
     <Compile Include="Model\CurrencyTypeEnum.cs" />
@@ -110,6 +111,9 @@
     </Compile>
     <Compile Include="View\OrderPage.xaml.cs">
       <DependentUpon>OrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\OrderMainPage.xaml.cs">
+      <DependentUpon>OrderMainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\VendorDetailPage.xaml.cs">
       <DependentUpon>VendorDetailPage.xaml</DependentUpon>
@@ -195,6 +199,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="View\OrderPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\OrderMainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
