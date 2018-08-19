@@ -1,16 +1,12 @@
-﻿using System;
+﻿using Seiya.WpfBindingUtilities;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Input;
-using Seiya.WpfBindingUtilities;
 //using System.Windows.Interactivity;
 using System.Windows.Media.Imaging;
-using System.IO;
 
 namespace Seiya
 {
@@ -758,6 +754,80 @@ namespace Seiya
 
         #endregion
 
+        #region Orders Related Properties
+
+        private Order _orderTemporalItem;
+        public Order OrderTemporalItem
+        {
+            get
+            {
+                return _orderTemporalItem;
+            }
+            set
+            {
+                _orderTemporalItem = value;
+                OnPropertyChanged("OrderTemporalItem");
+            }
+        }
+
+        private string _ordersSearchText;
+        public string OrdersSearchText
+        {
+            get
+            {
+                return _ordersSearchText;
+            }
+            set
+            {
+                _ordersSearchText = value.ToLower();
+                OnPropertyChanged("OrdersSearchText");
+            }
+        }
+
+        /// <summary>
+        /// Hold search results
+        /// </summary>
+        /// 
+        private ObservableCollection<Order> _ordersSearchedEntries;
+
+        public ObservableCollection<Order> OrdersSearchedEntries
+        {
+            get { return _ordersSearchedEntries; }
+            set
+            {
+                _ordersSearchedEntries = value;
+                OnPropertyChanged("OrdersSearchedEntries");
+            }
+        }
+
+        private Order _selectedOrder;
+        public Order SelectedOrder
+        {
+            get { return _selectedOrder; }
+            set
+            {
+                _selectedOrder = value;
+                OnPropertyChanged("SelectedOrder");
+            }
+        }
+
+        private BitmapImage _orderImage;
+        public BitmapImage OrderImage
+        {
+            get
+            {
+                //return SelectedInventoryProduct == null ? null : SelectedInventoryProduct.Image;
+                return OrderTemporalItem == null ? null : OrderTemporalItem.Image;
+            }
+            set
+            {
+                _orderImage = value;
+                OnPropertyChanged("OrderImage");
+            }
+        }
+
+        #endregion
+
         #region Exchange Rate Related Properties
 
         public decimal ExchangeRate
@@ -923,7 +993,7 @@ namespace Seiya
                     CurrentPage = "\\View\\UserMainPage.xaml";
                     break;
                 case "orders":
-                    CurrentPage = "\\View\\OrderPage.xaml";
+                    CurrentPage = "\\View\\OrderMainPage.xaml";
                     break;
                 case "exchange_rate":
                     CurrentPage = "\\View\\ExchangeRatePage.xaml";
@@ -1661,6 +1731,29 @@ namespace Seiya
         }
         #endregion
 
+        #region  UserDeleteCommand
+
+        public ICommand UserDeleteCommand { get { return _userDeleteCommand ?? (_userDeleteCommand = new DelegateCommand(Execute_UserDeleteCommand, CanExecute_UserDeleteCommand)); } }
+        private ICommand _userDeleteCommand;
+
+        internal void Execute_UserDeleteCommand(object parameter)
+        {
+            //Check if code was updated
+            if (SelectedUser != null)
+            {
+                SelectedUser.Delete();
+                SelectedUser.SaveDataTableToCsv();
+            }
+            UsersSearchedEntries = null;
+            CurrentPage = "\\View\\UserMainPage.xaml";
+        }
+
+        internal bool CanExecute_UserDeleteCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
         #endregion User Commands
 
         #region Customer Commands
@@ -1784,6 +1877,29 @@ namespace Seiya
         internal bool CanExecute_CustomerSaveChangesCommand(object parameter)
         {
             return true;// UserTemporalItem.Password == UserTemporalItem.PasswordVerification && UserTemporalItem.Password != "";
+        }
+        #endregion
+
+        #region  CustomerDeleteCommand
+
+        public ICommand CustomerDeleteCommand { get { return _customerDeleteCommand ?? (_customerDeleteCommand = new DelegateCommand(Execute_CustomerDeleteCommand, CanExecute_CustomerDeleteCommand)); } }
+        private ICommand _customerDeleteCommand;
+
+        internal void Execute_CustomerDeleteCommand(object parameter)
+        {
+            //Check if code was updated
+            if (SelectedCustomer != null)
+            {
+                SelectedCustomer.Delete();
+                SelectedCustomer.SaveDataTableToCsv();
+            }
+            CustomersSearchedEntries = null;
+            CurrentPage = "\\View\\CustomerMainPage.xaml";
+        }
+
+        internal bool CanExecute_CustomerDeleteCommand(object parameter)
+        {
+            return true;
         }
         #endregion
 
@@ -1911,6 +2027,29 @@ namespace Seiya
         }
         #endregion
 
+        #region  ExpenseDeleteCommand
+
+        public ICommand ExpenseDeleteCommand { get { return _expenseDeleteCommand ?? (_expenseDeleteCommand = new DelegateCommand(Execute_ExpenseDeleteCommand, CanExecute_ExpenseDeleteCommand)); } }
+        private ICommand _expenseDeleteCommand;
+
+        internal void Execute_ExpenseDeleteCommand(object parameter)
+        {
+            //Check if code was updated
+            if (SelectedExpense != null)
+            {
+                SelectedExpense.Delete();
+                SelectedExpense.SaveDataTableToCsv();
+            }
+            ExpensesSearchedEntries = null;
+            CurrentPage = "\\View\\ExpenseMainPage.xaml";
+        }
+
+        internal bool CanExecute_ExpenseDeleteCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
         #endregion Expenses Commands
 
         #region Vendor Commands
@@ -2009,7 +2148,31 @@ namespace Seiya
 
         #endregion
 
-        #region  VendorSaveChangesCommand
+        #region  VendorDeleteCommand
+
+        public ICommand VendorDeleteCommand { get { return _vendorDeleteCommand ?? (_vendorDeleteCommand = new DelegateCommand(Execute_VendorDeleteCommand, CanExecute_VendorDeleteCommand)); } }
+        private ICommand _vendorDeleteCommand;
+
+        internal void Execute_VendorDeleteCommand(object parameter)
+        {
+            //Check if code was updated
+            if (SelectedVendor != null)
+            {
+                SelectedVendor.Delete();
+                SelectedVendor.SaveDataTableToCsv();
+            }
+            VendorsSearchedEntries = null;
+            CurrentPage = "\\View\\VendorMainPage.xaml";
+        }
+
+        internal bool CanExecute_VendorDeleteCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
+        #region VendorSaveChangesCommand
+
         public ICommand VendorSaveChangesCommand { get { return _vendorSaveChangesCommand ?? (_vendorSaveChangesCommand = new DelegateCommand(Execute_VendorSaveChangesCommand, CanExecute_VendorSaveChangesCommand)); } }
         private ICommand _vendorSaveChangesCommand;
 
@@ -2049,29 +2212,33 @@ namespace Seiya
             //Change main frame page based on the parameter
             switch ((string)parameter)
             {
-                //case "customer_details":
-                //    var temporalProduct = new User(Constants.DataFolderPath + Constants.UsersFileName)
-                //    {
-                //        Id = SelectedUser.Id,
-                //        Name = SelectedUser.Name,
-                //        Email = SelectedUser.Email,
-                //        Phone = SelectedUser.Phone,
-                //        RegistrationDate = SelectedUser.RegistrationDate,
-                //        Rights = SelectedUser.Rights,
-                //        UserName = SelectedUser.UserName,
-                //        Password = SelectedUser.Password,
-                //        LastLogin = SelectedUser.LastLogin
-                //    };
+                case "order_details":
+                    var temporalOrder = new Order(Constants.DataFolderPath + Constants.OrdersFileName)
+                    {
+                        Id = SelectedOrder.Id,
+                        OrderTicketNumber = SelectedOrder.OrderTicketNumber,
+                        Customer = SelectedOrder.Customer,
+                        Title = SelectedOrder.Title,
+                        DueDate = SelectedOrder.DueDate,
+                        Category = SelectedOrder.Category,
+                        TotalDue = SelectedOrder.TotalDue,
+                        TotalPrePaid = SelectedOrder.TotalPrePaid,
+                        PrePaidTicketNumber = SelectedOrder.PrePaidTicketNumber,
+                        TotalAmount = SelectedOrder.TotalAmount,
+                        Description = SelectedOrder.Description,
+                        ImageName = SelectedOrder.ImageName,
+                        RegistrationDate = SelectedOrder.RegistrationDate
+                    };
 
-                //    CurrentPage = "\\View\\UserDetailPage.xaml";
-                //    UserTemporalItem = temporalProduct;
-                //    break;
+                    CurrentPage = "\\View\\OrderPage.xaml";
+                    OrderTemporalItem = temporalOrder;
+                    break;
             }
         }
 
         internal bool CanExecute_OrderUpdateCommand(object parameter)
         {
-            return SelectedUser != null;
+            return SelectedOrder != null;
         }
 
         #endregion
@@ -2086,25 +2253,29 @@ namespace Seiya
             //Change main frame page based on the parameter
             switch ((string)parameter)
             {
-                //case "user_add":
-                //    SelectedUser = null;    //Clear selected item in the user list
-                //    //Create new productt
-                //    var temporalProduct = new User(Constants.DataFolderPath + Constants.UsersFileName)
-                //    {
-                //        Name = "",
-                //        Email = "",
-                //        Phone = "",
-                //        RegistrationDate = DateTime.Now,
-                //        Rights = UserAccessLevelEnum.Basic,
-                //        UserName = "",
-                //        Password = "",
-                //        LastLogin = DateTime.Now
-                //    };
-                //    temporalProduct.Id = temporalProduct.GetLastItemNumber() + 1;
+                case "order_add":
+                    SelectedOrder= null;    //Clear selected item in the user list
+                    //Create new productt
+                    var temporalOrder = new Order(Constants.DataFolderPath + Constants.OrdersFileName)
+                    {
+                        OrderTicketNumber = 0,
+                        Customer = "",
+                        Title = "",
+                        DueDate = DateTime.Now,
+                        Category = "",
+                        TotalDue = 0,
+                        TotalPrePaid = 0,
+                        PrePaidTicketNumber = 0,
+                        TotalAmount = 0,
+                        Description = "",
+                        ImageName = "NA.jpg",
+                        RegistrationDate = DateTime.Now
+                    };
+                    temporalOrder.Id = temporalOrder.GetLastItemNumber() + 1;
 
-                //    CurrentPage = "\\View\\UserDetailPage.xaml";
-                //    UserTemporalItem = temporalProduct;
-                //    break;
+                    CurrentPage = "\\View\\OrderPage.xaml";
+                    OrderTemporalItem = temporalOrder;
+                    break;
             }
         }
 
@@ -2122,9 +2293,9 @@ namespace Seiya
 
         internal void Execute_OrderStartSearchCommand(object parameter)
         {
-            ////Inventory search method that returns a list of products for the datagrid
-            //UsersSearchedEntries = new ObservableCollection<User>(new User(Constants.DataFolderPath + Constants.UsersFileName).Search(UsersSearchText));
-            //UsersSearchText = "";
+            //Inventory search method that returns a list of products for the datagrid
+            OrdersSearchedEntries = new ObservableCollection<Order>(new Order(Constants.DataFolderPath + Constants.OrdersFileName).Search(OrdersSearchText));
+            OrdersSearchText = "";
         }
         internal bool CanExecute_OrderStartSearchCommand(object parameter)
         {
@@ -2139,23 +2310,71 @@ namespace Seiya
 
         internal void Execute_OrderSaveChangesCommand(object parameter)
         {
-            ////Check if code was updated
-            //if (SelectedUser != null)
-            //{
-            //    SelectedUser.UpdateUserToTable(UserTemporalItem);
-            //    SelectedUser.SaveDataTableToCsv();
-            //}
-            //else
-            //{
-            //    UserTemporalItem.Register();
-            //}
-            //UsersSearchedEntries = null;
-            //CurrentPage = "\\View\\UserMainPage.xaml";
+            //Check if code was updated
+            if (SelectedOrder != null)
+            {
+                SelectedOrder.UpdateOrderToTable(OrderTemporalItem);
+                SelectedOrder.SaveDataTableToCsv();
+            }
+            else
+            {
+                OrderTemporalItem.Register();
+            }
+            OrdersSearchedEntries = null;
+            CurrentPage = "\\View\\OrderMainPage.xaml";
         }
 
         internal bool CanExecute_OrderSaveChangesCommand(object parameter)
         {
-            return UserTemporalItem.Password == UserTemporalItem.PasswordVerification && UserTemporalItem.Password != "";
+            return true;
+        }
+        #endregion
+
+        #region  OrderDeleteCommand
+
+        public ICommand OrderDeleteCommand { get { return _orderDeleteCommand ?? (_orderDeleteCommand = new DelegateCommand(Execute_OrderDeleteCommand, CanExecute_OrderDeleteCommand)); } }
+        private ICommand _orderDeleteCommand;
+
+        internal void Execute_OrderDeleteCommand(object parameter)
+        {
+            //Check if code was updated
+            if (SelectedOrder != null)
+            {
+                SelectedOrder.Delete();
+                SelectedOrder.SaveDataTableToCsv();
+            }
+            OrdersSearchedEntries = null;
+            CurrentPage = "\\View\\OrdersMainPage.xaml";
+        }
+
+        internal bool CanExecute_OrderDeleteCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
+        #region OrderImageCommand
+
+        private ICommand _orderImageCommand;
+        public ICommand OrderImageCommand { get { return _orderImageCommand ?? (_orderImageCommand = new DelegateCommand(Execute_OrderImageCommand, CanExecute_OrderImageCommand)); } }
+
+        internal void Execute_OrderImageCommand(object parameter)
+        {
+            switch (parameter)
+            {
+                case "add":
+                    OrderTemporalItem.ImageName = SelectImage();
+                    OrderImage = OrderTemporalItem.Image;
+                    break;
+                case "remove":
+                    OrderTemporalItem.ImageName = "NA.jpg";
+                    OrderImage = OrderTemporalItem.Image;
+                    break;
+            }
+        }
+        internal bool CanExecute_OrderImageCommand(object parameter)
+        {
+            return true;
         }
         #endregion
 
@@ -2894,6 +3113,8 @@ namespace Seiya
             if(result == true)
             {
                 var fileName = Path.GetFileName(dialog.FileName);
+                //Move the file to the images file
+                File.Copy(dialog.FileName, Constants.DataFolderPath + Constants.ImagesFolderPath + fileName);
                 return fileName;
             }
             else
