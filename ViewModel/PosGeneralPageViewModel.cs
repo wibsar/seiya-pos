@@ -180,7 +180,7 @@ namespace Seiya
         {
             if (Category != null && Price != null && Price != "0")
             {
-                ManualProduct = Product.Add(Description, Category, decimal.Parse(Price), Quantity);
+                ManualProduct = Product.Add(Description, Category.ToString(), decimal.Parse(Price), Quantity);
             }
             //MainWindowViewModel.AddManualProductToCart(ManualProduct); Changed from static
             var main = MainWindowViewModel.GetInstance();
