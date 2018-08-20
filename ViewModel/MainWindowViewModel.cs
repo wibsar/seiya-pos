@@ -339,7 +339,7 @@ namespace Seiya
             set
             {
                 _paymentTotalMXN = value;
-                PaymentTotalUSD = _paymentTotalMXN / _exchangeRate;
+                PaymentTotalUSD = Math.Round(_paymentTotalMXN / _exchangeRate, 2);
                 OnPropertyChanged("PaymentTotalMXN");
             }
         }
