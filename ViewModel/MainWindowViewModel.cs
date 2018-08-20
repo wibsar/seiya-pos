@@ -3104,16 +3104,18 @@ namespace Seiya
         public string SelectImage()
         {
             //Open dialog and select jpg image
-            var dialog = new Microsoft.Win32.OpenFileDialog();
-            dialog.DefaultExt = ".jpg";
-
+            var dialog = new Microsoft.Win32.OpenFileDialog {DefaultExt = ".jpg"};
             //Display dialog
             bool? result = dialog.ShowDialog();
 
             if(result == true)
             {
                 var fileName = Path.GetFileName(dialog.FileName);
-                //Move the file to the images file
+
+                //Move the file to the images file and append the time at the beginning of the name
+                fileName = DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() +
+                            DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + "_" + fileName;
+                
                 File.Copy(dialog.FileName, Constants.DataFolderPath + Constants.ImagesFolderPath + fileName);
                 return fileName;
             }
