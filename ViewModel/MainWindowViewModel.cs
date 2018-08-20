@@ -394,6 +394,42 @@ namespace Seiya
             }
         }
 
+        #region Enum Related Properties
+
+        private IList<PaymentTypeEnum> _paymentTypes;
+        public IList<PaymentTypeEnum> PaymentTypes
+        {
+            get { return Enum.GetValues(typeof(PaymentTypeEnum)).Cast<PaymentTypeEnum>().ToList(); }
+            set
+            {
+                _paymentTypes = value;
+                OnPropertyChanged("PaymentTypes");
+            }
+        }
+
+        private IList<CurrencyTypeEnum> _currencyTypes;
+        public IList<CurrencyTypeEnum> CurrencyTypes
+        {
+            get { return Enum.GetValues(typeof(CurrencyTypeEnum)).Cast<CurrencyTypeEnum>().ToList(); }
+            set
+            {
+                _currencyTypes = value;
+                OnPropertyChanged("CurrencyTypes");
+            }
+        }
+
+        private IList<UserAccessLevelEnum> _userAccessLevelTypes;
+        public IList<UserAccessLevelEnum> UserAccessLevelTypes
+        {
+            get { return Enum.GetValues(typeof(UserAccessLevelEnum)).Cast<UserAccessLevelEnum>().ToList(); }
+            set
+            {
+                _userAccessLevelTypes = value;
+                OnPropertyChanged("UserAccessLevelTypes");
+            }
+        }
+        #endregion
+
         #region Products Page Titles
 
         public string PageOneTitle
@@ -1667,7 +1703,7 @@ namespace Seiya
                         Email = "",
                         Phone = "",
                         RegistrationDate = DateTime.Now,
-                        Rights = UserAccessLevelEnum.Basic,
+                        Rights = UserAccessLevelEnum.Basico,
                         UserName = "",
                         Password = "",
                         LastLogin = DateTime.Now
@@ -1966,7 +2002,7 @@ namespace Seiya
                         ExpenseCategory = "",
                         Date = DateTime.Now,
                         PaymentType = PaymentTypeEnum.Cash,
-                        CurrencyType = CurrencyTypeEnum.MXN
+                        CurrencyType = CurrencyTypeEnum.USD
                     };
                     temporalExpense.Id = temporalExpense.GetLastItemNumber() + 1;
 

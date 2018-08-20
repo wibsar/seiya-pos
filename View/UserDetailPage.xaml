@@ -62,17 +62,7 @@
                 <TextBox Grid.Row="1" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Name}"></TextBox>
                 <TextBox Grid.Row="2" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Email}"></TextBox>
                 <TextBox Grid.Row="3" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Phone}"></TextBox>
-                <ComboBox Grid.Row="4" Grid.Column="2" Margin="5" SelectedItem ="{Binding UserTemporalItem.AccessLevel}">
-                    <ComboBoxItem>
-                        <TextBlock Text="Basico" FontSize="20" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Avanzado" FontSize="20" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="Admin" FontSize="20" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></TextBlock>
-                    </ComboBoxItem>
-                </ComboBox>
+                <ComboBox Grid.Row="4" Grid.Column="2" Margin="5" ItemsSource="{Binding UserAccessLevelTypes, Mode=TwoWay}" SelectedItem ="{Binding UserTemporalItem.Rights, Mode=TwoWay}" FontSize="20" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
                 <TextBox Grid.Row="5" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.UserName}"></TextBox>
                 <TextBox Grid.Row="6" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Password}"></TextBox>
                 <TextBox Grid.Row="7" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.PasswordVerification}"></TextBox>

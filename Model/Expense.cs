@@ -93,6 +93,14 @@ namespace Seiya
                 _currency = value;
             }
         }
+
+        public string CurrencyTypeString
+        {
+            get
+            {
+                return _currency.ToString();
+            }
+        }
         public decimal Amount
         {
             get
@@ -125,6 +133,11 @@ namespace Seiya
             {
                 _paymentType = value;
             }
+        }
+
+        public string PaymentTypeString
+        {
+            get { return _paymentType.ToString(); }
         }
         public string ExpensesFilePath
         {
@@ -216,11 +229,11 @@ namespace Seiya
 
                     };
                     if (row["Moneda"].ToString().ToUpper() == "USD")
-                        CurrencyType = CurrencyTypeEnum.USD;
+                        expense.CurrencyType = CurrencyTypeEnum.USD;
                     else
-                        CurrencyType = CurrencyTypeEnum.MXN;
+                        expense.CurrencyType = CurrencyTypeEnum.MXN;
 
-                    PaymentType = (PaymentTypeEnum)Enum.Parse(typeof(PaymentTypeEnum),row["MetodoPago"].ToString(), true);
+                    expense.PaymentType = (PaymentTypeEnum)Enum.Parse(typeof(PaymentTypeEnum),row["MetodoPago"].ToString(), true);
 
                     expenses.Add(expense);
                 }
@@ -245,11 +258,11 @@ namespace Seiya
 
                 };
                 if (row["Moneda"].ToString().ToUpper() == "USD")
-                    CurrencyType = CurrencyTypeEnum.USD;
+                    expense.CurrencyType = CurrencyTypeEnum.USD;
                 else
-                    CurrencyType = CurrencyTypeEnum.MXN;
+                    expense.CurrencyType = CurrencyTypeEnum.MXN;
 
-                PaymentType = (PaymentTypeEnum)Enum.Parse(typeof(PaymentTypeEnum), row["MetodoPago"].ToString(), true);
+                expense.PaymentType = (PaymentTypeEnum)Enum.Parse(typeof(PaymentTypeEnum), row["MetodoPago"].ToString(), true);
 
                 expenses.Add(expense);
             }
@@ -269,11 +282,11 @@ namespace Seiya
 
                 };
                 if (row["Moneda"].ToString().ToUpper() == "USD")
-                    CurrencyType = CurrencyTypeEnum.USD;
+                    expense.CurrencyType = CurrencyTypeEnum.USD;
                 else
-                    CurrencyType = CurrencyTypeEnum.MXN;
+                    expense.CurrencyType = CurrencyTypeEnum.MXN;
 
-                PaymentType = (PaymentTypeEnum)Enum.Parse(typeof(PaymentTypeEnum), row["MetodoPago"].ToString(), true);
+                expense.PaymentType = (PaymentTypeEnum)Enum.Parse(typeof(PaymentTypeEnum), row["MetodoPago"].ToString(), true);
 
                 //Add if it does not exist already
                 if (!expenses.Exists(x => x.Id == expense.Id))

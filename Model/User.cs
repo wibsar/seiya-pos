@@ -73,25 +73,25 @@ namespace Seiya
             {
                 return _rights.ToString();
             }
-            set
-            {
-                if (value == "Administrador")
-                {
-                    Rights = UserAccessLevelEnum.Admin;
-                }
-                else if (value == "Basico")
-                {
-                    Rights = UserAccessLevelEnum.Basic;
-                }
-                else if (value == "Avanzado")
-                {
-                    Rights = UserAccessLevelEnum.Advanced;
-                }
-                else
-                {
-                    Rights = UserAccessLevelEnum.Unknown;
-                }
-            }
+            //set
+            //{
+            //    if (value == "Administrador")
+            //    {
+            //        Rights = UserAccessLevelEnum.Admin;
+            //    }
+            //    else if (value == "Basico")
+            //    {
+            //        Rights = UserAccessLevelEnum.Basic;
+            //    }
+            //    else if (value == "Avanzado")
+            //    {
+            //        Rights = UserAccessLevelEnum.Advanced;
+            //    }
+            //    else
+            //    {
+            //        Rights = UserAccessLevelEnum.Unknown;
+            //    }
+            //}
         }
 
         public string Name { get => _name; set => _name = value; }
@@ -243,12 +243,7 @@ namespace Seiya
                         LastLogin = Convert.ToDateTime(row["UltimaSession"].ToString())
                     };
 
-                    if (row["NivelAcceso"].ToString() == "Admin")
-                        Rights = UserAccessLevelEnum.Admin;
-                    else if (row["NivelAcceso"].ToString() == "Avanzado")
-                        Rights = UserAccessLevelEnum.Advanced;
-                    else
-                        Rights = UserAccessLevelEnum.Basic;
+                    user.Rights = (UserAccessLevelEnum)Enum.Parse(typeof(UserAccessLevelEnum), row["NivelAcceso"].ToString(), true);
 
                     users.Add(user);
                 }
@@ -262,7 +257,7 @@ namespace Seiya
         /// <summary>
         /// Update product in the datatable
         /// </summary>
-        /// <param name="product"></param>
+        /// <param name="user"></param>
         /// <returns></returns>
         public bool UpdateUserToTable(User user)
         {

@@ -11,6 +11,9 @@ namespace Seiya
         Admin,
         Advanced,
         Basic,
-        Unknown
+        Unknown,
+        Administrador,
+        Avanzado,
+        Basico
     }
 }
