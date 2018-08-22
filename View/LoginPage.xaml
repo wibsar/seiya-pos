@@ -12,15 +12,21 @@
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="White" ></Setter>
-            <Setter Property="Foreground" Value="#2C5066"/>
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="16"></Setter>
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
     <Grid>
@@ -33,7 +39,7 @@
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Logo Wibsar Retail.png" Margin="30"></Image>
+        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Logo Wibsar Retail.png" MaxWidth="500"></Image>
         <TextBlock Grid.Row="1" Text="iniciar sesion" Foreground="#2C5066" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"></TextBlock>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
@@ -49,11 +55,11 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="Contraseña:" Foreground="#2C5066" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18"></TextBlock>
+            <TextBlock Text="Contraseña:" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="18"></TextBlock>
             <TextBox Grid.Column="1" Text="{Binding LoginPasswordText}" Margin="5" HorizontalAlignment="Left" MinWidth="100" MaxLength="100" MinHeight="18" MaxHeight="30"/>
         </Grid>
-        <TextBlock Grid.Row="4" Text="{Binding LoginMessage, Mode=TwoWay}" HorizontalAlignment="Center"></TextBlock>
-        <Button Grid.Row="5"  Command="{Binding LoginCheckCommand}" Background="#2C5066" Foreground="White" Content="entrar" Width="150" Height="30" FontSize="18" BorderBrush="{x:Null}"></Button>
+        <TextBlock Grid.Row="4" Text="{Binding LoginMessage, Mode=TwoWay}" HorizontalAlignment="Center" Foreground="DarkRed"></TextBlock>
+        <Button Grid.Row="5"  Command="{Binding LoginCheckCommand}" Background="#2C5066" Foreground="White" Content="entrar" Width="150" Height="40" FontSize="18" BorderBrush="{x:Null}"></Button>
 
     </Grid>
     

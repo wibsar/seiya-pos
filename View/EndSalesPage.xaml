@@ -11,22 +11,22 @@
   >
     <Page.Resources>
         <Style TargetType="Page">
-            <Setter Property="Foreground" Value="#FF0E2D3B" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"/>
-            
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>            
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="Foreground" Value="#FF0E2D3B" />
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
-
         <Style TargetType="TextBlock">
-            <Setter Property="Foreground" Value="#FF0E2D3B" />
-            <Setter Property="VerticalAlignment" Value="Center"/>
-            <Setter Property="FontSize" Value="14" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"/>                     
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
 
@@ -43,7 +43,7 @@
         </Grid.RowDefinitions>
 
         <!-- header -->
-        <TextBlock Grid.Column="0" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458" FontWeight="Bold">CORTE DE CAJA</TextBlock>
+        <TextBlock Grid.Column="0" Text="CORTE DE CAJA" FontSize="24" VerticalAlignment="Center"></TextBlock>
       
 
         <!-- Users input for quantities -->
@@ -68,14 +68,14 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(MXN)   PESO" FontSize="14"/>
-                <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 1,000   X   " FontSize="12"></TextBlock>
-                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 500    X   " FontSize="12"></TextBlock>
-                <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 200    X   " FontSize="12"></TextBlock>
-                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 100    X   " FontSize="12"></TextBlock>
-                <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 50     X   " FontSize="12"></TextBlock>
-                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 20     X   " FontSize="12"></TextBlock>
-                <TextBlock Grid.Row="7" TextAlignment="Right" Text="Monedas " FontWeight="Bold" FontSize="14" ></TextBlock>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(MXN)   PESO" FontSize="18"/>
+                <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 1,000   X   " ></TextBlock>
+                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 500    X   "></TextBlock>
+                <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 200    X   " ></TextBlock>
+                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 100    X   " ></TextBlock>
+                <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 50     X   " ></TextBlock>
+                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 20     X   " ></TextBlock>
+                <TextBlock Grid.Row="7" TextAlignment="Right" Text="Monedas " FontWeight="Bold" ></TextBlock>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Margin="0,5">
                 <Grid.RowDefinitions>
@@ -88,7 +88,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="CANTIDAD"/>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="CANTIDAD" FontSize="18"/>
                 <TextBox Grid.Row="1" Text="{Binding MxnPeso1000}"></TextBox>
                 <TextBox Grid.Row="2" Text="{Binding MxnPeso500}" Background="#FFECECEC"></TextBox>
                 <TextBox Grid.Row="3" Text="{Binding MxnPeso200}"></TextBox>
@@ -109,14 +109,14 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(USD)   DOLAR" FontSize="14"/>
-                <TextBlock Grid.Row="1" FontSize="12" TextAlignment="Right" Text="$ 100   X   "></TextBlock>
-                <TextBlock Grid.Row="2" FontSize="12" TextAlignment="Right" Background="#FFECECEC" Text="$ 50    X   "></TextBlock>
-                <TextBlock Grid.Row="3" FontSize="12" TextAlignment="Right" Text="$ 20    X   "></TextBlock>
-                <TextBlock Grid.Row="4" FontSize="12" TextAlignment="Right" Background="#FFECECEC" Text="$ 10    X   "></TextBlock>
-                <TextBlock Grid.Row="5" FontSize="12" TextAlignment="Right" Text="$ 5     X   "></TextBlock>
-                <TextBlock Grid.Row="6" FontSize="12" TextAlignment="Right" Background="#FFECECEC" Text="$ 1     X   "></TextBlock>
-                <TextBlock Grid.Row="7" FontSize="14" TextAlignment="Right" Text="Monedas " FontWeight="Bold" ></TextBlock>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF590C0C" Foreground="White" Text="(USD)   DOLAR" FontSize="18"/>
+                <TextBlock Grid.Row="1"  TextAlignment="Right" Text="$ 100   X   "></TextBlock>
+                <TextBlock Grid.Row="2"  TextAlignment="Right" Background="#FFECECEC" Text="$ 50    X   "></TextBlock>
+                <TextBlock Grid.Row="3"  TextAlignment="Right" Text="$ 20    X   "></TextBlock>
+                <TextBlock Grid.Row="4"  TextAlignment="Right" Background="#FFECECEC" Text="$ 10    X   "></TextBlock>
+                <TextBlock Grid.Row="5"  TextAlignment="Right" Text="$ 5     X   "></TextBlock>
+                <TextBlock Grid.Row="6"  TextAlignment="Right" Background="#FFECECEC" Text="$ 1     X   "></TextBlock>
+                <TextBlock Grid.Row="7"  TextAlignment="Right" Text="Monedas " FontWeight="Bold" Foreground="#FF590C0C"></TextBlock>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1" Margin="0,5">
                 <Grid.RowDefinitions>
@@ -129,7 +129,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="CANTIDAD"/>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF590C0C" Foreground="White" Text="CANTIDAD"/>
                 <TextBox Grid.Row="1" Text="{Binding UsdDollar100}"></TextBox>
                 <TextBox Grid.Row="2" Text="{Binding UsdDollar50}" Background="#FFECECEC"></TextBox>
                 <TextBox Grid.Row="3" Text="{Binding UsdDollar20}"></TextBox>
@@ -212,7 +212,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White">COMENTARIOS</TextBlock>
+            <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF0E801E" Foreground="White" Text="COMENTARIOS"></TextBlock>
             <TextBox Grid.Row="1"></TextBox>
         </Grid>
 
@@ -222,30 +222,28 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="0">
+            <Button Grid.Column="0"  Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="x" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Grid.Row="0" BorderBrush="{x:Null}" Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="x">
-                    <Button.Background>
-                        <ImageBrush ImageSource="/Seiya;component/Resources/Images/Cortex.png" Stretch="Uniform"/>
-                    </Button.Background>
-                </Button>
-                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="12" Background="White" Foreground="#FF7E7E7E" HorizontalAlignment="Center">Corte X</TextBlock>
-            </Grid>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button Grid.Row="0" BorderBrush="{x:Null}" Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="z">
-                    <Button.Background>
-                        <ImageBrush ImageSource="C:\Projects\seiya-pos\Resources\Images\Cortez.png" Stretch="Uniform"/>
-                    </Button.Background>
-                </Button>
-                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Background="White" Foreground="#FF7E7E7E" HorizontalAlignment="Center" FontSize="12">Corte Z</TextBlock>
-            </Grid>
+                    <Image Grid.Row="0" Source="/Seiya;component/Resources/Images/Cortex.png"></Image>
+                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" HorizontalAlignment="Center" Text="Corte X"></TextBlock>
+                </Grid>
+            </Button>
+            <Button Grid.Column="1" BorderBrush="{x:Null}" Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="z" Background="{x:Null}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Cortez.png"></Image>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="16" Text="Corte Z"></TextBlock>
+                </Grid>
+            </Button>
+                
+           
         </Grid>
     </Grid>
 </Page>

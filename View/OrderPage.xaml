@@ -11,28 +11,37 @@
 
     <Page.Resources>
         <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#2C5066" />
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="TextBlock">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="Margin" Value="5,0,0,0"></Setter>
-        </Style>
-        <Style TargetType="TextBox">
-            <Setter Property="Margin" Value="5"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
 
     <Grid Background="white">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="3*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="12*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" FontSize="20" Padding="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458" FontWeight="Bold">PEDIDOS</TextBlock>
+        <TextBlock Grid.Column="0" FontSize="24" VerticalAlignment="Center" Text="PEDIDOS"></TextBlock>
         
         <!-- Datos-->
         <Grid Grid.Column="0" Grid.Row="1">                      
@@ -62,17 +71,17 @@
                     <ColumnDefinition Width="1.8*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0" Foreground="#FF224458">No. de Folio</TextBlock>
-                <TextBlock Grid.Row="1" Foreground="#FF224458">Cliente</TextBlock>
-                <TextBlock Grid.Row="2" Foreground="#FF224458">Titulo</TextBlock>
-                <TextBlock Grid.Row="3" Foreground="#FF224458">Fecha Entrega</TextBlock>
-                <TextBlock Grid.Row="4" Foreground="#FF224458">Categoria</TextBlock>
+                <TextBlock Grid.Row="0" Text="No. de Folio"></TextBlock>
+                <TextBlock Grid.Row="1" Text="Cliente"></TextBlock>
+                <TextBlock Grid.Row="2" Text="Titulo"></TextBlock>
+                <TextBlock Grid.Row="3" Text="Fecha Entrega"></TextBlock>
+                <TextBlock Grid.Row="4" Text="Categoria"></TextBlock>
                 
                 <TextBlock Grid.Row="5" Background="LightGray" Height="2" ></TextBlock>
-                <TextBlock Grid.Row="6" Foreground="#FF224458">Monto Total</TextBlock>
-                <TextBlock Grid.Row="7" Foreground="#FF224458">Anticipo</TextBlock>
-                <TextBlock Grid.Row="8" Foreground="#FF224458">Ticket Anticipo</TextBlock>
-                <TextBlock Grid.Row="9" Foreground="#FF224458">Saldo</TextBlock>
+                <TextBlock Grid.Row="6" Text="Monto Total"></TextBlock>
+                <TextBlock Grid.Row="7" Text="Anticipo"></TextBlock>
+                <TextBlock Grid.Row="8" Text="Ticket Anticipo"></TextBlock>
+                <TextBlock Grid.Row="9" Text="Saldo"></TextBlock>
                 <TextBlock Grid.Row="10" Background="LightGray" Height="2" ></TextBlock>
 
                 <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding OrderTemporalItem.OrderTicketNumber}"></TextBox>
@@ -94,26 +103,12 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="4*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Foreground="#FF224458">Descripcion</TextBlock>
-                <TextBox Grid.Row="1" Text="{Binding OrderTemporalItem.Description}"></TextBox>
+                <TextBlock Grid.Row="0" Text="Descripcion"></TextBlock>
+                <TextBox Grid.Row="1" Text="{Binding OrderTemporalItem.Description}" VerticalContentAlignment="Top"></TextBox>
             </Grid>
             <!-- Inputs for Product properties -->
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>                                        
-                </Grid.RowDefinitions>                        
-              
-            </Grid>            
+                      
+                        
         </Grid>
         
         <Grid Grid.Column="1" Grid.Row="1">
@@ -127,27 +122,47 @@
             <Grid Grid.Row="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="10*"></RowDefinition>
-                    <RowDefinition Height="3*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="2.5*"></RowDefinition>
                 </Grid.RowDefinitions>
                  <!-- Image holder -->
                 <Image Grid.Row="0" Visibility="Visible" Stretch="Fill" Source="{Binding OrderImage, Mode=TwoWay}"></Image>
                 <Grid Grid.Row="1">
                     
                     <!-- Camera Controls -->
-                    <Button Grid.Column="0" Command="{Binding OrderImageCommand}" CommandParameter="add" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*"></RowDefinition>
-                                <RowDefinition Height="1.5*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Addphoto.png"></Image>
-                            <TextBlock Grid.Row="1" Foreground="#FF224458" FontSize="12" >agregar imagen</TextBlock>
-                        </Grid>
-                    </Button>
-                    
+                   <Grid Grid.Row="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+
+                            <Button Grid.Column="0" Command="{Binding InventoryItemImageCommand}" CommandParameter="remove" Background="{x:Null}" BorderBrush="{x:Null}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="3*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\DeletePhoto.png"></Image>
+                                    <TextBlock Grid.Row="1" FontSize="16" Text="Eliminar Imagen" ></TextBlock>
+                                </Grid>
+                            </Button>
+                            <Button Grid.Column="1" Command="{Binding InventoryItemImageCommand}" CommandParameter="add" Background="{x:Null}" BorderBrush="{x:Null}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="3*"></RowDefinition>
+                                        <RowDefinition Height="*"></RowDefinition>
+                                    </Grid.RowDefinitions>
+                                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\AddPhoto.png"></Image>
+                                    <TextBlock Grid.Row="1" FontSize="16" Text="Cargar Imagen" ></TextBlock>
+                                </Grid>
+                            </Button>
+
+                   </Grid>
+
                 </Grid>
+
+                
 
                 <Grid Grid.Row="3">
                     <Grid.ColumnDefinitions>

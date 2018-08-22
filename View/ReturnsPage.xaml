@@ -8,7 +8,27 @@
       d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
       d:DesignHeight="600" d:DesignWidth="800"
       Title="ReturnsPage">
-
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
+        </Style>
+    </Page.Resources>
     <Grid ShowGridLines="false" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -20,7 +40,7 @@
         </Grid.RowDefinitions>
 
         <!-- header -->
-        <TextBlock Grid.Row="0" Text="DEVOLUCION" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458"></TextBlock>
+        <TextBlock Grid.Row="0" Text="DEVOLUCION" FontSize="24" VerticalAlignment="Center"></TextBlock>
 
 
 
@@ -48,21 +68,21 @@
 
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center">Registro de Devolución</TextBlock>
-                <TextBlock Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18"  Foreground="#FF224458">No. de Ticket:</TextBlock>
-                <TextBlock Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18"  Foreground="#FF224458">Método de Pago:</TextBlock>
-                <TextBlock Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18"  Foreground="#FF224458">Moneda:</TextBlock>
-                <TextBlock Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18"  Foreground="#FF224458">Monto:</TextBlock>
-                <TextBlock Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18"  Foreground="#FF224458">Motivo:</TextBlock>
+                <TextBlock Grid.Row="0" FontSize="18" Text="Registro de Devolución" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="1" Text="No. de Ticket"></TextBlock>
+                <TextBlock Grid.Row="2" Text="Método de Pago"></TextBlock>
+                <TextBlock Grid.Row="3" Text="Moneda"></TextBlock>
+                <TextBlock Grid.Row="4" Text="Monto"></TextBlock>
+                <TextBlock Grid.Row="5" Text="Motivo"></TextBlock>
 
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="5"></TextBox>
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5"></TextBox>
                 <ComboBox Grid.Row="3" Grid.Column="1" Margin="5">
                     <ComboBoxItem>
-                        <TextBlock Text="MXN" FontSize="20" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></TextBlock>
+                        <TextBlock Text="MXN" FontSize="18"></TextBlock>
                     </ComboBoxItem>
                     <ComboBoxItem>
-                        <TextBlock Text="USD" FontSize="20" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></TextBlock>
+                        <TextBlock Text="USD" FontSize="18"></TextBlock>
                     </ComboBoxItem>
                 </ComboBox>
                 <TextBox Grid.Row="4" Grid.Column="1" Margin="5"></TextBox>
@@ -86,8 +106,8 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0"  Margin="5,0,0,0" FontSize="16" Foreground="Gray" Text="No. de Folio" VerticalAlignment="Bottom"></TextBlock>
-                <TextBlock Grid.Row="1" Margin="5,0,0,0" FontSize="28" Foreground="#FF224458" Text="1234"></TextBlock>
+                <TextBlock Grid.Row="0"  Margin="5,0,0,0" Foreground="Gray" Text="No. de Folio" VerticalAlignment="Bottom"></TextBlock>
+                <TextBlock Grid.Row="1" Margin="5,0,0,0" FontSize="28" Text="1234"></TextBlock>
                 
             </Grid>
             
@@ -98,7 +118,7 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png" ></Image>
-                    <TextBlock HorizontalAlignment="Center" Grid.Row="1" FontSize="12" Foreground="#FF224458">Cancelar</TextBlock>
+                    <TextBlock HorizontalAlignment="Center" Grid.Row="1" FontSize="16" Text="Cancelar"></TextBlock>
                 </Grid>
             </Button>
             <Button Grid.Column="2" Command="{Binding VendorSaveChangesCommand}"  Background="{x:Null}" BorderBrush="{x:Null}">
@@ -108,7 +128,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png"></Image>
-                    <TextBlock Grid.Row="1" Foreground="#FF224458" FontSize="12" >Guardar</TextBlock>
+                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" >Guardar</TextBlock>
                 </Grid>
             </Button>
 

@@ -9,7 +9,28 @@
       d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
       Title="VendorDetailPage">
 
-
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
+        </Style>
+    </Page.Resources>
+    
     <Grid ShowGridLines="false" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -21,7 +42,7 @@
         </Grid.RowDefinitions>
 
         <!-- header -->
-        <TextBlock Grid.Row="0" Text="PROVEEDOR" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="5,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458"></TextBlock>
+        <TextBlock Grid.Row="0" Text="PROVEEDOR" FontSize="24"></TextBlock>
 
 
         <Grid Grid.Row="1" Background="White" Margin="5">
@@ -50,14 +71,14 @@
 
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center">Registro de Proveedor</TextBlock>
-                <TextBlock Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Foreground="#FF224458">Nombre:</TextBlock>
-                <TextBlock Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Foreground="#FF224458">Correo Electronico:</TextBlock>
-                <TextBlock Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Foreground="#FF224458">Telefono:</TextBlock>
-                <TextBlock Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Foreground="#FF224458">RFC:</TextBlock>
-                <TextBlock Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Foreground="#FF224458">Razon Social:</TextBlock>
-                <TextBlock Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Foreground="#FF224458">Banco:</TextBlock>
-                <TextBlock Grid.Row="7" HorizontalAlignment="Left" VerticalAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Foreground="#FF224458">Cuenta de Banco:</TextBlock>
+                <TextBlock Grid.Row="0" FontSize="18" Foreground="Gray" Grid.ColumnSpan="2" Text="Registro de Proveedor" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="1" Text="Nombre"></TextBlock>
+                <TextBlock Grid.Row="2" Text="Correo Electrónico"></TextBlock>
+                <TextBlock Grid.Row="3" Text="Telefono"></TextBlock>
+                <TextBlock Grid.Row="4" Text="RFC"></TextBlock>
+                <TextBlock Grid.Row="5" Text="Razón Social"></TextBlock>
+                <TextBlock Grid.Row="6" Text="Banco"></TextBlock>
+                <TextBlock Grid.Row="7" Text="Cuenta Interbancaria"></TextBlock>
 
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Name}"></TextBox>
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Email}"></TextBox>
@@ -84,7 +105,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png" ></Image>
-                    <TextBlock HorizontalAlignment="Center" Grid.Row="1" Foreground="#FF224458">Cancelar</TextBlock>
+                    <TextBlock  Grid.Row="1" Text="Cancelar"></TextBlock>
                 </Grid>
             </Button>
             <Button Grid.Column="2" Command="{Binding VendorDeleteCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
@@ -94,7 +115,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png"></Image>
-                    <TextBlock Grid.Row="1" Text="Eliminar" Foreground="#FF224458" Margin="16,0,0,0"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="Eliminar" ></TextBlock>
                 </Grid>
             </Button>
             <Button Grid.Column="3" Command="{Binding VendorSaveChangesCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
@@ -104,7 +125,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png"></Image>
-                    <TextBlock Grid.Row="1" Foreground="#FF224458" HorizontalAlignment="Center" >Guardar</TextBlock>
+                    <TextBlock Grid.Row="1" Text="Guardar"></TextBlock>
                 </Grid>
             </Button>
 

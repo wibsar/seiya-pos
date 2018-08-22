@@ -31,6 +31,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height=".1*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -39,8 +40,7 @@
         <Grid Column="0" Row="0">
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>                    
                     <ColumnDefinition Width="8*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
 
@@ -51,19 +51,14 @@
 
                     </Grid>
                 </Button>
-                <Button Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="login">
-                    <Grid>
-
-                        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Usuario.png" Margin="10"></Image>
-
-                    </Grid>
-                </Button>
-                <TextBlock Grid.Column="2" Text="{Binding CurrentUser.Name}" Foreground="Gray" VerticalAlignment="Center"  ></TextBlock>
+                
             </Grid>
         </Grid>
-
+        <!-- Linea gris -->
+        <TextBlock Grid.Row="1" Height="1" Background="#FFECECEC"></TextBlock>
+        <TextBlock Grid.Row="1" Grid.Column="1" Height="1" Background="#FFECECEC"></TextBlock>
         <!-- Grid for category boxes -->
-        <Grid Column="0" Row="1" >
+        <Grid Column="0" Row="2" >
             <!-- Need to bind the source to choose page depending on selection-->
             <Border BorderBrush="LightBlue" >
                 <Frame x:Name="Main" Source="{Binding CurrentPage}"  NavigationUIVisibility="Hidden" Margin="-1,0,1.2,0">
@@ -71,8 +66,27 @@
             </Border>
         </Grid>
         <TextBlock Grid.Column="1" Grid.Row="0" ></TextBlock>
+
+        <Grid Column="1" Row="0">
+            <Grid ShowGridLines="False">
+                <Grid.ColumnDefinitions>
+                   
+                    <ColumnDefinition Width="7*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                
+                <Button Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="login">
+                    <Grid>
+
+                        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Usuario.png" Margin="5"></Image>
+
+                    </Grid>
+                </Button>
+                <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name}" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Right"  ></TextBlock>
+            </Grid>
+        </Grid>
         <!-- Grid for checkout section -->
-        <Grid Column="1" Row="1">
+        <Grid Column="1" Row="2">
 
             <Grid >
                 <Grid.ColumnDefinitions>
@@ -83,7 +97,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="10*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="1.5*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <!-- Top for cart selection-->
@@ -112,18 +126,18 @@
                 </Grid>
 
                 <!-- List of products -->
-                <ListBox x:Name ="ProductListBox" Grid.Row="1" BorderBrush="LightBlue" Margin="0" Foreground="#FF0E2D3B" ItemsSource="{Binding CurrentCartProducts}" SelectedItem="{Binding SelectedCartProduct, Mode=TwoWay}">
+                <ListBox x:Name ="ProductListBox" Grid.Row="1" BorderBrush="#FFECECEC" ItemsSource="{Binding CurrentCartProducts}" SelectedItem="{Binding SelectedCartProduct, Mode=TwoWay}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch"></TextBlock>
-                                <TextBlock Text="{Binding Category}" HorizontalAlignment="Stretch"></TextBlock>
+                                <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch" FontSize="18" Foreground="#FF0E2D3B"></TextBlock>
+                                <TextBlock Text="{Binding Category}" HorizontalAlignment="Stretch" FontSize="14" Foreground="Gray"></TextBlock>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding LastQuantitySold}" HorizontalAlignment="Left"></TextBlock>
-                                    <TextBlock Text=" x "></TextBlock>
-                                    <TextBlock Text="{Binding Price}"></TextBlock>
-                                    <TextBlock Text="  =  "></TextBlock>
-                                    <TextBlock Text="{Binding LastAmountSold}"></TextBlock>
+                                    <TextBlock Text="{Binding LastQuantitySold}" HorizontalAlignment="Left" FontSize="18" Foreground="#FF0054B9"></TextBlock>
+                                    <TextBlock Text=" x " FontSize="14" Foreground="gray" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding Price}" FontSize="18" Foreground="#FF0E2D3B"></TextBlock>
+                                    <TextBlock Text="  =  " FontSize="14" Foreground="gray" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding LastAmountSold}" FontSize="18" Foreground="#FF00BB00"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
@@ -153,7 +167,7 @@
                 </Grid>
                 <!-- Bottom for price display and payment -->
                 <Grid Row="3" ShowGridLines="True">
-                    <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" Margin="0,0,0,10" BorderBrush="{x:Null}" Foreground="White" FontSize="24" Background="Red">                        
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" BorderBrush="{x:Null}" Foreground="White" FontSize="24" Background="Red" Margin="0,0,0,1">                        
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -168,7 +182,7 @@
         </Grid>
 
         <!-- Grid for categories selection -->
-        <Grid Column="0" Row="2" >
+        <Grid Column="0" Row="3" >
 
             <Grid ShowGridLines="False" Margin="0,0,5,0">
                 <Grid.ColumnDefinitions>
@@ -262,7 +276,7 @@
         </Grid>
 
         <!-- Grid for scan or search code box -->
-        <Grid Column="1" Row="2">
+        <Grid Column="1" Row="3">
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"></ColumnDefinition>

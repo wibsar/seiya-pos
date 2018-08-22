@@ -9,6 +9,28 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="ExpenseMainPage">
 
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
+        </Style>
+    </Page.Resources>
+
     <Grid ShowGridLines="False" Background="White">
         <!--Main Grid definition-->
         <Grid.ColumnDefinitions>
@@ -27,10 +49,10 @@
                 <ColumnDefinition Width="6*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20" Padding="10,0,0,0" HorizontalAlignment="Left" VerticalAlignment="Center" Foreground="#FF224458">GASTOS</TextBlock>
-            <TextBox Grid.Column="1" Text="{Binding ExpensesSearchText, Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="6,0" VerticalContentAlignment="Center"/>
+            <TextBlock FontSize="24" VerticalAlignment="Center" Text="GASTOS"></TextBlock>
+            <TextBox Grid.Column="1" Text="{Binding ExpensesSearchText, Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False"/>
             <Button Grid.Column="3" Command="{Binding ExpenseStartSearchCommand}" CommandParameter="{Binding ExpensesSearchText}">
-                <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa inactiva.png"></Image>
+                <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png"></Image>
             </Button>
         </Grid>
 
@@ -67,7 +89,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ExpenseAddNewItemCommand}" CommandParameter="expense_add">
                     <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
                 </Button>
-                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#FF7E7E7E" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" >nuevo</TextBlock>
+                <TextBlock TextAlignment="Center" Grid.Row="1" Text="Nuevo"></TextBlock>
             </Grid>
 
             <Grid Grid.Column="2">
@@ -79,7 +101,7 @@
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ExpenseUpdateCommand}" CommandParameter="expense_details">
                     <Image Source="C:\Projects\seiya-pos\Resources\Images\Detalles.png"></Image>
                 </Button>
-                <TextBlock TextAlignment="Center" Grid.Row="1" Foreground="#FF7E7E7E" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" >detalle</TextBlock>
+                <TextBlock TextAlignment="Center" Grid.Row="1" Text="Detalle"></TextBlock>
             </Grid>
         </Grid>
     </Grid>
