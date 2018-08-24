@@ -12,7 +12,7 @@
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>                   
+            <Setter Property="FontSize" Value="18"></Setter>                   
         </Style>
     </Page.Resources>
     <Grid>

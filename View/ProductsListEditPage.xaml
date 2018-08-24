@@ -13,14 +13,22 @@
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="Background" Value="White" ></Setter>
-            <Setter Property="Foreground" Value="#2C5066"/>
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="16"></Setter>
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Foreground" Value="#2C5066"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
 
@@ -111,7 +119,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="8*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <ListBox x:Name ="ProductListBox" Grid.Row="0" Margin="5" ItemsSource="{Binding CurrentPageListProducts}" SelectedItem="{Binding SelectedPageListProduct, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
@@ -208,7 +216,7 @@
 
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="1" Text="Codigo" VerticalAlignment="Center"></TextBlock>
-                    <TextBlock Grid.Row="2" Text="Descripcion" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Row="2" Text="Descripción" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="3" Text="Categoria" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="4" Text="Precio" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="5" Text="Moneda" VerticalAlignment="Center"></TextBlock>
@@ -236,7 +244,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nombre de la lista"></TextBlock>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nombre de lista"></TextBlock>
                     <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Agregar Codigo"></TextBlock>
         </Grid>
 

@@ -12,20 +12,25 @@
 
     <Page.Resources>
         <Style TargetType="Page">
-            <Setter Property="Foreground" Value="#FF0E2D3B" />
-            <Setter Property="FontSize" Value="16" />
-        </Style>
-        <Style TargetType="Button" >
-            <Setter Property="Foreground" Value="#FF0E2D3B" />
-            <Setter Property="FontSize" Value="16" />
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
-            <Setter Property="Padding" Value="5"></Setter>
         </Style>
-        <Style TargetType="TextBlock" >
-            <Setter Property="Foreground" Value="#FF0E2D3B" />
-            <Setter Property="FontSize" Value="12" />
-            <Setter Property="TextAlignment" Value="Center"></Setter>
-            <Setter Property="Padding" Value="0,5,0,2"></Setter>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Foreground" Value="#2C5066"></Setter>            
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
 
