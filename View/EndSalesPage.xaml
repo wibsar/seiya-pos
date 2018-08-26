@@ -69,12 +69,12 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF224458" Foreground="White" Text="(MXN)   PESO" FontSize="18"/>
-                <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 1,000   X   " ></TextBlock>
-                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 500    X   "></TextBlock>
-                <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 200    X   " ></TextBlock>
-                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 100    X   " ></TextBlock>
-                <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 50     X   " ></TextBlock>
-                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 20     X   " ></TextBlock>
+                <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 1,000  X   " ></TextBlock>
+                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 500  X   "></TextBlock>
+                <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 200  X   " ></TextBlock>
+                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 100  X   " ></TextBlock>
+                <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 50  X   " ></TextBlock>
+                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 20  X   " ></TextBlock>
                 <TextBlock Grid.Row="7" TextAlignment="Right" Text="Monedas " FontWeight="Bold" ></TextBlock>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Margin="0,5">
@@ -110,12 +110,12 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF590C0C" Foreground="White" Text="(USD)   DOLAR" FontSize="18"/>
-                <TextBlock Grid.Row="1"  TextAlignment="Right" Text="$ 100   X   "></TextBlock>
-                <TextBlock Grid.Row="2"  TextAlignment="Right" Background="#FFECECEC" Text="$ 50    X   "></TextBlock>
-                <TextBlock Grid.Row="3"  TextAlignment="Right" Text="$ 20    X   "></TextBlock>
-                <TextBlock Grid.Row="4"  TextAlignment="Right" Background="#FFECECEC" Text="$ 10    X   "></TextBlock>
-                <TextBlock Grid.Row="5"  TextAlignment="Right" Text="$ 5     X   "></TextBlock>
-                <TextBlock Grid.Row="6"  TextAlignment="Right" Background="#FFECECEC" Text="$ 1     X   "></TextBlock>
+                <TextBlock Grid.Row="1"  TextAlignment="Right" Text="$ 100  X   "></TextBlock>
+                <TextBlock Grid.Row="2"  TextAlignment="Right" Background="#FFECECEC" Text="$ 50  X   "></TextBlock>
+                <TextBlock Grid.Row="3"  TextAlignment="Right" Text="$ 20  X   "></TextBlock>
+                <TextBlock Grid.Row="4"  TextAlignment="Right" Background="#FFECECEC" Text="$ 10  X   "></TextBlock>
+                <TextBlock Grid.Row="5"  TextAlignment="Right" Text="$ 5  X   "></TextBlock>
+                <TextBlock Grid.Row="6"  TextAlignment="Right" Background="#FFECECEC" Text="$ 1  X   "></TextBlock>
                 <TextBlock Grid.Row="7"  TextAlignment="Right" Text="Monedas " FontWeight="Bold" Foreground="#FF590C0C"></TextBlock>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1" Margin="0,5">
@@ -154,54 +154,64 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height=".1*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height=".2*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Caja Turno Anterior:"/>
-                <TextBlock Grid.Row="1" Text="Corte TPV:" ></TextBlock>
-                <TextBlock Grid.Row="2" Text="Efectivo:"></TextBlock>
-                <TextBlock Grid.Row="3" Text="Cheque:" ></TextBlock>
-                <TextBlock Grid.Row="4" Text="Transferencia:" ></TextBlock>
-                <TextBlock Grid.Row="5" Text="Otro Metodo de Pago:" ></TextBlock>
-                <TextBlock Grid.Row="6" Text="Puntos Usados:" ></TextBlock>
-                <TextBlock Grid.Row="7" Text="Total Ventas:"></TextBlock>
-                <TextBlock Grid.Row="8" Text="Gastos:" ></TextBlock>
-                <TextBlock Grid.Row="9" Text="Diferencia:" ></TextBlock>
-                <TextBlock Grid.Row="10" Text="Caja Nueva:"/>
+                <TextBlock Grid.Row="0" Text="Efectivo:"></TextBlock>
+                <TextBlock Grid.Row="1" Text="Pagos con Tarjeta:" ></TextBlock>
+                <TextBlock Grid.Row="2" Text="Pagos con Cheque:" ></TextBlock>
+                <TextBlock Grid.Row="3" Text="Pagos por Transferencia:" ></TextBlock>
+                <TextBlock Grid.Row="4" Text="Otro Metodo de Pago:" ></TextBlock>
+                <TextBlock Grid.Row="5" Background="#FFD4D4D4" Height="1"></TextBlock>
+                <TextBlock Grid.Row="6" Text="Gastos:" ></TextBlock>
+                <TextBlock Grid.Row="7" Text="Devoluciones:" ></TextBlock>
+                <TextBlock Grid.Row="8" Text="Caja Turno Anterior:"/>
+                <TextBlock Grid.Row="9" Text="Total Venta" ></TextBlock>
+                <TextBlock Grid.Row="10" Text="Diferencia"/>
+                <TextBlock Grid.Row="11" Text="Puntos Usados:" ></TextBlock>
+                <TextBlock Grid.Row="12" Text="Caja Chica Nueva" ></TextBlock>
 
             </Grid>
 
-            <Grid Grid.Column="1" Margin="5">
+            <Grid Grid.Column="1" >
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height=".1*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height=".2*"></RowDefinition>
+                    
                 </Grid.RowDefinitions>
-
-                <TextBlock Grid.Row="0" Margin="5" Text="{Binding RegisterPreviousCash}"></TextBlock>
-                <TextBlock Grid.Row="1" Margin="5" Text="{Binding CardTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="2" Margin="5" Text="{Binding CashTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="3" Margin="5" Text="{Binding CheckTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="4" Margin="5" Text="{Binding BankTransferTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="5" Margin="5" Text="{Binding OtherTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="6" Margin="5" Text="{Binding PointsTotalUsed}"></TextBlock>
-                <TextBlock Grid.Row="7" Margin="5" Text="{Binding TotalSales}"></TextBlock>
-                <TextBlock Grid.Row="8" Margin="5" Text="{Binding ExpensesTotal}"></TextBlock>
-                <TextBlock Grid.Row="9" Margin="5" Text="{Binding Delta}"></TextBlock>
-                <TextBox Grid.Row="10" Margin="5" Text="{Binding RegisterNewCash}"></TextBox>
+                <TextBlock Grid.Row="0" Text="{Binding CashTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="1" Text="{Binding CardTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="2" Text="{Binding CheckTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="3" Text="{Binding BankTransferTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="4" Text="{Binding OtherTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="5" Background="#FFD4D4D4" Height="1"></TextBlock>
+                <TextBlock Grid.Row="6" Text="{Binding ExpensesTotal}"></TextBlock>
+                <TextBlock Grid.Row="7" ></TextBlock>                                          <!-- Agregar Binding -->           
+                <TextBlock Grid.Row="8" Text="{Binding RegisterPreviousCash}"></TextBlock>
+                <TextBlock Grid.Row="9" Text="{Binding TotalSales}"></TextBlock>
+                <TextBlock Grid.Row="10" Text="{Binding Delta}"></TextBlock>
+                <TextBlock Grid.Row="11" Text="{Binding PointsTotalUsed}"></TextBlock>
+                <TextBox Grid.Row="12" Text="{Binding RegisterNewCash}"></TextBox>
 
             </Grid>
         </Grid>

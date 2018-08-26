@@ -217,7 +217,7 @@ namespace Seiya
 
         public int GetLastItemNumber()
         {
-            ///TODO:Check method for all other classes
+            //TODO: Check method for all other classes
             if (DataTable.Rows.Count == 0)
                 return 0;
             var row = DataTable.Rows[DataTable.Rows.Count - 1];

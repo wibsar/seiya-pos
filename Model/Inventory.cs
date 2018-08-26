@@ -112,6 +112,8 @@ namespace Seiya
         /// <returns></returns>
         public int GetLastItemNumber()
         {
+            if (_dictofdata.Rows.Count == 0)
+                return 0;
             var row = _dictofdata.Rows[_dictofdata.Rows.Count - 1];
             return Int32.Parse(row["NumeroProducto"].ToString());
         }

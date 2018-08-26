@@ -51,7 +51,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="Gray" Padding="10,0,0,0" Text="Descripción" VerticalAlignment="Bottom"/>
-                <TextBox Padding="auto" Margin="5,0,0,0" FontWeight="Bold" FontSize="24" Grid.Row="1" Text="{Binding Description, Mode=TwoWay}"/>
+                <TextBox Padding="auto"  FontWeight="Bold" FontSize="24" Grid.Row="1" Text="{Binding Description, Mode=TwoWay}"/>
             </Grid>
         </Grid>
 
@@ -66,7 +66,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="Gray" Padding="10,0,0,0" Grid.Row="0" VerticalAlignment="Bottom" Text="Precio"/>
-                <TextBox VerticalContentAlignment="Center" Grid.Row="1" Text="{Binding Price , Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False" FontWeight="Bold" FontSize="24">
+                <TextBox VerticalContentAlignment="Center" Grid.Row="1" Text="{Binding Price , Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False" FontWeight="Bold" FontSize="24" Margin="5,0">
                     <TextBox.InputBindings>
                         <KeyBinding Command="{Binding SomeCommand}" Key="Return" />
                         <KeyBinding Command="{Binding SomeCommand}" Key="Enter" />
@@ -76,7 +76,7 @@
         </Grid>
 
         <!-- Grid for manual number input-->
-        <Grid Column="0" Row="1" ShowGridLines="False">
+        <Grid Column="0" Row="1" ShowGridLines="False" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="67*"></ColumnDefinition>
                 <ColumnDefinition Width="66*"></ColumnDefinition>
@@ -93,7 +93,7 @@
             <Button Grid.Column="0" Grid.Row="0" Content="7" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="7" FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" FontWeight="Bold"/>
             <Button Grid.Column="0" Grid.Row="1" Content="4" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="4" FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" FontWeight="Bold"/>
             <Button Grid.Column="0" Grid.Row="2" Content="1" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="1" FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" FontWeight="Bold"/>
-            <Button Grid.Column="0" Grid.Row="3" Content="C" FontSize="36" Background="#FFAAD8E8" BorderBrush="White" Foreground="#FF224458" FontWeight="Bold"></Button>
+            <Button Grid.Column="0" Grid.Row="3" Content="C" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="C" FontSize="36" Background="#FFAAD8E8" BorderBrush="White" Foreground="#FF224458" FontWeight="Bold"></Button>
             <Button Grid.Column="1" Grid.Row="0" Content="8" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="8"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" FontWeight="Bold"></Button>
             <Button Grid.Column="1" Grid.Row="1" Content="5" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="5"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" FontWeight="Bold"></Button>
             <Button Grid.Column="1" Grid.Row="2" Content="2" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="2"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" FontWeight="Bold"></Button>
@@ -113,9 +113,9 @@
             </Grid.RowDefinitions>
 
             <!-- Category List-->
-            <ListBox  x:Name="lstCategories" Grid.Row="0" Margin="5" ItemsSource="{Binding CategoriesList, Mode=TwoWay}" SelectedItem="{Binding Category, Mode=TwoWay}" Background="White" BorderBrush="LightGray"/>
+            <ListBox  x:Name="lstCategories" Grid.Row="0" Margin="5" ItemsSource="{Binding CategoriesList, Mode=TwoWay}" SelectedItem="{Binding Category, Mode=TwoWay}" Background="White" BorderBrush="LightGray" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18"/>
             <!-- Enter -->
-            <Button Grid.Row="1" Content="enter" Command ="{Binding ClickEnterCommand}" FontSize="30" Foreground="white" Background="#FF3B96B6" BorderBrush="White"></Button>
+            <Button Grid.Row="1" Content="enter" Command ="{Binding ClickEnterCommand}" FontSize="30" Foreground="white" Background="#FF3B96B6" BorderBrush="White" Margin="5,1,5,0"></Button>
         </Grid>
 
     </Grid>

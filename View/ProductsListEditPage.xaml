@@ -233,11 +233,11 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Row="1" Margin="5,5,5,2.5" Text="{Binding SelectedPageListProduct.Code}"></TextBox>
-                    <TextBox Grid.Row="2" Margin="5,2.5,5,2.5" Text="{Binding SelectedPageListProduct.Description}"></TextBox>
-                    <TextBox Grid.Row="3" Margin="5,2.5,5,2.5" Text="{Binding SelectedPageListProduct.Category}"></TextBox>
-                    <TextBox Grid.Row="4" Margin="5,2.5,5,2.5" Text="{Binding SelectedPageListProduct.Price}"></TextBox>
-                    <TextBox Grid.Row="5" Margin="5,2.5,5,5" Text="{Binding SelectedPageListProduct.PriceCurrency}"></TextBox>
+                    <TextBlock Grid.Row="1" Margin="5,5,5,2.5" Foreground="Gray" Text="{Binding SelectedPageListProduct.Code}"></TextBlock>
+                    <TextBlock Grid.Row="2" Margin="5,2.5,5,2.5" Foreground="Gray" Text="{Binding SelectedPageListProduct.Description}"></TextBlock>
+                    <TextBlock Grid.Row="3" Margin="5,2.5,5,2.5" Foreground="Gray" Text="{Binding SelectedPageListProduct.Category}"></TextBlock>
+                    <TextBlock Grid.Row="4" Margin="5,2.5,5,2.5" Foreground="Gray" Text="{Binding SelectedPageListProduct.Price}"></TextBlock>
+                    <TextBlock Grid.Row="5" Margin="5,2.5,5,5" Foreground="Gray" Text="{Binding SelectedPageListProduct.PriceCurrency}"></TextBlock>
             </Grid>
                 <Grid Grid.Column="0" Grid.Row="0">
                     <Grid.RowDefinitions>

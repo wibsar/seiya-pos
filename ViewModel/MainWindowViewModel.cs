@@ -1773,11 +1773,13 @@ namespace Seiya
             {
                 _inventoryInstance.UpdateProductToTable(InventoryTemporalItem);
                 _inventoryInstance.SaveDataTableToCsv();
+                CurrentPage = "\\View\\InventoryMainPage.xaml";
             }
             else
             {
                 _inventoryInstance.AddNewProductToTable(InventoryTemporalItem);
                 _inventoryInstance.SaveDataTableToCsv();
+                CurrentPage = "\\View\\InventoryMainPage.xaml";
             }
         }
         internal bool CanExecute_InventorySaveChangesCommand(object parameter)
@@ -2866,6 +2868,7 @@ namespace Seiya
             _posInstance.UpdateExchangeRate(ExchangeRate);
             _posInstance.UpdateAllData();
             ExchangeRateString = _posInstance.ExchangeRate.ToString();
+            CurrentPage = "\\View\\PosGeneralPage.xaml";
         }
         internal bool CanExecute_ExchangeRateSaveCommand(object parameter)
         {
