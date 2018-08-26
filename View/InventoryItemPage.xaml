@@ -210,10 +210,7 @@
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-
-                
                 <Button Grid.Column="0" Grid.Row="1" Command="{Binding ChangePageCommand}" CommandParameter="inventory" Background="{x:Null}" BorderBrush="{x:Null}">
-
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="3*"></RowDefinition>
