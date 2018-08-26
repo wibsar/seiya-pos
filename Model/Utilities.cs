@@ -55,6 +55,50 @@ namespace Seiya
             return updatedList;
         }
 
+        public static IEnumerable<string> MoveListItemUp(IEnumerable<string> item, int selectedItemIndex)
+        {
+            var updatedList = item.ToList();
+            var tempItem = updatedList[selectedItemIndex];
+            if (selectedItemIndex < updatedList.Count && selectedItemIndex > 0)
+            {
+                updatedList[selectedItemIndex] = updatedList[selectedItemIndex - 1];
+                updatedList[selectedItemIndex - 1] = tempItem;
+            }
+            return updatedList;
+        }
+
+        public static IEnumerable<string> MoveListItemDown(IEnumerable<string> item, int selectedItemIndex)
+        {
+            var updatedList = item.ToList();
+            var tempItem = updatedList[selectedItemIndex];
+            if (selectedItemIndex < updatedList.Count - 1)
+            {
+                updatedList[selectedItemIndex] = updatedList[selectedItemIndex + 1];
+                updatedList[selectedItemIndex + 1] = tempItem;
+            }
+            return updatedList;
+        }
+
+        public static IEnumerable<string> DeleteListItem(IEnumerable<string> item, int selectedItemIndex)
+        {
+            var updatedList = item.ToList();
+            var tempItem = updatedList[selectedItemIndex];
+            updatedList.RemoveAt(selectedItemIndex);
+            return updatedList;
+        }
+
+        public static IEnumerable<string> AddListItem(IEnumerable<string> item, string newItem, int selectedItemIndex)
+        {
+            var updatedList = item.ToList();
+            if (updatedList.Count < 20)
+            {
+                updatedList.Insert(selectedItemIndex + 1, newItem);
+            }
+            var tempItem = updatedList[selectedItemIndex];
+            updatedList.RemoveAt(selectedItemIndex);
+            return updatedList;
+        }
+
         /// <summary>
         /// Load CSV database into a datatable object
         /// </summary>

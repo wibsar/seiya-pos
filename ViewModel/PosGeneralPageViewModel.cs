@@ -35,9 +35,7 @@ namespace Seiya
         public PosGeneralPageViewModel()
         {
             //Load category list
-            //TODO: Can be checked against null if categorylist cannot change
-            if(_categoriesList == null)
-              _categoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
+            CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
 
             if (ManualProduct == null) return;
 

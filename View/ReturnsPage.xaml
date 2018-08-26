@@ -29,6 +29,7 @@
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
+    
     <Grid ShowGridLines="false" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
@@ -77,14 +78,7 @@
 
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="5"></TextBox>
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5"></TextBox>
-                <ComboBox Grid.Row="3" Grid.Column="1" Margin="5">
-                    <ComboBoxItem>
-                        <TextBlock Text="MXN" FontSize="18"></TextBlock>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <TextBlock Text="USD" FontSize="18"></TextBlock>
-                    </ComboBoxItem>
-                </ComboBox>
+                <ComboBox Grid.Row="3" Grid.Column="1" Margin="2" VerticalContentAlignment="Center" ItemsSource="{Binding CurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding ExpenseTemporalItem.CurrencyType, Mode=TwoWay}" FontSize="18" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
                 <TextBox Grid.Row="4" Grid.Column="1" Margin="5"></TextBox>
                 <TextBox Grid.Row="5" Grid.Column="1" Margin="5"></TextBox>
 

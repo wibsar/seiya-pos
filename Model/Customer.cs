@@ -154,6 +154,8 @@ namespace Seiya
 
         public int GetLastItemNumber()
         {
+            if (DataTable.Rows.Count == 0)
+                return 0;
             var row = DataTable.Rows[DataTable.Rows.Count - 1];
             return Int32.Parse(row["Id"].ToString());
         }

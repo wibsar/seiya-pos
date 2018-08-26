@@ -10,16 +10,24 @@
         Title="MainWindow" Height="700" Width="1050" FontFamily=".\Resources\Fonts\#Comfortaa">
 
     <Window.Resources>
-        <Style TargetType="Window">
-            <Setter Property="Foreground" Value="#FF0E2D3B" />
-            <Setter Property="FontSize" Value="16" />
-        </Style>
-        <Style TargetType="Button" >
-            <Setter Property="BorderThickness" Value="0"></Setter>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
-            <Setter Property="Foreground" Value="#FF0E2D3B" />
-            <Setter Property="FontSize" Value="16" />
-
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Window.Resources>
 
@@ -167,14 +175,14 @@
                 </Grid>
                 <!-- Bottom for price display and payment -->
                 <Grid Row="3" ShowGridLines="True">
-                    <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" BorderBrush="{x:Null}" Foreground="White" FontSize="24" Background="Red" Margin="0,0,0,1">                        
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" BorderBrush="{x:Null}"  FontSize="24" Background="Red" Margin="0,0,0,1">                        
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Pagar: $" VerticalAlignment="Center" FontSize="18"></TextBlock>
-                            <TextBlock Grid.Column="1" Text="{Binding PaymentTotalMXN}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="5" ></TextBlock>
+                            <TextBlock Grid.Column="0" Text="Pagar: $" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
+                            <TextBlock Grid.Column="1" Text="{Binding PaymentTotalMXN}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="5" Foreground="White" ></TextBlock>
                         </Grid>
                     </Button>
                 </Grid>

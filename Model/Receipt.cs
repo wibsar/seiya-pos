@@ -112,7 +112,7 @@ namespace Seiya
 
         public void PrintSalesReceipt()
         {
-            bool printToFileOnly = false;
+            bool printToFileOnly = true;
 
             PrintDocument printDocument = new PrintDocument();
 
