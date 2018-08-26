@@ -190,14 +190,14 @@
                 <TextBlock Grid.Row="1" Text="Soporte Técnico"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="3" Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="users_guide" BorderBrush="{x:Null}">
+        <Button Grid.Row="3" Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="categories_edit" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Manual.png"></Image>
-                <TextBlock Grid.Row="1" Text="Manual"></TextBlock>
+                <TextBlock Grid.Row="1" Text="Categorias"></TextBlock>
             </Grid>
         </Button>
         <Button Grid.Row="3" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="others" BorderBrush="{x:Null}">

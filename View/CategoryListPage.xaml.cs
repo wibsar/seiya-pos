@@ -16,14 +16,14 @@ using System.Windows.Shapes;
 namespace Seiya
 {
     /// <summary>
-    /// Lógica de interacción para ExchangeRatePage.xaml
+    /// Interaction logic for CategoryListPage.xaml
     /// </summary>
-    public partial class TechSupportPage : Page
+    public partial class CategoryListPage : Page
     {
-        public TechSupportPage()
+        public CategoryListPage()
         {
             InitializeComponent();
-            DataContext = MainWindowViewModel.GetInstance();
+            this.DataContext = MainWindowViewModel.GetInstance();
         }
     }
 }

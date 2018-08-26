@@ -1,0 +1,152 @@
+﻿<Page x:Class="Seiya.ProductsListEditPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seiya"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="ProductsListEditPage">
+
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Foreground" Value="#2C5066"></Setter>
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
+        </Style>
+    </Page.Resources>
+
+    <Grid Background="White">
+        <!--Main Grid definition-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- Title -->
+        <Grid>
+            <TextBlock Grid.Row="0" Text="CATEGORIAS DE PRODUCTOS" FontSize="24" HorizontalAlignment="Left"></TextBlock>
+        </Grid>
+
+        <!-- Table of inventory items found based on the search -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <!-- List of categories -->
+            <Grid Grid.Row="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="8*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="1*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <ListBox x:Name ="CategoryListBox" Grid.Row="0" Margin="5" ItemsSource="{Binding CurrentCategoryList}" SelectedItem="{Binding SelectedCategoryItem, Mode=TwoWay}"></ListBox>
+                <!-- Up and Down Buttons -->
+                <Grid Grid.Row="1">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Command="{Binding MoveUpCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="5,0,2.5,2.5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha arriba.png" VerticalAlignment="Center" Margin="5"></Image>
+                            <TextBlock Grid.Column="1" Text="Subir" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button Grid.Column="1" Command="{Binding MoveDownCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="2.5,0,5,2.5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha abajo.png" Margin="5"></Image>
+                            <TextBlock Grid.Column="1" Text="Bajar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
+                        </Grid>
+                    </Button>
+                </Grid>
+                <!-- Delete and Save Buttons -->
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Button Grid.Column="0" Command="{Binding DeleteCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="5,2.5,2.5,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png" Margin="5"></Image>
+                            <TextBlock Grid.Column="1" Text="Eliminar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
+                        </Grid>
+                    </Button>
+                    <Button Grid.Column="1" Command="{Binding SaveChangesCategoryListCommand}" Margin="2.5,2.5,5,5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png" Margin="5"></Image>
+                            <TextBlock Grid.Column="1" Text="Guardar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
+                        </Grid>
+                    </Button>
+                </Grid>
+            </Grid>
+
+            <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,5,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <!-- New Category Text -->
+                <Grid Grid.Column="0" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nueva Categoria"></TextBlock>
+                </Grid>
+                <!-- New Category Text Input -->
+                <Grid Grid.Column="1" Grid.Row="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBox Grid.Row="0" Text="{Binding NewCategoryItem}" Height="30" Margin="5"/>
+                    <Button Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding AddCategoryListCommand}" CommandParameter="{Binding NewCategoryItem}">
+                        <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
+                    </Button>
+                </Grid>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>

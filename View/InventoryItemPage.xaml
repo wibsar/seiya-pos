@@ -199,18 +199,18 @@
                     </Grid>
                 
             </Grid>
-                
+
             <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                
+
                 <Button Grid.Column="0" Grid.Row="1" Command="{Binding ChangePageCommand}" CommandParameter="customers" Background="{x:Null}" BorderBrush="{x:Null}">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -242,9 +242,7 @@
                     </Grid>
                 </Button>
             </Grid>
-
-
-    </Grid>
+        </Grid>
     </Grid>
 
     

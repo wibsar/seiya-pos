@@ -61,10 +61,15 @@ namespace Seiya
         private decimal _paymentChangeUSD;
         private decimal _exchangeRate = 18; //TODO: Implement exchange rate based on the er set by the user
         private string _exchangeRateString;
+
         //Inventory Related Fields
         private Product _inventoryTemporalItem;
+        private static ObservableCollection<string> _categoriesList;
+        private static ObservableCollection<string> _currentCategoryList;
 
-
+        //Category Related Fields
+        private string _selectedCategoryItem;
+        private string _newCategoryItem;
 
         //Holds active cart product list
         private static ObservableCollection<Product> _currentCartProducts = new ObservableCollection<Product>()
@@ -86,6 +91,9 @@ namespace Seiya
             _posInstance = Pos.GetInstance(Constants.DataFolderPath + Constants.PosDataFileName);
             //Page Titles
             GetInitialPagesTitles();
+            //Initial Categories
+            if (CategoriesList == null)
+                CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
             //Set default page
             CurrentPage = "\\View\\LoginPage.xaml";
         }
@@ -155,6 +163,54 @@ namespace Seiya
         #endregion
 
         #region Observable Properties
+
+        /// <summary>
+        /// List of available categories
+        /// </summary>
+        public ObservableCollection<string> CategoriesList
+        {
+            get { return _categoriesList; }
+            set { _categoriesList = value; OnPropertyChanged("CategoriesList");}
+        }
+
+        /// <summary>
+        /// Holds currently selected category items
+        /// </summary>
+        public string SelectedCategoryItem
+        {
+            get { return _selectedCategoryItem; }
+            set
+            {
+                _selectedCategoryItem = value;
+                OnPropertyChanged("SelectedCategoryItem");
+            }
+        }
+
+        /// <summary>
+        /// Hold active cart items list
+        /// </summary>
+        public ObservableCollection<string> CurrentCategoryList
+        {
+            get { return _currentCategoryList; }
+            set
+            {
+                _currentCategoryList = value;
+                OnPropertyChanged("CurrentCategoryList");
+            }
+        }
+
+        /// <summary>
+        /// Holds currently selected category items
+        /// </summary>
+        public string NewCategoryItem
+        {
+            get { return _newCategoryItem; }
+            set
+            {
+                _newCategoryItem = value;
+                OnPropertyChanged("NewCategoryItem");
+            }
+        }
 
         /// <summary>
         /// Hold active cart items list
@@ -1042,8 +1098,13 @@ namespace Seiya
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     System.Diagnostics.Process.Start(@"C:\Projects\seiya-pos\Resources\UsersGuide\GuiaUsuario.pdf");
                     break;
+                case "categories_edit":
+                    CurrentCategoryList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
+                    NewCategoryItem = "";
+                    CurrentPage = "\\View\\CategoryListPage.xaml";
+                    break;
                 case "support":
-                    CurrentPage = "";
+                    CurrentPage = "\\View\\TechSupportPage.xaml";
                     break;
                 case "more_options":
                     CurrentPage = "";
@@ -1439,6 +1500,88 @@ namespace Seiya
         internal bool CanExecute_DeleteListItemCommand(object parameter)
         {
             return (int)parameter >= 0;
+        }
+        #endregion
+
+        #endregion
+
+        #region Category Edit Page Commands
+
+        #region MoveUpCategoryItemCommand
+        public ICommand MoveUpCategoryItemCommand { get { return _moveUpCategoryItemCommand ?? (_moveUpCategoryItemCommand = new DelegateCommand(Execute_MoveUpCategoryItemCommand, CanExecute_MoveUpCategoryItemCommand)); } }
+        private ICommand _moveUpCategoryItemCommand;
+
+        internal void Execute_MoveUpCategoryItemCommand(object parameter)
+        {
+            var updatedCategoryList = Utilities.MoveListItemUp(CurrentCategoryList, (int)parameter);
+            CurrentCategoryList = new ObservableCollection<string>(updatedCategoryList);
+        }
+        internal bool CanExecute_MoveUpCategoryItemCommand(object parameter)
+        {
+            return (int)parameter >= 0;
+        }
+        #endregion
+
+        #region MoveDownCategoryItemCommand
+        public ICommand MoveDownCategoryItemCommand { get { return _moveDownCategoryItemCommand ?? (_moveDownCategoryItemCommand = new DelegateCommand(Execute_MoveDownCategoryItemCommand, CanExecute_MoveDownCategoryItemCommand)); } }
+        private ICommand _moveDownCategoryItemCommand;
+
+        internal void Execute_MoveDownCategoryItemCommand(object parameter)
+        {
+            var updatedCategoryList = Utilities.MoveListItemDown(CurrentCategoryList, (int)parameter);
+            CurrentCategoryList = new ObservableCollection<string>(updatedCategoryList);
+        }
+        internal bool CanExecute_MoveDownCategoryItemCommand(object parameter)
+        {
+            return (int)parameter >= 0;
+        }
+        #endregion
+
+        #region DeleteCategoryItemCommand
+        public ICommand DeleteCategoryItemCommand { get { return _deleteCategoryItemCommand ?? (_deleteCategoryItemCommand = new DelegateCommand(Execute_DeleteCategoryItemCommand, CanExecute_DeleteCategoryItemCommand)); } }
+        private ICommand _deleteCategoryItemCommand;
+
+        internal void Execute_DeleteCategoryItemCommand(object parameter)
+        {
+            if(CurrentCategoryList.Count > 1)
+                CurrentCategoryList.RemoveAt((int)parameter);
+        }
+        internal bool CanExecute_DeleteCategoryItemCommand(object parameter)
+        {
+            return (int)parameter >= 0;
+        }
+        #endregion
+
+        #region SaveChangesCategoryListCommand
+        public ICommand SaveChangesCategoryListCommand { get { return _saveChangesCategoryListCommand ?? (_saveChangesCategoryListCommand = new DelegateCommand(Execute_SaveChangesCategoryListCommand, CanExecute_SaveChangesCategoryListCommand)); } }
+
+        private ICommand _saveChangesCategoryListCommand;
+
+        internal void Execute_SaveChangesCategoryListCommand(object parameter)
+        {
+            CategoryCatalog.UpdateCategoryListFile(Constants.DataFolderPath + Constants.CategoryListFileName, CurrentCategoryList.ToList());
+            //Reload categories
+            CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
+        }
+        internal bool CanExecute_SaveChangesCategoryListCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
+        #region AddCategoryListCommand
+        public ICommand AddCategoryListCommand { get { return _addCategoryListCommand ?? (_addCategoryListCommand = new DelegateCommand(Execute_AddCategoryListCommand, CanExecute_AddCategoryListCommand)); } }
+
+        private ICommand _addCategoryListCommand;
+
+        internal void Execute_AddCategoryListCommand(object parameter)
+        {
+            if(!CurrentCategoryList.Contains(parameter.ToString()))
+               CurrentCategoryList.Add(parameter.ToString());
+        }
+        internal bool CanExecute_AddCategoryListCommand(object parameter)
+        {
+            return parameter != null && parameter.ToString() != "";
         }
         #endregion
 
@@ -2084,6 +2227,7 @@ namespace Seiya
         {
             return true;
         }
+
         #endregion
 
         #endregion Expenses Commands

@@ -93,5 +93,25 @@ namespace Seiya
             return true;
         }
 
+        /// <summary>
+        /// Update category list file with new changes
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        public static bool UpdateCategoryListFile(string filePath, List<string> categories)
+        {
+            //Creates or overwrites file
+            StreamWriter writer = File.CreateText(filePath);
+            //Write code for each item
+            foreach (var category in categories)
+            {
+                writer.WriteLine(category);
+            }
+            writer.Close();
+            writer.Dispose();
+
+            return true;
+        }
+
     }
 }
