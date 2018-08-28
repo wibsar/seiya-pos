@@ -62,6 +62,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Log.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Interfaces\IBasicEntityInfo.cs" />

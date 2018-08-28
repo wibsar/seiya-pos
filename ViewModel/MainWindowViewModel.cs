@@ -1200,6 +1200,8 @@ namespace Seiya
         }
         #endregion
 
+        #region Search Code Related Commands
+
         #region SearchCodeCommand
         public ICommand SearchCodeCommand { get { return _searchCodeCommand ?? (_searchCodeCommand = new DelegateCommand(Execute_SearchCodeCommand, CanExecute_SearchCodeCommand)); } }
         private ICommand _searchCodeCommand;
@@ -1212,7 +1214,7 @@ namespace Seiya
                 product.LastQuantitySold = 1;
                 AddProductToCart(product);
             }
-                
+
             //TODO: Turn red if it is not found
 
         }
@@ -1220,6 +1222,22 @@ namespace Seiya
         {
             return true;
         }
+        #endregion
+
+        #region CodeLeftClickClearCommand
+        public ICommand CodeLeftClickClearCommand { get { return _codeLeftClickClearCommand ?? (_codeLeftClickClearCommand = new DelegateCommand(Execute_CodeLeftClickClearCommand, CanExecute_CodeLeftClickClearCommand)); } }
+        private ICommand _codeLeftClickClearCommand;
+
+        internal void Execute_CodeLeftClickClearCommand(object parameter)
+        {
+            Code = string.Empty;
+        }
+        internal bool CanExecute_CodeLeftClickClearCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
         #endregion
 
         #region SubtractFromProductListCommand
@@ -2869,6 +2887,8 @@ namespace Seiya
             _posInstance.UpdateAllData();
             ExchangeRateString = _posInstance.ExchangeRate.ToString();
             CurrentPage = "\\View\\PosGeneralPage.xaml";
+            //Log message to display success
+            Code = Log.ExchangeRateSaved;
         }
         internal bool CanExecute_ExchangeRateSaveCommand(object parameter)
         {
@@ -3185,7 +3205,7 @@ namespace Seiya
             return new ObservableCollection<string>(items);
         }
 
-        
+       
         /// <summary>
         /// Get products list and title for the pages
         /// </summary>
@@ -3315,6 +3335,15 @@ namespace Seiya
 
         #endregion
 
+        #region Test Methods
+
+        public void DoubleClickMethodTest(object sender, MouseButtonEventArgs e)
+        {
+            var x = 1;
+            x++;
+        }
+
+        #endregion
         #endregion
 
     }

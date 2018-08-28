@@ -127,7 +127,7 @@
                     <RowDefinition Height="2.5*"></RowDefinition>
                 </Grid.RowDefinitions>
                  <!-- Image holder -->
-                <Image Grid.Row="0" Visibility="Visible" Stretch="Fill" Source="{Binding OrderImage, Mode=TwoWay}"></Image>
+                <Image Grid.Row="0" Visibility="Visible" Stretch="Uniform" Source="{Binding OrderImage, Mode=TwoWay}"></Image>
                 <Grid Grid.Row="1">
                     
                     <!-- Camera Controls -->

@@ -25,5 +25,13 @@ namespace Seiya
             DataContext = MainWindowViewModel.GetInstance();
             InitializeComponent();
         }
+
+        //private void TxtCode_OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        //{
+        //    txtCode.Text = string.Empty;
+        //    txtCode.Foreground = new SolidColorBrush(Colors.Red);
+        //    //Sample Code
+        //    txtCode.Foreground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#2C5066"));
+        //}
     }
 }
