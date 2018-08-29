@@ -105,7 +105,7 @@
                 
             </Grid>
             
-            <Button Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="customers" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="menu" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Grid>
             <Grid.RowDefinitions>
                         <RowDefinition Height="3*"></RowDefinition>

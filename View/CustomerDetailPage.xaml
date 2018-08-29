@@ -81,10 +81,10 @@
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Email}"></TextBox>
                 <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Phone}"></TextBox>
                 <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Rfc}"></TextBox>
-                <TextBox Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.PointsAvailable}"></TextBox>
-                <TextBox Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.PointsUsed}"></TextBox>
-                <TextBox Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalVisits}"></TextBox>
-                <TextBox Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalSpent}"></TextBox>
+                <TextBlock Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.PointsAvailable}"></TextBlock>
+                <TextBlock Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.PointsUsed}"></TextBlock>
+                <TextBlock Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalVisits}"></TextBlock>
+                <TextBlock Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalSpent}"></TextBlock>
             </Grid>
         </Grid>
 

@@ -58,35 +58,35 @@
                 <TextBlock Grid.Row="1" Text="Inventario"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="0" Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="sales_report" BorderBrush="{x:Null}">
+        <Button Grid.Row="0" Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="product_list" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Corte.png"></Image>
-                <TextBlock Grid.Row="1" Text="Corte"></TextBlock>
+                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\grupos.png"></Image>
+                <TextBlock Grid.Row="1" Text="Grupos"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="0" Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="analysis" BorderBrush="{x:Null}">
+        <Button Grid.Row="0" Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="exchange_rate" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Analisis.png"></Image>
-                <TextBlock Grid.Row="1" Text="Análisis"></TextBlock>
+                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\tc.png"></Image>
+                <TextBlock Grid.Row="1" Text="Tipo de Cambio"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="0" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="exchange_rate" BorderBrush="{x:Null}">
+        <Button Grid.Row="0" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="categories_edit" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Source="C:\Projects\seiya-pos\Resources\Images\tc.png">
+                <Image Source="C:\Projects\seiya-pos\Resources\Images\categorias.png">
                 </Image>
-                <TextBlock Grid.Row ="1" Text="Tipo de Cambio" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row ="1" Text="Categorias" HorizontalAlignment="Center"></TextBlock>
             </Grid>
 
         </Button>
@@ -96,38 +96,38 @@
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Usuario.png"></Image>
+                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\usuario.png"></Image>
                 <TextBlock Grid.Row="1" Text="Usuarios"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="product_list" BorderBrush="{x:Null}">
+        <Button Grid.Row="1" Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="customers" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Categorias.png"></Image>
-                <TextBlock Grid.Row="1" Text="Categorías"></TextBlock>
-            </Grid>
-        </Button>
-        <Button Grid.Row="1" Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="customers" BorderBrush="{x:Null}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Clientes.png"></Image>
+                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\clientes.png"></Image>
                 <TextBlock Grid.Row="1" Text="Clientes"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="1" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="vendors" BorderBrush="{x:Null}">
+        <Button Grid.Row="1" Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="vendors" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Proveedores.png"></Image>
-                <TextBlock Grid.Row="1" Text="Proveedores"></TextBlock>
+                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\proveedores.png"></Image>
+                <TextBlock Grid.Row="1" Text="Proveedor"></TextBlock>
+            </Grid>
+        </Button>
+        <Button Grid.Row="1" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="orders" BorderBrush="{x:Null}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\pedidos.png"></Image>
+                <TextBlock Grid.Row="1" Text="Pedidos"></TextBlock>
             </Grid>
         </Button>
         <Button Grid.Row="2" Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="returns" BorderBrush="{x:Null}">
@@ -140,14 +140,14 @@
                 <TextBlock Grid.Row="1" Text="Devolución"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="orders" BorderBrush="{x:Null}">
+        <Button Grid.Row="2" Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="expenses" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Pedidos.png"></Image>
-                <TextBlock Grid.Row="1" Text="Pedidos"></TextBlock>
+                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\gastos.png"></Image>
+                <TextBlock Grid.Row="1" Text="Gastos"></TextBlock>
             </Grid>
         </Button>
         <Button Grid.Row="2" Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="calculator" BorderBrush="{x:Null}">
@@ -160,14 +160,14 @@
                 <TextBlock Grid.Row="1" Text="Calculadora"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="expenses" BorderBrush="{x:Null}">
+        <Button Grid.Row="2" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="analysis" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Gastos.png"></Image>
-                <TextBlock Grid.Row="1" Text="Gastos"></TextBlock>
+                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\analisis.png"></Image>
+                <TextBlock Grid.Row="1" Text="Analisis"></TextBlock>
             </Grid>
         </Button>
         <Button Grid.Row="3" Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="system" BorderBrush="{x:Null}">
@@ -190,13 +190,13 @@
                 <TextBlock Grid.Row="1" Text="Soporte Técnico"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="3" Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="categories_edit" BorderBrush="{x:Null}">
+        <Button Grid.Row="3" Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="sales_report" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Manual.png"></Image>
+                <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\corte.png"></Image>
                 <TextBlock Grid.Row="1" Text="Categorias"></TextBlock>
             </Grid>
         </Button>

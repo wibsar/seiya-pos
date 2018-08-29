@@ -80,7 +80,7 @@
                 <TextBlock Grid.Row="7" Text="Metodo de Pago:" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Row="8" Text="Categoria de Gasto" VerticalAlignment="Center"></TextBlock>
 
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.User}"></TextBox>
+                <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.User}"></TextBlock>
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Vendor}"></TextBox>
                 <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.TicketNumber}"></TextBox>
                 <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Description}"></TextBox>
