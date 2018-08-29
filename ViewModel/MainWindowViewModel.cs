@@ -2888,7 +2888,7 @@ namespace Seiya
             ExchangeRateString = _posInstance.ExchangeRate.ToString();
             CurrentPage = "\\View\\PosGeneralPage.xaml";
             //Log message to display success
-            Code = Log.ExchangeRateSaved;
+            //Code = Log.ExchangeRateSaved;
         }
         internal bool CanExecute_ExchangeRateSaveCommand(object parameter)
         {

@@ -62,7 +62,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Log.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Interfaces\IBasicEntityInfo.cs" />
@@ -375,6 +374,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\delete.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\grupos.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
