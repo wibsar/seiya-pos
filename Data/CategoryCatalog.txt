@@ -1,9 +1,11 @@
-Merceria
+Halloween
+Navidad
+Madera
 Regalos
+Cristal
 Liston
 Envoltura
-Cristal
-Madera
+Merceria
 Unicel
 Pedidos
 Impresion
@@ -12,3 +14,4 @@ Velas
 Articulos
 Herreria
 Otro
+Manualidades

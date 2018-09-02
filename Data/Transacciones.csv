@@ -1,5 +1,6 @@
 NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
-8029,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,21/08/2018 05:03:36 p. m.,Cliente,Estrella,No,Regular,Cash,1
-8029,809726059374x,2,Merceria,16mm acrilico diamante 8oz pack,87.5,1,87.5,21/08/2018 05:03:36 p. m.,Cliente,Estrella,No,Regular,Cash,1
-8029,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,21/08/2018 06:23:51 p. m.,Cliente,Estrella,No,Regular,Cash,1
-8029,809726059374x,2,Merceria,16mm acrilico diamante 8oz pack,87.5,1,87.5,21/08/2018 06:23:51 p. m.,Cliente,Estrella,No,Regular,Cash,1
+8029,1243x,5,Halloween,Canastas,36.0,1,36.0,26/08/2018 06:23:21 p. m.,Cliente,Estrella,No,Regular,Cash,1
+8031,1243x,5,Halloween,Canastas,40,1,40,26/08/2018 06:24:39 p. m.,Cliente,Estrella,No,Regular,Cash,1
+8029,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,01/09/2018 10:04:29 p. m.,Cliente,Estrella,No,Regular,Cash,1
+8030,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,01/09/2018 10:04:58 p. m.,Cliente,Estrella,No,Regular,Cash,1
+8029,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,01/09/2018 10:12:09 p. m.,Cliente,Estrella,No,Regular,Cash,1

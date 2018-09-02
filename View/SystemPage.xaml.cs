@@ -18,12 +18,12 @@ namespace Seiya
     /// <summary>
     /// Lógica de interacción para Page1.xaml
     /// </summary>
-    public partial class Page1 : Page
+    public partial class SystemPage : Page
     {
-        public Page1()
+        public SystemPage()
         {
             InitializeComponent();
-            DataContext = MainWindowViewModel.GetInstance();
+            DataContext = new SystemViewModel();
         }
     }
 }

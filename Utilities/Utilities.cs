@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using GenericParsing;
 using System.Data;
 using System.IO;
+using System.Drawing.Printing;
 
 namespace Seiya
 {
@@ -135,5 +136,23 @@ namespace Seiya
             }
             File.WriteAllText(csvFilePath, sb.ToString());
         }
+
+        #region Printer Utilities
+
+        /// <summary>
+        /// Return list of avaialble printers installed in the system
+        /// </summary>
+        /// <returns></returns>
+        public static List<string> GetAvailablePrinters()
+        {
+            var printers = new List<string>();
+            foreach (var printer in PrinterSettings.InstalledPrinters)
+            {
+                printers.Add(printer.ToString());
+            }
+            return printers;
+        }
+
+        #endregion
     }
 }

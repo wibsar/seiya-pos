@@ -29,6 +29,11 @@ namespace Seiya
         private string _businessName;
         private string _system;
         private string _license;
+        private string _footerMessage;
+        private string _facebook;
+        private string _instagram;
+        private string _twitter;
+        private string _website;
         #endregion
 
         #region FilePaths
@@ -165,6 +170,66 @@ namespace Seiya
             }
         }
 
+        public string Facebook
+        {
+            get
+            {
+                return _facebook;
+            }
+            set
+            {
+                _facebook = value;
+            }
+        }
+
+        public string Instagram
+        {
+            get
+            {
+                return _instagram;
+            }
+            set
+            {
+                _instagram = value;
+            }
+        }
+
+        public string Twitter
+        {
+            get
+            {
+                return _twitter;
+            }
+            set
+            {
+                _twitter = value;
+            }
+        }
+
+        public string Website
+        {
+            get
+            {
+                return _website;
+            }
+            set
+            {
+                _website = value;
+            }
+        }
+
+        public string FooterMessage
+        {
+            get
+            {
+                return _footerMessage;
+            }
+            set
+            {
+                _footerMessage = value;
+            }
+        }
+
         public string License
         {
             get
@@ -176,7 +241,6 @@ namespace Seiya
                 _license = value;
             }
         }
-
         public decimal RegisterCashUSD { get; set; }
 
         public decimal RegisterCashMXN { get; set; }
@@ -302,6 +366,8 @@ namespace Seiya
             for (int index = 0; index < _dictofdata.Rows.Count; index++)
             {
                 var row = _dictofdata.Rows[index];
+                System = row["Sistema"].ToString();
+                License = row["Licencia"].ToString();
                 ExchangeRate = decimal.Parse(row["TipoCambio"].ToString());
                 LastCashierAmountMxn = decimal.Parse(row["CantidadPesosCaja"].ToString());
                 LastCashierAmountUsd = decimal.Parse(row["CantidadDolarCaja"].ToString());
@@ -319,15 +385,18 @@ namespace Seiya
                 FiscalPhoneNumber = row["NumeroTelefono"].ToString();
                 FiscalEmail = row["Email"].ToString();
                 FiscalType = row["RazonSocial"].ToString();
-                System = row["Sistema"].ToString();
-                License = row["Licencia"].ToString();
+                Facebook = row["Facebook"].ToString();
+                Instagram = row["Instagram"].ToString();
+                Twitter = row["Twitter"].ToString();
+                Website = row["PaginaInternet"].ToString();
+                FooterMessage = row["MensajePie"].ToString();
             }
         }
 
         /// <summary>
         /// Method to write pos data from memory to csv file
         /// </summary>
-        public void UpdateAllData()
+        public void SaveDataTableToCsv()
         {
             StringBuilder sb = new StringBuilder();
 
@@ -341,6 +410,38 @@ namespace Seiya
                 sb.AppendLine(string.Join(",", fields));
             }
             File.WriteAllText(_systemDataFilePath, sb.ToString());
+        }
+
+        /// <summary>
+        /// Update all properties in the data table
+        /// </summary>
+        public void UpdateAllData()
+        {
+            var row = _dictofdata.Rows[0];
+            row["Sistema"] = System;
+            row["Licencia"] = License;
+            row["TipoCambio"] = ExchangeRate.ToString();
+            row["CantidadPesosCaja"] = LastCashierAmountMxn.ToString();
+            row["CantidadDolarCaja"] = LastCashierAmountUsd.ToString();
+            row["UltimoReciboNumero"] = LastReceiptNumber.ToString();
+            row["UltimoCorteZNumero"] = LastCorteZNumber.ToString();
+            row["UltimoTransaccionNumero"] = LastTransactionNumber.ToString();
+            row["UltimoNumeroInterno"] = LastInternalNumber.ToString();
+            row["UltimoNumeroPedido"] = LastOrderNumber.ToString();
+            row["NombreImpresora"] = PrinterName;
+            row["NombreNegocio"] = BusinessName;
+            row["DireccionCalleFiscal"] = FiscalStreetAddress;
+            row["CiudadCodigoFiscal"] = FiscalCityAndZipCode;
+            row["RFC"] = FiscalNumber;
+            row["NombreFiscal"] = FiscalName;
+            row["NumeroTelefono"] = FiscalPhoneNumber;
+            row["Email"] = FiscalEmail;
+            row["RazonSocial"] = FiscalType;
+            row["Facebook"] = Facebook;
+            row["Instagram"] = Instagram;
+            row["Twitter"] = Twitter;
+            row["PaginaInternet"] = Website;
+            row["MensajePie"] = FooterMessage;
         }
 
         /// <summary>

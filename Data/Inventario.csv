@@ -1,10 +1,6 @@
 NumeroProducto,Codigo,CodigoAlterno,ProveedorProductoId,Descripcion,Proveedor,Categoria,UltimoPedidoFecha,Costo,CostoMoneda,Precio,PrecioMoneda,CantidadInternoHistorial,CantidadVendidoHistorial,VendidoHistorial,CantidadLocal,CantidadDisponibleTotal,CantidadMinima,UltimaTransaccionFecha,Imagen
-1,809726059329x,NA,1067-Clear,ArturoM,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,19,87.5,0,13,0,21/08/2018,esfera.jpg
-2,809726059374x,NA,1072-Clear,16mm acrilico diamante 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,12,87.5,2,8,2,21/08/2018,NA.jpg
-3,809726059459x,NA,1080-Clear,12.5 x 13x13mm cubo diamante acrilico,Naturalstar,Merceria,28/04/2017 12:00:00 a. m.,1.75,USD,87.5,MXN,0,6,87.5,6,5,0,30/06/2018 12:00:00 a .m.,bibi.jpg
+1,809726059329x,NA,1067-Clear,ArturoM,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,20,87.5,0,12,0,01/09/2018,esfera.jpg
+2,809726059374x,NA,1072-Clear,16mm acrilico diamante 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,10,787.5,4,10,2,30/06/2018,NA.jpg
+3,809726059459x,NA,1080-Clear,12.5 x 13x13mm cubo diamante acrilico,Naturalstar,Merceria,28/04/2017 12:00:00 a. m.,1.75,USD,87.5,MXN,0,6,87.5,6,5,0,30/06/2018 12:00:00 a. m.,bibi.jpg
 4,809726063180x,NA,1081-Clear,10x14x14mm acrilico beads 8oz pack,Naturalstar,Merceria,28/04/2017 12:00:00 a. m.,1.75,USD,87.5,MXN,0,1,87.5,12,1,45,20/06/2018 12:00:00 a. m.,bibi.jpg
-5,123,,,Test123,,Madera,16/08/2018 11:29:39 a. m.,10,MXN,0,MXN,0,0,0,0,0,1,16/08/2018 11:29:39 a. m.,NA.jpg
-5,123,,,Test123,,Madera,16/08/2018 11:29:39 a. m.,10,MXN,0,MXN,0,0,0,0,0,1,16/08/2018 11:29:39 a. m.,NA.jpg
-5,123,,,Test123,,Madera,16/08/2018 11:29:39 a. m.,10,MXN,0,MXN,0,0,0,0,0,1,16/08/2018 11:29:39 a. m.,NA.jpg
-5,123,,,Test123,,Madera,16/08/2018 11:29:39 a. m.,10,MXN,0,MXN,0,0,0,0,0,1,16/08/2018 11:29:39 a. m.,NA.jpg
-5,123,,,Test123,,Madera,16/08/2018 11:29:39 a. m.,10,MXN,0,MXN,0,0,0,0,0,1,16/08/2018 11:29:39 a. m.,NA.jpg
+5,1243x,0,0,Canastas,Target,Halloween,26/08/2018 06:16:34 p. m.,1,MXN,36,MXN,0,2,40,98,2,0,26/08/2018 12:00:00 a. m.,2018181817_halloween.jpg

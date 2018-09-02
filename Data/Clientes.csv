@@ -1,4 +1,3 @@
 Id,Nombre,Email,Telefono,FechaRegistro,RFC,PuntosDisponibles,PuntosUsados,TotalVisitas,TotalVendido,UltimaVisitaFecha
 1,cliente1,cliente@gmail.com,6641039485,1/5/2018,CEFG30945280,3400,100,20,4000,5/5/2018
-2,cliente2,cliente2@gmail.com,6194023943,5/1/2018,,100,0,3,200,2/2/2018
 3,cliente2,cliente3@gmail.com,6649012983,6/7/2018,CEWRUSDU,0,0,1,400,7/7/2018

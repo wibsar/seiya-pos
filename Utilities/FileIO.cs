@@ -10,20 +10,6 @@ namespace Seiya
     public class FileIO
     {
         /// <summary>
-        /// Remove commas from string input
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public static string SanitizeInput(string input)
-        {
-            if (string.IsNullOrEmpty(input))
-                return string.Empty;
-
-            //TODO: What happens if there is no ,
-            return input.Replace(",", "");
-        }
-
-        /// <summary>
         /// Get the file name with no extension
         /// </summary>
         /// <param name="filePath"></param>
