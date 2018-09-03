@@ -23,7 +23,7 @@ namespace Seiya
         public ReturnsPage()
         {
             InitializeComponent();
-            DataContext = MainWindowViewModel.GetInstance();
+            DataContext = new ReturnsViewModel();
         }
     }
 }

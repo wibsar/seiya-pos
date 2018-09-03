@@ -5,9 +5,10 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
       mc:Ignorable="d" 
-      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DataContext="{d:DesignInstance local:ReturnsViewModel}"
       d:DesignHeight="600" d:DesignWidth="800"
       Title="ReturnsPage">
+
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
@@ -28,6 +29,11 @@
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
+        </Style>
     </Page.Resources>
     
     <Grid ShowGridLines="false" Background="White">
@@ -43,8 +49,7 @@
         <!-- header -->
         <TextBlock Grid.Row="0" Text="DEVOLUCION" FontSize="24" VerticalAlignment="Center"></TextBlock>
 
-
-
+        <!-- Return Info -->
         <Grid Grid.Row="1" Background="White" Margin="5">
 
             <Grid.ColumnDefinitions>
@@ -55,10 +60,9 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1.5*"></ColumnDefinition>
                     <ColumnDefinition Width="3*"/>
-
                 </Grid.ColumnDefinitions>
+
                 <Grid.RowDefinitions>
-
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -66,66 +70,52 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" FontSize="18" Text="Registro de Devolución" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="1" Text="No. de Ticket"></TextBlock>
-                <TextBlock Grid.Row="2" Text="Método de Pago"></TextBlock>
-                <TextBlock Grid.Row="3" Text="Moneda"></TextBlock>
-                <TextBlock Grid.Row="4" Text="Monto"></TextBlock>
-                <TextBlock Grid.Row="5" Text="Motivo"></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="18" Text="Registro de Devolución" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="No. de Ticket de Compra"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Fecha de Compra"></TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Nombre Cliente"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Numero Cliente"></TextBlock>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Motivo"></TextBlock>
 
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5"></TextBox>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="5"></TextBox>
-                <ComboBox Grid.Row="3" Grid.Column="1" Margin="2" VerticalContentAlignment="Center" ItemsSource="{Binding CurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding ExpenseTemporalItem.CurrencyType, Mode=TwoWay}" FontSize="18" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
-                <TextBox Grid.Row="4" Grid.Column="1" Margin="5"></TextBox>
-                <TextBox Grid.Row="5" Grid.Column="1" Margin="5"></TextBox>
-
-
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TicketNumber}" Margin="5"></TextBox>
+                <DatePicker Grid.Row="2" Grid.Column="1" Text="{Binding PurchaseDate}" Margin="5"></DatePicker>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CustomerName}"  Margin="5"></TextBox>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CustomerNumber}" Margin="5"></TextBox>
+                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ReturnReason}" Margin="5"></TextBox>
             </Grid>
-
-
         </Grid>
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="3*"/>                
                 <ColumnDefinition Width="*"/>
-
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
+
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
+
                 <TextBlock Grid.Row="0"  Margin="5,0,0,0" Foreground="Gray" Text="No. de Folio" VerticalAlignment="Bottom"></TextBlock>
-                <TextBlock Grid.Row="1" Margin="5,0,0,0" FontSize="28" Text="1234"></TextBlock>
-                
+                <TextBlock Grid.Row="1" Margin="5,0,0,0" FontSize="28" Foreground="Red" Text="{Binding ReturnID, Mode=TwoWay}"></TextBlock>
             </Grid>
-            
-            <Button Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="menu" Background="{x:Null}" BorderBrush="{x:Null}">
-                <Grid>
-            <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png" ></Image>
-                    <TextBlock HorizontalAlignment="Center" Grid.Row="1" FontSize="16" Text="Cancelar"></TextBlock>
-                </Grid>
-            </Button>
-            <Button Grid.Column="2" Command="{Binding VendorSaveChangesCommand}"  Background="{x:Null}" BorderBrush="{x:Null}">
+
+            <Button Grid.Column="2" Command="{Binding ReturnSaveChangesCommand}"  Background="{x:Null}" BorderBrush="{x:Null}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
+
                     <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png"></Image>
                     <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" >Guardar</TextBlock>
                 </Grid>
             </Button>
-
         </Grid>
     </Grid>
 </Page>

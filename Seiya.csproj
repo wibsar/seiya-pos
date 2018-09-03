@@ -95,6 +95,7 @@
     <Compile Include="ViewModel\PosGeneralPageViewModel.cs" />
     <Compile Include="ViewModel\PosMenuPageViewModel.cs" />
     <Compile Include="ViewModel\ProductsPageViewModel.cs" />
+    <Compile Include="ViewModel\ReturnsViewModel.cs" />
     <Compile Include="ViewModel\SystemViewModel.cs" />
     <Compile Include="View\TechSupportPage.xaml.cs">
       <DependentUpon>TechSupportPage.xaml</DependentUpon>

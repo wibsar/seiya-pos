@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using Seiya.WpfBindingUtilities;
 using System.Windows.Input;
@@ -34,6 +36,8 @@ namespace Seiya
 
         public SystemViewModel()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+
             _posInstance = Pos.GetInstance(Constants.DataFolderPath + Constants.PosDataFileName);
             PrinterName = _posInstance.PrinterName;
             FiscalNumber = _posInstance.FiscalNumber;

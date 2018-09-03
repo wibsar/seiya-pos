@@ -55,6 +55,8 @@ namespace Seiya
         //Items list
         public const int MaxNumberListItems = 20;
 
+        //Returns
+        public const string ReturnsFileName = "Devoluciones.csv";
 
     }
 }
