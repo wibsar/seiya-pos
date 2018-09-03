@@ -57,11 +57,11 @@
                 <ColumnDefinition Width=".5*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="Arturo Morales" Foreground="Gray"></TextBlock>
+            <TextBlock Text="{Binding CurrentCustomer.Name}" Foreground="Gray"></TextBlock>
             <TextBlock Grid.Column="1" Text="Puntos:" Foreground="Green" HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-            <TextBlock Grid.Column="2" Text="123456" Foreground="Green" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
-            <TextBox Grid.Column="3" ToolTip="Numero de Cliente" Margin="0,5,0,5"></TextBox>
-            <Button Grid.Column="4" BorderBrush="{x:Null}">
+            <TextBlock Grid.Column="2" Text="{Binding CurrentCustomer.PointsAvailable}" Foreground="Green" VerticalAlignment="Center" Margin="5,0,0,0"></TextBlock>
+            <TextBox Grid.Column="3" ToolTip="Numero de Cliente" Text="{Binding PaymentCustomerSearchInput}" Margin="0,5,0,5"></TextBox>
+            <Button Grid.Column="4" Command="{Binding PaymentCustomerSearchCommand}" BorderBrush="{x:Null}">
                 <Image Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png" ></Image>
             </Button>
         </Grid>

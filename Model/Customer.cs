@@ -192,9 +192,53 @@ namespace Seiya
                 return customers;
             }
 
+            var phoneFilter = base.DataTable.AsEnumerable().Where(r => r.Field<string>("Telefono").ToLower().Contains(searchInput));
+            var nameFilter = base.DataTable.AsEnumerable().Where(r => r.Field<string>("Nombre").ToLower().Contains(searchInput));
+
+            foreach (var row in phoneFilter)
+            {
+                var customer = new Customer(base.FilePath)
+                {
+                    Id = Int32.Parse(row["Id"].ToString()),
+                    Name = row["Nombre"].ToString(),
+                    Email = row["Email"].ToString(),
+                    Phone = row["Telefono"].ToString(),
+                    RegistrationDate = Convert.ToDateTime(row["FechaRegistro"].ToString()),
+                    Rfc = row["RFC"].ToString(),
+                    PointsAvailable = Int32.Parse(row["PuntosDisponibles"].ToString()),
+                    PointsUsed = Int32.Parse(row["PuntosUsados"].ToString()),
+                    TotalVisits = Int32.Parse(row["TotalVisitas"].ToString()),
+                    TotalSpent = Decimal.Parse(row["TotalVendido"].ToString()),
+                    LastVisitDate = Convert.ToDateTime(row["UltimaVisitaFecha"].ToString())
+                };
+
+                customers.Add(customer);
+            }
+
+            foreach (var row in nameFilter)
+            {
+                var customer = new Customer(base.FilePath)
+                {
+                    Id = Int32.Parse(row["Id"].ToString()),
+                    Name = row["Nombre"].ToString(),
+                    Email = row["Email"].ToString(),
+                    Phone = row["Telefono"].ToString(),
+                    RegistrationDate = Convert.ToDateTime(row["FechaRegistro"].ToString()),
+                    Rfc = row["RFC"].ToString(),
+                    PointsAvailable = Int32.Parse(row["PuntosDisponibles"].ToString()),
+                    PointsUsed = Int32.Parse(row["PuntosUsados"].ToString()),
+                    TotalVisits = Int32.Parse(row["TotalVisitas"].ToString()),
+                    TotalSpent = Decimal.Parse(row["TotalVendido"].ToString()),
+                    LastVisitDate = Convert.ToDateTime(row["UltimaVisitaFecha"].ToString())
+                };
+
+                //Add if it does not exist already
+                if (!customers.Exists(x => x.Phone == customer.Phone))
+                    customers.Add(customer);
+            }
+
             return customers;
         }
-
 
         /// <summary>
         /// Update customer in the datatable

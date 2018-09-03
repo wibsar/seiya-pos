@@ -22,6 +22,7 @@ namespace Seiya
         private static UserAccessLevelEnum _accessLevelGranted;
         private static bool _systemUnlock = true;
         private static User _currentUser;
+        private static Customer _currentCustomer;
 
         //Products page list related fields
         private static ObservableCollection<string> _products;
@@ -450,6 +451,28 @@ namespace Seiya
             }
         }
 
+        private string _paymentCustomerSearchInput;
+        public string PaymentCustomerSearchInput
+        {
+            get { return _paymentCustomerSearchInput; }
+            set
+            {
+                _paymentCustomerSearchInput = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private int _paymentPointsReceived;
+        public int PaymentPointsReceived
+        {
+            get { return _paymentPointsReceived; }
+            set
+            {
+                _paymentPointsReceived = value;
+                OnPropertyChanged();
+            }
+        }
+
         #region Enum Related Properties
 
         private IList<PaymentTypeEnum> _paymentTypes;
@@ -783,6 +806,16 @@ namespace Seiya
             {
                 _selectedCustomer = value;
                 OnPropertyChanged("SelectedCustomer");
+            }
+        }
+
+        public Customer CurrentCustomer
+        {
+            get { return _currentCustomer; }
+            set
+            {
+                _currentCustomer = value;
+                OnPropertyChanged();
             }
         }
 
@@ -1438,6 +1471,9 @@ namespace Seiya
                 case "exact_usd":
                     PaymentReceivedUSD = PaymentTotalUSD;
                     break;
+                case "1_usd":
+                    PaymentReceivedUSD += 1M;
+                    break;
                 case "5_usd":
                     PaymentReceivedUSD += 5M;
                     break;
@@ -1461,18 +1497,73 @@ namespace Seiya
         }
         #endregion
 
+        #region Payment Commands
+
         #region PaymentProcessCommand
+
         public ICommand PaymentProcessCommand { get { return _paymentProcessCommand ?? (_paymentProcessCommand = new DelegateCommand(Execute_PaymentProcessCommand, CanExecute_PaymentProcessCommand)); } }
         private ICommand _paymentProcessCommand;
 
         internal void Execute_PaymentProcessCommand(object parameter)
         {
             ProcessPayment();
+            PaymentChangeMXN = (PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN;
+            PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
+            PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN / 100M);
+            CurrentPage = "\\View\\PaymentEndPage.xaml";
         }
         internal bool CanExecute_PaymentProcessCommand(object parameter)
         {
-            return PaymentTotalMXN != 0M && PaymentTotalMXN <= PaymentReceivedMXN + PaymentReceivedUSD * _exchangeRate; 
+            return PaymentTotalMXN != 0M && PaymentTotalMXN <= PaymentReceivedMXN + PaymentReceivedUSD * _exchangeRate;
         }
+
+        #endregion
+
+        #region PaymentEndCommand
+
+        public ICommand PaymentEndCommand { get { return _paymentEndCommand ?? (_paymentEndCommand = new DelegateCommand(Execute_PaymentEndCommand, CanExecute_PaymentEndCommand)); } }
+        private ICommand _paymentEndCommand;
+
+        internal void Execute_PaymentEndCommand(object parameter)
+        {
+            //Clear all properties and return to general page
+            PaymentChangeMXN = 0;
+            PaymentChangeUSD = 0;
+            PaymentReceivedMXN = 0;
+            PaymentReceivedUSD = 0;
+            PaymentTotalMXN = 0;
+            PaymentTotalUSD = 0;
+            PaymentPointsReceived = 0;
+            CurrentCustomer = null;     
+            CurrentPage = "\\View\\PosGeneralPage.xaml";
+        }
+        internal bool CanExecute_PaymentEndCommand(object parameter)
+        {
+            return true;
+        }
+
+        #endregion
+
+        #region PaymentCustomerSearchCommand
+
+        public ICommand PaymentCustomerSearchCommand { get { return _paymentCustomerSearchCommand ?? (_paymentCustomerSearchCommand = new DelegateCommand(Execute_PaymentCustomerSearchCommand, CanExecute_PaymentCustomerSearchCommand)); } }
+        private ICommand _paymentCustomerSearchCommand;
+
+        internal void Execute_PaymentCustomerSearchCommand(object parameter)
+        {
+            //Inventory search method that returns a list of products for the datagrid
+            CustomersSearchedEntries = new ObservableCollection<Customer>(new Customer(Constants.DataFolderPath + Constants.CustomersFileName).Search(PaymentCustomerSearchInput.ToString()));
+            if(CustomersSearchedEntries.Count > 0)
+                CurrentCustomer = CustomersSearchedEntries.First();
+            PaymentCustomerSearchInput = "";
+        }
+        internal bool CanExecute_PaymentCustomerSearchCommand(object parameter)
+        {
+            return true;
+        }
+
+        #endregion     
+
         #endregion
 
         #region Products List Edit Page Commands

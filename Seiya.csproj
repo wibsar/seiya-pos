@@ -97,6 +97,9 @@
     <Compile Include="ViewModel\ProductsPageViewModel.cs" />
     <Compile Include="ViewModel\ReturnsViewModel.cs" />
     <Compile Include="ViewModel\SystemViewModel.cs" />
+    <Compile Include="View\PaymentEndPage.xaml.cs">
+      <DependentUpon>PaymentEndPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\TechSupportPage.xaml.cs">
       <DependentUpon>TechSupportPage.xaml</DependentUpon>
     </Compile>
@@ -186,6 +189,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\PaymentEndPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="View\TechSupportPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
