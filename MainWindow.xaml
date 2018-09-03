@@ -183,7 +183,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Text="Pagar: $" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
-                            <TextBlock Grid.Column="1" Text="{Binding PaymentTotalMXN}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="5" Foreground="White" ></TextBlock>
+                            <TextBlock Grid.Column="1" Text="{Binding PaymentTotalMXN, Mode=TwoWay}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="5" Foreground="White" ></TextBlock>
                         </Grid>
                     </Button>
                 </Grid>

@@ -55,7 +55,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
-            <TextBlock Text="{Binding CurrentCustomer.Name}" Foreground="Gray"></TextBlock>
+            <TextBlock Text="{Binding CurrentCustomer.Name}" HorizontalAlignment="Center" Foreground="Gray"></TextBlock>
         </Grid>
         <!--Separador-->
         <TextBlock Grid.Row="1" VerticalAlignment="Top" Margin="0,4,0,0" Background="#FFECECEC" Height="1"></TextBlock>
@@ -119,7 +119,7 @@
                 <TextBlock Grid.Column="1" Grid.Row="1" Foreground="#FF009E2B" Margin="2.5,5,5,5" HorizontalAlignment="Center" FontSize="36" Text="{Binding PaymentChangeUSD}"></TextBlock>
             </Grid>
         </Grid>
-        <Button Grid.Row="6" FontSize="18" FontWeight="Bold" Foreground="Red"  Content="TERMINAR TRANSACCION" Command="{Binding PaymentEndCommand}" Background="LightGray" BorderBrush="{x:Null}"></Button>
+        <Button Grid.Row="6" FontSize="18" FontWeight="Bold" Foreground="Red"  Content="TERMINAR TRANSACCION" Command="{Binding ChangePageCommand}" CommandParameter="end_transaction" Background="LightGray" BorderBrush="{x:Null}"></Button>
         <!--Payment Options-->
         <Grid Grid.Row="4" ShowGridLines="False">
             <Grid.ColumnDefinitions>

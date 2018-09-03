@@ -60,6 +60,8 @@ namespace Seiya
         private int _paymentCustomerNumber;
         private decimal _paymentChangeMXN;
         private decimal _paymentChangeUSD;
+        private decimal _paymentRemainingMXN;
+        private decimal _paymentRemainingUSD;
         private decimal _exchangeRate = 18; //TODO: Implement exchange rate based on the er set by the user
         private string _exchangeRateString;
         private decimal _pointsConvertionRatio = 100; //TODO: add this to the UI after it is defined
@@ -396,7 +398,7 @@ namespace Seiya
             }
             set
             {
-                _paymentTotalMXN = value;
+                _paymentTotalMXN = Math.Round(value, 2);
                 PaymentTotalUSD = Math.Round(_paymentTotalMXN / _exchangeRate, 2);
                 OnPropertyChanged("PaymentTotalMXN");
             }
@@ -408,6 +410,7 @@ namespace Seiya
             set
             {
                 _paymentReceivedUSD = value;
+                PaymentUpdateRemaining();
                 OnPropertyChanged("PaymentReceivedUSD");
             }
         }
@@ -418,6 +421,7 @@ namespace Seiya
             set
             {
                 _paymentReceivedMXN = value;
+                PaymentUpdateRemaining();
                 OnPropertyChanged("PaymentReceivedMXN");
             }
         }
@@ -439,6 +443,29 @@ namespace Seiya
             {
                 _paymentChangeUSD = value;
                 OnPropertyChanged("PaymentChangeUSD");
+            }
+        }
+
+        public decimal PaymentRemainingMXN
+        {
+            get
+            {
+                return _paymentRemainingMXN; 
+            }
+            set
+            {
+                _paymentRemainingMXN = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal PaymentRemainingUSD
+        {
+            get { return _paymentRemainingUSD; }
+            set
+            {
+                _paymentRemainingUSD = value;
+                OnPropertyChanged();
             }
         }
 
@@ -1154,12 +1181,32 @@ namespace Seiya
                     SystemUnlock = false;
                     CurrentPage = "\\View\\LoginPage.xaml";
                     break;
+                case "Efectivo":
+                    if (PaymentTotalMXN != 0M && (PaymentTotalMXN <= (PaymentReceivedMXN + PaymentReceivedUSD * _exchangeRate)))
+                    {
+                        PaymentProcessStart(parameter.ToString());
+                        SystemUnlock = false;
+                        CurrentPage = "\\View\\PaymentEndPage.xaml";
+                    }
+                    break;
+                case "Tarjeta":
+                case "Transferencia":
+                case "Cheque":
+                    PaymentProcessStart(parameter.ToString());
+                    SystemUnlock = false;
+                    CurrentPage = "\\View\\PaymentEndPage.xaml";
+                    break;
+                case "end_transaction":
+                    PaymentEndProcess(parameter.ToString());
+                    SystemUnlock = true;
+                    CurrentPage = "\\View\\PosGeneralPage.xaml";
+                    break;
             }
         }
 
         internal bool CanExecute_ChangePageCommand(object parameter)
         {
-            return SystemUnlock;
+            return SystemUnlock || parameter.ToString() == "end_transaction";
         }
         #endregion
 
@@ -1544,7 +1591,9 @@ namespace Seiya
             PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN / _pointsConvertionRatio);
 
             CurrentCartProducts.Clear();
+            PaymentTotalMXN = 0;
             CurrentPage = "\\View\\PaymentEndPage.xaml";
+            
         }
         internal bool CanExecute_PaymentProcessCommand(object parameter)
         {
@@ -1560,14 +1609,14 @@ namespace Seiya
         internal void Execute_PaymentEndCommand(object parameter)
         {
             //Clear all properties and return to general page
-            PaymentChangeMXN = 0;
-            PaymentChangeUSD = 0;
-            PaymentReceivedMXN = 0;
-            PaymentReceivedUSD = 0;
             PaymentTotalMXN = 0;
             PaymentTotalUSD = 0;
+            PaymentReceivedMXN = 0;
+            PaymentReceivedUSD = 0;
+            PaymentChangeMXN = 0;
+            PaymentChangeUSD = 0;
             PaymentPointsReceived = 0;
-            CurrentCustomer = null;     
+            CurrentCustomer = null;
             CurrentPage = "\\View\\PosGeneralPage.xaml";
         }
         internal bool CanExecute_PaymentEndCommand(object parameter)
@@ -3471,6 +3520,57 @@ namespace Seiya
         }
 
         #endregion
+
+        #region Payment Methods
+
+        public void PaymentUpdateRemaining()
+        {
+            PaymentRemainingMXN = PaymentTotalMXN - PaymentReceivedMXN - Math.Round(PaymentReceivedUSD*ExchangeRate, 2);
+            PaymentRemainingUSD = Math.Round(PaymentRemainingMXN / ExchangeRate, 2);
+        }
+
+        public void PaymentProcessStart(string parameter)
+        {
+            //Get payment type from string
+            var status = PaymentTypeEnum.TryParse(parameter, out PaymentTypeEnum paymentType);
+            if (status == false)
+                paymentType = PaymentTypeEnum.Efectivo;
+
+            ProcessPayment(paymentType);
+
+            if (paymentType == PaymentTypeEnum.Efectivo)
+            {
+                PaymentChangeMXN = (PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN;
+                PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
+            }
+            else
+            {
+                PaymentChangeMXN = 0;
+                PaymentChangeUSD = 0;
+            }
+
+            PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN / _pointsConvertionRatio);
+
+            CurrentCartProducts.Clear();
+            if(paymentType != PaymentTypeEnum.Efectivo)
+                PaymentTotalMXN = 0;
+        }
+
+        public void PaymentEndProcess(string parameter)
+        {
+            //Clear all properties and return to general page
+            PaymentTotalMXN = 0;
+            PaymentTotalUSD = 0;
+            PaymentReceivedMXN = 0;
+            PaymentReceivedUSD = 0;
+            PaymentChangeMXN = 0;
+            PaymentChangeUSD = 0;
+            PaymentPointsReceived = 0;
+            CurrentCustomer = null;
+        }
+
+        #endregion
+
         #endregion
 
     }
