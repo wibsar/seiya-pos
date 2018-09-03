@@ -179,7 +179,7 @@
                 <!-- Paid Amount and process payment in USD-->
             </Grid>
         </Grid>
-        <Button Grid.Row="6" FontSize="18" FontWeight="Bold" Foreground="DarkGreen"  Content="COBRAR EN EFECTIVO" Command="{Binding PaymentProcessCommand}" Background="#FF8BD48B" BorderBrush="{x:Null}"></Button>
+        <Button Grid.Row="6" FontSize="18" FontWeight="Bold" Foreground="DarkGreen"  Content="COBRAR EN EFECTIVO" Command="{Binding PaymentCashProcessCommand}" CommandParameter="Efectivo" Background="#FF8BD48B" BorderBrush="{x:Null}"></Button>
         <!--Payment Options-->
         <Grid Grid.Row="4" ShowGridLines="False">
             <Grid.ColumnDefinitions>
@@ -190,10 +190,10 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock Grid.Row="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Metodo de Pago"></TextBlock>
-            <Button Grid.Column="1" Margin="5,5,2.5,5" Content="Tarjeta" Background="#FFDEF7FF" Command="{Binding StartCheckoutCommand}" CommandParameter="cash" BorderBrush="{x:Null}"></Button>
-            <Button Grid.Column="2" Margin="2.5,5,2.5,5" Content="Puntos" Background="#FFEEE2FF" Command="{Binding StartCheckoutCommand}" CommandParameter="card" BorderBrush="{x:Null}"></Button>
-            <Button Grid.Column="3" Margin="2.5,5,2.5,5" Content="Transferencia" Command="{Binding StartCheckoutCommand}" CommandParameter="transfer" Background="#FFFFFFE6" BorderBrush="{x:Null}"></Button>
-            <Button Grid.Column="4" Margin="2.5,5,5,5" Content="Cheque" Command="{Binding StartCheckoutCommand}" CommandParameter="check" Background="#FFFFCFCF" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="1" Margin="5,5,2.5,5" Content="Tarjeta" Background="#FFDEF7FF" Command="{Binding PaymentProcessCommand}" CommandParameter="Tarjeta" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="2" Margin="2.5,5,2.5,5" Content="Puntos" Background="#FFEEE2FF" Command="{Binding PaymentProcessCommand}" CommandParameter="Puntos" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="3" Margin="2.5,5,2.5,5" Content="Transferencia" Command="{Binding PaymentProcessCommand}" CommandParameter="Transferencia" Background="#FFFFFFE6" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="4" Margin="2.5,5,5,5" Content="Cheque" Command="{Binding PaymentProcessCommand}" CommandParameter="Cheque" Background="#FFFFCFCF" BorderBrush="{x:Null}"></Button>
         </Grid>
     </Grid>
 </Page>

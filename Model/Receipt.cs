@@ -153,6 +153,8 @@ namespace Seiya
             Font storeNameFont = new Font("Courier New", 14, System.Drawing.FontStyle.Bold);
             Font storeInfoFont = new Font("Courier New", 8, System.Drawing.FontStyle.Bold);
 
+            string paymentMethod = Transaction.PaymentType.ToString();
+
             var buf = string.Empty;
             float fontHeight = font.GetHeight();
             float storeNameFontHeight = storeNameFont.GetHeight();
@@ -215,7 +217,7 @@ namespace Seiya
 
             offset = offset + (int)fontHeight;// + 5;
 
-            graphic.DrawString("Efectivo: ".PadLeft(20) + string.Format("{0:c}", Transaction.AmountPaid), font,
+            graphic.DrawString(string.Format("{0}: ", Transaction.PaymentType.ToString()).PadLeft(20) + string.Format("{0:c}", Transaction.AmountPaid), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
             offset = offset + (int)fontHeight;// + 5;
@@ -231,7 +233,7 @@ namespace Seiya
 
             offset = offset + (int)fontHeight + 5;// + 15;
 
-            graphic.DrawString("       Gracias por su visita!", font, new SolidBrush(Color.Black), startX,
+            graphic.DrawString("       " + Pos.FooterMessage, font, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight;
 

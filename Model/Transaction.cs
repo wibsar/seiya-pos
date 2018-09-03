@@ -533,6 +533,11 @@ namespace Seiya
         Check,
         Tarjeta,
         Efectivo,
+        Cheque,
+        Transferencia,
+        Puntos,
+        Otro,
+        Desconocido,
         Unknown
     }
 

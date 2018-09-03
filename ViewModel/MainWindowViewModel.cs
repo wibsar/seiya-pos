@@ -20,7 +20,7 @@ namespace Seiya
         private static User _userInstance = null;
         private static Expense _expenseInstance = null;
         private static UserAccessLevelEnum _accessLevelGranted;
-        private static bool _systemUnlock = true;
+        private static bool _systemUnlock = false;
         private static User _currentUser;
         private static Customer _currentCustomer;
 
@@ -62,6 +62,7 @@ namespace Seiya
         private decimal _paymentChangeUSD;
         private decimal _exchangeRate = 18; //TODO: Implement exchange rate based on the er set by the user
         private string _exchangeRateString;
+        private decimal _pointsConvertionRatio = 100; //TODO: add this to the UI after it is defined
 
         //Inventory Related Fields
         private Product _inventoryTemporalItem;
@@ -1213,26 +1214,6 @@ namespace Seiya
         }
         #endregion
 
-        #region StartCheckoutCommand
-        public ICommand StartCheckoutCommand { get { return _startCheckoutCommand ?? (_startCheckoutCommand = new DelegateCommand(Execute_StartCheckoutCommand, CanExecute_StartCheckoutCommand)); } }
-        private ICommand _startCheckoutCommand;
-
-        internal void Execute_StartCheckoutCommand(object parameter)
-        {
-            var status = ProcessPayment();
-
-            if (status)
-            {
-                if(ProcessPayment())                
-                    CurrentCartProducts.Clear();
-            }
-        }
-        internal bool CanExecute_StartCheckoutCommand(object parameter)
-        {
-            return _currentCartProducts.Count > 0;
-        }
-        #endregion
-
         #region Search Code Related Commands
 
         #region SearchCodeCommand
@@ -1497,7 +1478,43 @@ namespace Seiya
         }
         #endregion
 
-        #region Payment Commands
+        #region Payment Processing Commands
+
+        #region PaymentCashProcessCommand
+
+        public ICommand PaymentCashProcessCommand { get { return _paymentCashProcessCommand ?? (_paymentCashProcessCommand = new DelegateCommand(Execute_PaymentCashProcessCommand, CanExecute_PaymentCashProcessCommand)); } }
+        private ICommand _paymentCashProcessCommand;
+
+        internal void Execute_PaymentCashProcessCommand(object parameter)
+        {
+            //Get payment type from string
+            var status = PaymentTypeEnum.TryParse(parameter.ToString(), out PaymentTypeEnum paymentType);
+            if (status == false)
+                paymentType = PaymentTypeEnum.Cash;
+
+            ProcessPayment(paymentType);
+
+            if (paymentType == PaymentTypeEnum.Efectivo)
+            {
+                PaymentChangeMXN = (PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN;
+                PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
+            }
+            else
+            {
+                PaymentChangeMXN = 0;
+                PaymentChangeUSD = 0;
+            }
+
+            PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN / _pointsConvertionRatio);
+
+            CurrentCartProducts.Clear();
+            CurrentPage = "\\View\\PaymentEndPage.xaml";
+        }
+        internal bool CanExecute_PaymentCashProcessCommand(object parameter)
+        {
+            return PaymentTotalMXN != 0M && PaymentTotalMXN <= PaymentReceivedMXN + PaymentReceivedUSD * _exchangeRate;
+        }
+        #endregion
 
         #region PaymentProcessCommand
 
@@ -1506,17 +1523,33 @@ namespace Seiya
 
         internal void Execute_PaymentProcessCommand(object parameter)
         {
-            ProcessPayment();
-            PaymentChangeMXN = (PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN;
-            PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
-            PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN / 100M);
+            //Get payment type from string
+            var status = PaymentTypeEnum.TryParse(parameter.ToString(), out PaymentTypeEnum paymentType);
+            if (status == false)
+                paymentType = PaymentTypeEnum.Cash;
+
+            ProcessPayment(paymentType);
+
+            if (paymentType == PaymentTypeEnum.Efectivo)
+            {
+                PaymentChangeMXN = (PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN;
+                PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
+            }
+            else
+            {
+                PaymentChangeMXN = 0;
+                PaymentChangeUSD = 0;
+            }
+
+            PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN / _pointsConvertionRatio);
+
+            CurrentCartProducts.Clear();
             CurrentPage = "\\View\\PaymentEndPage.xaml";
         }
         internal bool CanExecute_PaymentProcessCommand(object parameter)
         {
-            return PaymentTotalMXN != 0M && PaymentTotalMXN <= PaymentReceivedMXN + PaymentReceivedUSD * _exchangeRate;
+            return PaymentTotalMXN > 0;
         }
-
         #endregion
 
         #region PaymentEndCommand
@@ -3079,11 +3112,11 @@ namespace Seiya
         /// Method to initialize payment page and make payment
         /// </summary>
         /// <returns></returns>
-        bool ProcessPayment()
+        bool ProcessPayment(PaymentTypeEnum paymentType)
         {
             Transaction currentTransaction;
 
-            RecordTransaction(out currentTransaction);
+            RecordTransaction(paymentType, out currentTransaction);
             
             PrintReceipt(currentTransaction, true);
             //Update POS file ticket info
@@ -3095,7 +3128,7 @@ namespace Seiya
         /// Method to record transaction
         /// </summary>
         /// <returns></returns>
-        private bool RecordTransaction(out Transaction transaction)
+        private bool RecordTransaction(PaymentTypeEnum paymentMethod, out Transaction transaction)
         {
             //Create new instance
             transaction = new Transaction(Constants.DataFolderPath + Constants.TransactionsFileName,
@@ -3105,14 +3138,17 @@ namespace Seiya
             //General transaction information
             var transactionNumber = _posInstance.GetNextTransactionNumber();
             var internalNumber = _posInstance.GetNextInternalNumber();
-            var user = "Estrella";
-            var customer = "Cliente";
+            var user = CurrentUser.Name;
             var fiscalReceipt = "No";
             var saleType = TransactionType.Regular;
-            var paymentType = PaymentTypeEnum.Cash;
+            var paymentType = paymentMethod;
             int orderNumber = 1;
             var transactionDate = DateTime.Now;
             decimal totalDue = 0M;
+            string customer = "General";
+
+            if(CurrentCustomer != null)
+                customer = CurrentCustomer.Name;
 
             //Get next receipt number, if applicable
             var receiptNumber = saleType == TransactionType.Regular ? _posInstance.GetNextReceiptNumber() : _posInstance.LastReceiptNumber;
@@ -3142,7 +3178,7 @@ namespace Seiya
 
             //Set total due amount and total paid and calculate the change due
             transaction.TotalDue = totalDue;
-            transaction.AmountPaid = PaymentReceivedMXN;
+            transaction.AmountPaid = paymentType == PaymentTypeEnum.Efectivo ? PaymentReceivedMXN : PaymentTotalMXN;
             transaction.ChangeDue = transaction.AmountPaid - transaction.TotalDue;
 
             //Save inventory
