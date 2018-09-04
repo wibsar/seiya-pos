@@ -196,7 +196,7 @@
             <Button Grid.Column="1" Margin="5,5,2.5,5" Content="Tarjeta" Background="#FFDEF7FF" Command="{Binding ChangePageCommand}" CommandParameter="Tarjeta" BorderBrush="{x:Null}"></Button>
             <Button Grid.Column="2" Margin="2.5,5,2.5,5" Content="Transferencia" Command="{Binding ChangePageCommand}" CommandParameter="Transferencia" Background="#FFFFFFE6" BorderBrush="{x:Null}"></Button>
             <Button Grid.Column="3" Margin="2.5,5,5,5" Content="Cheque" Command="{Binding ChangePageCommand}" CommandParameter="Cheque" Background="#FFFFCFCF" BorderBrush="{x:Null}"></Button>
-            <Button Grid.Column="4" Margin="2.5,5,2.5,5" Content="Puntos" Background="#FFEEE2FF" Command="{Binding ChangePageCommand}" CommandParameter="Puntos" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="4" Margin="2.5,5,2.5,5" Content="Usar Puntos" Background="#FFEEE2FF" Command="{Binding PaymentUsePointsCommand}" CommandParameter="Puntos" BorderBrush="{x:Null}"></Button>
         </Grid>
     </Grid>
 </Page>

@@ -20,8 +20,8 @@ namespace Seiya
         private DateTime _registrationDate;
 
         private string _rfc;
-        private int _pointsAvailable;
-        private int _pointsUsed;
+        private double _pointsAvailable;
+        private double _pointsUsed;
         private int _totalVisits;
         private decimal _totalSpent;
         private DateTime _lastVisitDate;
@@ -49,8 +49,8 @@ namespace Seiya
         public DateTime RegistrationDate { get => _registrationDate; set => _registrationDate = value; }
 
         public string Rfc { get => _rfc; set => _rfc = value; }
-        public int PointsAvailable { get => _pointsAvailable; set => _pointsAvailable = value; }
-        public int PointsUsed { get => _pointsUsed; set => _pointsUsed = value; }
+        public double PointsAvailable { get => _pointsAvailable; set => _pointsAvailable = value; }
+        public double PointsUsed { get => _pointsUsed; set => _pointsUsed = value; }
         public int TotalVisits { get => _totalVisits; set => _totalVisits = value; }
         public decimal TotalSpent { get => _totalSpent; set => _totalSpent = value; }
         public DateTime LastVisitDate { get => _lastVisitDate; set => _lastVisitDate = value; }
@@ -67,8 +67,8 @@ namespace Seiya
             LoadCsvToDataTable();
         }
 
-        public Customer(string dbPath, string name, string email, string phone, int id, string rfc, int pointsAvailable,
-            int pointsUsed, int totalVisits, decimal totalSpent) : base(dbPath)
+        public Customer(string dbPath, string name, string email, string phone, int id, string rfc, double pointsAvailable,
+            double pointsUsed, int totalVisits, decimal totalSpent) : base(dbPath)
         {
             //TODO: Check if path exists
             DbPath = dbPath;
@@ -88,7 +88,7 @@ namespace Seiya
         #region Methods
 
         public static void RegisterUser(string filePath, string name, string email, string phone, string id,
-            string rfc, int pointsAvailable, int pointsUsed, int totalVisits, decimal totalSpent)
+            string rfc, double pointsAvailable, double pointsUsed, int totalVisits, decimal totalSpent)
         {
             //TODO: Check if username already exists
             //TODO: Implement feature
@@ -119,7 +119,7 @@ namespace Seiya
         }
 
         public void FullUpdate(string filePath, string name, string email, string phone, string id,
-            string rfc, int pointsAvailable, int pointsUsed, int totalVisits, decimal totalSpent)
+            string rfc, double pointsAvailable, double pointsUsed, int totalVisits, decimal totalSpent)
         {
             //TODO: Check if exists, and update if valid
         }
@@ -181,8 +181,8 @@ namespace Seiya
                         Phone = row["Telefono"].ToString(),
                         RegistrationDate = Convert.ToDateTime(row["FechaRegistro"].ToString()),
                         Rfc = row["RFC"].ToString(),
-                        PointsAvailable = Int32.Parse(row["PuntosDisponibles"].ToString()),
-                        PointsUsed = Int32.Parse(row["PuntosUsados"].ToString()),
+                        PointsAvailable = double.Parse(row["PuntosDisponibles"].ToString()),
+                        PointsUsed = double.Parse(row["PuntosUsados"].ToString()),
                         TotalVisits = Int32.Parse(row["TotalVisitas"].ToString()),
                         TotalSpent = Decimal.Parse(row["TotalVendido"].ToString()),
                         LastVisitDate = Convert.ToDateTime(row["UltimaVisitaFecha"].ToString())
@@ -205,8 +205,8 @@ namespace Seiya
                     Phone = row["Telefono"].ToString(),
                     RegistrationDate = Convert.ToDateTime(row["FechaRegistro"].ToString()),
                     Rfc = row["RFC"].ToString(),
-                    PointsAvailable = Int32.Parse(row["PuntosDisponibles"].ToString()),
-                    PointsUsed = Int32.Parse(row["PuntosUsados"].ToString()),
+                    PointsAvailable = double.Parse(row["PuntosDisponibles"].ToString()),
+                    PointsUsed = double.Parse(row["PuntosUsados"].ToString()),
                     TotalVisits = Int32.Parse(row["TotalVisitas"].ToString()),
                     TotalSpent = Decimal.Parse(row["TotalVendido"].ToString()),
                     LastVisitDate = Convert.ToDateTime(row["UltimaVisitaFecha"].ToString())
@@ -225,8 +225,8 @@ namespace Seiya
                     Phone = row["Telefono"].ToString(),
                     RegistrationDate = Convert.ToDateTime(row["FechaRegistro"].ToString()),
                     Rfc = row["RFC"].ToString(),
-                    PointsAvailable = Int32.Parse(row["PuntosDisponibles"].ToString()),
-                    PointsUsed = Int32.Parse(row["PuntosUsados"].ToString()),
+                    PointsAvailable = double.Parse(row["PuntosDisponibles"].ToString()),
+                    PointsUsed = double.Parse(row["PuntosUsados"].ToString()),
                     TotalVisits = Int32.Parse(row["TotalVisitas"].ToString()),
                     TotalSpent = Decimal.Parse(row["TotalVendido"].ToString()),
                     LastVisitDate = Convert.ToDateTime(row["UltimaVisitaFecha"].ToString())
@@ -267,6 +267,34 @@ namespace Seiya
 
             return true;
         }
+
+        /// <summary>
+        /// Update customer in the datatable
+        /// </summary>
+        /// <param name="customer"></param>
+        /// <returns></returns>
+        public bool UpdateUserToTable()
+        {
+            for (int index = 0; index < DataTable.Rows.Count; index++)
+            {
+                var row = DataTable.Rows[index];
+                if (row["Id"].ToString() == this.Id.ToString())
+                {
+                    row["Nombre"] = this.Name;
+                    row["Email"] = this.Email;
+                    row["Telefono"] = this.Phone;
+                    row["FechaRegistro"] = this.RegistrationDate;
+                    row["RFC"] = this.Rfc;
+                    row["PuntosDisponibles"] = this.PointsAvailable.ToString();
+                    row["PuntosUsados"] = this.PointsUsed.ToString();
+                    row["TotalVisitas"] = this.TotalVisits.ToString();
+                    row["TotalVendido"] = this.TotalSpent.ToString();
+                    row["UltimaVisitaFecha"] = this.LastVisitDate.ToString();
+                }
+            }
+            return true;
+        }
+
 
         /// <summary>
         /// Add new product to data table

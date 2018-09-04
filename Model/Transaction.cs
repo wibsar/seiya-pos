@@ -296,7 +296,7 @@ namespace Seiya
         public static List<Tuple<string, int, decimal>> GetTransactionsData2(TransactionType transactionType,
             Pos posData, out int firstReceiptNumber, out int lastReceiptNumber, out int totalItemsSold, out decimal totalAmountSold,
             out decimal cashTotal, out decimal cardTotal, out decimal checkTotal, out decimal bankTotal, 
-            out decimal otherTotal, out int pointsTotal)
+            out decimal otherTotal, out double pointsTotal)
         {
             System.Data.DataTable data;
             totalAmountSold = 0;
@@ -511,7 +511,7 @@ namespace Seiya
         }
 
         public static void RecordEndOfDaySalesTransaction(string filePath, int endOfDayReceiptNumber, int firstReceipt, int lastReceipt,
-            int totalUnitsSold, int totalPointsUsed, decimal totalCashSold, decimal totalCardSold, decimal totalOthersSold, 
+            int totalUnitsSold, double totalPointsUsed, decimal totalCashSold, decimal totalCardSold, decimal totalOthersSold, 
             decimal totalAmountSold, string date)
         {
             var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}", endOfDayReceiptNumber, firstReceipt, lastReceipt, totalUnitsSold,

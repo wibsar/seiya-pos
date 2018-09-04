@@ -64,7 +64,8 @@ namespace Seiya
         private decimal _paymentRemainingUSD;
         private decimal _exchangeRate = 18; //TODO: Implement exchange rate based on the er set by the user
         private string _exchangeRateString;
-        private decimal _pointsConvertionRatio = 100; //TODO: add this to the UI after it is defined
+        private decimal _pointsConvertionRatio = 100M; //TODO: add this to the UI after it is defined
+        private double _paymentPointsInUse;
 
         //Inventory Related Fields
         private Product _inventoryTemporalItem;
@@ -163,6 +164,12 @@ namespace Seiya
                 _currentUser = value;
                 OnPropertyChanged();
             }
+        }
+
+        public double PaymentPointsInUse
+        {
+            get { return _paymentPointsInUse; }
+            set { _paymentPointsInUse = value; }
         }
         #endregion
 
@@ -490,8 +497,8 @@ namespace Seiya
             }
         }
 
-        private int _paymentPointsReceived;
-        public int PaymentPointsReceived
+        private double _paymentPointsReceived;
+        public double PaymentPointsReceived
         {
             get { return _paymentPointsReceived; }
             set
@@ -1527,6 +1534,38 @@ namespace Seiya
 
         #region Payment Processing Commands
 
+        #region PaymentUsePointsCommand
+
+        public ICommand PaymentUsePointsCommand { get { return _paymentUsePointsCommand ?? (_paymentUsePointsCommand = new DelegateCommand(Execute_PaymentUsePointsCommand, CanExecute_PaymentUsePointsCommand)); } }
+        private ICommand _paymentUsePointsCommand;
+
+        internal void Execute_PaymentUsePointsCommand(object parameter)
+        {
+            if (CurrentCustomer.PointsAvailable >= 1)
+            {
+                Product productMimic;
+                var tempTotal = MainWindowViewModel.GetInstance().calculateCurrentCartTotal();
+                if (CurrentCustomer.PointsAvailable > Convert.ToDouble(tempTotal))
+                {
+                    productMimic = Product.Add(CurrentCustomer.Name, "Descuento P", Convert.ToDecimal(tempTotal - 1) * -1, 1);
+                    PaymentPointsInUse = Convert.ToDouble(tempTotal - 1);
+                }
+                else
+                {
+                    productMimic = Product.Add(CurrentCustomer.Name, "Descuento P ", Convert.ToDecimal(CurrentCustomer.PointsAvailable) * -1, 1);
+                    PaymentPointsInUse = CurrentCustomer.PointsAvailable;
+                }
+                MainWindowViewModel.GetInstance().AddManualProductToCart(productMimic);
+            }
+        }
+
+        internal bool CanExecute_PaymentUsePointsCommand(object parameter)
+        {
+            return CurrentCustomer != null;
+        }
+        #endregion
+
+
         #region PaymentCashProcessCommand
 
         public ICommand PaymentCashProcessCommand { get { return _paymentCashProcessCommand ?? (_paymentCashProcessCommand = new DelegateCommand(Execute_PaymentCashProcessCommand, CanExecute_PaymentCashProcessCommand)); } }
@@ -1552,7 +1591,7 @@ namespace Seiya
                 PaymentChangeUSD = 0;
             }
 
-            PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN / _pointsConvertionRatio);
+            PaymentPointsReceived = Convert.ToDouble(PaymentTotalMXN / _pointsConvertionRatio);
 
             CurrentCartProducts.Clear();
             CurrentPage = "\\View\\PaymentEndPage.xaml";
@@ -3230,6 +3269,19 @@ namespace Seiya
             transaction.AmountPaid = paymentType == PaymentTypeEnum.Efectivo ? PaymentReceivedMXN : PaymentTotalMXN;
             transaction.ChangeDue = transaction.AmountPaid - transaction.TotalDue;
 
+            if (CurrentCustomer != null)
+            {
+                PaymentPointsReceived = Math.Round(Convert.ToDouble(transaction.TotalDue / _pointsConvertionRatio),2);
+                CurrentCustomer.PointsAvailable += PaymentPointsReceived;
+                CurrentCustomer.PointsAvailable -= PaymentPointsInUse;
+                CurrentCustomer.PointsUsed += PaymentPointsInUse;
+                CurrentCustomer.TotalVisits += 1;
+                CurrentCustomer.LastVisitDate = DateTime.Now;
+                CurrentCustomer.TotalSpent += transaction.TotalDue;
+                CurrentCustomer.UpdateUserToTable();
+                CurrentCustomer.SaveDataTableToCsv();
+            }         
+
             //Save inventory
             _inventoryInstance.SaveDataTableToCsv();
             string x = nameof(CurrencyTypeEnum.MXN);
@@ -3549,8 +3601,6 @@ namespace Seiya
                 PaymentChangeUSD = 0;
             }
 
-            PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN / _pointsConvertionRatio);
-
             CurrentCartProducts.Clear();
             if(paymentType != PaymentTypeEnum.Efectivo)
                 PaymentTotalMXN = 0;
@@ -3566,6 +3616,7 @@ namespace Seiya
             PaymentChangeMXN = 0;
             PaymentChangeUSD = 0;
             PaymentPointsReceived = 0;
+            PaymentPointsInUse = 0;
             CurrentCustomer = null;
         }
 
