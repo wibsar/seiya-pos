@@ -153,8 +153,8 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height=".1*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -169,9 +169,9 @@
                 <TextBlock Grid.Row="1" Text="Pagos con Tarjeta:" ></TextBlock>
                 <TextBlock Grid.Row="2" Text="Pagos con Cheque:" ></TextBlock>
                 <TextBlock Grid.Row="3" Text="Pagos por Transferencia:" ></TextBlock>
-                <TextBlock Grid.Row="4" Text="Otro Metodo de Pago:" ></TextBlock>
-                <TextBlock Grid.Row="5" Background="#FFD4D4D4" Height="1"></TextBlock>
-                <TextBlock Grid.Row="6" Text="Gastos:" ></TextBlock>
+                <TextBlock Grid.Row="4" Background="#FFD4D4D4" Height="1"></TextBlock>
+                <TextBlock Grid.Row="5" Text="Gastos Totales:" ></TextBlock>
+                <TextBlock Grid.Row="6" Text="Gastos Efectivo:" ></TextBlock>
                 <TextBlock Grid.Row="7" Text="Devoluciones:" ></TextBlock>
                 <TextBlock Grid.Row="8" Text="Caja Turno Anterior:"/>
                 <TextBlock Grid.Row="9" Text="Total Venta" ></TextBlock>
@@ -187,8 +187,8 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height=".1*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -203,10 +203,10 @@
                 <TextBlock Grid.Row="1" Text="{Binding CardTotalSales}"></TextBlock>
                 <TextBlock Grid.Row="2" Text="{Binding CheckTotalSales}"></TextBlock>
                 <TextBlock Grid.Row="3" Text="{Binding BankTransferTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="4" Text="{Binding OtherTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="5" Background="#FFD4D4D4" Height="1"></TextBlock>
-                <TextBlock Grid.Row="6" Text="{Binding ExpensesTotal}"></TextBlock>
-                <TextBlock Grid.Row="7" ></TextBlock>                                          <!-- Agregar Binding -->           
+                <TextBlock Grid.Row="4" Background="#FFD4D4D4" Height="1"></TextBlock>
+                <TextBlock Grid.Row="5" Text="{Binding ExpensesTotal}"></TextBlock>
+                <TextBlock Grid.Row="6" Text="{Binding ExpensesCashTotal}"></TextBlock>
+                <TextBlock Grid.Row="7" Text="{Binding ReturnsTotal}"></TextBlock>                                          <!-- Agregar Binding -->           
                 <TextBlock Grid.Row="8" Text="{Binding RegisterPreviousCash}"></TextBlock>
                 <TextBlock Grid.Row="9" Text="{Binding TotalSales}"></TextBlock>
                 <TextBlock Grid.Row="10" Text="{Binding Delta}"></TextBlock>

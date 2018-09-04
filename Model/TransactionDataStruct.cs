@@ -19,6 +19,7 @@ namespace Seiya
         public decimal CheckTotal { get; set; }
         public decimal BankTotal { get; set; }
         public decimal OtherTotal { get; set; }
-        public int PointsTotal { get; set; }
+        public double PointsTotal { get; set; }
+        public decimal ReturnsTotal { get; set; }
     }
 }

@@ -413,7 +413,8 @@ namespace Seiya
                 CheckTotal = 0,
                 BankTotal = 0,
                 OtherTotal = 0,
-                PointsTotal = 0
+                PointsTotal = 0,
+                ReturnsTotal = 0
             };
 
             string selectedFilePath = String.Empty;
@@ -460,36 +461,45 @@ namespace Seiya
                         itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
 
                         //Get payment method
-                        switch (row["MetodoPago"].ToString())
+                        if (row["Descripcion"].ToString() != "Puntos Descuento")
                         {
-                            case "Cash":
-                            case "Efectivo":
-                                transactionData.CashTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            case "Card":
-                            case "Tarjeta":
-                                transactionData.CardTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            case "Check":
-                            case "Cheque":
-                                transactionData.CheckTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            case "BankTransfer":
-                            case "Transferencia":
-                                transactionData.BankTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            case "Other":
-                            case "Otro":
-                                transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            default:
-                                transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
+                            switch (row["MetodoPago"].ToString())
+                            {
+                                case "Cash":
+                                case "Efectivo":
+                                    transactionData.CashTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                    break;
+                                case "Card":
+                                case "Tarjeta":
+                                    transactionData.CardTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                    break;
+                                case "Check":
+                                case "Cheque":
+                                    transactionData.CheckTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                    break;
+                                case "BankTransfer":
+                                case "Transferencia":
+                                    transactionData.BankTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                    break;
+                                case "Other":
+                                case "Otro":
+                                    transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                    break;
+                                default:
+                                    transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                    break;
+                            }
                         }
 
-                        //Add all points used
-                        ///TODO: Add once the Puntos Usados Column is added to the transfer list, if needed
-                        // pointsTotal = int.Parse(row["PuntosUsados"].ToString());
+                        if (row["Descripcion"].ToString() == "Puntos Descuento")
+                        {
+                            transactionData.PointsTotal += double.Parse(row["TotalVendido"].ToString())*-1;
+                        }
+
+                        if (row["TipoVenta"].ToString() == "Devolucion")
+                        {
+                            transactionData.ReturnsTotal += decimal.Parse(row["TotalVendido"].ToString()) * -1;
+                        }
                     }
                 }
 

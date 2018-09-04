@@ -35,10 +35,12 @@ namespace Seiya
         private decimal _checkTotalSales;
         private decimal _bankTransferTotalSales;
         private decimal _otherTotalSales;
-        private int _pointsTotalUsed;
+        private double _pointsTotalUsed;
         private decimal _expensesTotal;
+        private decimal _expensesCashTotal;
         private decimal _registerPreviousCash;
         private decimal _registerNewCash;
+        private decimal _returnsTotal;
         private decimal _delta;
 
         private Pos _pos;
@@ -54,7 +56,7 @@ namespace Seiya
             }
             set
             {
-                _totalSales = value;
+                _totalSales = Math.Round(value, 2);
                 OnPropertyChanged("TotalSales");
             }
         }
@@ -67,7 +69,7 @@ namespace Seiya
             }
             set
             {
-                _cardTotalSales = value;
+                _cardTotalSales = Math.Round(value, 2);
                 OnPropertyChanged();
             }
         }
@@ -80,7 +82,7 @@ namespace Seiya
             }
             set
             {
-                _cashTotalSales = value;
+                _cashTotalSales = Math.Round(value, 2);
                 OnPropertyChanged();
             }
         }
@@ -90,7 +92,7 @@ namespace Seiya
             get { return _checkTotalSales; }
             set
             {
-                _checkTotalSales = value;
+                _checkTotalSales = Math.Round(value, 2);
                 OnPropertyChanged();
             }
         }
@@ -100,7 +102,7 @@ namespace Seiya
             get { return _bankTransferTotalSales; }
             set
             {
-                _bankTransferTotalSales = value;
+                _bankTransferTotalSales = Math.Round(value, 2);
                 OnPropertyChanged();
             }
         }
@@ -110,7 +112,7 @@ namespace Seiya
             get { return _otherTotalSales; }
             set
             {
-                _otherTotalSales = value;
+                _otherTotalSales = Math.Round(value, 2);
                 OnPropertyChanged();
             }
         }
@@ -120,12 +122,22 @@ namespace Seiya
             get { return _expensesTotal; }
             set
             {
-                _expensesTotal = value;
+                _expensesTotal = Math.Round(value, 2);
                 OnPropertyChanged(); 
             }
         }
 
-        public int PointsTotalUsed
+        public decimal ExpensesCashTotal
+        {
+            get { return _expensesCashTotal; }
+            set
+            {
+                _expensesCashTotal = Math.Round(value, 2);
+                OnPropertyChanged();
+            }
+        }
+
+        public double PointsTotalUsed
         {
             get
             {
@@ -133,7 +145,7 @@ namespace Seiya
             }
             set
             {
-                _pointsTotalUsed = value;
+                _pointsTotalUsed = Math.Round(value, 2);
                 OnPropertyChanged();
             }
         }
@@ -143,7 +155,7 @@ namespace Seiya
             get { return _registerPreviousCash; }
             set
             {
-                _registerPreviousCash = value;
+                _registerPreviousCash = Math.Round(value, 2);
                 OnPropertyChanged();
             }
         }
@@ -153,7 +165,17 @@ namespace Seiya
             get { return _registerNewCash; }
             set
             {
-                _registerNewCash = value;
+                _registerNewCash = Math.Round(value, 2);
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal ReturnsTotal
+        {
+            get { return _returnsTotal; }
+            set
+            {
+                _returnsTotal = Math.Round(value, 2);
                 OnPropertyChanged();
             }
         }
@@ -387,6 +409,7 @@ namespace Seiya
             CalculateSales();
             CalculateInitialCash();
             CalculateExpenses();
+            CalculateDelta();
         }
 
         #endregion
@@ -426,12 +449,6 @@ namespace Seiya
 
         private void CalculateSales()
         {
-            //Ticket data
-            //Read transactions and separate them by payment type
- //           var dataInt = Transaction.GetTransactionsData(TransactionType.Internal, _pos, out var firstReceiptNumber, out var lastReceiptNumber, out var totalItemsSold,
-   //             out var totalAmountSold, out var cashTotal, out var cardTotal, out var checkTotal, out var bankTotal, out var otherTotal, out var pointsTotal);
-
-            ///TODO:Remove independent sales and transaction info and just use the struct for displaying data as well
             var dataInt = Transaction.GetTransactionsData(TransactionType.Internal, _pos, out var transactionData);
             TransactionData = transactionData;
             TotalItemsSold = transactionData.TotalItemsSold;
@@ -442,15 +459,17 @@ namespace Seiya
             BankTransferTotalSales = transactionData.BankTotal;
             CheckTotalSales = transactionData.CheckTotal;
             PointsTotalUsed = transactionData.PointsTotal;
+            ReturnsTotal = transactionData.ReturnsTotal;
             OtherTotalSales = transactionData.OtherTotal;
-            Delta = 0;
             TotalSales = transactionData.TotalAmountSold;
         }
 
         private void CalculateExpenses()
         {
-            ///TODO: Read expeneses file and add the expenses in cash 
-            ExpensesTotal = 10;
+            var expenses = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName);
+            expenses.GetTotal(out var expensesMxn, out var expensesUsd, out var expensesCashMxn, out var expensesCashUsd);
+            ExpensesTotal = expensesMxn + expensesUsd * _pos.ExchangeRate;
+            ExpensesCashTotal = expensesCashMxn + expensesCashUsd * _pos.ExchangeRate;
         }
 
         private void CalculateDelta()
@@ -460,7 +479,7 @@ namespace Seiya
             var cashUsd = UsdDollar1 + UsdDollar5*5 + UsdDollar10*10 + UsdDollar20*20 + UsdDollar50*50 + UsdDollar100*100 + UsdDollarCoinsTotal;
             var totalCash = cashMxn + cashUsd * _pos.ExchangeRate;
             //Calculate delta
-            Delta = (totalCash + ExpensesTotal - RegisterPreviousCash) - CashTotalSales;
+            Delta = (totalCash + ExpensesCashTotal - RegisterPreviousCash) - CashTotalSales;
         }
 
         private void CalculateInitialCash()

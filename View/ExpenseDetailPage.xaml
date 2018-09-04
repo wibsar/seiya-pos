@@ -70,17 +70,17 @@
 
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="Registro de Gasto" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="1" Text="Usuario:" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="2" Text="Proveedor:" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="3" Text="Numero de Ticket:" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="4" Text="Concepto:" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="5" Text="Monto:" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="6" Text="Moneda:" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="7" Text="Metodo de Pago:" VerticalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="8" Text="Categoria de Gasto" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Registro de Gasto" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Usuario:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="0" Text="Proveedor:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="3" Grid.Column="0" Text="Numero de Ticket:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="4" Grid.Column="0" Text="Concepto:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="5" Grid.Column="0" Text="Monto:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="6" Grid.Column="0" Text="Moneda:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="7" Grid.Column="0" Text="Metodo de Pago:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="8" Grid.Column="0" Text="Categoria de Gasto" VerticalAlignment="Center"></TextBlock>
 
-                <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.User}"></TextBlock>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.User}"></TextBox>
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Vendor}"></TextBox>
                 <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.TicketNumber}"></TextBox>
                 <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Description}"></TextBox>

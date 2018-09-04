@@ -492,7 +492,7 @@ namespace Seiya
             get { return _paymentCustomerSearchInput; }
             set
             {
-                _paymentCustomerSearchInput = value;
+                _paymentCustomerSearchInput = value.ToLower();
                 OnPropertyChanged();
             }
         }
@@ -1082,6 +1082,10 @@ namespace Seiya
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     break;
                 case "payment":
+                    PaymentCustomerSearchInput = "";
+                    PaymentReceivedMXN = 0;
+                    PaymentReceivedUSD = 0;
+                    CurrentCustomer = null;
                     CurrentPage = "\\View\\PaymentPage.xaml";
                     break;
                 case "product_list_1":
@@ -1227,16 +1231,25 @@ namespace Seiya
             {
                 case "1":
                     CurrentCartNumber = 1;
+                    PaymentReceivedMXN = 0;
+                    PaymentReceivedUSD = 0;
                     //Update button colors  
                     CurrentCartProducts = _cartOneProducts;
+                    PaymentUpdateRemaining();
                     break;
                 case "2":
                     CurrentCartNumber = 2;
+                    PaymentReceivedMXN = 0;
+                    PaymentReceivedUSD = 0;
                     CurrentCartProducts = _cartTwoProducts;
+                    PaymentUpdateRemaining();
                     break;
                 case "3":
                     CurrentCartNumber = 3;
+                    PaymentReceivedMXN = 0;
+                    PaymentReceivedUSD = 0;
                     CurrentCartProducts = _cartThreeProducts;
+                    PaymentUpdateRemaining();
                     break;
             }
         }

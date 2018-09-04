@@ -301,9 +301,39 @@ namespace Seiya
             throw new NotImplementedException();
         }
 
-        public object GetProduct(string searchInput)
+        public object GetTotal(string searchInput)
         {
             throw new NotImplementedException();
+        }
+
+        public bool GetTotal(out decimal expensesMxn, out decimal expensesUsd, out decimal expensesCashMxn, out decimal expensesCashUsd)
+        {
+            expensesMxn = 0;
+            expensesUsd = 0;
+            expensesCashMxn = 0;
+            expensesCashUsd = 0;
+
+            var allFields = base.DataTable.AsEnumerable();
+            foreach (var row in allFields)
+            {
+                if (row["Moneda"].ToString() == "USD")
+                {
+                    expensesUsd += Convert.ToDecimal(row["Monto"].ToString());
+                    if (row["MetodoPago"].ToString() == "Efectivo")
+                    {
+                        expensesCashUsd += Convert.ToDecimal(row["Monto"].ToString());
+                    }
+                }
+                else
+                {
+                    expensesMxn += Convert.ToDecimal(row["Monto"].ToString());
+                    if (row["MetodoPago"].ToString() == "Efectivo")
+                    {
+                        expensesCashMxn += Convert.ToDecimal(row["Monto"].ToString());
+                    }
+                }
+            }
+            return true;
         }
 
         public int GetLastItemNumber()
