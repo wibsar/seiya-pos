@@ -61,7 +61,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListBox x:Name ="CategoryListBox" Grid.Row="0" Margin="5" ItemsSource="{Binding CurrentCategoryList}" SelectedItem="{Binding SelectedCategoryItem, Mode=TwoWay}"></ListBox>
+                <ListBox x:Name ="CategoryListBox" Grid.Row="0" Margin="5" ItemsSource="{Binding CurrentCategoryList}" SelectedItem="{Binding SelectedCategoryItem, Mode=TwoWay}" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20"></ListBox>
                 <!-- Up and Down Buttons -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
@@ -119,21 +119,24 @@
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,5,0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*"></ColumnDefinition>
-                    <ColumnDefinition Width="3*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
+                
                 <Grid.RowDefinitions>
+                    <RowDefinition Height="1.5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height=".74*"></RowDefinition>
+                    <RowDefinition Height="3*"></RowDefinition>
                 </Grid.RowDefinitions>
+                <TextBlock Grid.Row="1" FontSize="24" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Agregar Categoria"></TextBlock>
                 <!-- New Category Text -->
-                <Grid Grid.Column="0" Grid.Row="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nueva Categoria"></TextBlock>
+                <Grid Grid.Row="2">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Text="{Binding NewCategoryItem}" Height="40" Margin="5"/>
+                    <Button Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding AddCategoryListCommand}" CommandParameter="{Binding NewCategoryItem}">
+                        <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
+                    </Button>
                 </Grid>
                 <!-- New Category Text Input -->
                 <Grid Grid.Column="1" Grid.Row="0">
@@ -141,10 +144,8 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" Text="{Binding NewCategoryItem}" Height="30" Margin="5"/>
-                    <Button Grid.Row="1" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding AddCategoryListCommand}" CommandParameter="{Binding NewCategoryItem}">
-                        <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
-                    </Button>
+                    
+                    
                 </Grid>
             </Grid>
         </Grid>

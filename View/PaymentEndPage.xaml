@@ -38,30 +38,21 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>            
+            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height=".5*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
-            <RowDefinition Height=".5*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
-            <RowDefinition Height="1.7*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>            
+            <RowDefinition Height="2.8*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--Display client information-->
         <Grid Grid.Row="0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
             <TextBlock Text="{Binding CurrentCustomer.Name}" HorizontalAlignment="Center" Foreground="Gray"></TextBlock>
         </Grid>
-        <!--Separador-->
-        <TextBlock Grid.Row="1" VerticalAlignment="Top" Margin="0,4,0,0" Background="#FFECECEC" Height="1"></TextBlock>
+      
         
         <!--Diplay Totals-->
-        <Grid Grid.Row="2" ShowGridLines="False">
+        <Grid Grid.Row="1" ShowGridLines="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -72,18 +63,18 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Puntos Obtenidos" Foreground="Gray" HorizontalAlignment="Center" ></TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="0" Text="Puntos Disponibles" Foreground="Gray" HorizontalAlignment="Center" ></TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,5,2.5,5" HorizontalAlignment="Center" FontSize="24" Text="{Binding PaymentPointsReceived}"></TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="1" Margin="2.5,5,5,5" HorizontalAlignment="Center" FontSize="24" Text="{Binding CurrentCustomer.PointsAvailable}"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,5,2.5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Text="{Binding PaymentPointsReceived}"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1" Margin="2.5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Text="{Binding CurrentCustomer.PointsAvailable}"></TextBlock>
         </Grid>
         <!--Separador-->
-        <TextBlock Grid.Row="3" Background="#FFECECEC" Height="1"></TextBlock>
+        <TextBlock Grid.Row="2" Background="#FFECECEC" Height="2" VerticalAlignment="Top"></TextBlock>
         <!--Quantity paid shortcuts-->
-        <Grid Grid.Row="5" ShowGridLines="False">
+        <Grid Grid.Row="3" ShowGridLines="False">
             <!--Main Grid definition-->
             <Grid.RowDefinitions>
-                <RowDefinition Height="5*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="5*"></RowDefinition>
+                <RowDefinition Height="0"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!-- Paid Amount and process payment in MXN-->
@@ -97,10 +88,10 @@
                     <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Recibido en Pesos" Foreground="Gray" HorizontalAlignment="Center" ></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="Recibido en Dolar" Foreground="Gray" HorizontalAlignment="Center" ></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,5,2.5,5" HorizontalAlignment="Center" FontSize="36" Text="{Binding PaymentReceivedMXN}"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" Margin="2.5,5,5,5" HorizontalAlignment="Center" FontSize="36" Text="{Binding PaymentReceivedUSD}"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Recibido en Pesos" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" ></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Recibido en Dolar" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" ></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,5,2.5,5" HorizontalAlignment="Center" FontSize="24" Text="{Binding PaymentReceivedMXN}" VerticalAlignment="Top"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Margin="2.5,5,5,5" HorizontalAlignment="Center" FontSize="24" Text="{Binding PaymentReceivedUSD}" VerticalAlignment="Top"></TextBlock>
             </Grid>
             <!-- Paid Amount and process payment in USD-->
             <Grid Grid.Row="2">
@@ -113,23 +104,14 @@
                     <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Cambio en Pesos" Foreground="Gray" HorizontalAlignment="Center" ></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="Cambio en Dolar" Foreground="Gray" HorizontalAlignment="Center" ></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="1" Foreground="#FFD10202" Margin="5,5,2.5,5" HorizontalAlignment="Center" FontSize="36" Text="{Binding PaymentChangeMXN}"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" Foreground="#FF009E2B" Margin="2.5,5,5,5" HorizontalAlignment="Center" FontSize="36" Text="{Binding PaymentChangeUSD}"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Cambio en Pesos" Foreground="Gray" HorizontalAlignment="Center" FontSize="24" ></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Cambio en Dolar" Foreground="Gray" HorizontalAlignment="Center" FontSize="24" ></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" Foreground="#FFD10202" Margin="5,5,2.5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Text="{Binding PaymentChangeMXN}"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Foreground="#FF009E2B" Margin="2.5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Text="{Binding PaymentChangeUSD}"></TextBlock>
             </Grid>
         </Grid>
-        <Button Grid.Row="6" FontSize="18" FontWeight="Bold" Foreground="Red"  Content="TERMINAR TRANSACCION" Command="{Binding ChangePageCommand}" CommandParameter="end_transaction" Background="LightGray" BorderBrush="{x:Null}"></Button>
-        <!--Payment Options-->
-        <Grid Grid.Row="4" ShowGridLines="False">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-        </Grid>
+        <Button Grid.Row="6" FontSize="24" FontWeight="Bold" Foreground="DarkGreen" Background="#FF8BD48B" Content="TERMINAR TRANSACCION" Command="{Binding ChangePageCommand}" CommandParameter="end_transaction" BorderBrush="{x:Null}"></Button>
+        
+        
     </Grid>
 </Page>
