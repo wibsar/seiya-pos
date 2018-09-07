@@ -8,8 +8,9 @@ namespace Seiya
 {
     public struct TransactionDataStruct
     {
-        public List<Tuple<string, int, decimal>> SalesInfoPerCategory;
-        public TransactionType TransactionType;
+        public List<Tuple<string, int, decimal>> SalesInfoPerCategory { get; set; }
+        public TransactionType TransactionType { get; set; }
+        public PaymentTypeEnum PaymentType { get; set; }
         public int FirstReceiptNumber { get; set; }
         public int LastReceiptNumber { get; set; }
         public int TotalItemsSold { get; set; }

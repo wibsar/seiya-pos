@@ -508,6 +508,31 @@ namespace Seiya
             }
         }
 
+        private bool _returnTransaction = false;
+        public bool ReturnTransaction
+        {
+            get { return _returnTransaction; }
+            set
+            {
+                _returnTransaction = value;
+                OnPropertyChanged("SaleOrReturn");
+            }
+        }
+
+        private string _saleOrReturn;
+        public string SaleOrReturn
+        {
+            get
+            {
+                return _returnTransaction == true ? "REGRESAR EN EFECTIVO" : "COBRAR EN EFECTIVO";
+            } 
+            set
+            {
+                _saleOrReturn = value;
+                OnPropertyChanged();
+            }
+        }
+
         #region Enum Related Properties
 
         private IList<PaymentTypeEnum> _paymentTypes;
@@ -1591,7 +1616,8 @@ namespace Seiya
             if (status == false)
                 paymentType = PaymentTypeEnum.Cash;
 
-            ProcessPayment(paymentType);
+            //TODO: Review if needed
+            ProcessPayment(paymentType, TransactionType.Regular);
 
             if (paymentType == PaymentTypeEnum.Efectivo)
             {
@@ -1627,7 +1653,8 @@ namespace Seiya
             if (status == false)
                 paymentType = PaymentTypeEnum.Cash;
 
-            ProcessPayment(paymentType);
+            //TODO: Review if needed
+            ProcessPayment(paymentType, TransactionType.Regular);
 
             if (paymentType == PaymentTypeEnum.Efectivo)
             {
@@ -3213,11 +3240,9 @@ namespace Seiya
         /// Method to initialize payment page and make payment
         /// </summary>
         /// <returns></returns>
-        bool ProcessPayment(PaymentTypeEnum paymentType)
+        bool ProcessPayment(PaymentTypeEnum paymentType, TransactionType transactionType)
         {
-            Transaction currentTransaction;
-
-            RecordTransaction(paymentType, out currentTransaction);
+            RecordTransaction(paymentType, transactionType, out var currentTransaction);
             
             PrintReceipt(currentTransaction, true);
             //Update POS file ticket info
@@ -3229,7 +3254,7 @@ namespace Seiya
         /// Method to record transaction
         /// </summary>
         /// <returns></returns>
-        private bool RecordTransaction(PaymentTypeEnum paymentMethod, out Transaction transaction)
+        private bool RecordTransaction(PaymentTypeEnum paymentMethod, TransactionType transactionType, out Transaction transaction)
         {
             //Create new instance
             transaction = new Transaction(Constants.DataFolderPath + Constants.TransactionsFileName,
@@ -3241,13 +3266,14 @@ namespace Seiya
             var internalNumber = _posInstance.GetNextInternalNumber();
             var user = CurrentUser.Name;
             var fiscalReceipt = "No";
-            var saleType = TransactionType.Regular;
+            var saleType = transactionType;
             var paymentType = paymentMethod;
             int orderNumber = 1;
             var transactionDate = DateTime.Now;
             decimal totalDue = 0M;
             string customer = "General";
 
+            //Get customer, if registered
             if(CurrentCustomer != null)
                 customer = CurrentCustomer.Name;
 
@@ -3268,11 +3294,12 @@ namespace Seiya
                 transaction.SaleType = saleType;
                 transaction.PaymentType = paymentType;
                 transaction.OrderNumber = orderNumber;
-                transaction.Record(TransactionType.Regular);
+                transaction.Record(saleType);
 
                 //update inventory for each product, if applicatable
                 UpdateInventory(product, transactionDate, saleType);
 
+                //TODO: Cambiarlo a negativo si es devolucion???
                 //Total
                 totalDue += product.Price * product.LastQuantitySold;
             }
@@ -3282,22 +3309,31 @@ namespace Seiya
             transaction.AmountPaid = paymentType == PaymentTypeEnum.Efectivo ? PaymentReceivedMXN : PaymentTotalMXN;
             transaction.ChangeDue = transaction.AmountPaid - transaction.TotalDue;
 
+            //Save inventory
+            _inventoryInstance.SaveDataTableToCsv();
+
             if (CurrentCustomer != null)
             {
-                PaymentPointsReceived = Math.Round(Convert.ToDouble(transaction.TotalDue / _pointsConvertionRatio),2);
-                CurrentCustomer.PointsAvailable += PaymentPointsReceived;
+                PaymentPointsReceived = Math.Round(Convert.ToDouble(transaction.TotalDue / _pointsConvertionRatio), 2);
+
+                if (transactionType != TransactionType.Devolucion && transactionType != TransactionType.Remover)
+                {
+                    CurrentCustomer.PointsAvailable += PaymentPointsReceived;
+                    CurrentCustomer.TotalSpent += transaction.TotalDue;
+                }
+                else
+                {
+                    CurrentCustomer.PointsAvailable -= PaymentPointsReceived;
+                    CurrentCustomer.TotalSpent -= transaction.TotalDue;
+                }
+                CurrentCustomer.TotalVisits += 1;
                 CurrentCustomer.PointsAvailable -= PaymentPointsInUse;
                 CurrentCustomer.PointsUsed += PaymentPointsInUse;
-                CurrentCustomer.TotalVisits += 1;
                 CurrentCustomer.LastVisitDate = DateTime.Now;
-                CurrentCustomer.TotalSpent += transaction.TotalDue;
                 CurrentCustomer.UpdateUserToTable();
                 CurrentCustomer.SaveDataTableToCsv();
             }         
 
-            //Save inventory
-            _inventoryInstance.SaveDataTableToCsv();
-            string x = nameof(CurrencyTypeEnum.MXN);
             return true;
         }
 
@@ -3307,11 +3343,10 @@ namespace Seiya
         /// <returns></returns>
         bool UpdateInventory(Product product, DateTime transactionDate, TransactionType transactionType)
         {
-            //TODO:Verify
             if (product.Id == 0) return false;
                 
-            if(transactionType == TransactionType.Regular || transactionType == TransactionType.Internal 
-                || transactionType == TransactionType.Removal)
+            if(transactionType == TransactionType.Regular || transactionType == TransactionType.Internal || transactionType == TransactionType.Interno
+                || transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
             {
                 if (product.LocalQuantityAvailable > 0)
                     _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
@@ -3326,7 +3361,7 @@ namespace Seiya
                 _inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
                     transactionDate.ToString("d"));
 
-                if(transactionType == TransactionType.Internal)
+                if(transactionType == TransactionType.Internal || transactionType == TransactionType.Interno)
                     _inventoryInstance.UpdateItem(product.Code, "CantidadInternoHistorial",
                         (product.InternalQuantity + product.LastQuantitySold).ToString());
 
@@ -3334,7 +3369,7 @@ namespace Seiya
                     _inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
                         (product.QuantitySold + product.LastQuantitySold).ToString());
 
-                if(transactionType != TransactionType.Removal)
+                if(transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
                     _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
                         (product.AmountSold + product.LastQuantitySold * product.LastAmountSold).ToString());
             }
@@ -3601,7 +3636,8 @@ namespace Seiya
             if (status == false)
                 paymentType = PaymentTypeEnum.Efectivo;
 
-            ProcessPayment(paymentType);
+            var transactionType = TransactionType.Internal;
+            ProcessPayment(paymentType, transactionType);
 
             if (paymentType == PaymentTypeEnum.Efectivo)
             {
@@ -3630,6 +3666,7 @@ namespace Seiya
             PaymentChangeUSD = 0;
             PaymentPointsReceived = 0;
             PaymentPointsInUse = 0;
+            ReturnTransaction = false;
             CurrentCustomer = null;
         }
 

@@ -118,12 +118,19 @@ namespace Seiya
 
         internal void Execute_ReturnSaveChangesCommand(object parameter)
         {
-            //Record Transaction
-            RecordReturn();
-            //Message
-            MainWindowViewModel.GetInstance().Code = ReturnID;
-            //Return
- //         MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PosGeneralPage.xaml";
+            if (MainWindowViewModel.GetInstance().CurrentCartProducts.Count > 0)
+            {
+                //Record Transaction
+                RecordReturn();
+                //Message
+                MainWindowViewModel.GetInstance().Code = ReturnID;
+                MainWindowViewModel.GetInstance().ReturnTransaction = true;
+                MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PaymentPage.xaml";
+            }
+            else
+            {
+                MainWindowViewModel.GetInstance().Code = "Agregar articulos primero!";
+            }
         }
 
         internal bool CanExecute_ReturnSaveChangesCommand(object parameter)
