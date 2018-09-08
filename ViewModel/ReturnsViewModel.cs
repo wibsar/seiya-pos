@@ -97,7 +97,7 @@ namespace Seiya
         {
             Random generator = new Random();
             var num = generator.Next(0, 9999).ToString("D4");
-            var timeVar = "R" + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
+            var timeVar = DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString();
             return timeVar + num;
         }
 
@@ -124,6 +124,7 @@ namespace Seiya
                 RecordReturn();
                 //Message
                 MainWindowViewModel.GetInstance().Code = ReturnID;
+                MainWindowViewModel.GetInstance().ReturnID = Int32.Parse(ReturnID);
                 MainWindowViewModel.GetInstance().ReturnTransaction = true;
                 MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PaymentPage.xaml";
             }

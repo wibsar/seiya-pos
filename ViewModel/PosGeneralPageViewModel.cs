@@ -4,6 +4,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Seiya.WpfBindingUtilities;
@@ -39,11 +40,14 @@ namespace Seiya
 
             if (ManualProduct == null) return;
 
-            Price = ManualProduct.Price.ToString();
-            Quantity = ManualProduct.QuantitySold;
-            Description = ManualProduct.Description;
-            Category = ManualProduct.Category;
-            ManualProduct = _manualProduct;
+            //var mainInstance = MainWindowViewModel.GetInstance();
+            //if (mainInstance.SelectedCartProduct != null)
+            //{
+            //    Price = mainInstance.SelectedCartProduct.Price.ToString();
+            //    Quantity = mainInstance.SelectedCartProduct.LastQuantitySold;
+            //    Description = mainInstance.SelectedCartProduct.Description;
+            //    Category = mainInstance.SelectedCartProduct.Category;
+            //}
         }
 
         #endregion
@@ -57,14 +61,23 @@ namespace Seiya
             get { return _price; }
             set
             {
-                //Check if price has something other than digits
-                decimal number;
-                decimal.TryParse(value, out number);
-                if (number > 0)
-                    _price = number.ToString();
+                //Check if price has something other than digits or decimal point
+                if (value != "")
+                {
+                    if (value.Substring(value.Length - 1) == ".")
+                    {
+                        _price += ".";
+                    }
+                    else
+                    {
+                        decimal.TryParse(value, out var number);
+                        _price = number > 0 ? number.ToString() : "0";
+                    }
+                }
                 else
-                    _price = "0";
-                
+                {
+                    _price = value;
+                }
                 OnPropertyChanged("Price");
             }
         }
@@ -157,6 +170,10 @@ namespace Seiya
                     Price += (string)parameter;
                 }
             }
+            else if ((string)parameter == "C")
+            {
+                Price = "0";
+            }
             else
             {
                 Price += (string)parameter;
@@ -184,6 +201,9 @@ namespace Seiya
             var main = MainWindowViewModel.GetInstance();
             main.AddManualProductToCart(ManualProduct);
             Clear = true;
+            Price = "0";
+            Description = "";
+            Quantity = 1;
         }
 
         internal bool CanExecute_ClickEnterCommand(object parameter)
@@ -217,24 +237,6 @@ namespace Seiya
             //Add logic to check if the command can be executed (if any)
             return true;
         }
-        #endregion
-
-        #region Sample Command Implementation
-        /*
-        public ICommand EnterKeyPadNumberCommand { get { return _enterKeyPadNumberCommand ?? (_enterKeyPadNumberCommand = new DelegateCommand(Execute_SelectCalibrationDirectoryCommand, CanExecute_SelectCalibrationDirectoryCommand)); } }
-        private ICommand _enterKeyPadNumberCommand;
-
-        internal void Execute_EnterKeyPadNumberCommand(object parameter)
-        {
-            //Call methods or execute the command
-        }
-
-        internal bool CanExecute_EnterKeyPadNumberCommand(object parameter)
-        {
-            //Add logic to check if the command can be executed (if any)
-            return true;
-        }
-        */
         #endregion
 
         #region Methods

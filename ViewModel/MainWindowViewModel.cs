@@ -171,6 +171,19 @@ namespace Seiya
             get { return _paymentPointsInUse; }
             set { _paymentPointsInUse = value; }
         }
+
+        private int _returnID = 0;
+        public int ReturnID
+        {
+            get
+            {
+                return _returnID;
+            }
+            set
+            {
+                _returnID = value;
+            }
+        }
         #endregion
 
         #region Observable Properties
@@ -1100,6 +1113,7 @@ namespace Seiya
         internal void Execute_ChangePageCommand(object parameter)
         {
             string pageTitleHolder;
+            TransactionType transactionType;
             //Change main frame page based on the parameter
             switch ((string)parameter)
             {
@@ -1220,7 +1234,9 @@ namespace Seiya
                 case "Efectivo":
                     if (PaymentTotalMXN != 0M && (PaymentTotalMXN <= (PaymentReceivedMXN + PaymentReceivedUSD * _exchangeRate)))
                     {
-                        PaymentProcessStart(parameter.ToString());
+                        //TODO: Add internal capability for personal use
+                        transactionType = PaymentTotalMXN <= 100 ? TransactionType.Regular : TransactionType.Interno;
+                        PaymentProcessStart(parameter.ToString(), transactionType);
                         SystemUnlock = false;
                         CurrentPage = "\\View\\PaymentEndPage.xaml";
                     }
@@ -1228,7 +1244,8 @@ namespace Seiya
                 case "Tarjeta":
                 case "Transferencia":
                 case "Cheque":
-                    PaymentProcessStart(parameter.ToString());
+                    transactionType = TransactionType.Regular;
+                    PaymentProcessStart(parameter.ToString(), transactionType);
                     SystemUnlock = false;
                     CurrentPage = "\\View\\PaymentEndPage.xaml";
                     break;
@@ -3268,7 +3285,8 @@ namespace Seiya
             var fiscalReceipt = "No";
             var saleType = transactionType;
             var paymentType = paymentMethod;
-            int orderNumber = 1;
+            //TODO: if order is created, add the number of the order here
+            int orderNumber = 0;
             var transactionDate = DateTime.Now;
             decimal totalDue = 0M;
             string customer = "General";
@@ -3277,6 +3295,11 @@ namespace Seiya
             if(CurrentCustomer != null)
                 customer = CurrentCustomer.Name;
 
+            //Check if it is a return
+            if (transactionType == TransactionType.DevolucionEfectivo || transactionType != TransactionType.DevolucionTarjeta)
+            {
+                orderNumber = ReturnID;
+            }
             //Get next receipt number, if applicable
             var receiptNumber = saleType == TransactionType.Regular ? _posInstance.GetNextReceiptNumber() : _posInstance.LastReceiptNumber;
 
@@ -3294,12 +3317,13 @@ namespace Seiya
                 transaction.SaleType = saleType;
                 transaction.PaymentType = paymentType;
                 transaction.OrderNumber = orderNumber;
+
+                //Record Transaction
                 transaction.Record(saleType);
 
                 //update inventory for each product, if applicatable
                 UpdateInventory(product, transactionDate, saleType);
 
-                //TODO: Cambiarlo a negativo si es devolucion???
                 //Total
                 totalDue += product.Price * product.LastQuantitySold;
             }
@@ -3316,7 +3340,7 @@ namespace Seiya
             {
                 PaymentPointsReceived = Math.Round(Convert.ToDouble(transaction.TotalDue / _pointsConvertionRatio), 2);
 
-                if (transactionType != TransactionType.Devolucion && transactionType != TransactionType.Remover)
+                if (transactionType != TransactionType.DevolucionEfectivo && transactionType != TransactionType.DevolucionTarjeta && transactionType != TransactionType.Remover)
                 {
                     CurrentCustomer.PointsAvailable += PaymentPointsReceived;
                     CurrentCustomer.TotalSpent += transaction.TotalDue;
@@ -3629,14 +3653,27 @@ namespace Seiya
             PaymentRemainingUSD = Math.Round(PaymentRemainingMXN / ExchangeRate, 2);
         }
 
-        public void PaymentProcessStart(string parameter)
+        public void PaymentProcessStart(string parameter, TransactionType transactionType)
         {
             //Get payment type from string
             var status = PaymentTypeEnum.TryParse(parameter, out PaymentTypeEnum paymentType);
             if (status == false)
                 paymentType = PaymentTypeEnum.Efectivo;
 
-            var transactionType = TransactionType.Internal;
+            //Check if it is a return
+            if (ReturnTransaction)
+            {
+                if (paymentType == PaymentTypeEnum.Efectivo)
+                    transactionType = TransactionType.DevolucionEfectivo;
+                else if (paymentType == PaymentTypeEnum.Tarjeta)
+                    transactionType =  TransactionType.DevolucionTarjeta;
+                else
+                {
+                    Code = "Transaccion Invalida";
+                    return;
+                }
+            }
+
             ProcessPayment(paymentType, transactionType);
 
             if (paymentType == PaymentTypeEnum.Efectivo)
@@ -3666,6 +3703,9 @@ namespace Seiya
             PaymentChangeUSD = 0;
             PaymentPointsReceived = 0;
             PaymentPointsInUse = 0;
+            Code = "";
+            ReturnID = 0;
+
             ReturnTransaction = false;
             CurrentCustomer = null;
         }

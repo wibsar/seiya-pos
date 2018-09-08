@@ -121,7 +121,7 @@ namespace Seiya
         #endregion  
 
         #region Methods
-
+/*
         //TODO: Remove this function
         //Method to add transaction details to transaction files
         public void Add(int transactionNumber, int internalNumber, int receiptNumber, string productCode,
@@ -170,7 +170,7 @@ namespace Seiya
                 File.AppendAllText(_transactionFilePath, data);
             }
         }
-
+*/
         /// <summary>
         /// Record transaction data into database
         /// </summary>
@@ -193,10 +193,6 @@ namespace Seiya
                          Product.Description, Product.Price, Product.LastQuantitySold, Product.LastQuantitySold * Product.Price,
                          TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
 
-                    SaveTransaction(_transactionFilePath, dataShort);
-                    SaveTransaction(_transactionMasterFilePath, data);
-                    SaveTransaction(_transactionHistoryFilePath, data);
-
                     return SaveTransaction(_transactionFilePath, dataShort) && SaveTransaction(_transactionMasterFilePath, data) &&
                         SaveTransaction(_transactionHistoryFilePath, data);
                    
@@ -207,9 +203,6 @@ namespace Seiya
                           Product.Description, Product.Price, Product.LastQuantitySold, Product.LastQuantitySold * Product.Price,
                           TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
 
-                    SaveTransaction(_transactionMasterFilePath, internalData);
-                    SaveTransaction(_transactionHistoryFilePath, internalData);
-
                     return SaveTransaction(_transactionMasterFilePath, internalData) && SaveTransaction(_transactionHistoryFilePath, internalData);
 
                 case TransactionType.Removal:
@@ -219,13 +212,11 @@ namespace Seiya
                           Product.Description, Product.Price * 0, Product.LastQuantitySold, Product.LastQuantitySold * Product.Price * 0,
                           TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
 
-                    SaveTransaction(_transactionMasterFilePath, removalData);
-                    SaveTransaction(_transactionHistoryFilePath, removalData);
-
                     return SaveTransaction(_transactionMasterFilePath, removalData) && SaveTransaction(_transactionHistoryFilePath, removalData);
 
                 case TransactionType.Return:
-                case TransactionType.Devolucion:
+                case TransactionType.DevolucionEfectivo:
+                case TransactionType.DevolucionTarjeta:
                     var returnData = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
                         TransactionNumber, InternalNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
                         Product.Description, -1 * Product.Price, -1 * Product.LastQuantitySold, -1 * Product.LastQuantitySold * Product.Price,
@@ -235,10 +226,6 @@ namespace Seiya
                          ReceiptNumber, Product.Code, Product.Id, Product.Category,
                          Product.Description, -1 * Product.Price, -1 * Product.LastQuantitySold, -1 * Product.LastQuantitySold * Product.Price,
                          TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
-
-                    SaveTransaction(_transactionFilePath, returnDataShort);
-                    SaveTransaction(_transactionMasterFilePath, returnData);
-                    SaveTransaction(_transactionHistoryFilePath, returnData);
 
                     return SaveTransaction(_transactionFilePath, returnDataShort) && SaveTransaction(_transactionMasterFilePath, returnData) &&
                         SaveTransaction(_transactionHistoryFilePath, returnData);
@@ -567,7 +554,8 @@ namespace Seiya
         Internal,
         Interno,
         Return,
-        Devolucion,
+        DevolucionEfectivo,
+        DevolucionTarjeta,
         Removal,
         Remover
     }
