@@ -121,16 +121,18 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListBox x:Name ="ProductListBox" Grid.Row="0" Margin="5" ItemsSource="{Binding CurrentPageListProducts}" SelectedItem="{Binding SelectedPageListProduct, Mode=TwoWay}">
+                <ListBox x:Name ="ProductListBox" Grid.Row="0" Margin="5" FontSize="18" ItemsSource="{Binding CurrentPageListProducts}" SelectedItem="{Binding SelectedPageListProduct, Mode=TwoWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel>
-                            <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch"></TextBlock>
-                            <TextBlock Text="{Binding Category}" HorizontalAlignment="Stretch"></TextBlock>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Price}"></TextBlock>
-                                <TextBlock Text="    "></TextBlock>
-                                <TextBlock Text="{Binding PriceCurrency}"></TextBlock>
+                                <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch" Foreground="#2C5066"></TextBlock>
+                            
+                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+                                    <TextBlock Text="{Binding Category}" HorizontalAlignment="Stretch" Foreground="LightGray"></TextBlock>
+                                    <TextBlock Text="    "></TextBlock>
+                                    <TextBlock Text="{Binding Price}" Foreground="Green"></TextBlock>
+                                <TextBlock Text=" "></TextBlock>
+                                <TextBlock Text="{Binding PriceCurrency}" FontSize="14" VerticalAlignment="Bottom" Foreground="LightGray"></TextBlock>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
