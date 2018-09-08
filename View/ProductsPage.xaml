@@ -14,7 +14,11 @@
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>                   
         </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+        </Style>
     </Page.Resources>
+
     <Grid>
          <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>

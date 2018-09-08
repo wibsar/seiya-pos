@@ -23,10 +23,12 @@
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
@@ -59,7 +61,8 @@
         <Grid Row="0" Grid.Column="1">
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition/>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
@@ -72,6 +75,7 @@
                         <KeyBinding Command="{Binding SomeCommand}" Key="Enter" />
                     </TextBox.InputBindings>
                 </TextBox>
+                <ToggleButton Grid.Column="1" Grid.Row="1" x:Name="toggle" FontSize="18" Foreground="White" Width="Auto" Margin="5,0,5,0"  BorderBrush="{x:Null}" Background="LightGray"  Content="Dolar" HorizontalAlignment = "Stretch"  />
             </Grid>
         </Grid>
 
@@ -90,32 +94,36 @@
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Grid.Column="0" Grid.Row="0" Content="7" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="7" FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" />
-            <Button Grid.Column="0" Grid.Row="1" Content="4" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="4" FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" />
-            <Button Grid.Column="0" Grid.Row="2" Content="1" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="1" FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" />
-            <Button Grid.Column="0" Grid.Row="3" Content="C" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="C" FontSize="36" Background="#FFAAD8E8" BorderBrush="White" Foreground="#FF224458" ></Button>
-            <Button Grid.Column="1" Grid.Row="0" Content="8" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="8"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458"></Button>
-            <Button Grid.Column="1" Grid.Row="1" Content="5" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="5"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458"></Button>
-            <Button Grid.Column="1" Grid.Row="2" Content="2" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="2"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458"></Button>
-            <Button Grid.Column="1" Grid.Row="3" Content="0" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="0"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458"></Button>
-            <Button Grid.Column="2" Grid.Row="0" Content="9" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="9"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
-            <Button Grid.Column="2" Grid.Row="1" Content="6" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="6"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
-            <Button Grid.Column="2" Grid.Row="2" Content="3" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="3"  FontSize="36" Background="#FFCCE5EE" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
-            <Button Grid.Column="2" Grid.Row="3" Content="." Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="."  FontSize="36" Background="#FFAAD8E8" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
+            <Button Grid.Column="0" Grid.Row="0" Content="7" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="7" FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458" />
+            <Button Grid.Column="0" Grid.Row="1" Content="4" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="4" FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458" />
+            <Button Grid.Column="0" Grid.Row="2" Content="1" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="1" FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458" />
+            <Button Grid.Column="0" Grid.Row="3" Content="C" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="C" FontSize="36" Background="LightGray" BorderBrush="White" Foreground="#FF224458" ></Button>
+            <Button Grid.Column="1" Grid.Row="0" Content="8" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="8"  FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458"></Button>
+            <Button Grid.Column="1" Grid.Row="1" Content="5" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="5"  FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458"></Button>
+            <Button Grid.Column="1" Grid.Row="2" Content="2" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="2"  FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458"></Button>
+            <Button Grid.Column="1" Grid.Row="3" Content="0" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="0"  FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458"></Button>
+            <Button Grid.Column="2" Grid.Row="0" Content="9" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="9"  FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
+            <Button Grid.Column="2" Grid.Row="1" Content="6" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="6"  FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
+            <Button Grid.Column="2" Grid.Row="2" Content="3" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="3"  FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
+            <Button Grid.Column="2" Grid.Row="3" Content="." Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="."  FontSize="36" Background="LightGray" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
 
         </Grid>
 
         <!-- Grid for categories selection-->
         <Grid Column="1" Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="199*"/>
+                <ColumnDefinition Width="68*"/>
+            </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="3*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!-- Category List-->
-            <ListBox  x:Name="lstCategories" Grid.Row="0" Margin="5" ItemsSource="{Binding CategoriesList, Mode=TwoWay}" SelectedItem="{Binding Category, Mode=TwoWay}" Background="White" BorderBrush="LightGray" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18"/>
+            <ListBox  x:Name="lstCategories" Grid.Row="0" Margin="5" ItemsSource="{Binding CategoriesList, Mode=TwoWay}" SelectedItem="{Binding Category, Mode=TwoWay}" Background="White" BorderBrush="LightGray" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Grid.ColumnSpan="2"/>
             <!-- Enter -->
-            <Button Grid.Row="1" Content="enter" Command ="{Binding ClickEnterCommand}" FontSize="36" Foreground="white" Background="#FF3B96B6" BorderBrush="White" Margin="5,1,5,0"></Button>
+            <Button Grid.Row="1" Content="enter" Command ="{Binding ClickEnterCommand}" FontSize="36" Foreground="white" Background="#FF3B96B6" BorderBrush="White" Margin="5,1,5,0" Grid.ColumnSpan="2"></Button>
         </Grid>
 
     </Grid>
