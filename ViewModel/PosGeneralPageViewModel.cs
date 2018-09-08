@@ -204,12 +204,12 @@ namespace Seiya
             Price = "0";
             Description = "";
             Quantity = 1;
+
         }
 
         internal bool CanExecute_ClickEnterCommand(object parameter)
         {
             //Add logic to check if the command can be executed (if any)
-            //TODO: Check that there is something for quantity, price, and category
             return Price != string.Empty && Price != "0" && Price != null && Category != null;
         }
         #endregion
@@ -251,7 +251,7 @@ namespace Seiya
             Price = string.Empty;
             Quantity = 1;
             Description = string.Empty;
-            Category = string.Empty;
+            Category = null;
             Clear = false;
         }
 

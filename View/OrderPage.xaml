@@ -83,7 +83,7 @@
                 <TextBlock Grid.Row="6" Text="Monto Total"></TextBlock>
                 <TextBlock Grid.Row="7" Text="Anticipo"></TextBlock>
                 <TextBlock Grid.Row="8" Text="Ticket Anticipo"></TextBlock>
-                <TextBlock Grid.Row="9" Text="Saldo"></TextBlock>
+                <TextBlock Grid.Row="9" Text=""></TextBlock>
                 <TextBlock Grid.Row="10" Background="LightGray" Height="2" ></TextBlock>
 
                 <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding OrderTemporalItem.OrderTicketNumber}"></TextBox>
@@ -96,7 +96,7 @@
                 <TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding OrderTemporalItem.TotalAmount}"></TextBox>
                 <TextBox Grid.Column="1" Grid.Row="7" Margin="2" Text="{Binding OrderTemporalItem.TotalPrePaid}"></TextBox>
                 <TextBox Grid.Column="1" Grid.Row="8" Margin="2" Text="{Binding OrderTemporalItem.PrePaidTicketNumber}"></TextBox>
-                <TextBox Grid.Column="1" Grid.Row="9" Margin="2" Text="{Binding OrderTemporalItem.TotalDue}"></TextBox>
+               <!-- <TextBox Grid.Column="1" Grid.Row="9" Margin="2" Text="{Binding OrderTemporalItem.TotalDue}"></TextBox> -->
                 <TextBlock Grid.Column="1" Grid.Row="10" Background="LightGray" Height="2" Margin="0"></TextBlock>
 
             </Grid>
@@ -109,15 +109,11 @@
                 <TextBox Grid.Row="1" Text="{Binding OrderTemporalItem.Description}" VerticalContentAlignment="Top"></TextBox>
             </Grid>
             <!-- Inputs for Product properties -->
-                      
-                        
         </Grid>
         
         <Grid Grid.Column="1" Grid.Row="1">
             <!-- Product image holder, cancel and save button -->
-            
 
-           
 
             <!-- Browse or delete a picture buttons-->
             

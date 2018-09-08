@@ -69,13 +69,9 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="Gray" Padding="10,0,0,0" Grid.Row="0" VerticalAlignment="Bottom" Text="Precio"/>
-                <TextBox VerticalContentAlignment="Center" Grid.Row="1" Text="{Binding Price , Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False" FontWeight="Bold" FontSize="24" Margin="5,0">
-                    <TextBox.InputBindings>
-                        <KeyBinding Command="{Binding SomeCommand}" Key="Return" />
-                        <KeyBinding Command="{Binding SomeCommand}" Key="Enter" />
-                    </TextBox.InputBindings>
-                </TextBox>
+                <TextBox VerticalContentAlignment="Center" Grid.Row="1" Text="{Binding Price , Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False" FontWeight="Bold" FontSize="24" Margin="5,0"></TextBox>
                 <ToggleButton Grid.Column="1" Grid.Row="1" x:Name="toggle" FontSize="18" Foreground="White" Width="Auto" Margin="5,0,5,0"  BorderBrush="{x:Null}" Background="LightGray"  Content="Dolar" HorizontalAlignment = "Stretch"  />
+                <TextBox VerticalContentAlignment="Center" Grid.Row="1" Text="{Binding Price , Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False" FontWeight="Bold" FontSize="24" Margin="5,0"></TextBox>
             </Grid>
         </Grid>
 
