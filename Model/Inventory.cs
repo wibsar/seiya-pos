@@ -187,11 +187,12 @@ namespace Seiya
                             PriceCurrency = row["PrecioMoneda"].ToString(),
                             InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                             QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
+                            AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
                             LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
                             TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
                             MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),
                             LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString()),
-                            ImageName = row["Imagen"].ToString()
+                            ImageName = row["Imagen"].ToString()                        
                         };
                     }
                 }
@@ -235,6 +236,7 @@ namespace Seiya
                             PriceCurrency = row["PrecioMoneda"].ToString(),
                             InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                             QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
+                            AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
                             LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
                             TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
                             MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),
@@ -302,6 +304,7 @@ namespace Seiya
                     row["CantidadInternoHistorial"] = product.InternalQuantity.ToString();
                     row["CantidadVendidoHistorial"] = product.QuantitySold.ToString();
                     row["CantidadLocal"] = product.LocalQuantityAvailable.ToString();
+                    row["VendidoHistorial"] = product.AmountSold.ToString();
                     row["CantidadDisponibleTotal"] = product.TotalQuantityAvailable.ToString();
                     row["CantidadMinima"] = product.MinimumStockQuantity.ToString();
                     row["UltimoPedidoFecha"] = product.LastPurchaseDate.ToString();
@@ -397,6 +400,7 @@ namespace Seiya
                         PriceCurrency = row["PrecioMoneda"].ToString(),
                         InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                         QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
+                        AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
                         LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
                         TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
                         MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),
@@ -430,6 +434,7 @@ namespace Seiya
                     PriceCurrency = row["PrecioMoneda"].ToString(),
                     InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                     QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
+                    AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
                     LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
                     TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
                     MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),
@@ -458,6 +463,7 @@ namespace Seiya
                     PriceCurrency = row["PrecioMoneda"].ToString(),
                     InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                     QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
+                    AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
                     LocalQuantityAvailable = Int32.Parse(row["CantidadLocal"].ToString()),
                     TotalQuantityAvailable = Int32.Parse(row["CantidadDisponibleTotal"].ToString()),
                     MinimumStockQuantity = Int32.Parse(row["CantidadMinima"].ToString()),

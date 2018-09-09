@@ -25,6 +25,11 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
+        <Style TargetType="DatePickerTextBox">
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -89,7 +94,7 @@
                 <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding OrderTemporalItem.OrderTicketNumber}"></TextBox>
                 <TextBox Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding OrderTemporalItem.Customer}"></TextBox>
                 <TextBox Grid.Column="1" Grid.Row="2" Margin="2" Text="{Binding OrderTemporalItem.Title}"></TextBox>
-                <TextBox Grid.Column="1" Grid.Row="3" Margin="2" Text="{Binding OrderTemporalItem.DueDate}"></TextBox>
+                <DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding OrderTemporalItem.DueDate}" Margin="5"></DatePicker>
                 <TextBox Grid.Column="1" Grid.Row="4" Margin="2" Text="{Binding OrderTemporalItem.Category}"></TextBox>
 
                 <TextBlock Grid.Column="1" Grid.Row="5" Background="LightGray" Height="2" Margin="0"></TextBlock>
@@ -135,7 +140,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
 
-                            <Button Grid.Column="0" Command="{Binding InventoryItemImageCommand}" CommandParameter="remove" Background="{x:Null}" BorderBrush="{x:Null}">
+                        <Button Grid.Column="0" Command="{Binding OrderItemImageCommand}" CommandParameter="remove" Background="{x:Null}" BorderBrush="{x:Null}">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="3*"></RowDefinition>
@@ -145,7 +150,7 @@
                                     <TextBlock Grid.Row="1" FontSize="16" Text="Eliminar Imagen" ></TextBlock>
                                 </Grid>
                             </Button>
-                            <Button Grid.Column="1" Command="{Binding InventoryItemImageCommand}" CommandParameter="add" Background="{x:Null}" BorderBrush="{x:Null}">
+                            <Button Grid.Column="1" Command="{Binding OrderItemImageCommand}" CommandParameter="add" Background="{x:Null}" BorderBrush="{x:Null}">
                                 <Grid>
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="3*"></RowDefinition>

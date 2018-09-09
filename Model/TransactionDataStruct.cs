@@ -21,6 +21,8 @@ namespace Seiya
         public decimal BankTotal { get; set; }
         public decimal OtherTotal { get; set; }
         public double PointsTotal { get; set; }
-        public decimal ReturnsTotal { get; set; }
+        public decimal ReturnsCard{ get; set; }
+        public decimal ReturnsCash { get; set; }
+        public int TotalReturnItems { get; set; }
     }
 }

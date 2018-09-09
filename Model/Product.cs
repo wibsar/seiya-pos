@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Media.Imaging;
@@ -93,6 +94,38 @@ namespace Seiya
         #endregion
 
         #region Constructors
+
+        public Product()
+        {
+
+        }
+
+        public Product(Product product)
+        {
+            this.AlternativeCode = product.AlternativeCode;
+            this.AmountSold = product.AmountSold;
+            this.Code = product.Code;
+            this.LastQuantitySold = product.LastQuantitySold;
+            this.TotalQuantityAvailable = product.TotalQuantityAvailable;
+            this.Brand = product.Brand;
+            this.Category = product.Category;
+            this.Cost = product.Cost;
+            this.CostCurrency = product.CostCurrency;
+            this.Price = product.Price;
+            this.PriceCurrency = product.PriceCurrency;
+            this.Id = product.Id;
+            this.Description = product.Description;
+            this.ImageName = product.ImageName;
+            this.Image = product.Image;
+            this.InternalQuantity = product.InternalQuantity;
+            this.Provider = product.Provider;
+            this.ProviderProductId = product.ProviderProductId;
+            this.MinimumStockQuantity = product.MinimumStockQuantity;
+            this.AmountSold = product.AmountSold;
+            this.LastPurchaseDate = product.LastPurchaseDate;
+            this.LastSaleDate = product.LastSaleDate;
+
+        }
 
         #endregion
 

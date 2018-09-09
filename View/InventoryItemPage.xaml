@@ -25,6 +25,11 @@
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
+        <Style TargetType="DatePicker">
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
         <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
@@ -125,17 +130,17 @@
                 <TextBox Grid.Row="4" Margin="2" Text="{Binding InventoryTemporalItem.Description}"></TextBox>
                 <TextBox Grid.Row="5" Margin="2" Text="{Binding InventoryTemporalItem.Category}"></TextBox>
                 <TextBox Grid.Row="6" Margin="2" Text="{Binding InventoryTemporalItem.Price}"></TextBox>
-                <ComboBox Grid.Row="7" Grid.Column="1" Margin="2" ItemsSource="{Binding CurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding ExpenseTemporalItem.CurrencyType, Mode=TwoWay}" FontSize="18" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
+                <ComboBox Grid.Row="7" Margin="2" ItemsSource="{Binding CurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding ExpenseTemporalItem.CurrencyType, Mode=TwoWay}" FontSize="18" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
                 <TextBlock Grid.Row="8" Background="LightGray" Height="2" Margin="0"></TextBlock>
                 <TextBox Grid.Row="9" Margin="2" Text="{Binding InventoryTemporalItem.Cost}"></TextBox>                
-                <ComboBox Grid.Row="10" Grid.Column="1" Margin="2" ItemsSource="{Binding CurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding ExpenseTemporalItem.CurrencyType, Mode=TwoWay}" FontSize="18" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
+                <ComboBox Grid.Row="10" Margin="2" ItemsSource="{Binding CurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding ExpenseTemporalItem.CurrencyType, Mode=TwoWay}" FontSize="18" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
                 <TextBlock Grid.Row="11" Margin="2" Text="{Binding InventoryTemporalItem.InternalQuantity}"></TextBlock>
                 <TextBlock Grid.Row="12" Margin="2" Text="{Binding InventoryTemporalItem.QuantitySold}"></TextBlock>
                 <TextBlock Grid.Row="13" Margin="2" Text="{Binding InventoryTemporalItem.AmountSold}"></TextBlock>
                 <TextBox Grid.Row="14" Margin="2" Text="{Binding InventoryTemporalItem.LocalQuantityAvailable}"></TextBox>
                 <TextBox Grid.Row="15" Margin="2" Text="{Binding InventoryTemporalItem.TotalQuantityAvailable}"></TextBox>
                 <TextBox Grid.Row="16" Margin="2" Text="{Binding InventoryTemporalItem.MinimumStockQuantity}"></TextBox>
-                <TextBox Grid.Row="17" Margin="2" Text="{Binding InventoryTemporalItem.LastPurchaseDate}"></TextBox>
+                <DatePicker Grid.Row="17" Margin="2" SelectedDate="{Binding InventoryTemporalItem.LastPurchaseDate}"></DatePicker>
                 <TextBlock Grid.Row="18" Margin="2" Text="{Binding InventoryTemporalItem.LastSaleDateString}"></TextBlock>
                 </Grid>
 

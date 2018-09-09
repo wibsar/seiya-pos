@@ -40,7 +40,9 @@ namespace Seiya
         private decimal _expensesCashTotal;
         private decimal _registerPreviousCash;
         private decimal _registerNewCash;
-        private decimal _returnsTotal;
+        private decimal _returnsCashTotal;
+        private decimal _returnsCardTotal;
+        private int _returnsTotalItems;
         private decimal _delta;
 
         private Pos _pos;
@@ -170,12 +172,32 @@ namespace Seiya
             }
         }
 
-        public decimal ReturnsTotal
+        public decimal ReturnsCashTotal
         {
-            get { return _returnsTotal; }
+            get { return _returnsCashTotal; }
             set
             {
-                _returnsTotal = Math.Round(value, 2);
+                _returnsCashTotal = Math.Round(value, 2);
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal ReturnsCardTotal
+        {
+            get { return _returnsCardTotal; }
+            set
+            {
+                _returnsCardTotal = Math.Round(value, 2);
+                OnPropertyChanged();
+            }
+        }
+
+        public int ReturnsTotalItems
+        {
+            get { return _returnsTotalItems; }
+            set
+            {
+                _returnsTotalItems = value;
                 OnPropertyChanged();
             }
         }
@@ -459,7 +481,9 @@ namespace Seiya
             BankTransferTotalSales = transactionData.BankTotal;
             CheckTotalSales = transactionData.CheckTotal;
             PointsTotalUsed = transactionData.PointsTotal;
-            ReturnsTotal = transactionData.ReturnsTotal;
+            ReturnsCardTotal = transactionData.ReturnsCard;
+            ReturnsCashTotal = transactionData.ReturnsCash;
+            ReturnsTotalItems = transactionData.TotalReturnItems;
             OtherTotalSales = transactionData.OtherTotal;
             TotalSales = transactionData.TotalAmountSold;
         }
