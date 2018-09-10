@@ -66,7 +66,7 @@ namespace Seiya
         private decimal _paymentChangeUSD;
         private decimal _paymentRemainingMXN;
         private decimal _paymentRemainingUSD;
-        private decimal _exchangeRate = 18; //TODO: Implement exchange rate based on the er set by the user
+        private decimal _exchangeRate = 1;
         private string _exchangeRateString;
         private decimal _pointsConvertionRatio = 100M; //TODO: add this to the UI after it is defined
         private double _paymentPointsInUse;
@@ -98,6 +98,7 @@ namespace Seiya
             //Initialize inventory and Pos data files
             _inventoryInstance = Inventory.GetInstance(Constants.DataFolderPath + Constants.InventoryFileName);
             _posInstance = Pos.GetInstance(Constants.DataFolderPath + Constants.PosDataFileName);
+            ExchangeRate = _posInstance.ExchangeRate;
             //Page Titles
             GetInitialPagesTitles();
             //Initial Categories
@@ -428,7 +429,7 @@ namespace Seiya
             set
             {
                 _paymentTotalMXN = Math.Round(value, 2);
-                PaymentTotalUSD = Math.Round(_paymentTotalMXN / _exchangeRate, 2);
+                PaymentTotalUSD = Math.Round(_paymentTotalMXN /_exchangeRate, 2);
                 OnPropertyChanged("PaymentTotalMXN");
             }
         }
@@ -576,6 +577,28 @@ namespace Seiya
             {
                 _currencyTypes = value;
                 OnPropertyChanged("CurrencyTypes");
+            }
+        }
+
+        private IList<CurrencyTypeEnum> _inventoryPriceCurrencyTypes;
+        public IList<CurrencyTypeEnum> InventoryPriceCurrencyTypes
+        {
+            get { return Enum.GetValues(typeof(CurrencyTypeEnum)).Cast<CurrencyTypeEnum>().ToList(); }
+            set
+            {
+                _inventoryPriceCurrencyTypes = value;
+                OnPropertyChanged("InventoryPriceCurrencyTypes");
+            }
+        }
+
+        private IList<CurrencyTypeEnum> _inventoryCostCurrencyTypes;
+        public IList<CurrencyTypeEnum> InventoryCostCurrencyTypes
+        {
+            get { return Enum.GetValues(typeof(CurrencyTypeEnum)).Cast<CurrencyTypeEnum>().ToList(); }
+            set
+            {
+                _inventoryCostCurrencyTypes = value;
+                OnPropertyChanged("InventoryCostCurrencyTypes");
             }
         }
 
@@ -1121,6 +1144,7 @@ namespace Seiya
         {
             string pageTitleHolder;
             TransactionType transactionType;
+            ClearSearchLists();
             //Change main frame page based on the parameter
             switch ((string)parameter)
             {
@@ -2083,6 +2107,9 @@ namespace Seiya
                 _inventoryInstance.SaveDataTableToCsv();
                 CurrentPage = "\\View\\InventoryMainPage.xaml";
             }
+            //Reset list
+            InventorySearchedProducts = null;
+            SelectedInventoryProduct = null;
         }
         internal bool CanExecute_InventorySaveChangesCommand(object parameter)
         {
@@ -3441,7 +3468,7 @@ namespace Seiya
 
                 if(transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
                     _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                        (product.AmountSold + product.LastQuantitySold * product.LastAmountSold).ToString());
+                        (product.AmountSold + product.LastAmountSold).ToString()); //removed  product.LastQuantitySold * 
             }
             else
             {
@@ -3461,7 +3488,7 @@ namespace Seiya
                     (product.QuantitySold - product.LastQuantitySold).ToString());
 
                 _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                    (product.AmountSold - product.LastQuantitySold * product.LastAmountSold).ToString());
+                    (product.AmountSold - product.LastAmountSold).ToString()); // removed product.LastQuantitySold * 
             }
 
             return true;
@@ -3471,7 +3498,7 @@ namespace Seiya
         /// Method to print receipt of the transaction
         /// </summary>
         /// <returns></returns>
-        bool PrintReceipt(Transaction transaction, bool printToFileOnly = false)
+        private bool PrintReceipt(Transaction transaction, bool printToFileOnly = false)
         {
             //Receipt for individual sale
             var receipt = new Receipt(_posInstance, transaction, ReceiptType.RegularSale, CurrentCartProducts);
@@ -3758,7 +3785,25 @@ namespace Seiya
 
         #endregion
 
-        #region Orders Method
+        #region Main Page Methods
+        /// <summary>
+        /// Clears all the searchable lists 
+        /// </summary>
+        private void ClearSearchLists()
+        {
+            InventorySearchedProducts = null;
+            SelectedInventoryProduct = null;
+            UsersSearchedEntries = null;
+            SelectedUser = null;
+            CustomersSearchedEntries = null;
+            SelectedCustomer = null;
+            VendorsSearchedEntries = null;
+            SelectedVendor = null;
+            OrdersSearchedEntries = null;
+            SelectedOrder = null;
+            ExpensesSearchedEntries = null;
+            SelectedExpense = null;
+        }
 
         #endregion
 

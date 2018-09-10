@@ -102,29 +102,33 @@ namespace Seiya
 
         public Product(Product product)
         {
-            this.AlternativeCode = product.AlternativeCode;
-            this.AmountSold = product.AmountSold;
+            //Basic
+            this.Id = product.Id;
             this.Code = product.Code;
-            this.LastQuantitySold = product.LastQuantitySold;
-            this.TotalQuantityAvailable = product.TotalQuantityAvailable;
+            this.AlternativeCode = product.AlternativeCode;
+            this.Description = product.Description;
             this.Brand = product.Brand;
             this.Category = product.Category;
+            this.Provider = product.Provider;
+            this.ProviderProductId = product.ProviderProductId;
+            this.ImageName = product.ImageName;
+            this.Image = product.Image;
+            //Amounts
+            this.AmountSold = product.AmountSold;
             this.Cost = product.Cost;
             this.CostCurrency = product.CostCurrency;
             this.Price = product.Price;
             this.PriceCurrency = product.PriceCurrency;
-            this.Id = product.Id;
-            this.Description = product.Description;
-            this.ImageName = product.ImageName;
-            this.Image = product.Image;
-            this.InternalQuantity = product.InternalQuantity;
-            this.Provider = product.Provider;
-            this.ProviderProductId = product.ProviderProductId;
+            //Quantities
+            this.LastQuantitySold = product.LastQuantitySold;
+            this.TotalQuantityAvailable = product.TotalQuantityAvailable;
+            this.LocalQuantityAvailable = product.LocalQuantityAvailable;
             this.MinimumStockQuantity = product.MinimumStockQuantity;
-            this.AmountSold = product.AmountSold;
+            this.InternalQuantity = product.InternalQuantity;
+            this.QuantitySold = product.QuantitySold;
+            //dates
             this.LastPurchaseDate = product.LastPurchaseDate;
             this.LastSaleDate = product.LastSaleDate;
-
         }
 
         #endregion
