@@ -44,7 +44,7 @@ namespace Seiya
         private decimal _returnsCardTotal;
         private int _returnsTotalItems;
         private decimal _delta;
-
+        private string _comments;
         private Pos _pos;
         #endregion
 
@@ -208,6 +208,16 @@ namespace Seiya
             set
             {
                 _delta = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string Comments
+        {
+            get { return _comments; }
+            set
+            {
+                _comments = Formatter.SanitizeInput(value); 
                 OnPropertyChanged();
             }
         }

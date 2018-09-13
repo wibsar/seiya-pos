@@ -135,7 +135,7 @@
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBox Text="{Binding NewCategoryItem, UpdateSourceTrigger=PropertyChanged}" Height="40" Margin="5"/>
+                    <TextBox Height="40" Margin="5" Text="{Binding NewCategoryItem, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent"/>
                     <Button Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding AddCategoryListCommand}" CommandParameter="{Binding NewCategoryItem}">
                         <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
                     </Button>

@@ -65,7 +65,7 @@
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Text="Nuevo: " HorizontalAlignment="Right" VerticalAlignment="Center"></TextBlock>
-                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="10" Foreground="DarkGreen"  Height="50" Width="100" Text="{Binding ExchangeRate}"/>
+                <TextBox Grid.Column="1" HorizontalAlignment="Left" Margin="10" Foreground="DarkGreen"  Height="50" Width="100" Text="{Binding ExchangeRate, UpdateSourceTrigger=PropertyChanged}"/>
             </Grid>
 
         </Grid>
