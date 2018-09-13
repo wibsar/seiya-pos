@@ -26,30 +26,5 @@ namespace Seiya
             InitializeComponent();
         }
 
-        private void KeyUpNoSymbolsEvent(object sender, KeyEventArgs e)
-        {
-            ((TextBox)sender).Text = Formatter.RemoveInvalidCharacters(((TextBox)sender).Text, out bool status);
-            ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
-            if (status)
-            {
-                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
-            }
-        }
-
-        private void KeyUpNoSymbolsNoSpaceEvent(object sender, KeyEventArgs e)
-        {
-            ((TextBox)sender).Text = Formatter.RemoveInvalidCharacters(((TextBox)sender).Text, out var status);
-            ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
-            if (status)
-            {
-                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
-            }
-            ((TextBox)sender).Text = Formatter.RemoveWhiteSpace(((TextBox)sender).Text, out status);
-            ((TextBox)sender).CaretIndex = ((TextBox)sender).Text.Length;
-            if (status)
-            {
-                MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
-            }
-        }
     }
 }
