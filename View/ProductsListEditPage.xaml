@@ -257,7 +257,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBox Grid.Row="0" Name="ListNameTxtBox" Text="{Binding CurrentPageListTitle}" Height="30" Margin="5"/>
+                    <TextBox Grid.Row="0" Name="ListNameTxtBox" Text="{Binding CurrentPageListTitle}" KeyUp="KeyUpNoSymbolsEvent" Height="30" Margin="5"/>
                     <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -266,7 +266,7 @@
                         <Button Grid.Column="1" Command="{Binding AddListItemCommand}" CommandParameter="{Binding Text, ElementName=AddToListTxtBox}" Margin="10,0,10,0">
                             <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
                         </Button>
-                        <TextBox Grid.Column="0" Name="AddToListTxtBox" Height="30" Margin="5"/>
+                        <TextBox Grid.Column="0" Name="AddToListTxtBox" KeyUp="KeyUpNoSymbolsEvent" Height="30" Margin="5"/>
                     </Grid>
                 </Grid>
             </Grid>

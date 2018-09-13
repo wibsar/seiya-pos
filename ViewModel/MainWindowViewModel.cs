@@ -2,8 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Drawing;
+using System.Drawing.Imaging;
+using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Threading;
 using System.Windows.Input;
 //using System.Windows.Interactivity;
 using System.Windows.Media.Imaging;
@@ -62,7 +66,7 @@ namespace Seiya
         private decimal _paymentChangeUSD;
         private decimal _paymentRemainingMXN;
         private decimal _paymentRemainingUSD;
-        private decimal _exchangeRate = 18; //TODO: Implement exchange rate based on the er set by the user
+        private decimal _exchangeRate = 1;
         private string _exchangeRateString;
         private decimal _pointsConvertionRatio = 100M; //TODO: add this to the UI after it is defined
         private double _paymentPointsInUse;
@@ -94,6 +98,7 @@ namespace Seiya
             //Initialize inventory and Pos data files
             _inventoryInstance = Inventory.GetInstance(Constants.DataFolderPath + Constants.InventoryFileName);
             _posInstance = Pos.GetInstance(Constants.DataFolderPath + Constants.PosDataFileName);
+            ExchangeRate = _posInstance.ExchangeRate;
             //Page Titles
             GetInitialPagesTitles();
             //Initial Categories
@@ -184,6 +189,11 @@ namespace Seiya
                 _returnID = value;
             }
         }
+
+        #region Orders Properties
+
+        #endregion
+
         #endregion
 
         #region Observable Properties
@@ -231,7 +241,7 @@ namespace Seiya
             get { return _newCategoryItem; }
             set
             {
-                _newCategoryItem = value;
+                _newCategoryItem = Formatter.SanitizeInput(value); ;
                 OnPropertyChanged("NewCategoryItem");
             }
         }
@@ -298,7 +308,7 @@ namespace Seiya
             get { return _currentPageListTitle; }
             set
             {
-                _currentPageListTitle = value;
+                _currentPageListTitle = Formatter.SanitizeInput(value);
                 OnPropertyChanged("CurrentPageListTitle");
             }
         }
@@ -419,7 +429,7 @@ namespace Seiya
             set
             {
                 _paymentTotalMXN = Math.Round(value, 2);
-                PaymentTotalUSD = Math.Round(_paymentTotalMXN / _exchangeRate, 2);
+                PaymentTotalUSD = Math.Round(_paymentTotalMXN /_exchangeRate, 2);
                 OnPropertyChanged("PaymentTotalMXN");
             }
         }
@@ -567,6 +577,28 @@ namespace Seiya
             {
                 _currencyTypes = value;
                 OnPropertyChanged("CurrencyTypes");
+            }
+        }
+
+        private IList<CurrencyTypeEnum> _inventoryPriceCurrencyTypes;
+        public IList<CurrencyTypeEnum> InventoryPriceCurrencyTypes
+        {
+            get { return Enum.GetValues(typeof(CurrencyTypeEnum)).Cast<CurrencyTypeEnum>().ToList(); }
+            set
+            {
+                _inventoryPriceCurrencyTypes = value;
+                OnPropertyChanged("InventoryPriceCurrencyTypes");
+            }
+        }
+
+        private IList<CurrencyTypeEnum> _inventoryCostCurrencyTypes;
+        public IList<CurrencyTypeEnum> InventoryCostCurrencyTypes
+        {
+            get { return Enum.GetValues(typeof(CurrencyTypeEnum)).Cast<CurrencyTypeEnum>().ToList(); }
+            set
+            {
+                _inventoryCostCurrencyTypes = value;
+                OnPropertyChanged("InventoryCostCurrencyTypes");
             }
         }
 
@@ -778,6 +810,7 @@ namespace Seiya
             }
             set
             {
+             //   var x = Formatter.SanitizeInput(value, typeof(User));
                 _userTemporalItem = value;
                 OnPropertyChanged("UserTemporalItem");
             }
@@ -792,7 +825,7 @@ namespace Seiya
             }
             set
             {
-                _usersSearchText = value.ToLower();
+                _usersSearchText = Formatter.SanitizeInput(value.ToLower());
                 OnPropertyChanged("UsersSearchText");
             }
         }
@@ -955,19 +988,17 @@ namespace Seiya
         #region Orders Related Properties
 
         private Order _orderTemporalItem;
+
         public Order OrderTemporalItem
         {
-            get
-            {
-                return _orderTemporalItem;
-            }
+            get { return _orderTemporalItem; }
             set
             {
                 _orderTemporalItem = value;
                 OnPropertyChanged("OrderTemporalItem");
             }
         }
-
+        
         private string _ordersSearchText;
         public string OrdersSearchText
         {
@@ -1114,6 +1145,7 @@ namespace Seiya
         {
             string pageTitleHolder;
             TransactionType transactionType;
+            ClearSearchLists();
             //Change main frame page based on the parameter
             switch ((string)parameter)
             {
@@ -1242,12 +1274,24 @@ namespace Seiya
                     }
                     break;
                 case "Tarjeta":
-                case "Transferencia":
-                case "Cheque":
                     transactionType = TransactionType.Regular;
                     PaymentProcessStart(parameter.ToString(), transactionType);
                     SystemUnlock = false;
                     CurrentPage = "\\View\\PaymentEndPage.xaml";
+                    break;
+                case "Transferencia":
+                case "Cheque":
+                    if (!ReturnTransaction)
+                    {
+                        transactionType = TransactionType.Regular;
+                        PaymentProcessStart(parameter.ToString(), transactionType);
+                        SystemUnlock = false;
+                        CurrentPage = "\\View\\PaymentEndPage.xaml";
+                    }
+                    else
+                    {
+                        Code = "No permitido!!";
+                    }
                     break;
                 case "end_transaction":
                     PaymentEndProcess(parameter.ToString());
@@ -1497,9 +1541,7 @@ namespace Seiya
         {
             //TODO: Check to make sure the item is found, otherwise show error message
             //Create a new object for every product 
-            var product = new Product();
-            product = (Product)parameter;
-            product.LastQuantitySold = 1;
+            var product = new Product((Product) parameter) {LastQuantitySold = 1};
             AddManualProductToCart(product);
         }
 
@@ -1519,9 +1561,7 @@ namespace Seiya
         {
             //TODO: Check to make sure the item is found, otherwise show error message
             //Create a new object for every product 
-            var product = new Product();
-            product = (Product)parameter;
-            product.LastQuantitySold = 1;
+            var product = new Product((Product)parameter) { LastQuantitySold = 1 };
             AddManualProductToCart(product);
         }
 
@@ -1531,6 +1571,8 @@ namespace Seiya
         }
 
         #endregion
+
+
 
         #region PaymentBillClickCommand
         public ICommand PaymentBillClickCommand { get { return _paymentBillClickCommand ?? (_paymentBillClickCommand = new DelegateCommand(Execute_PaymentBillClickCommand, CanExecute_PaymentBillClickCommand)); } }
@@ -1583,7 +1625,7 @@ namespace Seiya
         }
         internal bool CanExecute_PaymentBillClickCommand(object parameter)
         {
-            return true;
+            return ReturnTransaction == false;
         }
         #endregion
 
@@ -1912,7 +1954,7 @@ namespace Seiya
                         Provider = SelectedInventoryProduct.Provider,
                         ProviderProductId = SelectedInventoryProduct.ProviderProductId,
                         QuantitySold = SelectedInventoryProduct.QuantitySold,
-                        TotalQuantityAvailable = SelectedInventoryProduct.QuantitySold,
+                        TotalQuantityAvailable = SelectedInventoryProduct.TotalQuantityAvailable,
                         Brand = SelectedInventoryProduct.Brand
                     };
 
@@ -1991,9 +2033,7 @@ namespace Seiya
         {
             //TODO: Check to make sure the item is found, otherwise show error message
             //Create a new object for every product 
-            var product = new Product();
-            product = (Product)parameter;
-            product.LastQuantitySold = 1;
+            var product = new Product((Product)parameter) { LastQuantitySold = 1 };
             AddProductToCart(product);
         }
 
@@ -2068,6 +2108,9 @@ namespace Seiya
                 _inventoryInstance.SaveDataTableToCsv();
                 CurrentPage = "\\View\\InventoryMainPage.xaml";
             }
+            //Reset list
+            InventorySearchedProducts = null;
+            SelectedInventoryProduct = null;
         }
         internal bool CanExecute_InventorySaveChangesCommand(object parameter)
         {
@@ -2789,6 +2832,19 @@ namespace Seiya
             {
                 OrderTemporalItem.Register();
             }
+
+            //TODO: Make it generic based on POS data later
+            var toName = "Estrella de Regalos";
+            var toEmailAddress = "armoag+movvfdhrzrdgpqmw5qcg@boards.trello.com";
+            var subject = OrderTemporalItem.Customer + " " + OrderTemporalItem.OrderTicketNumber;
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
+            var body = OrderTemporalItem.Description + Environment.NewLine +
+                       OrderTemporalItem.DueDate.ToString("G", CultureInfo.CreateSpecificCulture("mx"));
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+            var attachmentFilePath = Constants.DataFolderPath + Constants.ImagesFolderPath + OrderTemporalItem.ImageName;
+            var fromEmailAddress = "lluviasantafe@gmail.com";
+            var fromPassword = "Yadira00";
+            Notification.SendNotification(toName,toEmailAddress, subject,body, attachmentFilePath, fromEmailAddress, fromPassword);
             OrdersSearchedEntries = null;
             CurrentPage = "\\View\\OrderMainPage.xaml";
         }
@@ -2822,12 +2878,12 @@ namespace Seiya
         }
         #endregion
 
-        #region OrderImageCommand
+        #region OrderItemImageCommand
 
-        private ICommand _orderImageCommand;
-        public ICommand OrderImageCommand { get { return _orderImageCommand ?? (_orderImageCommand = new DelegateCommand(Execute_OrderImageCommand, CanExecute_OrderImageCommand)); } }
+        private ICommand _orderItemImageCommand;
+        public ICommand OrderItemImageCommand { get { return _orderItemImageCommand ?? (_orderItemImageCommand = new DelegateCommand(Execute_OrderItemImageCommand, CanExecute_OrderItemImageCommand)); } }
 
-        internal void Execute_OrderImageCommand(object parameter)
+        internal void Execute_OrderItemImageCommand(object parameter)
         {
             switch (parameter)
             {
@@ -2841,7 +2897,7 @@ namespace Seiya
                     break;
             }
         }
-        internal bool CanExecute_OrderImageCommand(object parameter)
+        internal bool CanExecute_OrderItemImageCommand(object parameter)
         {
             return true;
         }
@@ -3210,6 +3266,16 @@ namespace Seiya
 
         public void AddProductToCart(Product product)
         {
+            //new
+            //Check if product already exists in the file
+            for (var index = 0; index < CurrentCartProducts.Count; index++)
+            {
+                if (product.Code != CurrentCartProducts[index].Code) continue;
+                AddOneAdditinoalQuantityToProductInCart(CurrentCartProducts[index], index);
+                PaymentTotalMXN = calculateCurrentCartTotal();
+                return;
+            }
+            //end test
             CurrentCartProducts.Insert(0, product);
             PaymentTotalMXN = calculateCurrentCartTotal();
         }
@@ -3220,10 +3286,18 @@ namespace Seiya
         /// <param name="product"></param>
         public void AddManualProductToCart(Product product)
         {
+            //Check if product already exists in the file
+            for (var index = 0; index < CurrentCartProducts.Count; index++)
+            {
+                if (product.Code != _currentCartProducts[index].Code) continue;
+                AddOneAdditinoalQuantityToProductInCart(_currentCartProducts[index], index);
+                PaymentTotalMXN = calculateCurrentCartTotal();
+                return;
+            }
             CurrentCartProducts.Insert(0, product);
             PaymentTotalMXN = calculateCurrentCartTotal();
         }
-        
+
         public void RemoveProductFromCart(Product product)
         {
             if (CurrentCartProducts.Contains(product))
@@ -3232,7 +3306,7 @@ namespace Seiya
             }
         }
 
-        private decimal calculateCurrentCartTotal()
+        public decimal calculateCurrentCartTotal()
         {
             var total = 0M;
             foreach(var item in _currentCartProducts)
@@ -3296,7 +3370,7 @@ namespace Seiya
                 customer = CurrentCustomer.Name;
 
             //Check if it is a return
-            if (transactionType == TransactionType.DevolucionEfectivo || transactionType != TransactionType.DevolucionTarjeta)
+            if (transactionType == TransactionType.DevolucionEfectivo || transactionType == TransactionType.DevolucionTarjeta)
             {
                 orderNumber = ReturnID;
             }
@@ -3385,17 +3459,17 @@ namespace Seiya
                 _inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
                     transactionDate.ToString("d"));
 
-                if(transactionType == TransactionType.Internal || transactionType == TransactionType.Interno)
+                if(transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
                     _inventoryInstance.UpdateItem(product.Code, "CantidadInternoHistorial",
                         (product.InternalQuantity + product.LastQuantitySold).ToString());
 
-                if(transactionType == TransactionType.Regular)
+                if(transactionType == TransactionType.Regular || transactionType == TransactionType.Interno || transactionType == TransactionType.Internal)
                     _inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
                         (product.QuantitySold + product.LastQuantitySold).ToString());
 
                 if(transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
                     _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                        (product.AmountSold + product.LastQuantitySold * product.LastAmountSold).ToString());
+                        (product.AmountSold + product.LastAmountSold).ToString()); //removed  product.LastQuantitySold * 
             }
             else
             {
@@ -3415,7 +3489,7 @@ namespace Seiya
                     (product.QuantitySold - product.LastQuantitySold).ToString());
 
                 _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                    (product.AmountSold - product.LastQuantitySold * product.LastAmountSold).ToString());
+                    (product.AmountSold - product.LastAmountSold).ToString()); // removed product.LastQuantitySold * 
             }
 
             return true;
@@ -3425,7 +3499,7 @@ namespace Seiya
         /// Method to print receipt of the transaction
         /// </summary>
         /// <returns></returns>
-        bool PrintReceipt(Transaction transaction, bool printToFileOnly = false)
+        private bool PrintReceipt(Transaction transaction, bool printToFileOnly = false)
         {
             //Receipt for individual sale
             var receipt = new Receipt(_posInstance, transaction, ReceiptType.RegularSale, CurrentCartProducts);
@@ -3708,6 +3782,28 @@ namespace Seiya
 
             ReturnTransaction = false;
             CurrentCustomer = null;
+        }
+
+        #endregion
+
+        #region Main Page Methods
+        /// <summary>
+        /// Clears all the searchable lists 
+        /// </summary>
+        private void ClearSearchLists()
+        {
+            InventorySearchedProducts = null;
+            SelectedInventoryProduct = null;
+            UsersSearchedEntries = null;
+            SelectedUser = null;
+            CustomersSearchedEntries = null;
+            SelectedCustomer = null;
+            VendorsSearchedEntries = null;
+            SelectedVendor = null;
+            OrdersSearchedEntries = null;
+            SelectedOrder = null;
+            ExpensesSearchedEntries = null;
+            SelectedExpense = null;
         }
 
         #endregion

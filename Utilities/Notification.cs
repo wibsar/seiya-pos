@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Net.Mail;
@@ -17,9 +18,13 @@ namespace Seiya
         /// <param name="toEmailAddress"></param>
         /// <param name="subject"></param>
         /// <param name="body"></param>
+        /// <param name="fromPassword"></param>
         /// <param name="fromName"></param>
+        /// <param name="attachmentFilePath"></param>
+        /// <param name="fromEmailAddress"></param>
         /// <returns></returns>
-        public static bool SendNotification(string toName, string toEmailAddress, string subject, string body, string fromName = "Wibsar Bot")
+        public static bool SendNotification(string toName, string toEmailAddress, string subject, string body, 
+            string attachmentFilePath, string fromEmailAddress, string fromPassword, string fromName = "Wibsar POS")
         {
             if (string.IsNullOrEmpty(toEmailAddress) || string.IsNullOrEmpty(toName) || string.IsNullOrEmpty(subject) || string.IsNullOrEmpty(body))
             {
@@ -28,9 +33,8 @@ namespace Seiya
 
             try
             {
-                var fromAddress = new MailAddress("notification@wibsar.com", fromName);
+                var fromAddress = new MailAddress(fromEmailAddress, fromName);
                 var toAddress = new MailAddress(toEmailAddress, toName);
-                const string fromPassword = "pass123";
 
                 using (var smtp = new SmtpClient
                 {
@@ -48,6 +52,11 @@ namespace Seiya
                         Body = body
                     })
                     {
+                        if (File.Exists(attachmentFilePath))
+                        {
+                            Attachment data = new Attachment(attachmentFilePath);
+                            message.Attachments.Add(data);
+                        }
                         smtp.Send(message);
                     }
                 }

@@ -199,6 +199,7 @@ namespace Seiya
             }
             //MainWindowViewModel.AddManualProductToCart(ManualProduct); Changed from static
             var main = MainWindowViewModel.GetInstance();
+
             main.AddManualProductToCart(ManualProduct);
             Clear = true;
             Price = "0";

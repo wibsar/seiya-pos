@@ -81,13 +81,13 @@
                 <TextBlock Grid.Row="6"  Grid.ColumnSpan="2" Text="Contraseña"></TextBlock>
                 <TextBlock Grid.Row="7"  Grid.ColumnSpan="2" Text="Confirmar Contraseña"></TextBlock>
 
-                <TextBox Grid.Row="1" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Name}"></TextBox>
-                <TextBox Grid.Row="2" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Email}"></TextBox>
-                <TextBox Grid.Row="3" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Phone}"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Name, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Email}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" ></TextBox>
+                <TextBox Grid.Row="3" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Phone}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
                 <ComboBox Grid.Row="4" Grid.Column="2" Margin="5" ItemsSource="{Binding UserAccessLevelTypes, Mode=TwoWay}" SelectedItem ="{Binding UserTemporalItem.Rights, Mode=TwoWay}" FontSize="20" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
-                <TextBox Grid.Row="5" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.UserName}"></TextBox>
-                <TextBox Grid.Row="6" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Password}"></TextBox>
-                <TextBox Grid.Row="7" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.PasswordVerification}"></TextBox>
+                <TextBox Grid.Row="5" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.UserName}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <TextBox Grid.Row="6" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Password}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <TextBox Grid.Row="7" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.PasswordVerification}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
             </Grid>
         </Grid>
 

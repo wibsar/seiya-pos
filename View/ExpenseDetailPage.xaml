@@ -73,7 +73,7 @@
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" Text="Registro de Gasto" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Usuario:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="1" Grid.Column="0" Text="Persona Responsable:" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Proveedor:" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Numero de Ticket:" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Concepto:" VerticalAlignment="Center"></TextBlock>
@@ -82,14 +82,14 @@
                 <TextBlock Grid.Row="7" Grid.Column="0" Text="Metodo de Pago:" VerticalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Row="8" Grid.Column="0" Text="Categoria de Gasto" VerticalAlignment="Center"></TextBlock>
 
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.User}"></TextBox>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Vendor}"></TextBox>
-                <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.TicketNumber}"></TextBox>
-                <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Description}"></TextBox>
-                <TextBox Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Amount}"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.User}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Vendor}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.TicketNumber}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Description}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                <TextBox Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.Amount}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
                 <ComboBox Grid.Row="6" Grid.Column="1" Margin="5" ItemsSource="{Binding CurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding ExpenseTemporalItem.CurrencyType, Mode=TwoWay}" FontSize="20" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
                 <ComboBox Grid.Row="7" Grid.Column="1" Margin="5" ItemsSource="{Binding PaymentTypes, Mode=TwoWay}" SelectedItem="{Binding ExpenseTemporalItem.PaymentType, Mode=TwoWay}" FontSize="20" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
-                <TextBox Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.ExpenseCategory}"></TextBox>
+                <TextBox Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding ExpenseTemporalItem.ExpenseCategory}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
             </Grid>
         </Grid>
 

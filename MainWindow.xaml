@@ -135,7 +135,7 @@
                 </Grid>
 
                 <!-- List of products -->
-                <ListBox x:Name ="ProductListBox" Grid.Row="1" BorderBrush="#FFECECEC" ItemsSource="{Binding CurrentCartProducts}" SelectedItem="{Binding SelectedCartProduct, Mode=TwoWay}">
+                <ListBox x:Name ="ProductListBox" Grid.Row="1" BorderBrush="#FFECECEC" ItemsSource="{Binding CurrentCartProducts, Mode=TwoWay}" SelectedItem="{Binding SelectedCartProduct, Mode=TwoWay}">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>

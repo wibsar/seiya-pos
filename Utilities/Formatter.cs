@@ -1,8 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace Seiya
 {
@@ -20,6 +23,95 @@ namespace Seiya
 
             //TODO: What happens if there is no ,
             return input.Replace(",", ".");
+        }
+
+        public static User SanitizeInput(User user)
+        {
+            //Check all string properties
+            user.Address = Formatter.SanitizeInput(user.Address);
+            user.Email = Formatter.SanitizeInput(user.Email);
+            user.Name = Formatter.SanitizeInput(user.Name);
+            user.Password = Formatter.SanitizeInput(user.Password);
+            user.PasswordVerification = Formatter.SanitizeInput(user.PasswordVerification);
+            user.Phone = Formatter.SanitizeInput(user.Phone);
+            user.UserName = Formatter.SanitizeInput(user.UserName);
+
+            return user;
+        }
+
+        public static string RemoveInvalidCharacters(string input, out bool foundInvalidCharacter)
+        {
+            var initialInput = input;
+            if(input != null)
+            {
+                input = input.Replace(",", "");
+                input = input.Replace(";", "");
+                input = input.Replace("'", "");
+                input = input.Replace(@"\", "");
+                input = input.Replace(@"/", "");
+                input = input.Replace("?", "");
+                input = input.Replace("!", "");
+                input = input.Replace("&", "");
+                input = input.Replace("*", "");
+                input = input.Replace("#", "");
+                input = input.Replace("%", "");
+                input = input.Replace("^", "");
+                input = input.Replace("(", "");
+                input = input.Replace(")", "");
+                input = input.Replace("}", "");
+                input = input.Replace("]", "");
+                input = input.Replace("[", "");
+                input = input.Replace("{", "");
+                input = input.Replace("|", "");
+                input = input.Replace("=", "");
+                input = input.Replace("-", "");
+                input = input.Replace("+", "");
+                input = input.Replace("~", "");
+                input = input.Replace("`", "");
+                input = input.Replace(":", "");
+                input = input.Replace("$", "");
+                input = input.Replace("\"", "");
+                input = input.Replace("<", "");
+                input = input.Replace(">", "");
+            };
+
+            foundInvalidCharacter = input != initialInput;
+
+            return input;
+        }
+
+        public static string RemoveWhiteSpace(string input, out bool foundInvalidCharacter)
+        {
+            var initialInput = input;
+            if (input != null)
+            {
+                input = input.Replace(" ", "");
+            }
+            foundInvalidCharacter = input != initialInput;
+            return input;
+        }
+
+        public static object SanitizeInput(object input, Type type)
+        {
+            //get all properties
+            var propertyInfo = type.GetProperties();
+            
+            //convert to type
+            var inputType = Convert.ChangeType(input, type);
+            foreach (var property in propertyInfo)
+            {
+                int y = 1;
+                if (property.PropertyType.Name == "String")
+                {
+                    y=2;
+                }
+                //contains value of property
+                var x = (property.GetValue(input));
+                //find same property in inputType
+                var xv = property.Name;
+                
+            }
+            return input;
         }
     }
 }

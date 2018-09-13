@@ -77,12 +77,12 @@
                 <TextBlock Grid.Row="5" Text="Puntos Disponibles:"></TextBlock>
                 <TextBlock Grid.Row="6" Text="Puntos Usados"></TextBlock>
                 <TextBlock Grid.Row="7" Text="Numero de Visitas"></TextBlock>
-                <TextBlock Grid.Row="8" Text="Total Gastado:"></TextBlock>                
+                <TextBlock Grid.Row="8" Text="Total Gastado:"></TextBlock>
 
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Name}"></TextBox>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Email}"></TextBox>
-                <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Phone}"></TextBox>
-                <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Rfc}"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Name}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Email}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Phone}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Rfc}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
                 <TextBlock Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.PointsAvailable}"></TextBlock>
                 <TextBlock Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.PointsUsed}"></TextBlock>
                 <TextBlock Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalVisits}"></TextBlock>

@@ -396,7 +396,13 @@ namespace Seiya
             return categoryData;
         }
 
-        //Get transactions data per payment type
+        /// <summary>
+        /// Get transaction sales data for end of day sales report
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <param name="posData"></param>
+        /// <param name="transactionData"></param>
+        /// <returns></returns>
         public static List<Tuple<string, int, decimal>> GetTransactionsData(TransactionType transactionType,
             Pos posData, out TransactionDataStruct transactionData)
         {
@@ -411,7 +417,9 @@ namespace Seiya
                 BankTotal = 0,
                 OtherTotal = 0,
                 PointsTotal = 0,
-                ReturnsTotal = 0
+                ReturnsCash = 0,
+                ReturnsCard = 0,
+                TotalReturnItems = 0
             };
 
             string selectedFilePath = String.Empty;
@@ -419,7 +427,7 @@ namespace Seiya
             var categoryData = new List<Tuple<string, int, decimal>>();
 
             //Open current transaction file and get data
-            if (transactionType == TransactionType.Internal)
+            if (transactionType == TransactionType.Internal || transactionType == TransactionType.Interno)
             {
                 selectedFilePath = posData.TransactionMasterDataFilePath;
             }
@@ -458,7 +466,7 @@ namespace Seiya
                         itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
 
                         //Get payment method
-                        if (row["Descripcion"].ToString() != "Puntos Descuento")
+                        if (row["Descripcion"].ToString() != "Puntos Descuento" && row["TipoVenta"].ToString() != "DevolucionEfectivo" && row["TipoVenta"].ToString() != "DevolucionTarjeta")
                         {
                             switch (row["MetodoPago"].ToString())
                             {
@@ -493,9 +501,16 @@ namespace Seiya
                             transactionData.PointsTotal += double.Parse(row["TotalVendido"].ToString())*-1;
                         }
 
-                        if (row["TipoVenta"].ToString() == "Devolucion")
+                        if (row["TipoVenta"].ToString() == "DevolucionEfectivo")
                         {
-                            transactionData.ReturnsTotal += decimal.Parse(row["TotalVendido"].ToString()) * -1;
+                            transactionData.ReturnsCash += decimal.Parse(row["TotalVendido"].ToString()) * -1;
+                            transactionData.TotalReturnItems -= Int32.Parse(row["UnidadesVendidas"].ToString());
+                        }
+                        
+                        if (row["TipoVenta"].ToString() == "DevolucionTarjeta")
+                        {
+                            transactionData.ReturnsCard += decimal.Parse(row["TotalVendido"].ToString()) * -1;
+                            transactionData.TotalReturnItems -= Int32.Parse(row["UnidadesVendidas"].ToString());
                         }
                     }
                 }
