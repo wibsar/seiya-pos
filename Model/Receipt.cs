@@ -166,27 +166,28 @@ namespace Seiya
 
             int itemsNumber = 0;
 
-            buf = "   " + Pos.BusinessName;
+            buf = "  " + Pos.BusinessName;
             graphic.DrawString(buf, storeNameFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeNameFontHeight;
-            buf = "    " + Pos.FiscalName;
+            buf = "     " + Pos.FiscalName;
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight;
+            buf = "          " + Pos.FiscalType + "  " + Pos.FiscalNumber;
+            graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeInfoFontHeight;            
             buf = "  " + Pos.FiscalStreetAddress;
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black),
                 startX, startY + offset);
-            offset = offset + (int)storeInfoFontHeight;
-            buf = "        " + Pos.FiscalCityAndZipCode;
+            offset  = offset + (int)storeInfoFontHeight;
+            buf = "   " + Pos.FiscalCityAndZipCode + "  " +Pos.FiscalPhoneNumber;
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight;
-            buf = "   " + Pos.FiscalPhoneNumber + " " + Pos.FiscalType + " " + Pos.FiscalNumber;
-            graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
-                startY + offset);
-            offset = offset + (int)storeInfoFontHeight;
-            buf = "       " + Pos.FiscalEmail;
+            
+            buf = "        " + Pos.FiscalEmail;
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;

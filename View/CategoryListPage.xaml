@@ -70,24 +70,24 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Command="{Binding MoveUpCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="5,0,2.5,2.5">
+                    <Button Grid.Column="0" Command="{Binding MoveUpCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="0,2.5,0,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha arriba.png" VerticalAlignment="Center" Margin="5"></Image>
-                            <TextBlock Grid.Column="1" Text="Subir" FontSize="12" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Gray"></TextBlock>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha arriba.png" VerticalAlignment="Center" MinWidth="100"></Image>
+                            <TextBlock Grid.Column="1" Text="Subir" VerticalAlignment="Center" Foreground="Gray" MinWidth="100"></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Command="{Binding MoveDownCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="2.5,0,5,2.5">
+                    <Button Grid.Column="1" Command="{Binding MoveDownCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="0,2.5,0,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha abajo.png" Margin="5"></Image>
-                            <TextBlock Grid.Column="1" Text="Bajar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha abajo.png" MinWidth="100"></Image>
+                            <TextBlock Grid.Column="1" Text="Bajar" MinWidth="100" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
                 </Grid>
@@ -97,24 +97,24 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Command="{Binding DeleteCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="5,2.5,2.5,5">
+                    <Button Grid.Column="0" Command="{Binding DeleteCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="0,2.5,0,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png" Margin="5"></Image>
-                            <TextBlock Grid.Column="1" Text="Eliminar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png" MinWidth="100"></Image>
+                            <TextBlock Grid.Column="1" Text="Eliminar" VerticalAlignment="Center" MinWidth="100" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Command="{Binding SaveChangesCategoryListCommand}" Margin="2.5,2.5,5,5">
+                    <Button Grid.Column="1" Command="{Binding SaveChangesCategoryListCommand}" Margin="0,2.5,0,0">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png" Margin="5"></Image>
-                            <TextBlock Grid.Column="1" Text="Guardar" FontSize="12" VerticalAlignment="Center" Margin="5" Foreground="Gray"></TextBlock>
+                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png" MinWidth="100"></Image>
+                            <TextBlock Grid.Column="1" Text="Guardar" VerticalAlignment="Center" MinWidth="100" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
                 </Grid>
