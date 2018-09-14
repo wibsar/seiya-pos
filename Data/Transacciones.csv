@@ -1,5 +1,4 @@
 NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
-<<<<<<< HEAD
 8029,1243x,5,Halloween,Canastas,36.0,1,36.0,26/08/2018 06:23:21 p. m.,Cliente,Estrella,No,Regular,Cash,1
 8031,1243x,5,Halloween,Canastas,40,1,40,26/08/2018 06:24:39 p. m.,Cliente,Estrella,No,Regular,Cash,1
 8029,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,01/09/2018 10:04:29 p. m.,Cliente,Estrella,No,Regular,Cash,1
@@ -69,34 +68,3 @@ NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,U
 8030,809726059459x,3,Merceria,12.5 x 13x13mm cubo diamante acrilico,87.5,1,87.5,06/09/2018 05:34:14 p. m.,General,Luis Morales,No,Regular,Efectivo,1
 8030,809726059374x,2,Merceria,16mm acrilico diamante 8oz pack,87.5,1,87.5,06/09/2018 05:34:14 p. m.,General,Luis Morales,No,Regular,Efectivo,1
 8030,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,06/09/2018 05:34:14 p. m.,General,Luis Morales,No,Regular,Efectivo,1
-=======
-8029,1243x,5,Halloween,Canastas,36,1,36,26/08/2018 06:23:21 p. m.,Cliente,Estrella,No,Regular,Cash,1
-8029,,0,Liston,,-15,-1,-15,08/09/2018 04:36:09 p. m.,General,Arturo Morales,No,DevolucionEfectivo,Efectivo,35538339
-8030,,0,Envoltura,,150,1,150,08/09/2018 05:13:04 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8030,,0,Halloween,,-100,-1,-100,08/09/2018 05:13:39 p. m.,General,Arturo Morales,No,DevolucionTarjeta,Tarjeta,0
-8031,,0,Unicel,,1500,1,1500,08/09/2018 05:22:16 p. m.,Evy Martinez,Arturo Morales,No,Regular,Cheque,0
-8031,,0,Liston,,-1000,-1,-1000,08/09/2018 05:24:17 p. m.,General,Arturo Morales,No,DevolucionEfectivo,Efectivo,22520073
-8031,,0,Impresion,,-1500,-1,-1500,08/09/2018 05:25:08 p. m.,Evy Martinez,Arturo Morales,No,DevolucionEfectivo,Efectivo,24359051
-8030,1243x,5,Halloween,Canastas,36,2,72,08/09/2018 06:13:43 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8031,1243x,5,Halloween,Canastas,36,1,36,08/09/2018 06:14:38 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8031,1243x,5,Halloween,Canastas,36,1,36,08/09/2018 06:14:38 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8032,1243x,5,Halloween,Canastas,36,1,36,08/09/2018 06:15:07 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8032,1243x,5,Halloween,Canastas,36,1,36,08/09/2018 06:15:07 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8030,1243x,5,Halloween,Canastas,36,1,36,08/09/2018 06:26:40 p. m.,General,Arturo Morales,No,Regular,Efectivo,0
-8030,1243x,5,Halloween,Canastas,36,1,36,08/09/2018 06:26:40 p. m.,General,Arturo Morales,No,Regular,Efectivo,0
-8030,1243x,5,Halloween,Canastas,36,3,108,09/09/2018 10:51:24 a. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8030,1243x,5,Halloween,Canastas,36,3,108,09/09/2018 10:52:59 a. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8030,1243x,5,Halloween,Canastas,36,3,108,09/09/2018 01:57:38 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8031,1243x,5,Halloween,Canastas,36,1,36,09/09/2018 01:58:10 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8032,1243x,5,Halloween,Canastas,36,2,72,09/09/2018 01:58:37 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8033,1243x,5,Halloween,Canastas,36,2,72,09/09/2018 02:49:04 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8034,1243x,5,Halloween,Canastas,36,1,36,09/09/2018 02:49:27 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8035,1243x,5,Halloween,Canastas,36,1,36,09/09/2018 02:49:59 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8029,1243x,5,Halloween,Canastas,-36,-2,-72,09/09/2018 04:14:25 p. m.,General,Arturo Morales,No,DevolucionTarjeta,Tarjeta,14117922
-8030,1243x,5,Halloween,Canastas,36,2,72,09/09/2018 04:15:18 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8031,1243x,5,Halloween,Canastas,36,5,180,09/09/2018 04:15:43 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8032,1243x,5,Halloween,Canastas,36,3,108,09/09/2018 04:16:04 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8030,1243x,5,Halloween,Canastas,36,2,72,09/09/2018 04:20:00 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8030,1243x,5,Halloween,Canastas,36,2,72,09/09/2018 04:21:20 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
-8030,1243x,5,Halloween,Canastas,36,4,144,09/09/2018 07:07:08 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
->>>>>>> master
