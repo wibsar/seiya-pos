@@ -1,7 +1,5 @@
 NumeroProducto,Codigo,CodigoAlterno,ProveedorProductoId,Descripcion,Proveedor,Categoria,UltimoPedidoFecha,Costo,CostoMoneda,Precio,PrecioMoneda,CantidadInternoHistorial,CantidadVendidoHistorial,VendidoHistorial,CantidadLocal,CantidadDisponibleTotal,CantidadMinima,UltimaTransaccionFecha,Imagen
-1,809726059329x,NA,1067-Clear,ArturoM,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,78,73587.5,0,0,0,3/9/2018,esfera.jpg
-2,809726059374x,NA,1072-Clear,16mm acrilico diamante 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,13,87.5,1,7,2,3/9/2018,NA.jpg
-3,809726059459x,NA,1080-Clear,12.5 x 13x13mm cubo diamante acrilico,Naturalstar,Merceria,28/04/2017 12:00:00 a. m.,1.75,USD,87.5,MXN,0,9,87.5,3,2,0,3/9/2018,bibi.jpg
-4,809726063180x,NA,1081-Clear,10x14x14mm acrilico beads 8oz pack,Naturalstar,Merceria,28/04/2017 12:00:00 a. m.,1.75,USD,87.5,MXN,0,6,1400,7,0,45,3/9/2018,bibi.jpg
-5,1243x,0,0,Canastas,Target,Halloween,26/08/2018 06:16:34 p. m.,1,MXN,36,MXN,1,9,1800,96,96,10,09/09/2018,2018181817_halloween.jpg
-6,arturo,,,vasos,,General,09/09/2018 07:07:29 p. m.,10,MXN,100,MXN,0,0,0,100,100,1,09/09/2018 07:07:29 p. m.,NA.jpg
+1,809726059329x,NA,1067-Clear,ArturoM,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,17,87.5,0,15,0,12/8/2018,esfera.jpg
+2,809726059374x,NA,1072-Clear,16mm acrilico diamante 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,10,787.5,4,10,2,30/06/2018,NA.jpg
+3,809726059459x,NA,1080-Clear,12.5 x 13x13mm cubo diamante acrilico,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,6,87.5,6,5,0,30/06/2018,bibi.jpg
+4,809726063180x,NA,1081-Clear,10x14x14mm acrilico beads 8oz pack,Naturalstar,Merceria,28/04/2017,1.75,USD,87.5,MXN,0,1,87.5,12,1,45,20/06/2018,bibi.jpg
