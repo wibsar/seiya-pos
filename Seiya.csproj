@@ -79,6 +79,7 @@
     <Compile Include="Model\SalesReceipt.cs" />
     <Compile Include="Model\SalesSummaryReport.cs" />
     <Compile Include="Model\Transaction.cs" />
+    <Compile Include="Model\EndOfSalesDataStruct.cs" />
     <Compile Include="Model\TransactionDataStruct.cs" />
     <Compile Include="Model\Vendor.cs" />
     <Compile Include="Model\User.cs" />

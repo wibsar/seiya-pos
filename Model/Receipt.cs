@@ -87,6 +87,8 @@ namespace Seiya
         }
 
         public TransactionDataStruct EndOfDayReceiptData { get; set; }
+        public EndOfSalesDataStruct EndOfDayAmountData { get; set; }
+
         #endregion
 
         #region Constructors
@@ -99,11 +101,12 @@ namespace Seiya
             _products = products;
         }
 
-        public Receipt(Pos posData, ReceiptType receiptType, TransactionDataStruct endOfDatReceiptData)
+        public Receipt(Pos posData, ReceiptType receiptType, TransactionDataStruct endOfDayReceiptData, EndOfSalesDataStruct endOfDayAmountData)
         {
             _receiptType = receiptType;
             Pos = posData;
-            EndOfDayReceiptData = endOfDatReceiptData;
+            EndOfDayReceiptData = endOfDayReceiptData;
+            EndOfDayAmountData = endOfDayAmountData;
         }
 
         #endregion
@@ -273,6 +276,40 @@ namespace Seiya
             printDocument.PrintPage -= PrintEndOfDaySalesReceipt;
         }
 
+        public void PrintEndOfDaySalesFullReceipt()
+        {
+            bool printToFileOnly = true;
+
+            PrintDocument printDocument = new PrintDocument();
+
+            printDocument.PrintPage += new PrintPageEventHandler(PrintEndOfDaySalesFullReceipt);
+
+            var fullReceiptName = Constants.DataFolderPath + Constants.EndOfDaySalesBackupFolderPath + "CorteFullNum" +
+                                  Pos.LastCorteZNumber + ".xps";
+
+            if (!printToFileOnly)
+            {
+                printDocument.PrinterSettings.PrinterName = Pos.PrinterName;
+
+                printDocument.Print();
+            }
+
+            try
+            {
+                printDocument.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";//"CutePDF Writer";//"Microsoft Print to PDF";
+                printDocument.PrinterSettings.PrintToFile = true;
+                printDocument.PrinterSettings.PrintFileName = fullReceiptName;
+                printDocument.PrinterSettings.PrintRange = PrintRange.AllPages;
+                printDocument.Print();
+            }
+            catch (Exception)
+            {
+
+            }
+
+            printDocument.PrintPage -= PrintEndOfDaySalesFullReceipt;
+        }
+
         public void PrintEndOfDaySalesReceipt(object sender, PrintPageEventArgs e)
         {
             Graphics graphic = e.Graphics;
@@ -292,11 +329,15 @@ namespace Seiya
 
             int itemsNumber = 0;
 
-            buf = "   " + Pos.BusinessName;
+            buf = "  " + Pos.BusinessName;
             graphic.DrawString(buf, storeNameFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeNameFontHeight;
-            buf = "    " + Pos.FiscalName;
+            buf = "     " + Pos.FiscalName;
+            graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeInfoFontHeight;
+            buf = "          " + Pos.FiscalType + "  " + Pos.FiscalNumber;
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight;
@@ -304,19 +345,17 @@ namespace Seiya
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black),
                 startX, startY + offset);
             offset = offset + (int)storeInfoFontHeight;
-            buf = "        " + Pos.FiscalCityAndZipCode;
+            buf = "   " + Pos.FiscalCityAndZipCode + "  " + Pos.FiscalPhoneNumber;
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight;
-            buf = "   " + Pos.FiscalPhoneNumber + " " + Pos.FiscalType + " " + Pos.FiscalNumber;
-            graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
-                startY + offset);
-            offset = offset + (int)storeInfoFontHeight;
-            buf = "       " + Pos.FiscalEmail;
+
+            buf = "        " + Pos.FiscalEmail;
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
-            graphic.DrawString("Corte Z    " + "Folio " + EndOfDayReceiptData.FirstReceiptNumber.ToString() + " al " +
+
+            graphic.DrawString(string.Format("Corte {0}    " + "Folio ", EndOfDayAmountData.EndOfSalesReceiptType) + EndOfDayReceiptData.FirstReceiptNumber.ToString() + " al " +
                 EndOfDayReceiptData.LastReceiptNumber, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
@@ -389,9 +428,267 @@ namespace Seiya
 
         }
 
-
-        private void PrintDailyInternal()
+        public void PrintEndOfDaySalesFullReceipt(object sender, PrintPageEventArgs e)
         {
+            Graphics graphic = e.Graphics;
+
+            Font font = new Font("Courier New", 9, System.Drawing.FontStyle.Bold);
+            Font storeNameFont = new Font("Courier New", 14, System.Drawing.FontStyle.Bold);
+            Font storeInfoFont = new Font("Courier New", 8, System.Drawing.FontStyle.Bold);
+
+            var buf = string.Empty;
+            float fontHeight = 9.0f + 4.5f; //font.GetHeight();
+            float storeNameFontHeight = storeNameFont.GetHeight();
+            float storeInfoFontHeight = 8 + 6f; //storeInfoFont.GetHeight();
+
+            int startX = 5;
+            int startY = 1; //changed from 5
+            int offset = 10;
+
+            int itemsNumber = 0;
+
+            buf = "  " + Pos.BusinessName;
+            graphic.DrawString(buf, storeNameFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeNameFontHeight;
+            buf = "     " + Pos.FiscalName;
+            graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeInfoFontHeight;
+            buf = "          " + Pos.FiscalType + "  " + Pos.FiscalNumber;
+            graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeInfoFontHeight;
+            buf = "  " + Pos.FiscalStreetAddress;
+            graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black),
+                startX, startY + offset);
+            offset = offset + (int)storeInfoFontHeight;
+            buf = "   " + Pos.FiscalCityAndZipCode + "  " + Pos.FiscalPhoneNumber;
+            graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeInfoFontHeight;
+
+            buf = "        " + Pos.FiscalEmail;
+            graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeInfoFontHeight + 10;
+
+            graphic.DrawString("Corte Z    " + "Folio " + EndOfDayReceiptData.FirstReceiptNumber.ToString() + " al " +
+                EndOfDayReceiptData.LastReceiptNumber, storeInfoFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeInfoFontHeight + 10;
+
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+            var date = DateTime.Now.ToString("g");
+
+            var ticketNumber = "No. " + Pos.LastCorteZNumber.ToString();
+            graphic.DrawString(ticketNumber.PadRight(18) + date, storeInfoFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeInfoFontHeight + 10;
+
+            foreach (var catInfo in EndOfDayReceiptData.SalesInfoPerCategory)
+            {
+                //mimic a product just to use the ToString overwrite
+                var cat = new Product()
+                {
+                    Category = catInfo.Item1,
+                    LastQuantitySold = catInfo.Item2,
+                    Price = catInfo.Item3
+                };
+                if (cat.LastQuantitySold != 0)
+                {
+                    graphic.DrawString(cat.ToString(ReceiptType.DailyRegular), font, new SolidBrush(Color.Black), startX, startY + offset);
+                    offset = offset + (int)fontHeight;
+                }
+            }
+
+            offset = offset + 10;
+
+            //TOTAL LE CABEN 35 letras
+            //graphic.DrawString("***********************************", font,
+            //    new SolidBrush(Color.Black), startX, startY + offset);
+
+            //offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("********** Total Ventas ***********", font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Puntos Usados: ".PadLeft(20) + string.Format("{0}", EndOfDayReceiptData.PointsTotal), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Total Articulos: ".PadLeft(20) + string.Format("{0}", EndOfDayReceiptData.TotalItemsSold), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Total MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayReceiptData.TotalAmountSold), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Efectivo MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayReceiptData.CashTotal), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Tarjeta MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayReceiptData.CardTotal), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Otro Metodo MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayReceiptData.OtherTotal +
+                EndOfDayReceiptData.BankTotal + EndOfDayReceiptData.BankTotal), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("*********** Total Caja ************", font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Monedas Pesos: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.MxnCoins), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Pesos 20: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Mxn20), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Pesos 50: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Mxn50), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Pesos 100: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Mxn100), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Pesos 200: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Mxn200), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Pesos 500: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Mxn500), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Pesos 1000: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Mxn1000), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Total Efectivo MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.MxnTotalCash), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Monedas Dolar: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.UsdCoins), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Dolar 1: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Usd1), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Dolar 5: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Usd5), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Dolar 10: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Usd10), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Dolar 20: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Usd20), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Dolar 50: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Usd50), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Dolar 100: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Usd100), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Total Efectivo USD: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.UsdTotalCash), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("********** Total Gastos ***********", font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Gastos Efectivo MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.ExpensesCash), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Gastos Totales MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.ExpensesTotal), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("************* Resumen *************", font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Usuario: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.User), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Tipo de Corte: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.EndOfSalesReceiptType), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Tipo de Cambio: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.ExchangeRate), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Caja Inicio MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.InitialCash), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Caja Nueva MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+            
+            graphic.DrawString("Diferencia MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.Delta), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString("Comentarios: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Comments), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 1;
+
+            graphic.DrawString(string.Format("  Final Corte {0} {1}", EndOfDayAmountData.EndOfSalesReceiptType, date), storeInfoFont, new SolidBrush(Color.Black),
+                startX, startY + offset);
+            offset = offset + (int)storeInfoFontHeight;
 
         }
 
@@ -471,7 +768,6 @@ namespace Seiya
 
             return categoryData;
         }
-
 
         public int GetNextNumber()
         {

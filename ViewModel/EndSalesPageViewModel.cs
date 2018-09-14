@@ -429,7 +429,9 @@ namespace Seiya
         public int FirstReceiptNumber { get; set; }
         public int LastReceiptNumber { get; set; }
         public int TotalItemsSold { get; set; }
+        public string EndOfSalesType { get; set; }
         public TransactionDataStruct TransactionData { get; set; }
+        public EndOfSalesDataStruct EndOfSalesData { get; set; }
         #endregion
 
         #region Constructors
@@ -453,9 +455,11 @@ namespace Seiya
         /// </summary>
         void GenerateEndOfDaySalesReport()
         {
+            EndOfSalesType = "Z";
             SaveRegisterCashAmount();
             CalculateDelta();
             CalculateSales();
+            CollectEndOfSalesReceiptInformation();
             //Record End Of Sales Transaction in db
             Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.MasterEndOfDaySalesFileName,
                 _pos.GetNextCorteZNumber(), TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
@@ -467,6 +471,9 @@ namespace Seiya
             Transaction.ClearTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
             Transaction.ClearTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
             Inventory.InventoryBackUp(Constants.DataFolderPath + Constants.InventoryFileName);
+            //BackUp Expenses files
+            Expense.BackUpExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
+            Expense.ClearExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
             //Print Receipt
             PrintReceipt();
         }
@@ -475,8 +482,13 @@ namespace Seiya
         /// </summary>
         void GenerateCurrentSalesReport()
         {
+            EndOfSalesType = "X";
             SaveRegisterCashAmount();
             CalculateDelta();
+            CalculateSales();
+            CollectEndOfSalesReceiptInformation();
+            //Print Receipt
+            PrintReceipt();
         }
 
         private void CalculateSales()
@@ -496,6 +508,37 @@ namespace Seiya
             ReturnsTotalItems = transactionData.TotalReturnItems;
             OtherTotalSales = transactionData.OtherTotal;
             TotalSales = transactionData.TotalAmountSold;
+        }
+
+        private void CollectEndOfSalesReceiptInformation()
+        {
+            EndOfSalesData = new EndOfSalesDataStruct()
+            {
+                User = MainWindowViewModel.GetInstance().CurrentUser.Name,
+                Comments = Comments,
+                EndOfSalesReceiptType = EndOfSalesType,
+                ExpensesCash = ExpensesCashTotal,
+                ExpensesTotal = ExpensesTotal,
+                ExchangeRate = MainWindowViewModel.GetInstance().ExchangeRate,
+                InitialCash = RegisterPreviousCash,
+                NewInitialCash = RegisterNewCash,
+                SalesOffset = Delta,
+                MxnCoins = MxnPesoCoinsTotal,
+                Mxn20 = MxnPeso20,
+                Mxn50 = MxnPeso50,
+                Mxn100 = MxnPeso100,
+                Mxn200 = MxnPeso200,
+                Mxn500 = MxnPeso500,
+                Mxn1000 = MxnPeso1000,
+                UsdCoins = UsdDollarCoinsTotal,
+                Usd1 = UsdDollar1,
+                Usd5 = UsdDollar5,
+                Usd10 = UsdDollar10,
+                Usd20 = UsdDollar20,
+                Usd50 = UsdDollar50,
+                Usd100 = UsdDollar100,
+                Delta = Delta
+            };
         }
 
         private void CalculateExpenses()
@@ -528,8 +571,9 @@ namespace Seiya
 
         private void PrintReceipt()
         {
-            var receipt = new Receipt(_pos, ReceiptType.DailyInternal, TransactionData);
+            var receipt = new Receipt(_pos, ReceiptType.DailyInternal, TransactionData, EndOfSalesData);
             receipt.PrintEndOfDaySalesReceipt();
+            receipt.PrintEndOfDaySalesFullReceipt();
         }
         #endregion
 
