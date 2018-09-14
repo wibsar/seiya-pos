@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Seiya
@@ -399,6 +401,26 @@ namespace Seiya
         public void Delete()
         {
             base.RemoveEntryInDataTable(this.Id.ToString(), "Id");
+        }
+
+        //Method to create a backup file
+        public static void BackUpExpensesFile(string expensesFilePath)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+            var currentTime = DateTime.Now;
+            //Load inventory csv file and create a backup copy
+            string expensesFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + "Gastos" +
+                                                   currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") +
+                                                   currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".csv";
+
+            File.Copy(expensesFilePath, expensesFileBackUpCopyName);
+        }
+
+        //Method to clear file
+        public static void ClearExpensesFile(string expensesFilePath)
+        {
+            File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.ExpenseBlankFileName,
+                Constants.DataFolderPath + Constants.ExpenseFileName, true);
         }
         #endregion
     }
