@@ -82,13 +82,13 @@
                 <TextBlock Grid.Row="6" Text="Banco"></TextBlock>
                 <TextBlock Grid.Row="7" Text="Cuenta Interbancaria"></TextBlock>
 
-                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Name}"></TextBox>
-                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Email}"></TextBox>
-                <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Phone}"></TextBox>
-                <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Rfc}"></TextBox>
-                <TextBox Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.BusinessName}"></TextBox>
-                <TextBox Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Bank}"></TextBox>
-                <TextBox Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.BankAccount}"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Name}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Email}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <TextBox Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Phone}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <TextBox Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Rfc}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <TextBox Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.BusinessName}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                <TextBox Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.Bank}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                <TextBox Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding VendorTemporalItem.BankAccount}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
             </Grid>
         </Grid>
 

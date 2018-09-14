@@ -241,7 +241,7 @@ namespace Seiya
             get { return _newCategoryItem; }
             set
             {
-                _newCategoryItem = value;
+                _newCategoryItem = Formatter.SanitizeInput(value); ;
                 OnPropertyChanged("NewCategoryItem");
             }
         }
@@ -308,7 +308,7 @@ namespace Seiya
             get { return _currentPageListTitle; }
             set
             {
-                _currentPageListTitle = value;
+                _currentPageListTitle = Formatter.SanitizeInput(value);
                 OnPropertyChanged("CurrentPageListTitle");
             }
         }
@@ -810,6 +810,7 @@ namespace Seiya
             }
             set
             {
+             //   var x = Formatter.SanitizeInput(value, typeof(User));
                 _userTemporalItem = value;
                 OnPropertyChanged("UserTemporalItem");
             }
@@ -824,7 +825,7 @@ namespace Seiya
             }
             set
             {
-                _usersSearchText = value.ToLower();
+                _usersSearchText = Formatter.SanitizeInput(value.ToLower());
                 OnPropertyChanged("UsersSearchText");
             }
         }

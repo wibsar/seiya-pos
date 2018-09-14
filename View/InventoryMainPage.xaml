@@ -52,7 +52,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Text="INVENTARIO"></TextBlock>
-            <TextBox Grid.Column="1" Text="{Binding InventorySearchText, Mode=TwoWay}" AcceptsReturn="False" AcceptsTab="False" VerticalContentAlignment="Center"/>
+            <TextBox Grid.Column="1" Text="{Binding InventorySearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" VerticalContentAlignment="Center"/>
             <Button Grid.Column="2" Command="{Binding InventoryStartSearchCommand}" CommandParameter="{Binding InventorySearchText}">
                 <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png"></Image>
             </Button>

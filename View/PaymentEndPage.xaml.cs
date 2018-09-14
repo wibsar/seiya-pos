@@ -25,5 +25,6 @@ namespace Seiya
             this.DataContext = MainWindowViewModel.GetInstance();
             InitializeComponent();
         }
+
     }
 }
