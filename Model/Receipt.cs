@@ -441,6 +441,9 @@ namespace Seiya
             float storeNameFontHeight = storeNameFont.GetHeight();
             float storeInfoFontHeight = 8 + 6f; //storeInfoFont.GetHeight();
 
+            //Parse Description
+            var commentsLines = Formatter.BreakDownString(EndOfDayAmountData.Comments, 35);
+
             int startX = 5;
             int startY = 1; //changed from 5
             int offset = 10;
@@ -671,7 +674,7 @@ namespace Seiya
 
             offset = offset + (int)fontHeight + 1;
 
-            graphic.DrawString("Caja Nueva MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData), font,
+            graphic.DrawString("Caja Nueva MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.NewInitialCash), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
             offset = offset + (int)fontHeight + 1;
@@ -680,11 +683,18 @@ namespace Seiya
                 new SolidBrush(Color.Black), startX, startY + offset);
 
             offset = offset + (int)fontHeight + 1;
+            offset = offset + (int)fontHeight + 1;
 
-            graphic.DrawString("Comentarios: ".PadLeft(20) + string.Format("{0}", EndOfDayAmountData.Comments), font,
-                new SolidBrush(Color.Black), startX, startY + offset);
+            graphic.DrawString("Comentarios: ", font, new SolidBrush(Color.Black), startX, startY + offset);
 
             offset = offset + (int)fontHeight + 1;
+
+            foreach(var commentLine in commentsLines)
+            {
+                graphic.DrawString(string.Format("{0}", commentLine), font, new SolidBrush(Color.Black), startX, startY + offset);
+
+                offset = offset + (int)fontHeight + 1;
+            }
 
             graphic.DrawString(string.Format("  Final Corte {0} {1}", EndOfDayAmountData.EndOfSalesReceiptType, date), storeInfoFont, new SolidBrush(Color.Black),
                 startX, startY + offset);

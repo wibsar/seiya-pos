@@ -113,5 +113,20 @@ namespace Seiya
             }
             return input;
         }
+
+        public static List<string> BreakDownString(string input, int desiredSize)
+        {
+            var strings = new List<string>();
+            //Get string size
+            var size = input.Length;
+            int length = 0;
+ 
+            for(var index = 0; index < size; index = index + desiredSize)
+            {
+                length = (size - index) < desiredSize ? (size - index) : desiredSize;
+                strings.Add(input.Substring(index, length));
+            }
+            return strings;
+        }
     }
 }

@@ -598,6 +598,8 @@ namespace Seiya
                 default:
                     break;
             }
+
+            MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PosGeneralPage.xaml";
         }
 
         internal bool CanExecute_GenerateEndOfDaySalesReportCommand(object parameter)

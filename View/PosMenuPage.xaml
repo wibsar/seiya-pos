@@ -199,7 +199,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\corte.png"></Image>
-                <TextBlock Grid.Row="1" Text="Categorias"></TextBlock>
+                <TextBlock Grid.Row="1" Text="Corte"></TextBlock>
             </Grid>
         </Button>
         <Button Grid.Row="3" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="others" BorderBrush="{x:Null}">
