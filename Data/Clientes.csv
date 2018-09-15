@@ -1,5 +1,6 @@
 Id,Nombre,Email,Telefono,FechaRegistro,RFC,PuntosDisponibles,PuntosUsados,TotalVisitas,TotalVendido,UltimaVisitaFecha
 1,Yadis M,cliente@gmail.com,6641039485,1/5/2018,CEFG30945280,3400,100,20,4000,5/5/2018
-2,Evy Martinez,cliente3@gmail.com,6649012983,06/07/2018 12:00:00 a. m.,CEWRUSDU,123,0,3,400,08/09/2018 05:25:08 p. m.
+2,Evy Martinez,cliente3@gmail.com,6649012983,06/07/2018 12:00:00 a. m.,CEWRUSDU,87.64,35,4,364,15/09/2018 12:49:12 a. m.
 3,Evy,evy@gmail.com,6192077185,03/09/2018 02:16:21 p. m.,,0,0,0,0,03/09/2018 02:16:21 p. m.
 4,Rene,rene@gmail.com,6191111111,03/09/2018 05:02:40 p. m.,,1.38,93.32,10,9468.68,08/09/2018 05:20:05 p. m.
+5,evelyn,evelyn@gmail.com,6644819479,15/09/2018 12:42:25 a. m.,,0,0,0,0,15/09/2018 12:42:25 a. m.

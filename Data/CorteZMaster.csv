@@ -1,3 +1,5 @@
 NumeroCorte,FolioInicio, FolioFinal,TotalUnidades,TotalPuntos,Efectivo,Tarjeta,OtroMetodo,TotalVendido,Fecha
 220,8031,8030,9,0,700,325.0,0,10.0,14/09/2018 07:01:41 p.m.
 221,8030,8030,5,0,452,350.0,0,802.0,14/09/2018 07:04:41 p.m.
+220,8029,8029,5,0,437.5,0,0,437.5,15/09/2018 12:08:35 a. m.
+220,8029,8029,6,0,132.5,0,0,132.5,15/09/2018 12:57:57 a. m.

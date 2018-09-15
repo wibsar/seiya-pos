@@ -255,7 +255,7 @@ namespace Seiya
             set
             {
                 _currentCartProducts = value;
-                PaymentTotalMXN = calculateCurrentCartTotal();
+                PaymentTotalMXN = CalculateCurrentCartTotal();
                 OnPropertyChanged("CurrentCartProducts");
             }
         }
@@ -1422,7 +1422,7 @@ namespace Seiya
                 CurrentCartProducts.Insert(index, activeProduct);
                 SelectedCartProduct = activeProduct;
             }
-            PaymentTotalMXN = calculateCurrentCartTotal();
+            PaymentTotalMXN = CalculateCurrentCartTotal();
         }
         internal bool CanExecute_SubtractFromProductListCommand(object parameter)
         {
@@ -1443,7 +1443,7 @@ namespace Seiya
             activeProduct.LastQuantitySold += 1;
             CurrentCartProducts.Insert(index, activeProduct);
             SelectedCartProduct = activeProduct;
-            PaymentTotalMXN = calculateCurrentCartTotal();
+            PaymentTotalMXN = CalculateCurrentCartTotal();
         }
         internal bool CanExecute_AddToProductListCommand(object parameter)
         {
@@ -1466,7 +1466,7 @@ namespace Seiya
             activeProduct.Price = activeProduct.Price*(1 - discountPercentage/100);
             CurrentCartProducts.Insert(index, activeProduct);
             SelectedCartProduct = activeProduct;
-            PaymentTotalMXN = calculateCurrentCartTotal();
+            PaymentTotalMXN = CalculateCurrentCartTotal();
         }
         internal bool CanExecute_ApplyDiscountToProductListCommand(object parameter)
         {
@@ -1641,7 +1641,7 @@ namespace Seiya
             if (CurrentCustomer.PointsAvailable >= 1)
             {
                 Product productMimic;
-                var tempTotal = MainWindowViewModel.GetInstance().calculateCurrentCartTotal();
+                var tempTotal = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();
                 if (CurrentCustomer.PointsAvailable > Convert.ToDouble(tempTotal))
                 {
                     productMimic = Product.Add(CurrentCustomer.Name, "Descuento P", Convert.ToDecimal(tempTotal - 1) * -1, 1);
@@ -3211,6 +3211,7 @@ namespace Seiya
         {
             _posInstance.UpdateExchangeRate(ExchangeRate);
             _posInstance.UpdateAllData();
+            _posInstance.SaveDataTableToCsv();
             ExchangeRateString = _posInstance.ExchangeRate.ToString();
             CurrentPage = "\\View\\PosGeneralPage.xaml";
             //Log message to display success
@@ -3218,7 +3219,7 @@ namespace Seiya
         }
         internal bool CanExecute_ExchangeRateSaveCommand(object parameter)
         {
-            return ExchangeRate.ToString() != "" || ExchangeRate != 0.0M;
+            return ExchangeRate.ToString() != "" || ExchangeRate > 0.0M;
         }
         #endregion
 
@@ -3271,14 +3272,14 @@ namespace Seiya
             //Check if product already exists in the file
             for (var index = 0; index < CurrentCartProducts.Count; index++)
             {
-                if (product.Code != CurrentCartProducts[index].Code) continue;
+                if (product.Code == null || (product.Code != _currentCartProducts[index].Code)) continue;
                 AddOneAdditinoalQuantityToProductInCart(CurrentCartProducts[index], index);
-                PaymentTotalMXN = calculateCurrentCartTotal();
+                PaymentTotalMXN = CalculateCurrentCartTotal();
                 return;
             }
             //end test
             CurrentCartProducts.Insert(0, product);
-            PaymentTotalMXN = calculateCurrentCartTotal();
+            PaymentTotalMXN = CalculateCurrentCartTotal();
         }
 
         /// <summary>
@@ -3290,13 +3291,13 @@ namespace Seiya
             //Check if product already exists in the file
             for (var index = 0; index < CurrentCartProducts.Count; index++)
             {
-                if (product.Code != _currentCartProducts[index].Code) continue;
+                if (product.Code == null || (product.Code != _currentCartProducts[index].Code)) continue;
                 AddOneAdditinoalQuantityToProductInCart(_currentCartProducts[index], index);
-                PaymentTotalMXN = calculateCurrentCartTotal();
+                PaymentTotalMXN = CalculateCurrentCartTotal();
                 return;
             }
             CurrentCartProducts.Insert(0, product);
-            PaymentTotalMXN = calculateCurrentCartTotal();
+            PaymentTotalMXN = CalculateCurrentCartTotal();
         }
 
         public void RemoveProductFromCart(Product product)
@@ -3307,7 +3308,7 @@ namespace Seiya
             }
         }
 
-        public decimal calculateCurrentCartTotal()
+        public decimal CalculateCurrentCartTotal()
         {
             var total = 0M;
             foreach(var item in _currentCartProducts)

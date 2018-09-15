@@ -126,7 +126,7 @@ namespace Seiya
                 MainWindowViewModel.GetInstance().Code = ReturnID;
                 MainWindowViewModel.GetInstance().ReturnID = Int32.Parse(ReturnID);
                 MainWindowViewModel.GetInstance().ReturnTransaction = true;
-                MainWindowViewModel.GetInstance().PaymentReceivedMXN = MainWindowViewModel.GetInstance().calculateCurrentCartTotal();
+                MainWindowViewModel.GetInstance().PaymentReceivedMXN = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();
                 MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PaymentPage.xaml";
             }
             else

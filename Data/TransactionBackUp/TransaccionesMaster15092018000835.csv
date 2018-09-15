@@ -1,0 +1,5 @@
+NumeroTransaccion,NumeroInterno,NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
+13976,13976,8029,1243x,5,Halloween,Canastas,36,1,36,15/09/2018 12:02:47 a. m.,General,Yadira Martinez,No,Interno,Efectivo,0
+13976,13976,8029,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,15/09/2018 12:02:47 a. m.,General,Yadira Martinez,No,Interno,Efectivo,0
+13976,13976,8029,809726063180x,4,Merceria,10x14x14mm acrilico beads 8oz pack,87.5,1,87.5,15/09/2018 12:02:47 a. m.,General,Yadira Martinez,No,Interno,Efectivo,0
+13976,13976,8029,809726059459x,3,Merceria,12.5 x 13x13mm cubo diamante acrilico,87.5,3,262.5,15/09/2018 12:02:47 a. m.,General,Yadira Martinez,No,Interno,Efectivo,0
