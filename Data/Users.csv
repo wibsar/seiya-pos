@@ -1,4 +1,4 @@
 Id,Nombre,Email,Telefono,FechaRegistro,NivelAcceso,Usuario,Password,UltimaSession
 1,Arturo Morales,armoag@gmail.com,6192077185,1/3/2018,Admin,armoag,1,1/3/2018
 2,Yadira Martinez,yadis_mm@hotmail.com,6198548883,1/3/2018,Avanzado,yadis12,123,1/3/2018
-3,Luis Morales,wichoi@gmail.com,66402983895,01/03/2018,Basico,wicho,wichiopass,01/03/2018
+3,Luis Morales,wichoi@gmail.com,66402983895,01/03/2018,Basico,wicho,wichopass,01/03/2018
