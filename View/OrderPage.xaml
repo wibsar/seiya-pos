@@ -111,7 +111,7 @@
                     <RowDefinition Height="4*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="Descripcion"></TextBlock>
-                <TextBox Grid.Row="1" Text="{Binding OrderTemporalItem.Description}" KeyUp="KeyUpNoSymbolsEvent" VerticalContentAlignment="Top"></TextBox>
+                <TextBox Grid.Row="1" Text="{Binding OrderTemporalItem.Description}" KeyUp="KeyUpNoSymbolsEvent" TextWrapping="Wrap" VerticalContentAlignment="Top"></TextBox>
             </Grid>
             <!-- Inputs for Product properties -->
         </Grid>

@@ -392,5 +392,8 @@
   <ItemGroup>
     <Resource Include="Resources\Images\grupos.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\LOGO WIBSAR.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
