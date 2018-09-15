@@ -229,7 +229,7 @@
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
             <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF0E801E" Foreground="White" Text="COMENTARIOS"></TextBlock>
-            <TextBox Grid.Row="1" Text="{Binding Comments, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+            <TextBox Grid.Row="1" Text="{Binding Comments, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" TextWrapping="Wrap"></TextBox>
         </Grid>
 
         <!-- Buttons for sales report type -->
