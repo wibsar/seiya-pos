@@ -22,23 +22,26 @@ namespace Seiya
         private string _expenseCategory;
         private PaymentTypeEnum _paymentType;
         private string _expensesFilePath;
+        private string _expensesHistoryFilePath;
         private string _user;
         private DateTime _date;
         #endregion
 
         #region Constructors
-        public Expense(string expensesFilePath) : base(expensesFilePath)
+        public Expense(string expensesFilePath, string expensesHistoryFilePath) : base(expensesFilePath)
         {
             //TODO: Check if path exists
             ExpensesFilePath = expensesFilePath;
+            ExpensesHistoryFilePath = expensesHistoryFilePath;
             LoadCsvToDataTable();
         }
 
-        public Expense(string expensesFilePath, int id, string user, string vendor, string description, decimal amount, 
+        public Expense(string expensesFilePath, string expensesHistoryFilePath, int id, string user, string vendor, string description, decimal amount, 
             CurrencyTypeEnum currencyType, PaymentTypeEnum paymentType, string expenseCategory = "General") : base(expensesFilePath)
         {
             Id = id;
             ExpensesFilePath = expensesFilePath;
+            ExpensesHistoryFilePath = expensesHistoryFilePath;
             User = user;
             Vendor = vendor;
             Description = description;
@@ -152,6 +155,19 @@ namespace Seiya
                 _expensesFilePath = value;
             }
         }
+
+        public string ExpensesHistoryFilePath
+        {
+            get
+            {
+                return _expensesHistoryFilePath;
+            }
+            set
+            {
+                _expensesHistoryFilePath = value;
+            }
+        }
+
         public string User
         {
             get
@@ -198,6 +214,7 @@ namespace Seiya
             try
             {
                 File.AppendAllText(ExpensesFilePath, data);
+                File.AppendAllText(ExpensesHistoryFilePath, data);
             }
             catch (Exception e)
             {
@@ -218,7 +235,7 @@ namespace Seiya
                 var allFields = base.DataTable.AsEnumerable();
                 foreach (var row in allFields)
                 {
-                    var expense = new Expense(ExpensesFilePath)
+                    var expense = new Expense(ExpensesFilePath, ExpensesHistoryFilePath)
                     {
                         Id = Int32.Parse(row["Id"].ToString()),
                         User = row["Usuario"].ToString(),
@@ -247,7 +264,7 @@ namespace Seiya
 
             foreach (var row in searchField1)
             {
-                var expense = new Expense(ExpensesFilePath)
+                var expense = new Expense(ExpensesFilePath, ExpensesHistoryFilePath)
                 {
                     Id = Int32.Parse(row["Usuario"].ToString()),
                     User = row["Usuario"].ToString(),
@@ -271,7 +288,7 @@ namespace Seiya
 
             foreach (var row in searchField2)
             {
-                var expense = new Expense(ExpensesFilePath)
+                var expense = new Expense(ExpensesFilePath, ExpensesHistoryFilePath)
                 {
                     Id = Int32.Parse(row["Usuario"].ToString()),
                     User = row["Usuario"].ToString(),

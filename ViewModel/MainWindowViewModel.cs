@@ -2429,7 +2429,7 @@ namespace Seiya
             switch ((string)parameter)
             {
                 case "expense_details":
-                    var temporalExpense = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName)
+                    var temporalExpense = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, Constants.DataFolderPath + Constants.ExpenseHistoryFileName)
                     {
                         Id = SelectedExpense.Id,
                         User = SelectedExpense.User,
@@ -2468,7 +2468,7 @@ namespace Seiya
                 case "expense_add":
                     SelectedExpense = null;    //Clear selected item in the user list
                     //Create new productt
-                    var temporalExpense = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName)
+                    var temporalExpense = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, Constants.DataFolderPath + Constants.ExpenseHistoryFileName)
                     {
                         Vendor = "",
                         TicketNumber = "",
@@ -2502,7 +2502,8 @@ namespace Seiya
         internal void Execute_ExpenseStartSearchCommand(object parameter)
         {
             //Inventory search method that returns a list of products for the datagrid
-            ExpensesSearchedEntries = new ObservableCollection<Expense>(new Expense(Constants.DataFolderPath + Constants.ExpenseFileName).Search(ExpensesSearchText));
+            ExpensesSearchedEntries = new ObservableCollection<Expense>(new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, 
+                Constants.DataFolderPath + Constants.ExpenseHistoryFileName).Search(ExpensesSearchText));
             ExpensesSearchText = "";
         }
         internal bool CanExecute_ExpenseStartSearchCommand(object parameter)

@@ -543,7 +543,7 @@ namespace Seiya
 
         private void CalculateExpenses()
         {
-            var expenses = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName);
+            var expenses = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, Constants.DataFolderPath + Constants.ExpenseHistoryFileName);
             expenses.GetTotal(out var expensesMxn, out var expensesUsd, out var expensesCashMxn, out var expensesCashUsd);
             ExpensesTotal = expensesMxn + expensesUsd * _pos.ExchangeRate;
             ExpensesCashTotal = expensesCashMxn + expensesCashUsd * _pos.ExchangeRate;
