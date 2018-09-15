@@ -51,5 +51,11 @@ namespace Seiya
                 MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
             }
         }
+
+        private void LoginPasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var password = LoginPasswordBox.Password;
+            MainWindowViewModel.GetInstance().LoginPasswordText = password;
+        }
     }
 }

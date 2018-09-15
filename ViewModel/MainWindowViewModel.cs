@@ -3254,7 +3254,9 @@ namespace Seiya
         }
         internal bool CanExecute_LoginCheckCommand(object parameter)
         {
-            return LoginUserNameText != null && LoginPasswordText != null && LoginPasswordText != "" && LoginPasswordText != "";
+            return
+                LoginUserNameText !=
+                null; //&& LoginPasswordText != null && LoginPasswordText != "" && LoginPasswordText != "";
         }
         #endregion
 
