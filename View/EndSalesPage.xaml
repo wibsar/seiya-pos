@@ -178,7 +178,7 @@
                 <TextBlock Grid.Row="7" Text="Devoluciones Efectivo:" ></TextBlock>
                 <TextBlock Grid.Row="8" Text="Devoluciones Tarjeta:" ></TextBlock>
                 <TextBlock Grid.Row="9" Text="Caja Turno Anterior:"/>
-                <TextBlock Grid.Row="10" Text="Total Venta" ></TextBlock>
+                <TextBlock Grid.Row="10" Text="Balance de Efectivo" ></TextBlock>
                 <TextBlock Grid.Row="11" Text="Diferencia"/>
                 <TextBlock Grid.Row="12" Text="Puntos Usados:" ></TextBlock>
                 <TextBlock Grid.Row="13" Text="Caja Chica Nueva" ></TextBlock>
@@ -214,7 +214,7 @@
                 <TextBlock Grid.Row="7" Text="{Binding ReturnsCashTotal}"></TextBlock>
                 <TextBlock Grid.Row="8" Text="{Binding ReturnsCardTotal}"></TextBlock>
                 <TextBlock Grid.Row="9" Text="{Binding RegisterPreviousCash}"></TextBlock>
-                <TextBlock Grid.Row="10" Text="{Binding TotalSales}"></TextBlock>
+                <TextBlock Grid.Row="10" Text="{Binding MxnCashBalance}"></TextBlock>
                 <TextBlock Grid.Row="11" Text="{Binding Delta}"></TextBlock>
                 <TextBlock Grid.Row="12" Text="{Binding PointsTotalUsed}"></TextBlock>
                 <TextBox Grid.Row="13" Text="{Binding RegisterNewCash, UpdateSourceTrigger=PropertyChanged}"></TextBox>

@@ -356,15 +356,17 @@ namespace Seiya
             get { return _code; }
             set
             {
-                var product = _inventoryInstance.GetProduct(value + "x");
-                if (product.Code != null)
-                {
-                    product.LastQuantitySold = 1;
-                    AddProductToCart(product);
-                    _code = string.Empty;
-                }
-                else
-                    _code = value;
+                //var product = _inventoryInstance.GetProduct(value + "x");
+                //if (product.Code != null)
+                //{
+                //    product.LastQuantitySold = 1;
+                //    AddProductToCart(product);
+                //    _code = string.Empty;
+                //}
+                //else
+                //    _code = value;
+
+                _code = value;
                 OnPropertyChanged("Code");
             }
         }
@@ -1380,6 +1382,7 @@ namespace Seiya
             {
                 product.LastQuantitySold = 1;
                 AddProductToCart(product);
+                Code = "";
             }
 
             //TODO: Turn red if it is not found
@@ -1397,7 +1400,8 @@ namespace Seiya
 
         internal void Execute_CodeLeftClickClearCommand(object parameter)
         {
-            Code = string.Empty;
+            Code = "";
+            
         }
         internal bool CanExecute_CodeLeftClickClearCommand(object parameter)
         {
@@ -1644,12 +1648,12 @@ namespace Seiya
                 var tempTotal = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();
                 if (CurrentCustomer.PointsAvailable > Convert.ToDouble(tempTotal))
                 {
-                    productMimic = Product.Add(CurrentCustomer.Name, "Descuento P", Convert.ToDecimal(tempTotal - 1) * -1, 1);
+                    productMimic = Product.Add(CurrentCustomer.Name, "General", Convert.ToDecimal(tempTotal - 1) * -1, 1);
                     PaymentPointsInUse = Convert.ToDouble(tempTotal - 1);
                 }
                 else
                 {
-                    productMimic = Product.Add(CurrentCustomer.Name, "Descuento P ", Convert.ToDecimal(CurrentCustomer.PointsAvailable) * -1, 1);
+                    productMimic = Product.Add(CurrentCustomer.Name, "General", Convert.ToDecimal(CurrentCustomer.PointsAvailable) * -1, 1);
                     PaymentPointsInUse = CurrentCustomer.PointsAvailable;
                 }
                 MainWindowViewModel.GetInstance().AddManualProductToCart(productMimic);

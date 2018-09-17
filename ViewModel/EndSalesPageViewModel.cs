@@ -42,6 +42,7 @@ namespace Seiya
         private decimal _registerNewCash;
         private decimal _returnsCashTotal;
         private decimal _returnsCardTotal;
+        private decimal _mxnCashBalance;
         private int _returnsTotalItems;
         private decimal _delta;
         private string _comments;
@@ -208,6 +209,16 @@ namespace Seiya
             set
             {
                 _delta = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public decimal MxnCashBalance
+        {
+            get { return _mxnCashBalance; }
+            set
+            {
+                _mxnCashBalance = value;
                 OnPropertyChanged();
             }
         }
@@ -440,9 +451,9 @@ namespace Seiya
         {
             _pos = Pos.GetInstance(Constants.DataFolderPath + Constants.PosDataFileName);
             //Calculate sales from transactions
-            CalculateSales();
             CalculateInitialCash();
             CalculateExpenses();
+            CalculateSales();
             CalculateDelta();
         }
 
@@ -457,8 +468,8 @@ namespace Seiya
         {
             EndOfSalesType = "Z";
             SaveRegisterCashAmount();
-            CalculateDelta();
             CalculateSales();
+            CalculateDelta();
             CollectEndOfSalesReceiptInformation();
             //Record End Of Sales Transaction in db
             Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.MasterEndOfDaySalesFileName,
@@ -484,8 +495,8 @@ namespace Seiya
         {
             EndOfSalesType = "X";
             SaveRegisterCashAmount();
-            CalculateDelta();
             CalculateSales();
+            CalculateDelta();
             CollectEndOfSalesReceiptInformation();
             //Print Receipt
             PrintReceipt();
@@ -508,6 +519,8 @@ namespace Seiya
             ReturnsTotalItems = transactionData.TotalReturnItems;
             OtherTotalSales = transactionData.OtherTotal;
             TotalSales = transactionData.TotalAmountSold;
+
+            MxnCashBalance = CashTotalSales - ReturnsCashTotal - ExpensesCashTotal;
         }
 
         private void CollectEndOfSalesReceiptInformation()
@@ -556,7 +569,7 @@ namespace Seiya
             var cashUsd = UsdDollar1 + UsdDollar5*5 + UsdDollar10*10 + UsdDollar20*20 + UsdDollar50*50 + UsdDollar100*100 + UsdDollarCoinsTotal;
             var totalCash = cashMxn + cashUsd * _pos.ExchangeRate;
             //Calculate delta
-            Delta = (totalCash + ExpensesCashTotal - RegisterPreviousCash) - CashTotalSales;
+            Delta = totalCash + ExpensesCashTotal + ReturnsCashTotal - RegisterPreviousCash - CashTotalSales;
         }
 
         private void CalculateInitialCash()
@@ -604,7 +617,7 @@ namespace Seiya
 
         internal bool CanExecute_GenerateEndOfDaySalesReportCommand(object parameter)
         {
-            return true;
+            return RegisterNewCash != 0;
         }
         #endregion
 

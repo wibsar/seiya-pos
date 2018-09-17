@@ -209,7 +209,7 @@ namespace Seiya
         public void Register()
         {
             var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}", Id.ToString(), User, Vendor, TicketNumber, Description, Amount.ToString(), 
-                CurrencyType.ToString(), PaymentType.ToString(), ExpenseCategory, DateTime.Now);
+                CurrencyType.ToString(), PaymentType.ToString(), ExpenseCategory, DateTime.Now) + Environment.NewLine;
             
             try
             {

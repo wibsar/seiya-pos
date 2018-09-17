@@ -51,5 +51,11 @@ namespace Seiya
                 MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
             }
         }
+
+        private void TxtCode_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            //Clear textbox when it is entered (left click)
+            ((TextBox) sender).Text = "";
+        }
     }
 }

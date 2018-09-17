@@ -520,6 +520,11 @@ namespace Seiya
                 transactionData.TotalItemsSold += itemsNumber;
             }
 
+            //Subtract returns
+            transactionData.TotalAmountSold = transactionData.TotalAmountSold - transactionData.ReturnsCash - transactionData.ReturnsCard;
+
+            //Subtrack pts
+            transactionData.CashTotal = transactionData.CashTotal - Convert.ToDecimal(transactionData.PointsTotal);
             //Get first and last receipt number
             if (data.Rows.Count > 1)
             {

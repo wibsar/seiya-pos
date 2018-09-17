@@ -61,17 +61,12 @@
         <Grid Grid.Row="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width=".7*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>   
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Image Source="C:\Projects\seiya-pos\Resources\Images\LOGO WIBSAR.png" Margin=" 30,30,0,30" HorizontalAlignment="Right"></Image>
             <TextBlock Grid.Column="1" FontSize="20" Margin="10,0,0,0">
-            <Hyperlink NavigateUri="http://wibsar.com">www.wibsar.com</Hyperlink>
-    
+                <Hyperlink NavigateUri="http://wibsar.com" RequestNavigate="Hyperlink_OnRequestNavigate">www.wibsar.com</Hyperlink>
             </TextBlock>
-
-
         </Grid>
-        
-        
     </Grid>
 </Page>

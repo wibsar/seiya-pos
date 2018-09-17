@@ -294,16 +294,16 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="txtCode" Grid.Column="0" Text="{Binding Code}" VerticalAlignment="Center" Height="30"  Foreground="Red">
+                <TextBox x:Name="txtCode" Grid.Column="0" Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" VerticalAlignment="Center" Height="30"  Foreground="Red">
                     <TextBox.InputBindings>
                         <MouseBinding MouseAction="LeftClick" Command="{Binding CodeLeftClickClearCommand}">
                         </MouseBinding>
+                        <KeyBinding Command="{Binding SearchCodeCommand}" Key="Enter" CommandParameter="{Binding Code}"></KeyBinding>
                     </TextBox.InputBindings>
                 </TextBox>
                 <Button Command="{Binding SearchCodeCommand}" CommandParameter="{Binding Code}" Grid.Column="1" >
                     <Image Source="C:\Projects\seiya-pos\Resources\Images\lupa inactiva.png" Margin="5"></Image>
                 </Button>
-
             </Grid>
         </Grid>
     </Grid>
