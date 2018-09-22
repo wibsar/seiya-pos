@@ -1576,8 +1576,6 @@ namespace Seiya
 
         #endregion
 
-
-
         #region PaymentBillClickCommand
         public ICommand PaymentBillClickCommand { get { return _paymentBillClickCommand ?? (_paymentBillClickCommand = new DelegateCommand(Execute_PaymentBillClickCommand, CanExecute_PaymentBillClickCommand)); } }
         private ICommand _paymentBillClickCommand;
@@ -1996,7 +1994,7 @@ namespace Seiya
                         AmountSold = 0M,
                         Category = "",
                         Cost = 0M,
-                        CostCurrency = "MXN",
+                        CostCurrency = CurrencyTypeEnum.MXN,
                         Description = "",
                         ImageName = "NA.jpg",
                         InternalQuantity = 0,
@@ -2007,7 +2005,7 @@ namespace Seiya
                         MinimumStockQuantity = 1,
                         Name = "",
                         Price = 0M,
-                        PriceCurrency = "MXN",
+                        PriceCurrency = CurrencyTypeEnum.MXN,
                         Provider = "",
                         ProviderProductId = "",
                         QuantitySold = 0,

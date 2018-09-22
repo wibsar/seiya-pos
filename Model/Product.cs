@@ -31,9 +31,9 @@ namespace Seiya
         public string Brand { get; set; }
         public string Category { get; set; }
         public decimal Cost { get; set; }
-        public string CostCurrency { get; set; }
+        public CurrencyTypeEnum CostCurrency { get; set; }
         public decimal Price { get; set; }
-        public string PriceCurrency { get; set; }
+        public CurrencyTypeEnum PriceCurrency { get; set; }
         public int MinimumStockQuantity { get; set; }
         public decimal AmountSold { get; set; }
         public int InternalQuantity { get; set; }
@@ -171,21 +171,21 @@ namespace Seiya
         }
 
         //Calculate product margin
-        public decimal GetMargin()
+        public decimal GetMargin(decimal exchangeRate)
         {
             if (Price > 0)
             {
-                return 100M * this.GetProfit() / Price;
+                return 100M * this.GetProfit(exchangeRate) / Price;
             }
             return -1;
         }
 
         //Calculate product margin
-        public decimal GetProfit()
+        public decimal GetProfit(decimal exchangeRate)
         {
-            if (CostCurrency == "USD")
+            if (CostCurrency == CurrencyTypeEnum.USD)
             {
-                return Price - Cost * 20;
+                return Price - Cost * exchangeRate;
             }
             return Price - Cost;
         }

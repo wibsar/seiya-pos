@@ -54,6 +54,7 @@ namespace Seiya
         #endregion
 
         #region Properties
+
         public int Id
         {
             get
@@ -98,7 +99,6 @@ namespace Seiya
                 _currency = value;
             }
         }
-
         public string CurrencyTypeString
         {
             get
@@ -139,7 +139,6 @@ namespace Seiya
                 _paymentType = value;
             }
         }
-
         public string PaymentTypeString
         {
             get { return _paymentType.ToString(); }
@@ -155,7 +154,6 @@ namespace Seiya
                 _expensesFilePath = value;
             }
         }
-
         public string ExpensesHistoryFilePath
         {
             get
@@ -167,7 +165,6 @@ namespace Seiya
                 _expensesHistoryFilePath = value;
             }
         }
-
         public string User
         {
             get

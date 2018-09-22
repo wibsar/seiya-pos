@@ -182,9 +182,9 @@ namespace Seiya
                             Category = row["Categoria"].ToString(),
                             LastPurchaseDate = Convert.ToDateTime(row["UltimoPedidoFecha"].ToString()),
                             Cost = Decimal.Parse(row["Costo"].ToString()),
-                            CostCurrency = row["CostoMoneda"].ToString(),
+                            CostCurrency = row["CostoMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN,
                             Price = decimal.Parse(row["Precio"].ToString()),
-                            PriceCurrency = row["PrecioMoneda"].ToString(),
+                            PriceCurrency = row["PrecioMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN,
                             InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                             QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
                             AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
@@ -231,9 +231,9 @@ namespace Seiya
                             Category = row["Categoria"].ToString(),
                             LastPurchaseDate = Convert.ToDateTime(row["UltimoPedidoFecha"].ToString()),
                             Cost = Decimal.Parse(row["Costo"].ToString()),
-                            CostCurrency = row["CostoMoneda"].ToString(),
+                            CostCurrency = row["CostoMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN,
                             Price = decimal.Parse(row["Precio"].ToString()),
-                            PriceCurrency = row["PrecioMoneda"].ToString(),
+                            PriceCurrency = row["PrecioMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN,
                             InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                             QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
                             AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
@@ -395,9 +395,7 @@ namespace Seiya
                         Category = row["Categoria"].ToString(),
                         LastPurchaseDate = Convert.ToDateTime(row["UltimoPedidoFecha"].ToString()),
                         Cost = Decimal.Parse(row["Costo"].ToString()),
-                        CostCurrency = row["CostoMoneda"].ToString(),
                         Price = decimal.Parse(row["Precio"].ToString()),
-                        PriceCurrency = row["PrecioMoneda"].ToString(),
                         InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                         QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
                         AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
@@ -407,6 +405,10 @@ namespace Seiya
                         LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString()),
                         ImageName = row["Imagen"].ToString()
                     };
+
+                    product.CostCurrency = row["CostoMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN;
+                    product.PriceCurrency = row["PrecioMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN;
+
                     products.Add(product);
                 }
 
@@ -429,9 +431,7 @@ namespace Seiya
                     Category = row["Categoria"].ToString(),
                     LastPurchaseDate = Convert.ToDateTime(row["UltimoPedidoFecha"].ToString()),
                     Cost = Decimal.Parse(row["Costo"].ToString()),
-                    CostCurrency = row["CostoMoneda"].ToString(),
                     Price = decimal.Parse(row["Precio"].ToString()),
-                    PriceCurrency = row["PrecioMoneda"].ToString(),
                     InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                     QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
                     AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
@@ -441,6 +441,9 @@ namespace Seiya
                     LastSaleDate = Convert.ToDateTime(row["UltimaTransaccionFecha"].ToString()),
                     ImageName = row["Imagen"].ToString()
                 };
+
+                product.CostCurrency = row["CostoMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN;
+                product.PriceCurrency = row["PrecioMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN;
 
                 products.Add(product);
             }
@@ -458,9 +461,7 @@ namespace Seiya
                     Category = row["Categoria"].ToString(),
                     LastPurchaseDate = Convert.ToDateTime(row["UltimoPedidoFecha"].ToString()),
                     Cost = Decimal.Parse(row["Costo"].ToString()),
-                    CostCurrency = row["CostoMoneda"].ToString(),
                     Price = decimal.Parse(row["Precio"].ToString()),
-                    PriceCurrency = row["PrecioMoneda"].ToString(),
                     InternalQuantity = Int32.Parse(row["CantidadInternoHistorial"].ToString()),
                     QuantitySold = Int32.Parse(row["CantidadVendidoHistorial"].ToString()),
                     AmountSold = decimal.Parse(row["VendidoHistorial"].ToString()),
@@ -471,8 +472,11 @@ namespace Seiya
                     ImageName = row["Imagen"].ToString()
                 };
 
+                product.CostCurrency = row["CostoMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN;
+                product.PriceCurrency = row["PrecioMoneda"].ToString().ToUpper() == "USD" ? CurrencyTypeEnum.USD : CurrencyTypeEnum.MXN;
+
                 //Add if it does not exist already
-                if(!products.Exists(x => x.Code == product.Code))
+                if (!products.Exists(x => x.Code == product.Code))
                     products.Add(product);
             }
 
