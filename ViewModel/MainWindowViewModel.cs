@@ -20,6 +20,7 @@ namespace Seiya
         //Main instances
         private static Inventory _inventoryInstance = null;
         private static MainWindowViewModel _appInstance = null;
+        private static PosGeneralPageViewModel _posGeneralInstance = null;
         private static Pos _posInstance = null;
         private static User _userInstance = null;
         private static Expense _expenseInstance = null;
@@ -1546,7 +1547,7 @@ namespace Seiya
             //TODO: Check to make sure the item is found, otherwise show error message
             //Create a new object for every product 
             var product = new Product((Product) parameter) {LastQuantitySold = 1};
-            AddManualProductToCart(product);
+            AddProductToCart(product);
         }
 
         internal bool CanExecute_SelectItemCommand(object parameter)
@@ -1893,6 +1894,8 @@ namespace Seiya
             CategoryCatalog.UpdateCategoryListFile(Constants.DataFolderPath + Constants.CategoryListFileName, CurrentCategoryList.ToList());
             //Reload categories
             CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
+            PosGeneralPageViewModel.GetInstance().CategoriesList = CategoriesList;
+
         }
         internal bool CanExecute_SaveChangesCategoryListCommand(object parameter)
         {
@@ -3274,16 +3277,24 @@ namespace Seiya
         {
             //new
             //Check if product already exists in the file
-            for (var index = 0; index < CurrentCartProducts.Count; index++)
+            if (product.Price != 0M)
             {
-                if (product.Code == null || (product.Code != _currentCartProducts[index].Code)) continue;
-                AddOneAdditinoalQuantityToProductInCart(CurrentCartProducts[index], index);
+                for (var index = 0; index < CurrentCartProducts.Count; index++)
+                {
+                    if (product.Code == null || (product.Code != _currentCartProducts[index].Code) || product.Price == 0M) continue;
+                    AddOneAdditinoalQuantityToProductInCart(CurrentCartProducts[index], index);
+                    PaymentTotalMXN = CalculateCurrentCartTotal();
+                    return;
+                }
+                //end test
+                CurrentCartProducts.Insert(0, product);
                 PaymentTotalMXN = CalculateCurrentCartTotal();
-                return;
             }
-            //end test
-            CurrentCartProducts.Insert(0, product);
-            PaymentTotalMXN = CalculateCurrentCartTotal();
+            else
+            {
+                PosGeneralPageViewModel.GetInstance().ManualProduct = product;
+                CurrentPage = "\\View\\PosGeneralPage.xaml";
+            }
         }
 
         /// <summary>
@@ -3293,15 +3304,23 @@ namespace Seiya
         public void AddManualProductToCart(Product product)
         {
             //Check if product already exists in the file
-            for (var index = 0; index < CurrentCartProducts.Count; index++)
+            if (product.Price != 0M)
             {
-                if (product.Code == null || (product.Code != _currentCartProducts[index].Code)) continue;
-                AddOneAdditinoalQuantityToProductInCart(_currentCartProducts[index], index);
+                //for (var index = 0; index < CurrentCartProducts.Count; index++)
+                //{
+                //    if (product.Code == null || (product.Code != _currentCartProducts[index].Code) || product.Price == 0M) continue;
+                //    AddOneAdditinoalQuantityToProductInCart(_currentCartProducts[index], index);
+                //    PaymentTotalMXN = CalculateCurrentCartTotal();
+                //    return;
+                //}
+                CurrentCartProducts.Insert(0, product);
                 PaymentTotalMXN = CalculateCurrentCartTotal();
-                return;
             }
-            CurrentCartProducts.Insert(0, product);
-            PaymentTotalMXN = CalculateCurrentCartTotal();
+            else
+            {
+                PosGeneralPageViewModel.GetInstance().ManualProduct = product;
+                CurrentPage = "\\View\\PosGeneralPage.xaml";
+            }
         }
 
         public void RemoveProductFromCart(Product product)
@@ -3403,6 +3422,8 @@ namespace Seiya
 
                 //update inventory for each product, if applicatable
                 UpdateInventory(product, transactionDate, saleType);
+
+                //TODO: Check if the same product is already in the cart, if it is, need to update whole inventary before adding it again
 
                 //Total
                 totalDue += product.Price * product.LastQuantitySold;

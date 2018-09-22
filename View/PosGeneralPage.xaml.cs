@@ -23,7 +23,7 @@ namespace Seiya
         public PosGeneralPage()
         {
             InitializeComponent();
-            this.DataContext = new PosGeneralPageViewModel();
+            this.DataContext = PosGeneralPageViewModel.GetInstance();
         }
 
         private void KeyUpNoSymbolsEvent(object sender, KeyEventArgs e)

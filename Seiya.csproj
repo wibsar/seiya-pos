@@ -91,10 +91,8 @@
     <Compile Include="Utilities\Notification.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\EndSalesPageViewModel.cs" />
-    <Compile Include="ViewModel\InventoryMainPageViewModel.cs" />
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\PosGeneralPageViewModel.cs" />
-    <Compile Include="ViewModel\PosMenuPageViewModel.cs" />
     <Compile Include="ViewModel\ProductsPageViewModel.cs" />
     <Compile Include="ViewModel\ReturnsViewModel.cs" />
     <Compile Include="ViewModel\SystemViewModel.cs" />

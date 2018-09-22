@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
@@ -18,6 +19,7 @@ namespace Seiya
     {
         #region Fields
 
+        private static PosGeneralPageViewModel _posGeneralInstance;
         private string _price;
         private int _quantity = 1;
         private string _description;
@@ -31,23 +33,23 @@ namespace Seiya
 
         #region Constructors
         /// <summary>
-        /// Constructor; loads the product if there was one as input but did not clear before closing page
+        /// Private constructor; loads the product if there was one as input but did not clear before closing page
         /// </summary>
-        public PosGeneralPageViewModel()
+        private PosGeneralPageViewModel()
         {
-            //Load category list
-            CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
+            UpdateCategoriesList();
+        }
 
-            if (ManualProduct == null) return;
+        /// <summary>
+        /// Constructor using singleton
+        /// </summary>
+        /// <returns></returns>
+        public static PosGeneralPageViewModel GetInstance()
+        {
+            if(_posGeneralInstance == null)
+                _posGeneralInstance = new PosGeneralPageViewModel();
 
-            //var mainInstance = MainWindowViewModel.GetInstance();
-            //if (mainInstance.SelectedCartProduct != null)
-            //{
-            //    Price = mainInstance.SelectedCartProduct.Price.ToString();
-            //    Quantity = mainInstance.SelectedCartProduct.LastQuantitySold;
-            //    Description = mainInstance.SelectedCartProduct.Description;
-            //    Category = mainInstance.SelectedCartProduct.Category;
-            //}
+            return _posGeneralInstance;
         }
 
         #endregion
@@ -147,10 +149,21 @@ namespace Seiya
         /// <summary>
         /// Property for the manually created product
         /// </summary>
-        public static Product ManualProduct
+        public Product ManualProduct
         {
             get { return _manualProduct; }
-            set { _manualProduct = value; }
+            set
+            {
+                _manualProduct = value;
+                if (_manualProduct != null)
+                {
+                    Description = _manualProduct.Description;
+                    Price = _manualProduct.Price.ToString();
+                    Category = _manualProduct.Category;
+                    Quantity = _manualProduct.LastQuantitySold;
+                    //TODO: Add MXN or USD HERE once implemented
+                }
+            }
         }
 
         #endregion
@@ -195,7 +208,17 @@ namespace Seiya
         {
             if (Category != null && Price != null && Price != "0")
             {
-                ManualProduct = Product.Add(Description, Category.ToString(), decimal.Parse(Price), Quantity);
+                if (ManualProduct == null)
+                {
+                    ManualProduct = Product.Add(Description, Category.ToString(), decimal.Parse(Price), Quantity);
+                }
+                else
+                {
+                    ManualProduct.Price = decimal.Parse(Price);
+                    ManualProduct.Description = Description;
+                    ManualProduct.Category = Category;
+                    ManualProduct.LastQuantitySold = Quantity;
+                }
             }
             //MainWindowViewModel.AddManualProductToCart(ManualProduct); Changed from static
             var main = MainWindowViewModel.GetInstance();
@@ -205,6 +228,7 @@ namespace Seiya
             Price = "0";
             Description = "";
             Quantity = 1;
+            ManualProduct = null;
 
         }
 
@@ -254,8 +278,16 @@ namespace Seiya
             Description = string.Empty;
             Category = null;
             Clear = false;
+            ManualProduct = null;
         }
 
+        /// <summary>
+        /// Updates the list of categories from database
+        /// </summary>
+        public void UpdateCategoriesList()
+        {
+            CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
+        }
         #endregion
     }
 }
