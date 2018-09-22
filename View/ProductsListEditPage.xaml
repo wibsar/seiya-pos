@@ -155,7 +155,7 @@
                             <TextBlock Grid.Column="1" Text="Subir" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="100"  Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Command="{Binding MoveDownListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="0,0,2.5,0">
+                    <Button Grid.Column="1" Command="{Binding MoveDownListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="0,0,0,2.5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>

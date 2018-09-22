@@ -19,18 +19,12 @@ namespace Seiya
     /// <summary>
     /// Lógica de interacción para ExchangeRatePage.xaml
     /// </summary>
-    public partial class TechSupportPage : Page
+    public partial class ExchangeRatePage : Page
     {
-        public TechSupportPage()
+        public ExchangeRatePage()
         {
             InitializeComponent();
             DataContext = MainWindowViewModel.GetInstance();
-        }
-
-        private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
         }
     }
 }

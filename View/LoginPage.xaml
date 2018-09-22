@@ -34,16 +34,16 @@
     </Page.Resources>
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="5*"/>
+            <RowDefinition Height="7*"/>
             <RowDefinition Height="2*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
-            <RowDefinition Height="0.5*"/>
-            <RowDefinition Height="2*"/>
+            <RowDefinition Height=".5*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height=".5*"/>
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Logo Wibsar Retail.png" MaxWidth="500"/>
-        <TextBlock Grid.Row="1" Text="iniciar sesion" Foreground="#2C5066" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"/>
+        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Logo Wibsar Retail.png" MaxWidth="500" Margin="50"/>
+        <TextBlock Grid.Row="1" Text="Iniciar Sesión" Foreground="#2C5066" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="26"/>
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
