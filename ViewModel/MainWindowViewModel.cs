@@ -1644,18 +1644,18 @@ namespace Seiya
             if (CurrentCustomer.PointsAvailable >= 1)
             {
                 Product productMimic;
-                var tempTotal = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();
+                var tempTotal = CalculateCurrentCartTotal();
                 if (CurrentCustomer.PointsAvailable > Convert.ToDouble(tempTotal))
                 {
-                    productMimic = Product.Add(CurrentCustomer.Name, "General", Convert.ToDecimal(tempTotal - 1) * -1, 1);
+                    productMimic = Product.Add("Puntos Descuento", "Puntos", Convert.ToDecimal(tempTotal - 1) * -1, 1);
                     PaymentPointsInUse = Convert.ToDouble(tempTotal - 1);
                 }
                 else
                 {
-                    productMimic = Product.Add(CurrentCustomer.Name, "General", Convert.ToDecimal(CurrentCustomer.PointsAvailable) * -1, 1);
+                    productMimic = Product.Add("Puntos Descuento", "Puntos", Convert.ToDecimal(CurrentCustomer.PointsAvailable) * -1, 1);
                     PaymentPointsInUse = CurrentCustomer.PointsAvailable;
                 }
-                MainWindowViewModel.GetInstance().AddManualProductToCart(productMimic);
+                AddManualProductToCart(productMimic);
             }
         }
 

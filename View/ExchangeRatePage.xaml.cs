@@ -16,9 +16,6 @@ using System.Windows.Shapes;
 
 namespace Seiya
 {
-    /// <summary>
-    /// Lógica de interacción para ExchangeRatePage.xaml
-    /// </summary>
     public partial class ExchangeRatePage : Page
     {
         public ExchangeRatePage()

@@ -450,6 +450,9 @@ namespace Seiya
 
             var categories = CategoryCatalog.GetList(posData.Catalog);
 
+            //Add points category
+            categories.Add("Puntos");
+
             //Get each category
             foreach (var category in categories)
             {
@@ -463,10 +466,13 @@ namespace Seiya
                     if (row["CategoriaProducto"].ToString() == category)
                     {
                         amount += decimal.Parse(row["TotalVendido"].ToString());
-                        itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
+
+                        if(category != "Puntos")
+                            itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
 
                         //Get payment method
-                        if (row["Descripcion"].ToString() != "Puntos Descuento" && row["TipoVenta"].ToString() != "DevolucionEfectivo" && row["TipoVenta"].ToString() != "DevolucionTarjeta")
+                        //row["Descripcion"].ToString() != "Puntos Descuento" && 
+                        if (row["TipoVenta"].ToString() != "DevolucionEfectivo" && row["TipoVenta"].ToString() != "DevolucionTarjeta")
                         {
                             switch (row["MetodoPago"].ToString())
                             {
@@ -524,7 +530,7 @@ namespace Seiya
             transactionData.TotalAmountSold = transactionData.TotalAmountSold - transactionData.ReturnsCash - transactionData.ReturnsCard;
 
             //Subtrack pts
-            transactionData.CashTotal = transactionData.CashTotal - Convert.ToDecimal(transactionData.PointsTotal);
+            transactionData.CashTotal = transactionData.CashTotal;// - Convert.ToDecimal(transactionData.PointsTotal);
             //Get first and last receipt number
             if (data.Rows.Count > 1)
             {
@@ -548,8 +554,6 @@ namespace Seiya
             File.AppendAllText(filePath, data);
         }
     }
-
-
 
     public enum PaymentTypeEnum
     {

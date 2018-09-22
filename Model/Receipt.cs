@@ -204,15 +204,20 @@ namespace Seiya
 
             foreach (var product in _products)
             {
+                //TODO: poner descripcion en vez de solo la categoria como default o opcion a elegir
                 string productDescription = product.Category.PadRight(15);
                 string productTotal = string.Format("{0:c}", product.Price);
                 string productLine = productDescription + productTotal;
+
                 //product line
                 graphic.DrawString(product.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
 
                 offset = offset + (int)fontHeight;// + 5;
 
-                itemsNumber = itemsNumber + product.LastQuantitySold;
+                if (product.Category != "Puntos")
+                {
+                    itemsNumber = itemsNumber + product.LastQuantitySold;
+                }
             }
 
             offset = offset + 20;

@@ -16,7 +16,6 @@ using System.Windows.Shapes;
 
 namespace Seiya
 {
-    
     public partial class TechSupportPage : Page
     {
         public TechSupportPage()
@@ -28,12 +27,6 @@ namespace Seiya
         private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
-            e.Handled = true;
-        }
-
-        private void OnNavigate(object sender, RequestNavigateEventArgs e)
-        {
-            Process.Start(e.Uri.AbsoluteUri);
             e.Handled = true;
         }
     }
