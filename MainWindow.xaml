@@ -8,7 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
-        Title="MainWindow" Height="700" Width="1050" FontFamily=".\Resources\Fonts\#Comfortaa">
+        Title="Wibsar Retail" Height="700" Width="1050" FontFamily=".\Resources\Fonts\#Comfortaa">
 
     <Window.Resources>
         <Style TargetType="Page">
