@@ -396,5 +396,8 @@
   <ItemGroup>
     <Resource Include="Resources\Images\mail.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\tulogo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

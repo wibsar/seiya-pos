@@ -46,7 +46,9 @@
         </Grid.RowDefinitions>
 
         <!-- Grid for header section -->
-        <Grid Column="0" Row="0">
+        <Grid Column="0" Row="0" Grid.ColumnSpan="2">
+            <!-- Client logo -->
+            <Image Source="C:\Projects\seiya-pos\Resources\Images\tulogo.png" HorizontalAlignment="Center" MaxWidth="500"  ></Image>
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>                    
@@ -60,6 +62,7 @@
 
                     </Grid>
                 </Button>
+               
                 
             </Grid>
         </Grid>
@@ -302,7 +305,7 @@
                     </TextBox.InputBindings>
                 </TextBox>
                 <Button Command="{Binding SearchCodeCommand}" CommandParameter="{Binding Code}" Grid.Column="1" >
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\lupa inactiva.png" Margin="5"></Image>
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png" Margin="5"></Image>
                 </Button>
             </Grid>
         </Grid>
