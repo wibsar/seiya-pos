@@ -415,6 +415,7 @@
     <Resource Include="Resources\Images\mail.png" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Resource Include="icon retail.ico" />
   </ItemGroup>
   <ItemGroup>
@@ -428,6 +429,9 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+=======
+    <Resource Include="Resources\Images\tulogo.png" />
+>>>>>>> 07d57987d75567e04051cfc57697804749204d35
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
