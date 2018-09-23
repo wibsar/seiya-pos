@@ -128,5 +128,26 @@ namespace Seiya
             }
             return strings;
         }
+
+        public static string FirstLetterUpperConverter(string input)
+        {
+            var newCategory = input.ToString().ToCharArray();
+            string formattedCategory = null;
+            string newString = "";
+            try
+            {
+                var upperLetter = char.ToUpper(newCategory[0]);
+                newCategory[0] = upperLetter;
+                formattedCategory = new string(newCategory);
+            }
+            catch (Exception e)
+            {
+
+            }
+            if (formattedCategory != null)
+                newString = formattedCategory;
+
+            return newString;
+        }
     }
 }

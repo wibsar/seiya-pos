@@ -242,7 +242,7 @@ namespace Seiya
             get { return _newCategoryItem; }
             set
             {
-                _newCategoryItem = Formatter.SanitizeInput(value); ;
+                _newCategoryItem = Formatter.SanitizeInput(value);
                 OnPropertyChanged("NewCategoryItem");
             }
         }
@@ -1875,8 +1875,17 @@ namespace Seiya
 
         internal void Execute_DeleteCategoryItemCommand(object parameter)
         {
-            if(CurrentCategoryList.Count > 1)
-                CurrentCategoryList.RemoveAt((int)parameter);
+            if (CurrentCategoryList.Count > 1)
+            {
+                if (CurrentCategoryList[(int)parameter] != "general" && CurrentCategoryList[(int)parameter] != "General")
+                {
+                    CurrentCategoryList.RemoveAt((int)parameter);
+                }
+                else
+                {
+                    Code = "No se puede remover";
+                }
+            }
         }
         internal bool CanExecute_DeleteCategoryItemCommand(object parameter)
         {
@@ -1910,8 +1919,9 @@ namespace Seiya
 
         internal void Execute_AddCategoryListCommand(object parameter)
         {
-            if(!CurrentCategoryList.Contains(parameter.ToString()))
-               CurrentCategoryList.Add(parameter.ToString());
+            //Format the string before adding it to the list
+            if (!CurrentCategoryList.Contains(Formatter.FirstLetterUpperConverter(NewCategoryItem)))
+                CurrentCategoryList.Add(Formatter.FirstLetterUpperConverter(NewCategoryItem));
         }
         internal bool CanExecute_AddCategoryListCommand(object parameter)
         {
@@ -3275,10 +3285,10 @@ namespace Seiya
 
         public void AddProductToCart(Product product)
         {
-            //new
             //Check if product already exists in the file
             if (product.Price != 0M)
             {
+                if(!CategoriesList.Contains(product.Category)) product.Category = "General";
                 for (var index = 0; index < CurrentCartProducts.Count; index++)
                 {
                     if (product.Code == null || (product.Code != _currentCartProducts[index].Code) || product.Price == 0M) continue;
@@ -3303,16 +3313,10 @@ namespace Seiya
         /// <param name="product"></param>
         public void AddManualProductToCart(Product product)
         {
+            if (!CategoriesList.Contains(product.Category)) product.Category = "General";
             //Check if product already exists in the file
             if (product.Price != 0M)
             {
-                //for (var index = 0; index < CurrentCartProducts.Count; index++)
-                //{
-                //    if (product.Code == null || (product.Code != _currentCartProducts[index].Code) || product.Price == 0M) continue;
-                //    AddOneAdditinoalQuantityToProductInCart(_currentCartProducts[index], index);
-                //    PaymentTotalMXN = CalculateCurrentCartTotal();
-                //    return;
-                //}
                 CurrentCartProducts.Insert(0, product);
                 PaymentTotalMXN = CalculateCurrentCartTotal();
             }
