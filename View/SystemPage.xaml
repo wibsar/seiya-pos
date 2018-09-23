@@ -122,8 +122,6 @@
                 <TextBlock Grid.Column="0" Foreground="LightGray" FontSize="18" HorizontalAlignment="Right" Text="Wibsar Retail V."></TextBlock>
                 <TextBlock Grid.Column="1" Foreground="LightGray" FontSize="18" HorizontalAlignment="Left" Margin="5,0,0,0" Text="{Binding Version}"></TextBlock>
                 </Grid>
-<<<<<<< HEAD
-=======
             <Button Grid.Column="1" Command="{Binding InventoryItemImageCommand}" CommandParameter="add" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -134,7 +132,6 @@
                     <TextBlock Grid.Row="1" FontSize="16" Text="Cargar Logo" ></TextBlock>
                 </Grid>
             </Button>
->>>>>>> 07d57987d75567e04051cfc57697804749204d35
             <!-- Save Button -->
             <Button Grid.Column="2" Command="{Binding SystemSaveChangesCommand}"  Background="{x:Null}" BorderBrush="{x:Null}">
                 <Grid>
