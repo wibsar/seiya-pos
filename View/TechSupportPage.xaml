@@ -35,7 +35,7 @@
     <Grid ShowGridLines="false" Background="White">        
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="3*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
@@ -50,20 +50,22 @@
                         <RowDefinition Height="4*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Manual.png" HorizontalAlignment="Center" Margin="40,40,40,10"></Image>
+                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Manual.png" HorizontalAlignment="Center" Margin="0,0,0,15"></Image>
                     <TextBlock Grid.Row="1" Text="Guia de Usuario" FontSize="20"  HorizontalAlignment="Center"></TextBlock>
                 </Grid>
-            </Button>  
-               
-            
+            </Button>
+
+       
         <TextBlock Grid.Row="2" Text="Contacto" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" ></TextBlock>
-        <TextBlock Grid.Row="3" Text="e-mail: soporte@wibsar.com" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Top"></TextBlock>
-        <Grid Grid.Row="4">
+        <TextBlock Grid.Row="3" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Top">
+            <Hyperlink NavigateUri="mailto:soporte@wibsar.com?subject=Soporte Técnico&amp;" RequestNavigate="OnNavigate">soporte@wibsar.com</Hyperlink>
+        </TextBlock>
+        <Grid Grid.Row="4" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width=".7*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Source="C:\Projects\seiya-pos\Resources\Images\LOGO WIBSAR.png" Margin=" 30,30,0,30" HorizontalAlignment="Right"></Image>
+            <Image Source="C:\Projects\seiya-pos\Resources\Images\LOGO WIBSAR.png" Margin=" 20,20,0,20" HorizontalAlignment="Right"></Image>
             <TextBlock Grid.Column="1" FontSize="20" Margin="10,0,0,0">
                 <Hyperlink NavigateUri="http://wibsar.com" RequestNavigate="Hyperlink_OnRequestNavigate">www.wibsar.com</Hyperlink>
             </TextBlock>

@@ -16,15 +16,18 @@ using System.Windows.Shapes;
 
 namespace Seiya
 {
-    /// <summary>
-    /// Lógica de interacción para ExchangeRatePage.xaml
-    /// </summary>
     public partial class TechSupportPage : Page
     {
         public TechSupportPage()
         {
             InitializeComponent();
             DataContext = MainWindowViewModel.GetInstance();
+        }
+
+        private void OnNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri));
+            e.Handled = true;
         }
 
         private void Hyperlink_OnRequestNavigate(object sender, RequestNavigateEventArgs e)

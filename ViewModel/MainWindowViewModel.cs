@@ -3389,7 +3389,7 @@ namespace Seiya
             var transactionDate = DateTime.Now;
             decimal totalDue = 0M;
             string customer = "General";
-
+            
             //Get customer, if registered
             if(CurrentCustomer != null)
                 customer = CurrentCustomer.Name;
@@ -3402,6 +3402,7 @@ namespace Seiya
             //Get next receipt number, if applicable
             var receiptNumber = saleType == TransactionType.Regular ? _posInstance.GetNextReceiptNumber() : _posInstance.LastReceiptNumber;
 
+            var productsWithNoPrice = new List<Product>();
             //Record each item in the transactions db
             foreach (var product in CurrentCartProducts)
             {
@@ -3420,12 +3421,8 @@ namespace Seiya
                 //Record Transaction
                 transaction.Record(saleType);
 
-                //update inventory for each product, if applicatable
+                //update inventory for each product, if applicable
                 UpdateInventory(product, transactionDate, saleType);
-
-                //TODO: Check if the same product is already in the cart, if it is, need to update whole inventary before adding it again
-
-                //Total
                 totalDue += product.Price * product.LastQuantitySold;
             }
 
@@ -3457,7 +3454,8 @@ namespace Seiya
                 CurrentCustomer.LastVisitDate = DateTime.Now;
                 CurrentCustomer.UpdateUserToTable();
                 CurrentCustomer.SaveDataTableToCsv();
-            }         
+                _inventoryInstance.LoadCsvToDataTable();
+            }
 
             return true;
         }
@@ -3469,54 +3467,106 @@ namespace Seiya
         bool UpdateInventory(Product product, DateTime transactionDate, TransactionType transactionType)
         {
             if (product.Id == 0) return false;
-                
-            if(transactionType == TransactionType.Regular || transactionType == TransactionType.Internal || transactionType == TransactionType.Interno
+
+            var invProduct = _inventoryInstance.GetProduct(product.Code);
+
+            if (transactionType == TransactionType.Regular || transactionType == TransactionType.Internal || transactionType == TransactionType.Interno
                 || transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
             {
-                if (product.LocalQuantityAvailable > 0)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
-                        (product.LocalQuantityAvailable - product.LastQuantitySold) > 0
-                        ? (product.LocalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
+                //
+                if (invProduct.LocalQuantityAvailable > 0)
+                {
+                    invProduct.LocalQuantityAvailable = (invProduct.LocalQuantityAvailable - product.LastQuantitySold) > 0 ?
+                        (invProduct.LocalQuantityAvailable - product.LastQuantitySold) : 0;
+                }
 
-                if (product.TotalQuantityAvailable > 0)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
-                        (product.TotalQuantityAvailable - product.LastQuantitySold) > 0
-                        ? (product.TotalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
+                if (invProduct.TotalQuantityAvailable > 0)
+                {
+                    invProduct.TotalQuantityAvailable = (invProduct.TotalQuantityAvailable - product.LastQuantitySold) > 0 ?
+                        (invProduct.TotalQuantityAvailable - product.LastQuantitySold) : 0;
+                }
 
-                _inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
-                    transactionDate.ToString("d"));
+                invProduct.LastSaleDate = transactionDate;
 
-                if(transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadInternoHistorial",
-                        (product.InternalQuantity + product.LastQuantitySold).ToString());
+                if (transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
+                {
+                    invProduct.InternalQuantity = invProduct.InternalQuantity + product.LastQuantitySold;
+                }
 
-                if(transactionType == TransactionType.Regular || transactionType == TransactionType.Interno || transactionType == TransactionType.Internal)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
-                        (product.QuantitySold + product.LastQuantitySold).ToString());
+                if (transactionType == TransactionType.Regular || transactionType == TransactionType.Interno ||
+                    transactionType == TransactionType.Internal)
+                {
+                    invProduct.QuantitySold = invProduct.QuantitySold + product.LastQuantitySold;
+                }
 
-                if(transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
-                    _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                        (product.AmountSold + product.LastAmountSold).ToString()); //removed  product.LastQuantitySold * 
+                if (transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
+                {
+                    invProduct.AmountSold = invProduct.AmountSold + product.LastAmountSold;
+                }
+
+                _inventoryInstance.UpdateProductToTable(invProduct);
+
+                ////
+                //if (product.LocalQuantityAvailable > 0)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
+                //        (product.LocalQuantityAvailable - product.LastQuantitySold) > 0
+                //        ? (product.LocalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
+
+                //if (product.TotalQuantityAvailable > 0)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
+                //        (product.TotalQuantityAvailable - product.LastQuantitySold) > 0
+                //        ? (product.TotalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
+
+                //_inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
+                //    transactionDate.ToString("d"));
+
+                //if (transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
+                //_inventoryInstance.UpdateItem(product.Code, "CantidadInternoHistorial",
+                //    (product.InternalQuantity + product.LastQuantitySold).ToString());
+
+                //    if (transactionType == TransactionType.Regular || transactionType == TransactionType.Interno || transactionType == TransactionType.Internal)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
+                //        (product.QuantitySold + product.LastQuantitySold).ToString());
+
+                //if(transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
+                //    _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
+                //        (product.AmountSold + product.LastAmountSold).ToString()); //removed  product.LastQuantitySold * 
             }
             else
             {
                 //if it is a return
-                if (product.LocalQuantityAvailable > 0)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
-                        (product.LocalQuantityAvailable + product.LastQuantitySold).ToString());
+                if (invProduct.LocalQuantityAvailable > 0)
+                {
+                    invProduct.LocalQuantityAvailable = invProduct.LocalQuantityAvailable + product.LastQuantitySold;
+                }
 
-                if (product.TotalQuantityAvailable > 0)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
-                        (product.TotalQuantityAvailable + product.LastQuantitySold).ToString());
+                if (invProduct.TotalQuantityAvailable > 0)
+                {
+                    invProduct.TotalQuantityAvailable = invProduct.TotalQuantityAvailable + product.TotalQuantityAvailable;
+                }
 
-                _inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
-                    transactionDate.ToString("d"));
+                invProduct.LastSaleDate = transactionDate;
+                invProduct.QuantitySold = invProduct.QuantitySold + product.LastQuantitySold;
+                invProduct.AmountSold = invProduct.AmountSold + product.LastAmountSold;
 
-                _inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
-                    (product.QuantitySold - product.LastQuantitySold).ToString());
+                _inventoryInstance.UpdateProductToTable(invProduct);
 
-                _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                    (product.AmountSold - product.LastAmountSold).ToString()); // removed product.LastQuantitySold * 
+                //if (product.LocalQuantityAvailable > 0)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
+                //        (product.LocalQuantityAvailable + product.LastQuantitySold).ToString());
+
+                //if (product.TotalQuantityAvailable > 0)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
+                //        (product.TotalQuantityAvailable + product.LastQuantitySold).ToString());
+
+                //_inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
+                //    transactionDate.ToString("d"));
+
+                //_inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
+                //    (product.QuantitySold - product.LastQuantitySold).ToString());
+
+                //_inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
+                //    (product.AmountSold - product.LastAmountSold).ToString()); // removed product.LastQuantitySold * 
             }
 
             return true;

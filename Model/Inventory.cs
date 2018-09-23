@@ -64,7 +64,6 @@ namespace Seiya
                 parser.MaxRows = 8000;
 
                 _dictofdata = parser.GetDataTable();
-
             }
         }
 

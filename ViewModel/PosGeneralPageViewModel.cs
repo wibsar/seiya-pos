@@ -20,7 +20,7 @@ namespace Seiya
         #region Fields
 
         private static PosGeneralPageViewModel _posGeneralInstance;
-        private string _price;
+        private string _price = "0";
         private int _quantity = 1;
         private string _description;
         private string _category;
