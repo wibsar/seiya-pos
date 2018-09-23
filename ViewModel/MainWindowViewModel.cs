@@ -119,6 +119,27 @@ namespace Seiya
         #endregion
 
         #region Properties
+
+        public BitmapImage Image
+        {
+            get
+            {
+                BitmapImage bitmap = new BitmapImage();
+                if (LogoImage != null)
+                {
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(@"C:\Projects\seiya-pos\Resources\Images\" + _posInstance.LogoName);
+                    bitmap.EndInit();
+                    _logoImage = bitmap;
+                }
+                return bitmap;
+            }
+            set
+            {
+                _logoImage = value;
+            }
+        }
+
         public Product InventoryTemporalItem
         {
             get
@@ -190,7 +211,7 @@ namespace Seiya
                 _returnID = value;
             }
         }
-
+        
         #region Orders Properties
 
         #endregion
@@ -198,6 +219,21 @@ namespace Seiya
         #endregion
 
         #region Observable Properties
+
+        private BitmapImage _logoImage;
+        public BitmapImage LogoImage
+        {
+            get
+            {
+                //return SelectedInventoryProduct == null ? null : SelectedInventoryProduct.Image;
+                return Image == null ? null : _logoImage;
+            }
+            set
+            {
+                _logoImage = value;
+                OnPropertyChanged("LogoImage");
+            }
+        }
 
         /// <summary>
         /// List of available categories

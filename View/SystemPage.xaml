@@ -122,7 +122,7 @@
                 <TextBlock Grid.Column="0" Foreground="LightGray" FontSize="18" HorizontalAlignment="Right" Text="Wibsar Retail V."></TextBlock>
                 <TextBlock Grid.Column="1" Foreground="LightGray" FontSize="18" HorizontalAlignment="Left" Margin="5,0,0,0" Text="{Binding Version}"></TextBlock>
                 </Grid>
-            <Button Grid.Column="1" Command="{Binding InventoryItemImageCommand}" CommandParameter="add" Background="{x:Null}" BorderBrush="{x:Null}">
+            <Button Grid.Column="1" Command="{Binding SystemSaveLogoCommand}" CommandParameter="add" Background="{x:Null}" BorderBrush="{x:Null}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"></RowDefinition>

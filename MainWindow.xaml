@@ -48,22 +48,17 @@
         <!-- Grid for header section -->
         <Grid Column="0" Row="0" Grid.ColumnSpan="2">
             <!-- Client logo -->
-            <Image Source="C:\Projects\seiya-pos\Resources\Images\tulogo.png" HorizontalAlignment="Center" MaxWidth="500"  ></Image>
+            <Image Source="C:\Projects\seiya-pos\Data\Images\tulogo.png" HorizontalAlignment="Center" MaxWidth="500"  ></Image>
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>                    
                     <ColumnDefinition Width="8*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
                 <Button Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="menu">
                     <Grid>
-
                         <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\menu.png" Margin="5"></Image>
-
                     </Grid>
                 </Button>
-               
-                
             </Grid>
         </Grid>
         <!-- Linea gris -->

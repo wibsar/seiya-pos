@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -221,6 +222,7 @@ namespace Seiya
                 OnPropertyChanged();
             }
         }
+
         #endregion
 
         #region Commands
@@ -256,8 +258,50 @@ namespace Seiya
         {
             return true;
         }
+        #endregion
+
+        #region SystemSaveLogoCommand
+
+        private ICommand _systemSaveLogoCommand;
+        public ICommand SystemSaveLogoCommand { get { return _systemSaveLogoCommand ?? (_systemSaveLogoCommand = new DelegateCommand(Execute_SystemSaveLogoCommand, CanExecute_SystemSaveLogoCommand)); } }
+
+        internal void Execute_SystemSaveLogoCommand(object parameter)
+        {
+            SelectImage();
+        }
+        internal bool CanExecute_SystemSaveLogoCommand(object parameter)
+        {
+            return true; // SelectedInventoryProduct.Image != null;
+        }
+        #endregion
 
         #endregion
+
+        #region Methods
+
+        public string SelectImage()
+        {
+            //Open dialog and select jpg image
+            var dialog = new Microsoft.Win32.OpenFileDialog { DefaultExt = ".jpg" };
+            //Display dialog
+            bool? result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                var fileName = Path.GetFileName(dialog.FileName);
+
+                //Move the file to the images file and append the time at the beginning of the name
+                fileName = DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() +
+                           DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + "_" + fileName;
+
+                File.Copy(dialog.FileName, Constants.DataFolderPath + Constants.ImagesFolderPath + "tulogo.png", true);
+                return fileName;
+            }
+            else
+            {
+                return null;
+            }
+        }
 
         #endregion
     }

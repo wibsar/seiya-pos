@@ -1,4 +1,3 @@
-navidad
 Merceria
 Regalos
 Liston
@@ -13,3 +12,5 @@ Velas
 Articulos
 Herreria
 Otro
+General
+Navidad

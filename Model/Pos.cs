@@ -34,6 +34,7 @@ namespace Seiya
         private string _instagram;
         private string _twitter;
         private string _website;
+        private string _logoName;
         #endregion
 
         #region FilePaths
@@ -241,6 +242,12 @@ namespace Seiya
                 _license = value;
             }
         }
+
+        public string LogoName
+        {
+            get { return _logoName; }
+            set { _logoName = value; }
+        }
         public decimal RegisterCashUSD { get; set; }
 
         public decimal RegisterCashMXN { get; set; }
@@ -390,6 +397,7 @@ namespace Seiya
                 Twitter = row["Twitter"].ToString();
                 Website = row["PaginaInternet"].ToString();
                 FooterMessage = row["MensajePie"].ToString();
+                LogoName = row["LogoImagen"].ToString();
             }
         }
 
@@ -442,6 +450,7 @@ namespace Seiya
             row["Twitter"] = Twitter;
             row["PaginaInternet"] = Website;
             row["MensajePie"] = FooterMessage;
+            row["LogoImagen"] = LogoName;
         }
 
         /// <summary>

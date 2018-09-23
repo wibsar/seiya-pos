@@ -1,1 +1,4 @@
 NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
+8030,1243x,5,General,Canastas,36,1,36,22/09/2018 08:32:47 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
+8030,12,7,Regalos,helio,5000,1,5000,22/09/2018 08:32:47 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
+8030,abc,8,Envoltura,envoltura,5,1,5,22/09/2018 08:32:47 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0
