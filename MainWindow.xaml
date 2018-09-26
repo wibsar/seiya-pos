@@ -210,7 +210,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea roja.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="General" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="General" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -223,7 +223,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea amarilla.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageOneTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageOneTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -236,7 +236,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea morada.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageTwoTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageTwoTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -249,7 +249,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea verde.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageThreeTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageThreeTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -262,7 +262,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea naranja.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFourTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFourTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -275,7 +275,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea azul.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFiveTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFiveTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>

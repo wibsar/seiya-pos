@@ -31,6 +31,10 @@
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+        </Style>
     </Page.Resources>
     
     <Grid ShowGridLines="False" Background="White">
@@ -60,7 +64,7 @@
         </Grid>
 
         <!-- Table of user items found based on the search -->
-        <DataGrid x:Name="UserData" Grid.Row="1" Margin="0,6,0,0" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" HeadersVisibility="Column" ItemsSource="{Binding UsersSearchedEntries}" SelectedItem="{Binding SelectedUser, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single" >
+        <DataGrid x:Name="UserData" Grid.Row="1" Margin="0,6,0,0" HeadersVisibility="Column" ItemsSource="{Binding UsersSearchedEntries}" SelectedItem="{Binding SelectedUser, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single" >
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header="Id" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header="Nombre" IsReadOnly="True"/>
