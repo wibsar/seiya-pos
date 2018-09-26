@@ -604,9 +604,11 @@ namespace Seiya
             {
                 case "x":
                     GenerateCurrentSalesReport();
+                    MainWindowViewModel.GetInstance().Code = "Corte X realizado!";
                     break;
                 case "z":
                     GenerateEndOfDaySalesReport();
+                    MainWindowViewModel.GetInstance().Code = "Corte Y realizado!";
                     break;
                 default:
                     break;

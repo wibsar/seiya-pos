@@ -52,10 +52,11 @@ namespace Seiya
             }
         }
 
-        private void TxtCode_OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void TxtCode_OnMouseLeftButtonDown(object sender, RoutedEventArgs routedEventArgs)
         {
-            //Clear textbox when it is entered (left click)
+            //Clear textbox when the focus is on txtbox
             ((TextBox) sender).Text = "";
+            ((TextBox) sender).Focus();
         }
     }
 }

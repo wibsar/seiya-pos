@@ -126,7 +126,7 @@ namespace Seiya
                 //Record Transaction
                 RecordReturn();
                 //Message
-                MainWindowViewModel.GetInstance().Code = ReturnID;
+                MainWindowViewModel.GetInstance().Code = "Devolución registrada";
                 MainWindowViewModel.GetInstance().ReturnID = Int32.Parse(ReturnID);
                 MainWindowViewModel.GetInstance().ReturnTransaction = true;
                 MainWindowViewModel.GetInstance().PaymentReceivedMXN = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();

@@ -1311,6 +1311,10 @@ namespace Seiya
                         SystemUnlock = false;
                         CurrentPage = "\\View\\PaymentEndPage.xaml";
                     }
+                    else
+                    {
+                        Code = "Efectivo invalido!";
+                    }
                     break;
                 case "Tarjeta":
                     transactionType = TransactionType.Regular;
@@ -1334,6 +1338,7 @@ namespace Seiya
                     break;
                 case "end_transaction":
                     PaymentEndProcess(parameter.ToString());
+                    Code = "Transaccion Exitosa!";
                     SystemUnlock = true;
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     break;
@@ -1421,6 +1426,10 @@ namespace Seiya
                 AddProductToCart(product);
                 Code = "";
             }
+            else
+            {
+                Code = "Código inválido";
+            }
 
             //TODO: Turn red if it is not found
 
@@ -1437,8 +1446,7 @@ namespace Seiya
 
         internal void Execute_CodeLeftClickClearCommand(object parameter)
         {
-            Code = "";
-            
+            Code = "";           
         }
         internal bool CanExecute_CodeLeftClickClearCommand(object parameter)
         {
@@ -1940,7 +1948,7 @@ namespace Seiya
             //Reload categories
             CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
             PosGeneralPageViewModel.GetInstance().CategoriesList = CategoriesList;
-
+            Code = "Categoría guardada!";
         }
         internal bool CanExecute_SaveChangesCategoryListCommand(object parameter)
         {
@@ -2159,6 +2167,8 @@ namespace Seiya
                 _inventoryInstance.SaveDataTableToCsv();
                 CurrentPage = "\\View\\InventoryMainPage.xaml";
             }
+
+            Code = "Producto actualizado!";
             //Reset list
             InventorySearchedProducts = null;
             SelectedInventoryProduct = null;
@@ -2283,6 +2293,8 @@ namespace Seiya
             {
                 UserTemporalItem.Register();
             }
+
+            Code = "Usuario actualizado!";
             UsersSearchedEntries = null;
             CurrentPage = "\\View\\UserMainPage.xaml";
         }
@@ -2434,6 +2446,7 @@ namespace Seiya
             }
             CustomersSearchedEntries = null;
             CurrentPage = "\\View\\CustomerMainPage.xaml";
+            Code = "Cliente Actualizado!";
         }
 
         internal bool CanExecute_CustomerSaveChangesCommand(object parameter)
@@ -2580,6 +2593,8 @@ namespace Seiya
             {
                 ExpenseTemporalItem.Register();
             }
+
+            Code = "Gasto guardado!";
             ExpensesSearchedEntries = null;
             CurrentPage = "\\View\\ExpenseMainPage.xaml";
         }
@@ -2753,6 +2768,7 @@ namespace Seiya
                 VendorTemporalItem.Register();
             }
             VendorsSearchedEntries = null;
+            Code = "Proveedor actualizado!";
             CurrentPage = "\\View\\VendorMainPage.xaml";
         }
 
@@ -2898,6 +2914,7 @@ namespace Seiya
             var fromPassword = "Yadira00";
             Notification.SendNotification(toName,toEmailAddress, subject,body, attachmentFilePath, fromEmailAddress, fromPassword);
             OrdersSearchedEntries = null;
+            Code = "Pedido Registrado!";
             CurrentPage = "\\View\\OrderMainPage.xaml";
         }
 
@@ -3245,6 +3262,8 @@ namespace Seiya
                 PageFourTitle = CurrentPageListTitle;
             else if (LastSelectedProductsPage == 5)
                 PageFiveTitle = CurrentPageListTitle;
+
+            Code = "Lista actualizada!";
         }
         internal bool CanExecute_SaveChangesProductListCommand(object parameter)
         {
@@ -3264,6 +3283,7 @@ namespace Seiya
             _posInstance.UpdateAllData();
             _posInstance.SaveDataTableToCsv();
             ExchangeRateString = _posInstance.ExchangeRate.ToString();
+            Code = "Cambio Actualizado!";
             CurrentPage = "\\View\\PosGeneralPage.xaml";
             //Log message to display success
             //Code = Log.ExchangeRateSaved;
