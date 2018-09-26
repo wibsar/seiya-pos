@@ -59,7 +59,7 @@
                         <RowDefinition Height="4*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Lista 1" HorizontalAlignment="Center" VerticalAlignment="Top" ></TextBlock>
+                    <TextBlock Grid.Row="0" Text="Grupo 1" HorizontalAlignment="Center" VerticalAlignment="Top" ></TextBlock>
                     <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea amarilla.png"></Image>
                 </Grid>
             </Button>
@@ -69,7 +69,7 @@
                         <RowDefinition Height="4*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Lista 2" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="Grupo 2" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
                     <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea morada.png"></Image>
                 </Grid>
             </Button>
@@ -79,7 +79,7 @@
                         <RowDefinition Height="4*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Lista 3" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="Grupo 3" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
                     <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea verde.png"></Image>
                 </Grid>
             </Button>
@@ -90,7 +90,7 @@
                         <RowDefinition Height="4*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Lista 4" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="Grupo 4" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
                     <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea naranja.png"></Image>
                 </Grid>
             </Button>
@@ -101,7 +101,7 @@
                         <RowDefinition Height="4*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Lista 5" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="Grupo 5" HorizontalAlignment="Center" VerticalAlignment="Top"></TextBlock>
                     <Image VerticalAlignment="Bottom" Grid.Row="1" Source="C:\Projects\seiya-pos\Resources\Images\linea azul.png"></Image>
                 </Grid>
             </Button>
@@ -155,7 +155,7 @@
                             <TextBlock Grid.Column="1" Text="Subir" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="100"  Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Command="{Binding MoveDownListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="0,0,2.5,0">
+                    <Button Grid.Column="1" Command="{Binding MoveDownListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="0,0,0,2.5">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -248,7 +248,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nombre de lista"></TextBlock>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nombre del Grupo"></TextBlock>
                     <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Agregar Codigo"></TextBlock>
         </Grid>
 
