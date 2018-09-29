@@ -427,7 +427,7 @@ namespace Seiya
 
             offset = offset + (int)fontHeight + 5;
 
-            graphic.DrawString(string.Format("  Final Corte Z {0}", date), storeInfoFont, new SolidBrush(Color.Black),
+            graphic.DrawString(string.Format("  Final Corte {0} {1}", EndOfDayAmountData.EndOfSalesReceiptType, date), storeInfoFont, new SolidBrush(Color.Black),
                 startX, startY + offset);
             offset = offset + (int)storeInfoFontHeight;
 
@@ -447,7 +447,11 @@ namespace Seiya
             float storeInfoFontHeight = 8 + 6f; //storeInfoFont.GetHeight();
 
             //Parse Description
-            var commentsLines = Formatter.BreakDownString(EndOfDayAmountData.Comments, 35);
+            var commentsLines = new List<string>();
+            if (EndOfDayAmountData.Comments == null)
+                commentsLines.Add(" ");
+            else
+                commentsLines = Formatter.BreakDownString(EndOfDayAmountData.Comments, 35);
 
             int startX = 5;
             int startY = 1; //changed from 5
@@ -503,7 +507,7 @@ namespace Seiya
                     LastQuantitySold = catInfo.Item2,
                     Price = catInfo.Item3
                 };
-                if (cat.LastQuantitySold != 0)
+                if (cat.LastQuantitySold != 0 || cat.LastAmountSold != 0)
                 {
                     graphic.DrawString(cat.ToString(ReceiptType.DailyRegular), font, new SolidBrush(Color.Black), startX, startY + offset);
                     offset = offset + (int)fontHeight;
@@ -644,12 +648,12 @@ namespace Seiya
 
             offset = offset + (int)fontHeight + 1;
 
-            graphic.DrawString("Gastos Efectivo MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.ExpensesCash), font,
+            graphic.DrawString("Efectivo MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.ExpensesCash), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
             offset = offset + (int)fontHeight + 1;
 
-            graphic.DrawString("Gastos Totales MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.ExpensesTotal), font,
+            graphic.DrawString("Totales MXN: ".PadLeft(20) + string.Format("{0:c}", EndOfDayAmountData.ExpensesTotal), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
             offset = offset + (int)fontHeight + 1;

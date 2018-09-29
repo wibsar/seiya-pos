@@ -97,7 +97,7 @@
                 <TextBox Grid.Row="4" Text="{Binding MxnPeso100, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC"></TextBox>
                 <TextBox Grid.Row="5" Text="{Binding MxnPeso50, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBox Grid.Row="6" Text="{Binding MxnPeso20, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC"></TextBox>
-                <TextBox Grid.Row="7" Text="{Binding MxnPesoCoinsTotal, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Grid.Row="7" Text="{Binding MxnPesoCoinsTotal}"></TextBox>
             </Grid>
             <!-- USD panel -->
             <Grid Grid.Column="0" Grid.Row="1" Margin="0,5">
@@ -138,7 +138,7 @@
                 <TextBox Grid.Row="4" Text="{Binding UsdDollar10, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC"></TextBox>
                 <TextBox Grid.Row="5" Text="{Binding UsdDollar5, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBox Grid.Row="6" Text="{Binding UsdDollar1, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC"></TextBox>
-                <TextBox Grid.Row="7" Text="{Binding UsdDollarCoinsTotal, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Grid.Row="7" Text="{Binding UsdDollarCoinsTotal}"></TextBox>
             </Grid>
         </Grid>
 

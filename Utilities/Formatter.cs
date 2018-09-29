@@ -64,7 +64,6 @@ namespace Seiya
                 input = input.Replace("{", "");
                 input = input.Replace("|", "");
                 input = input.Replace("=", "");
-                input = input.Replace("-", "");
                 input = input.Replace("+", "");
                 input = input.Replace("~", "");
                 input = input.Replace("`", "");

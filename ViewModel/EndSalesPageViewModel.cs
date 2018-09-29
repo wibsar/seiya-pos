@@ -608,7 +608,7 @@ namespace Seiya
                     break;
                 case "z":
                     GenerateEndOfDaySalesReport();
-                    MainWindowViewModel.GetInstance().Code = "Corte Y realizado!";
+                    MainWindowViewModel.GetInstance().Code = "Corte Z realizado!";
                     break;
                 default:
                     break;

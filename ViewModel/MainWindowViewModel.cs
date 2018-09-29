@@ -220,6 +220,13 @@ namespace Seiya
 
         #region Observable Properties
 
+        private string _codeColor = "#2C5066";
+        public string CodeColor
+        {
+            get { return _codeColor; }
+            set { _codeColor = value; OnPropertyChanged();}
+        }
+
         private BitmapImage _logoImage;
         public BitmapImage LogoImage
         {
@@ -1245,6 +1252,8 @@ namespace Seiya
                     CurrentPage = "\\View\\EndSalesPage.xaml";
                     break;
                 case "product_list":
+                    string currentProductListTitle;
+                    GetPageProductsList(LastSelectedProductsPage, out currentProductListTitle);
                     CurrentPage = "\\View\\ProductsListEditPage.xaml";
                     break;
                 case "inventory_add":
@@ -1306,7 +1315,7 @@ namespace Seiya
                     if (PaymentTotalMXN != 0M && (PaymentTotalMXN <= (PaymentReceivedMXN + PaymentReceivedUSD * _exchangeRate)))
                     {
                         //TODO: Add internal capability for personal use
-                        transactionType = PaymentTotalMXN <= 100 ? TransactionType.Regular : TransactionType.Interno;
+                        transactionType = PaymentTotalMXN <= 150 ? TransactionType.Regular : TransactionType.Interno;
                         PaymentProcessStart(parameter.ToString(), transactionType);
                         SystemUnlock = false;
                         CurrentPage = "\\View\\PaymentEndPage.xaml";
@@ -1949,6 +1958,7 @@ namespace Seiya
             CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
             PosGeneralPageViewModel.GetInstance().CategoriesList = CategoriesList;
             Code = "Categoría guardada!";
+            CodeColor = Constants.ColorCodeSave;
         }
         internal bool CanExecute_SaveChangesCategoryListCommand(object parameter)
         {
@@ -1966,6 +1976,8 @@ namespace Seiya
             //Format the string before adding it to the list
             if (!CurrentCategoryList.Contains(Formatter.FirstLetterUpperConverter(NewCategoryItem)))
                 CurrentCategoryList.Add(Formatter.FirstLetterUpperConverter(NewCategoryItem));
+
+            NewCategoryItem = "";
         }
         internal bool CanExecute_AddCategoryListCommand(object parameter)
         {
@@ -2470,6 +2482,8 @@ namespace Seiya
             }
             CustomersSearchedEntries = null;
             CurrentPage = "\\View\\CustomerMainPage.xaml";
+
+            Code = "Cliente Eliminado";
         }
 
         internal bool CanExecute_CustomerDeleteCommand(object parameter)
@@ -3263,7 +3277,7 @@ namespace Seiya
             else if (LastSelectedProductsPage == 5)
                 PageFiveTitle = CurrentPageListTitle;
 
-            Code = "Lista actualizada!";
+            Code = "Grupo actualizado";
         }
         internal bool CanExecute_SaveChangesProductListCommand(object parameter)
         {
