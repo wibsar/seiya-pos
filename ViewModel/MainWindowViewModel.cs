@@ -2143,8 +2143,12 @@ namespace Seiya
             switch (parameter)
             {
                 case "add":
-                    InventoryTemporalItem.ImageName = SelectImage();
-                    ProductImage = InventoryTemporalItem.Image;
+                    var imageSelected = SelectImage();
+                    if (imageSelected != null)
+                    {
+                        InventoryTemporalItem.ImageName = imageSelected;
+                        ProductImage = InventoryTemporalItem.Image;
+                    }
                     break;
                 case "remove":
                     InventoryTemporalItem.ImageName = "NA.jpg";
