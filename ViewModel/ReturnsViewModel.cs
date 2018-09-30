@@ -126,7 +126,8 @@ namespace Seiya
                 //Record Transaction
                 RecordReturn();
                 //Message
-                MainWindowViewModel.GetInstance().Code = "Devolución registrada";
+                MainWindowViewModel.GetInstance().Code = "¡Devolución Registrada!";
+                MainWindowViewModel.GetInstance().CodeColor = Constants.ColorCodeSave;
                 MainWindowViewModel.GetInstance().ReturnID = Int32.Parse(ReturnID);
                 MainWindowViewModel.GetInstance().ReturnTransaction = true;
                 MainWindowViewModel.GetInstance().PaymentReceivedMXN = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();
@@ -134,7 +135,8 @@ namespace Seiya
             }
             else
             {
-                MainWindowViewModel.GetInstance().Code = "Agregar articulos primero!";
+                MainWindowViewModel.GetInstance().Code = "¡Agregar Artículos al Carrito!";
+                MainWindowViewModel.GetInstance().CodeColor = Constants.ColorCodeError;
             }
         }
 

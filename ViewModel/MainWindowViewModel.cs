@@ -286,7 +286,7 @@ namespace Seiya
             set
             {
                 _newCategoryItem = Formatter.SanitizeInput(value);
-                OnPropertyChanged("NewCategoryItem");
+                OnPropertyChanged("NewCategoryItem");                          
             }
         }
 
@@ -593,7 +593,7 @@ namespace Seiya
         {
             get
             {
-                return _returnTransaction == true ? "REGRESAR EN EFECTIVO" : "COBRAR EN EFECTIVO";
+                return _returnTransaction == true ? "DEVOLUCIÓN EN EFECTIVO" : "COBRAR EN EFECTIVO";
             } 
             set
             {
@@ -1936,7 +1936,8 @@ namespace Seiya
                 }
                 else
                 {
-                    Code = "No se puede remover";
+                    Code = "No es Posible Eliminar";
+                    CodeColor = Constants.ColorCodeError;
                 }
             }
         }
@@ -1957,7 +1958,7 @@ namespace Seiya
             //Reload categories
             CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
             PosGeneralPageViewModel.GetInstance().CategoriesList = CategoriesList;
-            Code = "Categoría guardada!";
+            Code = "¡Categorías Actualizadas!";
             CodeColor = Constants.ColorCodeSave;
         }
         internal bool CanExecute_SaveChangesCategoryListCommand(object parameter)
@@ -2184,7 +2185,8 @@ namespace Seiya
                 CurrentPage = "\\View\\InventoryMainPage.xaml";
             }
 
-            Code = "Producto actualizado!";
+            Code = "¡Producto Guardado!";
+            CodeColor = Constants.ColorCodeSave;
             //Reset list
             InventorySearchedProducts = null;
             SelectedInventoryProduct = null;
@@ -2310,7 +2312,8 @@ namespace Seiya
                 UserTemporalItem.Register();
             }
 
-            Code = "Usuario actualizado!";
+            Code = "¡Usuario Guardado!";
+            CodeColor = Constants.ColorCodeSave;
             UsersSearchedEntries = null;
             CurrentPage = "\\View\\UserMainPage.xaml";
         }
@@ -2336,6 +2339,8 @@ namespace Seiya
             }
             UsersSearchedEntries = null;
             CurrentPage = "\\View\\UserMainPage.xaml";
+            Code = "Usuario Eliminado";
+            CodeColor = Constants.ColorCodeError;
         }
 
         internal bool CanExecute_UserDeleteCommand(object parameter)
@@ -2462,7 +2467,8 @@ namespace Seiya
             }
             CustomersSearchedEntries = null;
             CurrentPage = "\\View\\CustomerMainPage.xaml";
-            Code = "Cliente Actualizado!";
+            Code = "¡Cliente Guardado!";
+            CodeColor = Constants.ColorCodeSave;
         }
 
         internal bool CanExecute_CustomerSaveChangesCommand(object parameter)
@@ -2486,8 +2492,8 @@ namespace Seiya
             }
             CustomersSearchedEntries = null;
             CurrentPage = "\\View\\CustomerMainPage.xaml";
-
             Code = "Cliente Eliminado";
+            CodeColor = Constants.ColorCodeError;
         }
 
         internal bool CanExecute_CustomerDeleteCommand(object parameter)
@@ -2612,9 +2618,10 @@ namespace Seiya
                 ExpenseTemporalItem.Register();
             }
 
-            Code = "Gasto guardado!";
+            Code = "¡Gasto Guardado!";
             ExpensesSearchedEntries = null;
             CurrentPage = "\\View\\ExpenseMainPage.xaml";
+            CodeColor = Constants.ColorCodeSave;
         }
 
         internal bool CanExecute_ExpenseSaveChangesCommand(object parameter)
@@ -2638,6 +2645,8 @@ namespace Seiya
             }
             ExpensesSearchedEntries = null;
             CurrentPage = "\\View\\ExpenseMainPage.xaml";
+            Code = "Gasto Eliminado";
+            CodeColor = Constants.ColorCodeError;
         }
 
         internal bool CanExecute_ExpenseDeleteCommand(object parameter)
@@ -2760,6 +2769,8 @@ namespace Seiya
             }
             VendorsSearchedEntries = null;
             CurrentPage = "\\View\\VendorMainPage.xaml";
+            Code = "Proveedor Eliminado";
+            CodeColor = Constants.ColorCodeError;
         }
 
         internal bool CanExecute_VendorDeleteCommand(object parameter)
@@ -2786,7 +2797,9 @@ namespace Seiya
                 VendorTemporalItem.Register();
             }
             VendorsSearchedEntries = null;
-            Code = "Proveedor actualizado!";
+            Code = "¡Proveedor Guardado!";
+            CodeColor = Constants.ColorCodeSave;
+
             CurrentPage = "\\View\\VendorMainPage.xaml";
         }
 
@@ -2932,8 +2945,9 @@ namespace Seiya
             var fromPassword = "Yadira00";
             Notification.SendNotification(toName,toEmailAddress, subject,body, attachmentFilePath, fromEmailAddress, fromPassword);
             OrdersSearchedEntries = null;
-            Code = "Pedido Registrado!";
             CurrentPage = "\\View\\OrderMainPage.xaml";
+            Code = "¡Pedido Enviado!";
+            CodeColor = Constants.ColorCodeSave;
         }
 
         internal bool CanExecute_OrderSaveChangesCommand(object parameter)
@@ -2957,6 +2971,8 @@ namespace Seiya
             }
             OrdersSearchedEntries = null;
             CurrentPage = "\\View\\OrderMainPage.xaml";
+            Code = "Pedido Eliminado";
+            CodeColor = Constants.ColorCodeError;
         }
 
         internal bool CanExecute_OrderDeleteCommand(object parameter)
@@ -3281,7 +3297,8 @@ namespace Seiya
             else if (LastSelectedProductsPage == 5)
                 PageFiveTitle = CurrentPageListTitle;
 
-            Code = "Grupo actualizado";
+            Code = "¡Grupo Actualizado!";
+            CodeColor = Constants.ColorCodeSave;
         }
         internal bool CanExecute_SaveChangesProductListCommand(object parameter)
         {
@@ -3301,7 +3318,7 @@ namespace Seiya
             _posInstance.UpdateAllData();
             _posInstance.SaveDataTableToCsv();
             ExchangeRateString = _posInstance.ExchangeRate.ToString();
-            Code = "Cambio Actualizado!";
+            Code = "¡Tipo de Cambio Actualizado!";
             CurrentPage = "\\View\\PosGeneralPage.xaml";
             //Log message to display success
             //Code = Log.ExchangeRateSaved;
@@ -3331,14 +3348,14 @@ namespace Seiya
                 SystemUnlock = true;
                 CurrentUser = userFound;
                 CurrentPage = "\\View\\PosGeneralPage.xaml";
-                LoginMessage = "Bienvenido a Wibsar Retail";
+                LoginMessage = "¡Bienvenido!";
                 LoginUserNameText = "";
                 LoginPasswordText = "";
             }
             else
             {
                 SystemUnlock = false;
-                LoginMessage = "Usuario o contraseña incorrecto! Intente de nuevo";
+                LoginMessage = "¡Usuario o Contraseña Incorrecto! Intente de Nuevo...";                
             }
         }
         internal bool CanExecute_LoginCheckCommand(object parameter)
