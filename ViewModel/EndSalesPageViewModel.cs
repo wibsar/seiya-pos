@@ -489,7 +489,7 @@ namespace Seiya
             PrintReceipt();
         }
         /// <summary>
-        /// Method to view current sales report and print receupt but do not backup transactoins nor record report as a end of day sales report
+        /// Method to view current sales report and print receupt but do not backup transactions nor record report as a end of day sales report
         /// </summary>
         void GenerateCurrentSalesReport()
         {
@@ -550,7 +550,11 @@ namespace Seiya
                 Usd20 = UsdDollar20,
                 Usd50 = UsdDollar50,
                 Usd100 = UsdDollar100,
-                Delta = Delta
+                Delta = Delta,
+                UsdTotalCash = UsdDollar1 + UsdDollar5 * 5 + UsdDollar10 * 10 + UsdDollar20 * 20 + 
+                               UsdDollar50 * 50 + UsdDollar100 * 100 + UsdDollarCoinsTotal,
+                MxnTotalCash = MxnPeso20 * 20 + MxnPeso50 * 50 + MxnPeso100 * 100 + MxnPeso200 * 200 + 
+                               MxnPeso500 * 500 + MxnPeso1000 * 1000 + MxnPesoCoinsTotal
             };
         }
 
@@ -569,7 +573,7 @@ namespace Seiya
             var cashUsd = UsdDollar1 + UsdDollar5*5 + UsdDollar10*10 + UsdDollar20*20 + UsdDollar50*50 + UsdDollar100*100 + UsdDollarCoinsTotal;
             var totalCash = cashMxn + cashUsd * _pos.ExchangeRate;
             //Calculate delta
-            Delta = totalCash + ExpensesCashTotal + ReturnsCashTotal - RegisterPreviousCash - CashTotalSales;
+            Delta = totalCash + ExpensesCashTotal + ReturnsCashTotal - RegisterPreviousCash - CashTotalSales;     
         }
 
         private void CalculateInitialCash()

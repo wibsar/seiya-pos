@@ -2956,7 +2956,7 @@ namespace Seiya
                 SelectedOrder.SaveDataTableToCsv();
             }
             OrdersSearchedEntries = null;
-            CurrentPage = "\\View\\OrdersMainPage.xaml";
+            CurrentPage = "\\View\\OrderMainPage.xaml";
         }
 
         internal bool CanExecute_OrderDeleteCommand(object parameter)
