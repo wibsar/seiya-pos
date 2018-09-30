@@ -7,19 +7,17 @@
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     
-    
     <Grid Background="White">
         <StackPanel>
-            <TextBlock Text="Descripcion" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" Foreground="#2C5066"></TextBlock>
-            <TextBlock Text="Categoria" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="12" Foreground="Gray" ></TextBlock>
+            <TextBlock Text="Descripcion" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Foreground="#2C5066"></TextBlock>
+            <TextBlock Text="Categoria" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" Foreground="Gray" ></TextBlock>
             <StackPanel Orientation="Horizontal">
-                <TextBlock Text="Price" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="12" ></TextBlock>
-                <TextBlock Text=" x " HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="12" Foreground="Gray"></TextBlock>
-                <TextBlock Text="Quantity" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="12" ></TextBlock>
-                <TextBlock Text="Total" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" Foreground="DarkGreen"></TextBlock>
+                <TextBlock Text="Price" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" ></TextBlock>
+                <TextBlock Text=" x " HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" Foreground="Gray"></TextBlock>
+                <TextBlock Text="Quantity" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" ></TextBlock>
+                <TextBlock Text="Total" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20" Foreground="DarkGreen"></TextBlock>
                 <Button Content="Edit" HorizontalAlignment="Right"></Button>
             </StackPanel>
-
         </StackPanel>    
     </Grid>
 </UserControl>

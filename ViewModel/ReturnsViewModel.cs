@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Seiya.WpfBindingUtilities;
@@ -27,6 +29,7 @@ namespace Seiya
         #region Constructors
         public ReturnsViewModel()
         {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             ReturnID = CreateReturnID();
             PurchaseDate = DateTime.Today;
         }
@@ -123,7 +126,7 @@ namespace Seiya
                 //Record Transaction
                 RecordReturn();
                 //Message
-                MainWindowViewModel.GetInstance().Code = ReturnID;
+                MainWindowViewModel.GetInstance().Code = "Devolución registrada";
                 MainWindowViewModel.GetInstance().ReturnID = Int32.Parse(ReturnID);
                 MainWindowViewModel.GetInstance().ReturnTransaction = true;
                 MainWindowViewModel.GetInstance().PaymentReceivedMXN = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();
@@ -137,7 +140,7 @@ namespace Seiya
 
         internal bool CanExecute_ReturnSaveChangesCommand(object parameter)
         {
-            return true;
+            return TicketNumber != 0 && ReturnReason != null & CustomerName != null;
         }
         #endregion
 

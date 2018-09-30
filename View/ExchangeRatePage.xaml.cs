@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,12 +16,9 @@ using System.Windows.Shapes;
 
 namespace Seiya
 {
-    /// <summary>
-    /// Lógica de interacción para ExchangeRatePage.xaml
-    /// </summary>
-    public partial class TechSupportPage : Page
+    public partial class ExchangeRatePage : Page
     {
-        public TechSupportPage()
+        public ExchangeRatePage()
         {
             InitializeComponent();
             DataContext = MainWindowViewModel.GetInstance();

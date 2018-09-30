@@ -8,7 +8,7 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
-        Title="MainWindow" Height="700" Width="1050" FontFamily=".\Resources\Fonts\#Comfortaa">
+        Title="Wibsar Retail" Height="700" Width="1050" FontFamily=".\Resources\Fonts\#Comfortaa">
 
     <Window.Resources>
         <Style TargetType="Page">
@@ -46,21 +46,19 @@
         </Grid.RowDefinitions>
 
         <!-- Grid for header section -->
-        <Grid Column="0" Row="0">
+        <Grid Column="0" Row="0" Grid.ColumnSpan="2">
+            <!-- Client logo -->
+            <Image Source="C:\Projects\seiya-pos\Data\Images\tulogo.png" HorizontalAlignment="Center" MaxWidth="500"  ></Image>
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>                    
                     <ColumnDefinition Width="8*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-
                 <Button Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="menu">
                     <Grid>
-
                         <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\menu.png" Margin="5"></Image>
-
                     </Grid>
                 </Button>
-                
             </Grid>
         </Grid>
         <!-- Linea gris -->
@@ -212,7 +210,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea roja.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="General" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="General" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -225,7 +223,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea amarilla.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageOneTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageOneTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -238,7 +236,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea morada.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageTwoTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageTwoTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -251,7 +249,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea verde.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageThreeTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageThreeTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -264,7 +262,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea naranja.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFourTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFourTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -277,7 +275,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\linea azul.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFiveTitle}" FontSize="14"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFiveTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -294,16 +292,15 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="txtCode" Grid.Column="0" Text="{Binding Code}" VerticalAlignment="Center" Height="30"  Foreground="Red">
+                <TextBox x:Name="txtCode" Grid.Column="0" Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" GotFocus="TxtCode_OnMouseLeftButtonDown" VerticalAlignment="Center" Height="30"  Foreground="{Binding CodeColor}">
                     <TextBox.InputBindings>
-                        <MouseBinding MouseAction="LeftClick" Command="{Binding CodeLeftClickClearCommand}">
-                        </MouseBinding>
+                        <!--MouseBinding MouseAction="LeftClick" Command="{Binding CodeLeftClickClearCommand}"></ -->
+                        <KeyBinding Command="{Binding SearchCodeCommand}" Key="Enter" CommandParameter="{Binding Code}"></KeyBinding>
                     </TextBox.InputBindings>
                 </TextBox>
                 <Button Command="{Binding SearchCodeCommand}" CommandParameter="{Binding Code}" Grid.Column="1" >
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\lupa inactiva.png" Margin="5"></Image>
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png" Margin="5"></Image>
                 </Button>
-
             </Grid>
         </Grid>
     </Grid>

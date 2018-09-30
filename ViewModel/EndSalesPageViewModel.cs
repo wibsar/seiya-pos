@@ -42,6 +42,7 @@ namespace Seiya
         private decimal _registerNewCash;
         private decimal _returnsCashTotal;
         private decimal _returnsCardTotal;
+        private decimal _mxnCashBalance;
         private int _returnsTotalItems;
         private decimal _delta;
         private string _comments;
@@ -208,6 +209,16 @@ namespace Seiya
             set
             {
                 _delta = value;
+                OnPropertyChanged();
+            }
+        }
+        
+        public decimal MxnCashBalance
+        {
+            get { return _mxnCashBalance; }
+            set
+            {
+                _mxnCashBalance = value;
                 OnPropertyChanged();
             }
         }
@@ -440,9 +451,9 @@ namespace Seiya
         {
             _pos = Pos.GetInstance(Constants.DataFolderPath + Constants.PosDataFileName);
             //Calculate sales from transactions
-            CalculateSales();
             CalculateInitialCash();
             CalculateExpenses();
+            CalculateSales();
             CalculateDelta();
         }
 
@@ -457,8 +468,8 @@ namespace Seiya
         {
             EndOfSalesType = "Z";
             SaveRegisterCashAmount();
-            CalculateDelta();
             CalculateSales();
+            CalculateDelta();
             CollectEndOfSalesReceiptInformation();
             //Record End Of Sales Transaction in db
             Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.MasterEndOfDaySalesFileName,
@@ -478,14 +489,14 @@ namespace Seiya
             PrintReceipt();
         }
         /// <summary>
-        /// Method to view current sales report and print receupt but do not backup transactoins nor record report as a end of day sales report
+        /// Method to view current sales report and print receupt but do not backup transactions nor record report as a end of day sales report
         /// </summary>
         void GenerateCurrentSalesReport()
         {
             EndOfSalesType = "X";
             SaveRegisterCashAmount();
-            CalculateDelta();
             CalculateSales();
+            CalculateDelta();
             CollectEndOfSalesReceiptInformation();
             //Print Receipt
             PrintReceipt();
@@ -508,6 +519,8 @@ namespace Seiya
             ReturnsTotalItems = transactionData.TotalReturnItems;
             OtherTotalSales = transactionData.OtherTotal;
             TotalSales = transactionData.TotalAmountSold;
+
+            MxnCashBalance = CashTotalSales - ReturnsCashTotal - ExpensesCashTotal;
         }
 
         private void CollectEndOfSalesReceiptInformation()
@@ -537,7 +550,11 @@ namespace Seiya
                 Usd20 = UsdDollar20,
                 Usd50 = UsdDollar50,
                 Usd100 = UsdDollar100,
-                Delta = Delta
+                Delta = Delta,
+                UsdTotalCash = UsdDollar1 + UsdDollar5 * 5 + UsdDollar10 * 10 + UsdDollar20 * 20 + 
+                               UsdDollar50 * 50 + UsdDollar100 * 100 + UsdDollarCoinsTotal,
+                MxnTotalCash = MxnPeso20 * 20 + MxnPeso50 * 50 + MxnPeso100 * 100 + MxnPeso200 * 200 + 
+                               MxnPeso500 * 500 + MxnPeso1000 * 1000 + MxnPesoCoinsTotal
             };
         }
 
@@ -556,7 +573,7 @@ namespace Seiya
             var cashUsd = UsdDollar1 + UsdDollar5*5 + UsdDollar10*10 + UsdDollar20*20 + UsdDollar50*50 + UsdDollar100*100 + UsdDollarCoinsTotal;
             var totalCash = cashMxn + cashUsd * _pos.ExchangeRate;
             //Calculate delta
-            Delta = (totalCash + ExpensesCashTotal - RegisterPreviousCash) - CashTotalSales;
+            Delta = totalCash + ExpensesCashTotal + ReturnsCashTotal - RegisterPreviousCash - CashTotalSales;     
         }
 
         private void CalculateInitialCash()
@@ -591,9 +608,11 @@ namespace Seiya
             {
                 case "x":
                     GenerateCurrentSalesReport();
+                    MainWindowViewModel.GetInstance().Code = "Corte X realizado!";
                     break;
                 case "z":
                     GenerateEndOfDaySalesReport();
+                    MainWindowViewModel.GetInstance().Code = "Corte Z realizado!";
                     break;
                 default:
                     break;
@@ -604,7 +623,7 @@ namespace Seiya
 
         internal bool CanExecute_GenerateEndOfDaySalesReportCommand(object parameter)
         {
-            return true;
+            return RegisterNewCash != 0;
         }
         #endregion
 

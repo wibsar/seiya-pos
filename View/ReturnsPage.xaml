@@ -82,7 +82,7 @@
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Numero Cliente"></TextBlock>
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Motivo"></TextBlock>
 
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TicketNumber}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="5"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TicketNumber, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="5"></TextBox>
                 <DatePicker Grid.Row="2" Grid.Column="1" Text="{Binding PurchaseDate}" Margin="5"></DatePicker>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
                 <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CustomerNumber, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>

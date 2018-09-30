@@ -33,6 +33,7 @@
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="Margin" Value="3"></Setter>
         </Style>
     </Page.Resources>
 

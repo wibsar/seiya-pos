@@ -61,5 +61,10 @@ namespace Seiya
         //Returns
         public const string ReturnsFileName = "Devoluciones.csv";
 
+        //Colors
+        public const string ColorCodeError = "Red";
+        public const string ColorCodeSave = "Green";
+        public const string ColorCodeRegular = "Black";
+
     }
 }

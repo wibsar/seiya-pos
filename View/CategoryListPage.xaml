@@ -141,13 +141,11 @@
                     </Button>
                 </Grid>
                 <!-- New Category Text Input -->
-                <Grid Grid.Column="1" Grid.Row="0">
+                <Grid Grid.Column="0" Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    
-                    
                 </Grid>
             </Grid>
         </Grid>

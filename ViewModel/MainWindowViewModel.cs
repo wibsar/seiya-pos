@@ -20,6 +20,7 @@ namespace Seiya
         //Main instances
         private static Inventory _inventoryInstance = null;
         private static MainWindowViewModel _appInstance = null;
+        private static PosGeneralPageViewModel _posGeneralInstance = null;
         private static Pos _posInstance = null;
         private static User _userInstance = null;
         private static Expense _expenseInstance = null;
@@ -118,6 +119,27 @@ namespace Seiya
         #endregion
 
         #region Properties
+
+        public BitmapImage Image
+        {
+            get
+            {
+                BitmapImage bitmap = new BitmapImage();
+                if (LogoImage != null)
+                {
+                    bitmap.BeginInit();
+                    bitmap.UriSource = new Uri(@"C:\Projects\seiya-pos\Resources\Images\" + _posInstance.LogoName);
+                    bitmap.EndInit();
+                    _logoImage = bitmap;
+                }
+                return bitmap;
+            }
+            set
+            {
+                _logoImage = value;
+            }
+        }
+
         public Product InventoryTemporalItem
         {
             get
@@ -189,7 +211,7 @@ namespace Seiya
                 _returnID = value;
             }
         }
-
+        
         #region Orders Properties
 
         #endregion
@@ -197,6 +219,28 @@ namespace Seiya
         #endregion
 
         #region Observable Properties
+
+        private string _codeColor = "#2C5066";
+        public string CodeColor
+        {
+            get { return _codeColor; }
+            set { _codeColor = value; OnPropertyChanged();}
+        }
+
+        private BitmapImage _logoImage;
+        public BitmapImage LogoImage
+        {
+            get
+            {
+                //return SelectedInventoryProduct == null ? null : SelectedInventoryProduct.Image;
+                return Image == null ? null : _logoImage;
+            }
+            set
+            {
+                _logoImage = value;
+                OnPropertyChanged("LogoImage");
+            }
+        }
 
         /// <summary>
         /// List of available categories
@@ -241,7 +285,7 @@ namespace Seiya
             get { return _newCategoryItem; }
             set
             {
-                _newCategoryItem = Formatter.SanitizeInput(value); ;
+                _newCategoryItem = Formatter.SanitizeInput(value);
                 OnPropertyChanged("NewCategoryItem");
             }
         }
@@ -356,15 +400,17 @@ namespace Seiya
             get { return _code; }
             set
             {
-                var product = _inventoryInstance.GetProduct(value + "x");
-                if (product.Code != null)
-                {
-                    product.LastQuantitySold = 1;
-                    AddProductToCart(product);
-                    _code = string.Empty;
-                }
-                else
-                    _code = value;
+                //var product = _inventoryInstance.GetProduct(value + "x");
+                //if (product.Code != null)
+                //{
+                //    product.LastQuantitySold = 1;
+                //    AddProductToCart(product);
+                //    _code = string.Empty;
+                //}
+                //else
+                //    _code = value;
+
+                _code = value;
                 OnPropertyChanged("Code");
             }
         }
@@ -1206,6 +1252,8 @@ namespace Seiya
                     CurrentPage = "\\View\\EndSalesPage.xaml";
                     break;
                 case "product_list":
+                    string currentProductListTitle;
+                    GetPageProductsList(LastSelectedProductsPage, out currentProductListTitle);
                     CurrentPage = "\\View\\ProductsListEditPage.xaml";
                     break;
                 case "inventory_add":
@@ -1267,10 +1315,14 @@ namespace Seiya
                     if (PaymentTotalMXN != 0M && (PaymentTotalMXN <= (PaymentReceivedMXN + PaymentReceivedUSD * _exchangeRate)))
                     {
                         //TODO: Add internal capability for personal use
-                        transactionType = PaymentTotalMXN <= 100 ? TransactionType.Regular : TransactionType.Interno;
+                        transactionType = PaymentTotalMXN <= 150 ? TransactionType.Regular : TransactionType.Interno;
                         PaymentProcessStart(parameter.ToString(), transactionType);
                         SystemUnlock = false;
                         CurrentPage = "\\View\\PaymentEndPage.xaml";
+                    }
+                    else
+                    {
+                        Code = "Efectivo invalido!";
                     }
                     break;
                 case "Tarjeta":
@@ -1295,6 +1347,7 @@ namespace Seiya
                     break;
                 case "end_transaction":
                     PaymentEndProcess(parameter.ToString());
+                    Code = "Transaccion Exitosa!";
                     SystemUnlock = true;
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     break;
@@ -1380,6 +1433,11 @@ namespace Seiya
             {
                 product.LastQuantitySold = 1;
                 AddProductToCart(product);
+                Code = "";
+            }
+            else
+            {
+                Code = "Código inválido";
             }
 
             //TODO: Turn red if it is not found
@@ -1397,7 +1455,7 @@ namespace Seiya
 
         internal void Execute_CodeLeftClickClearCommand(object parameter)
         {
-            Code = string.Empty;
+            Code = "";           
         }
         internal bool CanExecute_CodeLeftClickClearCommand(object parameter)
         {
@@ -1542,7 +1600,7 @@ namespace Seiya
             //TODO: Check to make sure the item is found, otherwise show error message
             //Create a new object for every product 
             var product = new Product((Product) parameter) {LastQuantitySold = 1};
-            AddManualProductToCart(product);
+            AddProductToCart(product);
         }
 
         internal bool CanExecute_SelectItemCommand(object parameter)
@@ -1571,8 +1629,6 @@ namespace Seiya
         }
 
         #endregion
-
-
 
         #region PaymentBillClickCommand
         public ICommand PaymentBillClickCommand { get { return _paymentBillClickCommand ?? (_paymentBillClickCommand = new DelegateCommand(Execute_PaymentBillClickCommand, CanExecute_PaymentBillClickCommand)); } }
@@ -1641,24 +1697,24 @@ namespace Seiya
             if (CurrentCustomer.PointsAvailable >= 1)
             {
                 Product productMimic;
-                var tempTotal = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();
+                var tempTotal = CalculateCurrentCartTotal();
                 if (CurrentCustomer.PointsAvailable > Convert.ToDouble(tempTotal))
                 {
-                    productMimic = Product.Add(CurrentCustomer.Name, "Descuento P", Convert.ToDecimal(tempTotal - 1) * -1, 1);
+                    productMimic = Product.Add("Puntos Descuento", "Puntos", Convert.ToDecimal(tempTotal - 1) * -1, 1);
                     PaymentPointsInUse = Convert.ToDouble(tempTotal - 1);
                 }
                 else
                 {
-                    productMimic = Product.Add(CurrentCustomer.Name, "Descuento P ", Convert.ToDecimal(CurrentCustomer.PointsAvailable) * -1, 1);
+                    productMimic = Product.Add("Puntos Descuento", "Puntos", Convert.ToDecimal(CurrentCustomer.PointsAvailable) * -1, 1);
                     PaymentPointsInUse = CurrentCustomer.PointsAvailable;
                 }
-                MainWindowViewModel.GetInstance().AddManualProductToCart(productMimic);
+                AddManualProductToCart(productMimic);
             }
         }
 
         internal bool CanExecute_PaymentUsePointsCommand(object parameter)
         {
-            return CurrentCustomer != null;
+            return CurrentCustomer != null && ReturnTransaction == false;
         }
         #endregion
 
@@ -1872,8 +1928,17 @@ namespace Seiya
 
         internal void Execute_DeleteCategoryItemCommand(object parameter)
         {
-            if(CurrentCategoryList.Count > 1)
-                CurrentCategoryList.RemoveAt((int)parameter);
+            if (CurrentCategoryList.Count > 1)
+            {
+                if (CurrentCategoryList[(int)parameter] != "general" && CurrentCategoryList[(int)parameter] != "General")
+                {
+                    CurrentCategoryList.RemoveAt((int)parameter);
+                }
+                else
+                {
+                    Code = "No se puede remover";
+                }
+            }
         }
         internal bool CanExecute_DeleteCategoryItemCommand(object parameter)
         {
@@ -1891,6 +1956,9 @@ namespace Seiya
             CategoryCatalog.UpdateCategoryListFile(Constants.DataFolderPath + Constants.CategoryListFileName, CurrentCategoryList.ToList());
             //Reload categories
             CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
+            PosGeneralPageViewModel.GetInstance().CategoriesList = CategoriesList;
+            Code = "Categoría guardada!";
+            CodeColor = Constants.ColorCodeSave;
         }
         internal bool CanExecute_SaveChangesCategoryListCommand(object parameter)
         {
@@ -1905,8 +1973,11 @@ namespace Seiya
 
         internal void Execute_AddCategoryListCommand(object parameter)
         {
-            if(!CurrentCategoryList.Contains(parameter.ToString()))
-               CurrentCategoryList.Add(parameter.ToString());
+            //Format the string before adding it to the list
+            if (!CurrentCategoryList.Contains(Formatter.FirstLetterUpperConverter(NewCategoryItem)))
+                CurrentCategoryList.Add(Formatter.FirstLetterUpperConverter(NewCategoryItem));
+
+            NewCategoryItem = "";
         }
         internal bool CanExecute_AddCategoryListCommand(object parameter)
         {
@@ -1992,7 +2063,7 @@ namespace Seiya
                         AmountSold = 0M,
                         Category = "",
                         Cost = 0M,
-                        CostCurrency = "MXN",
+                        CostCurrency = CurrencyTypeEnum.MXN,
                         Description = "",
                         ImageName = "NA.jpg",
                         InternalQuantity = 0,
@@ -2003,7 +2074,7 @@ namespace Seiya
                         MinimumStockQuantity = 1,
                         Name = "",
                         Price = 0M,
-                        PriceCurrency = "MXN",
+                        PriceCurrency = CurrencyTypeEnum.MXN,
                         Provider = "",
                         ProviderProductId = "",
                         QuantitySold = 0,
@@ -2072,8 +2143,12 @@ namespace Seiya
             switch (parameter)
             {
                 case "add":
-                    InventoryTemporalItem.ImageName = SelectImage();
-                    ProductImage = InventoryTemporalItem.Image;
+                    var imageSelected = SelectImage();
+                    if (imageSelected != null)
+                    {
+                        InventoryTemporalItem.ImageName = imageSelected;
+                        ProductImage = InventoryTemporalItem.Image;
+                    }
                     break;
                 case "remove":
                     InventoryTemporalItem.ImageName = "NA.jpg";
@@ -2108,6 +2183,8 @@ namespace Seiya
                 _inventoryInstance.SaveDataTableToCsv();
                 CurrentPage = "\\View\\InventoryMainPage.xaml";
             }
+
+            Code = "Producto actualizado!";
             //Reset list
             InventorySearchedProducts = null;
             SelectedInventoryProduct = null;
@@ -2232,6 +2309,8 @@ namespace Seiya
             {
                 UserTemporalItem.Register();
             }
+
+            Code = "Usuario actualizado!";
             UsersSearchedEntries = null;
             CurrentPage = "\\View\\UserMainPage.xaml";
         }
@@ -2383,6 +2462,7 @@ namespace Seiya
             }
             CustomersSearchedEntries = null;
             CurrentPage = "\\View\\CustomerMainPage.xaml";
+            Code = "Cliente Actualizado!";
         }
 
         internal bool CanExecute_CustomerSaveChangesCommand(object parameter)
@@ -2406,6 +2486,8 @@ namespace Seiya
             }
             CustomersSearchedEntries = null;
             CurrentPage = "\\View\\CustomerMainPage.xaml";
+
+            Code = "Cliente Eliminado";
         }
 
         internal bool CanExecute_CustomerDeleteCommand(object parameter)
@@ -2529,6 +2611,8 @@ namespace Seiya
             {
                 ExpenseTemporalItem.Register();
             }
+
+            Code = "Gasto guardado!";
             ExpensesSearchedEntries = null;
             CurrentPage = "\\View\\ExpenseMainPage.xaml";
         }
@@ -2702,6 +2786,7 @@ namespace Seiya
                 VendorTemporalItem.Register();
             }
             VendorsSearchedEntries = null;
+            Code = "Proveedor actualizado!";
             CurrentPage = "\\View\\VendorMainPage.xaml";
         }
 
@@ -2847,6 +2932,7 @@ namespace Seiya
             var fromPassword = "Yadira00";
             Notification.SendNotification(toName,toEmailAddress, subject,body, attachmentFilePath, fromEmailAddress, fromPassword);
             OrdersSearchedEntries = null;
+            Code = "Pedido Registrado!";
             CurrentPage = "\\View\\OrderMainPage.xaml";
         }
 
@@ -2870,7 +2956,7 @@ namespace Seiya
                 SelectedOrder.SaveDataTableToCsv();
             }
             OrdersSearchedEntries = null;
-            CurrentPage = "\\View\\OrdersMainPage.xaml";
+            CurrentPage = "\\View\\OrderMainPage.xaml";
         }
 
         internal bool CanExecute_OrderDeleteCommand(object parameter)
@@ -3194,6 +3280,8 @@ namespace Seiya
                 PageFourTitle = CurrentPageListTitle;
             else if (LastSelectedProductsPage == 5)
                 PageFiveTitle = CurrentPageListTitle;
+
+            Code = "Grupo actualizado";
         }
         internal bool CanExecute_SaveChangesProductListCommand(object parameter)
         {
@@ -3213,6 +3301,7 @@ namespace Seiya
             _posInstance.UpdateAllData();
             _posInstance.SaveDataTableToCsv();
             ExchangeRateString = _posInstance.ExchangeRate.ToString();
+            Code = "Cambio Actualizado!";
             CurrentPage = "\\View\\PosGeneralPage.xaml";
             //Log message to display success
             //Code = Log.ExchangeRateSaved;
@@ -3270,18 +3359,26 @@ namespace Seiya
 
         public void AddProductToCart(Product product)
         {
-            //new
             //Check if product already exists in the file
-            for (var index = 0; index < CurrentCartProducts.Count; index++)
+            if (product.Price != 0M)
             {
-                if (product.Code == null || (product.Code != _currentCartProducts[index].Code)) continue;
-                AddOneAdditinoalQuantityToProductInCart(CurrentCartProducts[index], index);
+                if(!CategoriesList.Contains(product.Category)) product.Category = "General";
+                for (var index = 0; index < CurrentCartProducts.Count; index++)
+                {
+                    if (product.Code == null || (product.Code != _currentCartProducts[index].Code) || product.Price == 0M) continue;
+                    AddOneAdditinoalQuantityToProductInCart(CurrentCartProducts[index], index);
+                    PaymentTotalMXN = CalculateCurrentCartTotal();
+                    return;
+                }
+                //end test
+                CurrentCartProducts.Insert(0, product);
                 PaymentTotalMXN = CalculateCurrentCartTotal();
-                return;
             }
-            //end test
-            CurrentCartProducts.Insert(0, product);
-            PaymentTotalMXN = CalculateCurrentCartTotal();
+            else
+            {
+                PosGeneralPageViewModel.GetInstance().ManualProduct = product;
+                CurrentPage = "\\View\\PosGeneralPage.xaml";
+            }
         }
 
         /// <summary>
@@ -3290,16 +3387,18 @@ namespace Seiya
         /// <param name="product"></param>
         public void AddManualProductToCart(Product product)
         {
+            if (!CategoriesList.Contains(product.Category)) product.Category = "General";
             //Check if product already exists in the file
-            for (var index = 0; index < CurrentCartProducts.Count; index++)
+            if (product.Price != 0M)
             {
-                if (product.Code == null || (product.Code != _currentCartProducts[index].Code)) continue;
-                AddOneAdditinoalQuantityToProductInCart(_currentCartProducts[index], index);
+                CurrentCartProducts.Insert(0, product);
                 PaymentTotalMXN = CalculateCurrentCartTotal();
-                return;
             }
-            CurrentCartProducts.Insert(0, product);
-            PaymentTotalMXN = CalculateCurrentCartTotal();
+            else
+            {
+                PosGeneralPageViewModel.GetInstance().ManualProduct = product;
+                CurrentPage = "\\View\\PosGeneralPage.xaml";
+            }
         }
 
         public void RemoveProductFromCart(Product product)
@@ -3368,7 +3467,7 @@ namespace Seiya
             var transactionDate = DateTime.Now;
             decimal totalDue = 0M;
             string customer = "General";
-
+            
             //Get customer, if registered
             if(CurrentCustomer != null)
                 customer = CurrentCustomer.Name;
@@ -3381,6 +3480,7 @@ namespace Seiya
             //Get next receipt number, if applicable
             var receiptNumber = saleType == TransactionType.Regular ? _posInstance.GetNextReceiptNumber() : _posInstance.LastReceiptNumber;
 
+            var productsWithNoPrice = new List<Product>();
             //Record each item in the transactions db
             foreach (var product in CurrentCartProducts)
             {
@@ -3399,10 +3499,8 @@ namespace Seiya
                 //Record Transaction
                 transaction.Record(saleType);
 
-                //update inventory for each product, if applicatable
+                //update inventory for each product, if applicable
                 UpdateInventory(product, transactionDate, saleType);
-
-                //Total
                 totalDue += product.Price * product.LastQuantitySold;
             }
 
@@ -3434,7 +3532,8 @@ namespace Seiya
                 CurrentCustomer.LastVisitDate = DateTime.Now;
                 CurrentCustomer.UpdateUserToTable();
                 CurrentCustomer.SaveDataTableToCsv();
-            }         
+                _inventoryInstance.LoadCsvToDataTable();
+            }
 
             return true;
         }
@@ -3446,54 +3545,106 @@ namespace Seiya
         bool UpdateInventory(Product product, DateTime transactionDate, TransactionType transactionType)
         {
             if (product.Id == 0) return false;
-                
-            if(transactionType == TransactionType.Regular || transactionType == TransactionType.Internal || transactionType == TransactionType.Interno
+
+            var invProduct = _inventoryInstance.GetProduct(product.Code);
+
+            if (transactionType == TransactionType.Regular || transactionType == TransactionType.Internal || transactionType == TransactionType.Interno
                 || transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
             {
-                if (product.LocalQuantityAvailable > 0)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
-                        (product.LocalQuantityAvailable - product.LastQuantitySold) > 0
-                        ? (product.LocalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
+                //
+                if (invProduct.LocalQuantityAvailable > 0)
+                {
+                    invProduct.LocalQuantityAvailable = (invProduct.LocalQuantityAvailable - product.LastQuantitySold) > 0 ?
+                        (invProduct.LocalQuantityAvailable - product.LastQuantitySold) : 0;
+                }
 
-                if (product.TotalQuantityAvailable > 0)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
-                        (product.TotalQuantityAvailable - product.LastQuantitySold) > 0
-                        ? (product.TotalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
+                if (invProduct.TotalQuantityAvailable > 0)
+                {
+                    invProduct.TotalQuantityAvailable = (invProduct.TotalQuantityAvailable - product.LastQuantitySold) > 0 ?
+                        (invProduct.TotalQuantityAvailable - product.LastQuantitySold) : 0;
+                }
 
-                _inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
-                    transactionDate.ToString("d"));
+                invProduct.LastSaleDate = transactionDate;
 
-                if(transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadInternoHistorial",
-                        (product.InternalQuantity + product.LastQuantitySold).ToString());
+                if (transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
+                {
+                    invProduct.InternalQuantity = invProduct.InternalQuantity + product.LastQuantitySold;
+                }
 
-                if(transactionType == TransactionType.Regular || transactionType == TransactionType.Interno || transactionType == TransactionType.Internal)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
-                        (product.QuantitySold + product.LastQuantitySold).ToString());
+                if (transactionType == TransactionType.Regular || transactionType == TransactionType.Interno ||
+                    transactionType == TransactionType.Internal)
+                {
+                    invProduct.QuantitySold = invProduct.QuantitySold + product.LastQuantitySold;
+                }
 
-                if(transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
-                    _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                        (product.AmountSold + product.LastAmountSold).ToString()); //removed  product.LastQuantitySold * 
+                if (transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
+                {
+                    invProduct.AmountSold = invProduct.AmountSold + product.LastAmountSold;
+                }
+
+                _inventoryInstance.UpdateProductToTable(invProduct);
+
+                ////
+                //if (product.LocalQuantityAvailable > 0)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
+                //        (product.LocalQuantityAvailable - product.LastQuantitySold) > 0
+                //        ? (product.LocalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
+
+                //if (product.TotalQuantityAvailable > 0)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
+                //        (product.TotalQuantityAvailable - product.LastQuantitySold) > 0
+                //        ? (product.TotalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
+
+                //_inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
+                //    transactionDate.ToString("d"));
+
+                //if (transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
+                //_inventoryInstance.UpdateItem(product.Code, "CantidadInternoHistorial",
+                //    (product.InternalQuantity + product.LastQuantitySold).ToString());
+
+                //    if (transactionType == TransactionType.Regular || transactionType == TransactionType.Interno || transactionType == TransactionType.Internal)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
+                //        (product.QuantitySold + product.LastQuantitySold).ToString());
+
+                //if(transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
+                //    _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
+                //        (product.AmountSold + product.LastAmountSold).ToString()); //removed  product.LastQuantitySold * 
             }
             else
             {
                 //if it is a return
-                if (product.LocalQuantityAvailable > 0)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
-                        (product.LocalQuantityAvailable + product.LastQuantitySold).ToString());
+                if (invProduct.LocalQuantityAvailable > 0)
+                {
+                    invProduct.LocalQuantityAvailable = invProduct.LocalQuantityAvailable + product.LastQuantitySold;
+                }
 
-                if (product.TotalQuantityAvailable > 0)
-                    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
-                        (product.TotalQuantityAvailable + product.LastQuantitySold).ToString());
+                if (invProduct.TotalQuantityAvailable > 0)
+                {
+                    invProduct.TotalQuantityAvailable = invProduct.TotalQuantityAvailable + product.LastQuantitySold;
+                }
 
-                _inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
-                    transactionDate.ToString("d"));
+                invProduct.LastSaleDate = transactionDate;
+                invProduct.QuantitySold = invProduct.QuantitySold + product.LastQuantitySold;
+                invProduct.AmountSold = invProduct.AmountSold + product.LastAmountSold;
 
-                _inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
-                    (product.QuantitySold - product.LastQuantitySold).ToString());
+                _inventoryInstance.UpdateProductToTable(invProduct);
 
-                _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                    (product.AmountSold - product.LastAmountSold).ToString()); // removed product.LastQuantitySold * 
+                //if (product.LocalQuantityAvailable > 0)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
+                //        (product.LocalQuantityAvailable + product.LastQuantitySold).ToString());
+
+                //if (product.TotalQuantityAvailable > 0)
+                //    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
+                //        (product.TotalQuantityAvailable + product.LastQuantitySold).ToString());
+
+                //_inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
+                //    transactionDate.ToString("d"));
+
+                //_inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
+                //    (product.QuantitySold - product.LastQuantitySold).ToString());
+
+                //_inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
+                //    (product.AmountSold - product.LastAmountSold).ToString()); // removed product.LastQuantitySold * 
             }
 
             return true;
