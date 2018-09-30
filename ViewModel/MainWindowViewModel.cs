@@ -1714,7 +1714,7 @@ namespace Seiya
 
         internal bool CanExecute_PaymentUsePointsCommand(object parameter)
         {
-            return CurrentCustomer != null;
+            return CurrentCustomer != null && ReturnTransaction == false;
         }
         #endregion
 
@@ -3620,7 +3620,7 @@ namespace Seiya
 
                 if (invProduct.TotalQuantityAvailable > 0)
                 {
-                    invProduct.TotalQuantityAvailable = invProduct.TotalQuantityAvailable + product.TotalQuantityAvailable;
+                    invProduct.TotalQuantityAvailable = invProduct.TotalQuantityAvailable + product.LastQuantitySold;
                 }
 
                 invProduct.LastSaleDate = transactionDate;
