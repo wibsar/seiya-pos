@@ -1714,7 +1714,7 @@ namespace Seiya
 
         internal bool CanExecute_PaymentUsePointsCommand(object parameter)
         {
-            return CurrentCustomer != null;
+            return CurrentCustomer != null && ReturnTransaction == false;
         }
         #endregion
 
@@ -2144,8 +2144,12 @@ namespace Seiya
             switch (parameter)
             {
                 case "add":
-                    InventoryTemporalItem.ImageName = SelectImage();
-                    ProductImage = InventoryTemporalItem.Image;
+                    var imageSelected = SelectImage();
+                    if (imageSelected != null)
+                    {
+                        InventoryTemporalItem.ImageName = imageSelected;
+                        ProductImage = InventoryTemporalItem.Image;
+                    }
                     break;
                 case "remove":
                     InventoryTemporalItem.ImageName = "NA.jpg";
@@ -2966,7 +2970,7 @@ namespace Seiya
                 SelectedOrder.SaveDataTableToCsv();
             }
             OrdersSearchedEntries = null;
-            CurrentPage = "\\View\\OrdersMainPage.xaml";
+            CurrentPage = "\\View\\OrderMainPage.xaml";
             Code = "Pedido Eliminado";
             CodeColor = Constants.ColorCodeError;
         }
@@ -3633,7 +3637,7 @@ namespace Seiya
 
                 if (invProduct.TotalQuantityAvailable > 0)
                 {
-                    invProduct.TotalQuantityAvailable = invProduct.TotalQuantityAvailable + product.TotalQuantityAvailable;
+                    invProduct.TotalQuantityAvailable = invProduct.TotalQuantityAvailable + product.LastQuantitySold;
                 }
 
                 invProduct.LastSaleDate = transactionDate;

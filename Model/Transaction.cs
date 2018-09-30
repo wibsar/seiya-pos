@@ -527,7 +527,7 @@ namespace Seiya
             }
 
             //Subtract returns
-            transactionData.TotalAmountSold = transactionData.TotalAmountSold - transactionData.ReturnsCash - transactionData.ReturnsCard;
+            transactionData.TotalAmountSold = transactionData.TotalAmountSold + transactionData.ReturnsCash + transactionData.ReturnsCard;
 
             //Subtrack pts
        //     transactionData.CashTotal = transactionData.CashTotal;// - Convert.ToDecimal(transactionData.PointsTotal);
