@@ -121,56 +121,6 @@ namespace Seiya
         #endregion  
 
         #region Methods
-/*
-        //TODO: Remove this function
-        //Method to add transaction details to transaction files
-        public void Add(int transactionNumber, int internalNumber, int receiptNumber, string productCode,
-            int productNumber, string productCategory, string productDescription, decimal soldPrice,
-            int soldUnits, decimal totalSold, DateTime transactionDate, string customerName, string userName,
-            string fiscalReceiptReq, string saleType, PaymentTypeEnum paymentType, int orderNumber)
-        {
-            string data;
-
-            if (saleType != "Devolucion")
-            {
-                data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
-                    transactionNumber, internalNumber, receiptNumber, productCode, productNumber, productCategory,
-                    productDescription, soldPrice, soldUnits, totalSold, TransactionDate, customerName, userName,
-                    fiscalReceiptReq, saleType, paymentType.ToString(), orderNumber) + Environment.NewLine;
-            }
-            else
-            {
-                data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
-                    transactionNumber, internalNumber, receiptNumber, productCode, productNumber, productCategory,
-                    productDescription, -1 * soldPrice, -1 * soldUnits, -1 * totalSold, TransactionDate, customerName,
-                    userName, fiscalReceiptReq, saleType, paymentType.ToString(), orderNumber) + Environment.NewLine;
-            }
-
-            //Append to daily master
-            File.AppendAllText(_transactionMasterFilePath, data);
-            //Append to history transaction file
-            File.AppendAllText(_transactionHistoryFilePath, data);
-            //Append to daily regular
-            if (saleType == "Regular")
-            {
-                data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}", receiptNumber,
-                    productCode, productNumber, productCategory, productDescription, soldPrice, soldUnits, totalSold,
-                    TransactionDate, customerName, userName, fiscalReceiptReq, saleType, paymentType.ToString(),
-                    orderNumber) + Environment.NewLine;
-
-                File.AppendAllText(_transactionFilePath, data);
-            }
-            else if (saleType == "Devolucion")
-            {
-                data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}", receiptNumber,
-                    productCode, productNumber, productCategory, productDescription, -1 * soldPrice, -1 * soldUnits,
-                    -1 * totalSold, TransactionDate, customerName, userName, FiscalReceiptRequired, SaleType,
-                    PaymentType.ToString(), OrderNumber) + Environment.NewLine;
-
-                File.AppendAllText(_transactionFilePath, data);
-            }
-        }
-*/
         /// <summary>
         /// Record transaction data into database
         /// </summary>
@@ -289,113 +239,6 @@ namespace Seiya
         }
         #endregion
 
-        //Get transactions data per payment type
-        public static List<Tuple<string, int, decimal>> GetTransactionsData2(TransactionType transactionType,
-            Pos posData, out int firstReceiptNumber, out int lastReceiptNumber, out int totalItemsSold, out decimal totalAmountSold,
-            out decimal cashTotal, out decimal cardTotal, out decimal checkTotal, out decimal bankTotal, 
-            out decimal otherTotal, out double pointsTotal)
-        {
-            System.Data.DataTable data;
-            totalAmountSold = 0;
-            totalItemsSold = 0;
-            cashTotal = 0;
-            cardTotal = 0;
-            checkTotal = 0;
-            bankTotal = 0;
-            otherTotal = 0;
-            pointsTotal = 0;
-
-            string selectedFilePath = String.Empty;
-
-            var categoryData = new List<Tuple<string, int, decimal>>();
-
-            //Open current transaction file and get data
-            if (transactionType == TransactionType.Internal)
-            {
-                selectedFilePath = posData.TransactionMasterDataFilePath;
-            }
-            else if (transactionType == TransactionType.Regular)
-            {
-                selectedFilePath = posData.TransactionsDataFilePath;
-            }
-
-            using (var parser = new GenericParserAdapter(selectedFilePath))
-            {
-                parser.ColumnDelimiter = ',';
-                parser.FirstRowHasHeader = true;
-                parser.SkipStartingDataRows = 0;
-                parser.SkipEmptyRows = true;
-                parser.MaxBufferSize = 4096;
-                parser.MaxRows = 8000;
-
-                data = parser.GetDataTable();
-            }
-
-            var categories = CategoryCatalog.GetList(posData.Catalog);
-
-            //Get each category
-            foreach (var category in categories)
-            {
-                var amount = 0M;
-                var itemsNumber = 0;
-
-                for (var index = 0; index < data.Rows.Count; index++)
-                {
-                    var row = data.Rows[index];
-                    //Separate categories
-                    if (row["CategoriaProducto"].ToString() == category)
-                    {
-                        amount += decimal.Parse(row["TotalVendido"].ToString());
-                        itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
-
-                        //Get payment method
-                        switch (row["MetodoPago"].ToString())
-                        {
-                            case "Cash":
-                            case "Efectivo":
-                                cashTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            case "Card":
-                            case "Tarjeta":
-                                cardTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            case "Check":
-                            case "Cheque":
-                                checkTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            case "BankTransfer":
-                            case "Transferencia":
-                                bankTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            case "Other":
-                            case "Otro":
-                                otherTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                            default:
-                                otherTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                break;
-                        }
-
-                        //Add all points used
-                        ///TODO: Add once the Puntos Usados Column is added to the transfer list, if needed
-                        //                   pointsTotal = int.Parse(row["PuntosUsados"].ToString());
-                    }
-                }
-
-                categoryData.Add(new Tuple<string, int, decimal>(category.ToString(), itemsNumber, amount));
-                totalAmountSold += amount;
-                totalItemsSold += itemsNumber;
-            }
-
-            //Get first and last receipt number
-            var firstRow = data.Rows[0];
-            var lastRow = data.Rows[data.Rows.Count - 1];
-            firstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
-            lastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
-
-            return categoryData;
-        }
-
         /// <summary>
         /// Get transaction sales data for end of day sales report
         /// </summary>
@@ -419,7 +262,11 @@ namespace Seiya
                 PointsTotal = 0,
                 ReturnsCash = 0,
                 ReturnsCard = 0,
-                TotalReturnItems = 0
+                TotalReturnItems = 0,
+                LastTransactionNumber = 0,
+                LastInternalTransactionNumber = 0,
+                EndOfSalesNumber = 0,
+                LastReceiptNumber = 0
             };
 
             string selectedFilePath = String.Empty;
@@ -529,8 +376,6 @@ namespace Seiya
             //Subtract returns
             transactionData.TotalAmountSold = transactionData.TotalAmountSold + transactionData.ReturnsCash + transactionData.ReturnsCard;
 
-            //Subtrack pts
-       //     transactionData.CashTotal = transactionData.CashTotal;// - Convert.ToDecimal(transactionData.PointsTotal);
             //Get first and last receipt number
             if (data.Rows.Count > 1)
             {
@@ -538,18 +383,34 @@ namespace Seiya
                 var lastRow = data.Rows[data.Rows.Count - 1];
                 transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
                 transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+                if (transactionType == TransactionType.Internal || transactionType == TransactionType.Interno)
+                {
+                    transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
+                }
+            }
+            else if (data.Rows.Count == 1)
+            {
+                var firstRow = data.Rows[0];
+                var lastRow = data.Rows[0];
+                transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
+                transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+                if (transactionType == TransactionType.Internal || transactionType == TransactionType.Interno)
+                {
+                    transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
+                }
             }
             transactionData.SalesInfoPerCategory = categoryData;
             return categoryData;
         }
 
         public static void RecordEndOfDaySalesTransaction(string filePath, int endOfDayReceiptNumber, int firstReceipt, int lastReceipt,
-            int totalUnitsSold, double totalPointsUsed, decimal totalCashSold, decimal totalCardSold, decimal totalOthersSold, 
-            decimal totalAmountSold, string date)
+            int totalUnitsSold, double totalPointsUsed, decimal totalCashSold, decimal totalCardSold, decimal totalCheckSold, 
+            decimal totalBankSold, decimal totalOthersSold, decimal totalAmountSold, decimal totalReturnCash, decimal totalReturnCard, 
+            decimal exchangeRate, string date)
         {
-            var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}", endOfDayReceiptNumber, firstReceipt, lastReceipt, totalUnitsSold,
-                              totalPointsUsed, totalCashSold, totalCardSold, totalOthersSold, totalAmountSold, date) + Environment.NewLine;
-
+            var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}", endOfDayReceiptNumber, firstReceipt, 
+                           lastReceipt, totalUnitsSold, totalPointsUsed, totalCashSold, totalCardSold, totalCheckSold, totalBankSold, 
+                           totalOthersSold, totalAmountSold, totalReturnCash, totalReturnCard, exchangeRate, date) + Environment.NewLine;
             //Append to daily receipt
             File.AppendAllText(filePath, data);
         }

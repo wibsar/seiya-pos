@@ -1,11 +1,6 @@
 ﻿using Seiya.WpfBindingUtilities;
 using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Seiya
@@ -29,7 +24,6 @@ namespace Seiya
         private int _usdDollar100;
         private decimal _usdDollarCoinsTotal;
         private decimal _totalSales;
-        private int _totalItemsSold;
         private decimal _cardTotalSales;
         private decimal _cashTotalSales;
         private decimal _checkTotalSales;
@@ -60,7 +54,7 @@ namespace Seiya
             set
             {
                 _totalSales = Math.Round(value, 2);
-                OnPropertyChanged("TotalSales");
+                OnPropertyChanged();
             }
         }
 
@@ -245,7 +239,7 @@ namespace Seiya
             {
                 _mxnPeso20 = value;
                 CalculateDelta();
-                OnPropertyChanged("MxnPeso20");
+                OnPropertyChanged();
             }
         }
 
@@ -259,7 +253,7 @@ namespace Seiya
             {
                 _mxnPeso50 = value;
                 CalculateDelta();
-                OnPropertyChanged("MxnPeso50");
+                OnPropertyChanged();
             }
         }
 
@@ -273,7 +267,7 @@ namespace Seiya
             {
                 _mxnPeso100 = value;
                 CalculateDelta();
-                OnPropertyChanged("MxnPeso100");
+                OnPropertyChanged();
             }
         }
 
@@ -287,7 +281,7 @@ namespace Seiya
             {
                 _mxnPeso200 = value;
                 CalculateDelta();
-                OnPropertyChanged("MxnPeso200");
+                OnPropertyChanged();
             }
         }
 
@@ -301,7 +295,7 @@ namespace Seiya
             {
                 _mxnPeso500 = value;
                 CalculateDelta();
-                OnPropertyChanged("MxnPeso500");
+                OnPropertyChanged();
             }
         }
 
@@ -315,7 +309,7 @@ namespace Seiya
             {
                 _mxnPeso1000 = value;
                 CalculateDelta();
-                OnPropertyChanged("MxnPeso1000");
+                OnPropertyChanged();
             }
         }
 
@@ -329,7 +323,7 @@ namespace Seiya
             {
                 _mxnPesoCoinsTotal = value;
                 CalculateDelta();
-                OnPropertyChanged("MxnPesoCoinsTotal");
+                OnPropertyChanged();
             }
         }
 
@@ -343,7 +337,7 @@ namespace Seiya
             {
                 _usdDollar1 = value;
                 CalculateDelta();
-                OnPropertyChanged("UsdDollar1");
+                OnPropertyChanged();
             }
         }
 
@@ -357,7 +351,7 @@ namespace Seiya
             {
                 _usdDollar5 = value;
                 CalculateDelta();
-                OnPropertyChanged("UsdDollar5");
+                OnPropertyChanged();
             }
         }
 
@@ -371,7 +365,7 @@ namespace Seiya
             {
                 _usdDollar10 = value;
                 CalculateDelta();
-                OnPropertyChanged("UsdDollar10");
+                OnPropertyChanged();
             }
         }
 
@@ -385,7 +379,7 @@ namespace Seiya
             {
                 _usdDollar20 = value;
                 CalculateDelta();
-                OnPropertyChanged("UsdDollar20");
+                OnPropertyChanged();
             }
         }
 
@@ -399,7 +393,7 @@ namespace Seiya
             {
                 _usdDollar50 = value;
                 CalculateDelta();
-                OnPropertyChanged("UsdDollar50");
+                OnPropertyChanged();
             }
         }
 
@@ -413,7 +407,7 @@ namespace Seiya
             {
                 _usdDollar100 = value;
                 CalculateDelta();
-                OnPropertyChanged("UsdDollar100");
+                OnPropertyChanged();
             }
         }
 
@@ -427,7 +421,7 @@ namespace Seiya
             {
                 _usdDollarCoinsTotal = value;
                 CalculateDelta();
-                OnPropertyChanged("UsdDollarCoinsTotal");
+                OnPropertyChanged();
             }
         }
 
@@ -442,6 +436,7 @@ namespace Seiya
         public int TotalItemsSold { get; set; }
         public string EndOfSalesType { get; set; }
         public TransactionDataStruct TransactionData { get; set; }
+        public TransactionDataStruct TransactionDataReg { get; set; }
         public EndOfSalesDataStruct EndOfSalesData { get; set; }
         #endregion
 
@@ -453,7 +448,7 @@ namespace Seiya
             //Calculate sales from transactions
             CalculateInitialCash();
             CalculateExpenses();
-            CalculateSales();
+            CalculateSales(TransactionType.Internal);
             CalculateDelta();
         }
 
@@ -468,14 +463,26 @@ namespace Seiya
         {
             EndOfSalesType = "Z";
             SaveRegisterCashAmount();
-            CalculateSales();
+            //Regular
+            CalculateSales(TransactionType.Regular);
+            //Record End Of Sales Transaction in db
+            Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.EndOfDaySalesFileName,
+                _pos.GetNextCorteZNumber(), TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
+                TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
+                TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
+                TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
+            //Print Receipt
+            PrintReceipt(ReceiptType.DailyRegular, false);
+            //Master
+            CalculateSales(TransactionType.Internal);
             CalculateDelta();
             CollectEndOfSalesReceiptInformation();
             //Record End Of Sales Transaction in db
             Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.MasterEndOfDaySalesFileName,
-                _pos.GetNextCorteZNumber(), TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
-                TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.OtherTotal,
-                TransactionData.TotalAmountSold, DateTime.Now.ToString(CultureInfo.CurrentCulture));
+                _pos.LastCorteZNumber, TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
+                TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal, 
+                TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
+                TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
             //BackUp Files and Clear
             Transaction.BackUpTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
             Transaction.BackUpTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
@@ -485,8 +492,14 @@ namespace Seiya
             //BackUp Expenses files
             Expense.BackUpExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
             Expense.ClearExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
+            //Update POS Data
+            _pos.LastReceiptNumber = TransactionData.LastReceiptNumber;
+            _pos.LastTransactionNumber = TransactionData.LastTransactionNumber;
+            _pos.LastCashierAmountMxn = RegisterNewCash;
+            _pos.UpdateAllData();
+            _pos.SaveDataTableToCsv();
             //Print Receipt
-            PrintReceipt();
+            PrintReceipt(ReceiptType.DailyInternal, true);
         }
         /// <summary>
         /// Method to view current sales report and print receupt but do not backup transactions nor record report as a end of day sales report
@@ -495,16 +508,18 @@ namespace Seiya
         {
             EndOfSalesType = "X";
             SaveRegisterCashAmount();
-            CalculateSales();
+            var totalSalesInfo = CalculateSales(TransactionType.Internal);
+            TransactionDataStruct totalInternalSalesInfo;
+            Transaction.GetTransactionsData(TransactionType.Regular, _pos, out totalInternalSalesInfo);
             CalculateDelta();
             CollectEndOfSalesReceiptInformation();
             //Print Receipt
-            PrintReceipt();
+            PrintReceipt(ReceiptType.DailyInternal, false);
         }
 
-        private void CalculateSales()
+        private TransactionDataStruct CalculateSales(TransactionType transactionType)
         {
-            var dataInt = Transaction.GetTransactionsData(TransactionType.Internal, _pos, out var transactionData);
+            Transaction.GetTransactionsData(transactionType, _pos, out var transactionData);
             TransactionData = transactionData;
             TotalItemsSold = transactionData.TotalItemsSold;
             FirstReceiptNumber = transactionData.FirstReceiptNumber;
@@ -521,6 +536,8 @@ namespace Seiya
             TotalSales = transactionData.TotalAmountSold;
 
             MxnCashBalance = CashTotalSales - ReturnsCashTotal - ExpensesCashTotal;
+
+            return TransactionData;
         }
 
         private void CollectEndOfSalesReceiptInformation()
@@ -586,11 +603,18 @@ namespace Seiya
             _pos.UpdateRegisterCashAmount(RegisterNewCash);
         }
 
-        private void PrintReceipt()
+        private void PrintReceipt(ReceiptType receiptType, bool fullReceipt)
         {
-            var receipt = new Receipt(_pos, ReceiptType.DailyInternal, TransactionData, EndOfSalesData);
-            receipt.PrintEndOfDaySalesReceipt();
-            receipt.PrintEndOfDaySalesFullReceipt();
+            var receipt = new Receipt(_pos, receiptType, TransactionData, EndOfSalesData);
+            if (fullReceipt == true)
+            {
+                receipt.PrintEndOfDaySalesFullReceipt();
+
+            }
+            else
+            {
+                receipt.PrintEndOfDaySalesReceipt();
+            }
         }
         #endregion
 
@@ -613,8 +637,6 @@ namespace Seiya
                 case "z":
                     GenerateEndOfDaySalesReport();
                     MainWindowViewModel.GetInstance().Code = "Corte Z realizado!";
-                    break;
-                default:
                     break;
             }
 

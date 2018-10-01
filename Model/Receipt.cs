@@ -329,8 +329,8 @@ namespace Seiya
             float storeInfoFontHeight = storeInfoFont.GetHeight();
 
             int startX = 5;
-            int startY = 5;
-            int offset = 15;
+            int startY = 2;
+            int offset = 10;
 
             int itemsNumber = 0;
 
@@ -360,7 +360,7 @@ namespace Seiya
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
 
-            graphic.DrawString(string.Format("Corte {0}    " + "Folio ", EndOfDayAmountData.EndOfSalesReceiptType) + EndOfDayReceiptData.FirstReceiptNumber.ToString() + " al " +
+            graphic.DrawString("Corte Z    " + "Folio " + EndOfDayReceiptData.FirstReceiptNumber.ToString() + " al " +
                 EndOfDayReceiptData.LastReceiptNumber, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
@@ -382,10 +382,6 @@ namespace Seiya
                     LastQuantitySold = catInfo.Item2,
                     Price = catInfo.Item3
                 };
-                ///TODO:Review
-                string productDescription = cat.Category.PadRight(15);
-                string productTotal = string.Format("{0:c}", cat.Price);
-              //  string productLine = productDescription + productTotal;
                 //product line
                 if (cat.LastQuantitySold != 0 || cat.Price != 0)
                 {

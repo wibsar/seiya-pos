@@ -1,1 +1,7 @@
-NumeroCorte,FolioInicio, FolioFinal,TotalUnidades,TotalPuntos,Efectivo,Tarjeta,OtroMetodo,TotalVendido,Fecha
+NumeroCorte,FolioInicio, FolioFinal,TotalUnidades,TotalPuntos,Efectivo,Tarjeta,Cheque,Transferencia,OtroMetodo,TotalVendido,DevolucionEfectivo,DevolucionTarjeta,TipoCambio,Fecha
+252,8043,8043,1,0,140,0,0,0,0,0,140,0,19,30/09/2018 11:42:00 p. m.
+254,8044,8044,1,0,150,0,0,0,0,0,150,0,19,30/09/2018 11:43:41 p. m.
+256,8045,8045,1,0,140,0,0,0,0,0,140,0,19,30/09/2018 11:53:47 p. m.
+257,8046,8046,1,0,0,150,0,0,0,0,150,0,19,30/09/2018 11:58:43 p. m.
+257,8046,8046,1,0,0,150,0,0,0,0,150,0,19,30/09/2018 11:59:40 p. m.
+257,8046,8046,1,0,0,150,0,0,0,150,0,0,19,01/10/2018 12:03:29 a. m.
