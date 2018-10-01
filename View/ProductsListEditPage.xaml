@@ -248,7 +248,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nombre de Grupo"></TextBlock>
+                    <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nombre del Grupo"></TextBlock>
                     <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Agregar Codigo"></TextBlock>
         </Grid>
 

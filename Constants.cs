@@ -63,8 +63,8 @@ namespace Seiya
 
         //Colors
         public const string ColorCodeError = "Red";
-        public const string ColorCodeSave = "Green";
-        public const string ColorCodeRegular = "Black";
+        public const string ColorCodeSave = "#0285BD";
+        public const string ColorCodeRegular = "##0285BD0";
 
     }
 }

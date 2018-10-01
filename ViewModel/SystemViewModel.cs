@@ -249,7 +249,8 @@ namespace Seiya
             _posInstance.UpdateAllData();
             _posInstance.SaveDataTableToCsv();
             //Message
-            MainWindowViewModel.GetInstance().Code = "Sistema Actualizado!";
+            MainWindowViewModel.GetInstance().Code = "¡Datos Actualizados!";
+            MainWindowViewModel.GetInstance().CodeColor = Constants.ColorCodeSave;
             //Return
             MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PosGeneralPage.xaml";
         }
