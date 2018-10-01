@@ -606,7 +606,7 @@ namespace Seiya
         private void PrintReceipt(ReceiptType receiptType, bool fullReceipt)
         {
             var receipt = new Receipt(_pos, receiptType, TransactionData, EndOfSalesData);
-            if (fullReceipt == true)
+            if (fullReceipt)
             {
                 receipt.PrintEndOfDaySalesFullReceipt();
 
