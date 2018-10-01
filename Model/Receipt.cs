@@ -115,7 +115,7 @@ namespace Seiya
 
         public void PrintSalesReceipt()
         {
-            bool printToFileOnly = true;
+            bool printToFileOnly = false;
 
             PrintDocument printDocument = new PrintDocument();
 
@@ -250,7 +250,7 @@ namespace Seiya
 
         public void PrintEndOfDaySalesReceipt()
         {
-            bool printToFileOnly = true;
+            bool printToFileOnly = false;
 
             PrintDocument printDocument = new PrintDocument();
 
@@ -283,7 +283,7 @@ namespace Seiya
 
         public void PrintEndOfDaySalesFullReceipt()
         {
-            bool printToFileOnly = true;
+            bool printToFileOnly = false;
 
             PrintDocument printDocument = new PrintDocument();
 
