@@ -1,4 +1,0 @@
-NumeroTransaccion,NumeroInterno,NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
-13976,13976,8029,1243x,5,Halloween,Canastas,-36,-1,-36,15/09/2018 12:49:12 a. m.,Evy Martinez,Yadira Martinez,No,DevolucionEfectivo,Efectivo,47507469
-13977,13977,8029,809726059329x,1,Merceria,ArturoM,87.5,1,87.5,15/09/2018 12:55:07 a. m.,General,Arturo Morales,No,Interno,Efectivo,0
-13977,13977,8029,,0,Liston,,9,5,45,15/09/2018 12:55:07 a. m.,General,Arturo Morales,No,Interno,Efectivo,0

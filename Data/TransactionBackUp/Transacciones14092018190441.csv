@@ -1,2 +1,0 @@
-NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
-8030,809726059329x,1,Merceria,ArturoM,87.5,4,350.0,14/09/2018 07:04:06 p.m.,General,Arturo Morales,No,Regular,Tarjeta,0

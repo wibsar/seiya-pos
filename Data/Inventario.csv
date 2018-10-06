@@ -1230,9 +1230,9 @@ NumeroProducto,Codigo,CodigoAlterno,ProveedorProductoId,Descripcion,Proveedor,Ca
 1232,SOM1Ux,NA,Sombrero Copa,Sombrero de Copa,naviempaques,Unicel,28/09/2017,0,MXN,45,MXN,0,4,184,0,0,0,12/4/2018,NA.jpg
 1233,SOM2Ux,NA,Sombrero Texano,Sombrero Texana,naviempaques,Unicel,28/09/2017,0,MXN,45,MXN,0,1,45,0,0,0,23/11/2017,NA.jpg
 1234,CAB1Ux,NA,Cabeza ,Cabeza,naviempaques,Unicel,28/09/2017,0,MXN,79,MXN,0,13,887,0,0,0,5/7/2018,NA.jpg
-1235,DIS4Ux,NA,Disco 4,"Disco 4""",naviempaques,Unicel,28/09/2017,0,MXN,5,MXN,0,7,35,0,0,0,31/10/2017,NA.jpg
-1236,DIS6Ux,NA,Disco 6,"Disco 6""",naviempaques,Unicel,28/09/2017,0,MXN,10,MXN,0,0,0,0,0,0,28/09/2017,NA.jpg
-1237,DIS8Ux,NA,Disco 8,"Disco 8""",naviempaques,Unicel,28/09/2017,0,MXN,19,MXN,0,0,0,0,0,0,28/09/2017,NA.jpg
+1235,DIS4Ux,NA,Disco 4,Disco 4",naviempaques,Unicel,28/09/2017,0,MXN,5,MXN,0,7,35,0,0,0,31/10/2017,NA.jpg
+1236,DIS6Ux,NA,Disco 6,Disco 6",naviempaques,Unicel,28/09/2017,0,MXN,10,MXN,0,0,0,0,0,0,28/09/2017,NA.jpg
+1237,DIS8Ux,NA,Disco 8,Disco 8",naviempaques,Unicel,28/09/2017,0,MXN,19,MXN,0,0,0,0,0,0,28/09/2017,NA.jpg
 1238,CON2Ux,NA,Cono 2,Cono #2,naviempaques,Unicel,28/09/2017,0,MXN,6.5,MXN,0,2,13,0,0,0,8/12/2017,NA.jpg
 1239,CON8Ux,NA,Cono 8,Cono #8,naviempaques,Unicel,28/09/2017,0,MXN,45,MXN,0,2,90,0,0,0,20/04/2018,NA.jpg
 1240,CON12Ux,NA,Cono 12,Cono #12,naviempaques,Unicel,28/09/2017,0,MXN,180,MXN,0,0,0,0,0,0,28/09/2017,NA.jpg
@@ -1254,10 +1254,10 @@ NumeroProducto,Codigo,CodigoAlterno,ProveedorProductoId,Descripcion,Proveedor,Ca
 1256,ESF12Ux,NA,Esfera 12,Esfera 12,naviempaques,Unicel,28/09/2017,0,MXN,68,MXN,0,9,612,0,0,0,22/04/2018,NA.jpg
 1257,ESF13Ux,NA,Esfera 13,Esfera 13,naviempaques,Unicel,28/09/2017,0,MXN,80,MXN,0,6,480,0,0,0,30/09/2018,NA.jpg
 1258,ESF14Ux,NA,Esfera 14,Esfera 14,naviempaques,Unicel,28/09/2017,0,MXN,140,MXN,0,7,980,0,0,0,24/01/2018,NA.jpg
-1259,LET6Ux,NA,Letras 6,"Letras y Num Unicel 6""",Juan,Unicel,28/09/2017,0,MXN,10,MXN,0,163,1558,0,0,0,14/09/2018,NA.jpg
-1260,LET8Ux,NA,Letra 8 ,"Letras y Num Unicel 8""",Juan,Unicel,28/09/2017,0,MXN,14,MXN,0,76,1064,0,0,0,20/06/2018,NA.jpg
-1261,LET10Ux,NA,Letra 10,"Letras y Num Unicel 10""",Juan,Unicel,28/09/2017,0,MXN,17,MXN,0,1,16.5,0,0,0,30/11/2017,NA.jpg
-1262,LET12Ux,NA,Letra 12,"Letras y Num Unicel 12""",Juan,Unicel,28/09/2017,0,MXN,20,MXN,0,0,0,0,0,0,28/09/2017,NA.jpg
+1259,LET6Ux,NA,Letras 6,Letras y Num Unicel 6",Juan,Unicel,28/09/2017,0,MXN,10,MXN,0,163,1558,0,0,0,14/09/2018,NA.jpg
+1260,LET8Ux,NA,Letra 8 ,Letras y Num Unicel 8",Juan,Unicel,28/09/2017,0,MXN,14,MXN,0,76,1064,0,0,0,20/06/2018,NA.jpg
+1261,LET10Ux,NA,Letra 10,Letras y Num Unicel 10",Juan,Unicel,28/09/2017,0,MXN,17,MXN,0,1,16.5,0,0,0,30/11/2017,NA.jpg
+1262,LET12Ux,NA,Letra 12,Letras y Num Unicel 12",Juan,Unicel,28/09/2017,0,MXN,20,MXN,0,0,0,0,0,0,28/09/2017,NA.jpg
 1263,809126072706x,NA,5760-red,Lampara China Roja 10in,Naturalstar,Merceria,29/09/2017,0.5,USD,29,MXN,0,2,58,0,0,0,24/06/2018,NA.jpg
 1264,809726072519x,NA,5760-orange,Lampara China Naranja 10in,Naturalstar,Merceria,29/09/2017,0.5,USD,29,MXN,0,-3,-87,5,5,0,27/09/2018,NA.jpg
 1265,809726072090x,NA,5760-black,Lampara China Negra 10in,Naturalstar,Merceria,29/09/2017,0.5,USD,29,MXN,0,4,116,0,0,0,23/09/2018,NA.jpg
@@ -1272,7 +1272,7 @@ NumeroProducto,Codigo,CodigoAlterno,ProveedorProductoId,Descripcion,Proveedor,Ca
 1274,ESF10Ux,NA,Esfera 10,Esfera 10,naviempaques,Unicel,2/10/2017,0,MXN,23,MXN,0,0,0,0,0,0,2/10/2017,NA.jpg
 1275,ESF12Ux,NA,Esfera 12,Esfera 12,naviempaques,Unicel,2/10/2017,0,MXN,68,MXN,0,1,68,0,0,0,8/10/2017,NA.jpg
 1276,ESF13Ux,NA,Esfera 13,Esfera 13,naviempaques,Unicel,2/10/2017,0,MXN,80,MXN,0,2,160,0,0,0,22/10/2017,NA.jpg
-1277,DIS6Ux,NA,Disco 6,"Disco 6""",naviempaques,Unicel,2/10/2017,0,MXN,10,MXN,0,0,0,0,0,0,2/10/2017,NA.jpg
+1277,DIS6Ux,NA,Disco 6,Disco 6",naviempaques,Unicel,2/10/2017,0,MXN,10,MXN,0,0,0,0,0,0,2/10/2017,NA.jpg
 1278,CON2Ux,NA,Cono 2,Cono #2,naviempaques,Unicel,2/10/2017,0,MXN,6.5,MXN,0,0,0,0,0,0,2/10/2017,NA.jpg
 1279,COR2Ux,NA,Corona Adviento,Corona de Adviento,Naviempaques,Unicel,2/10/2017,0,MXN,62,MXN,0,4,248,0,0,0,30/11/2017,NA.jpg
 1280,SOM2Ux,NA,Sombrero Texana,Sombrero Texana,naviempaques,Unicel,2/10/2017,0,MXN,45,MXN,0,2,145,0,0,0,24/10/2017,NA.jpg
@@ -1409,7 +1409,7 @@ NumeroProducto,Codigo,CodigoAlterno,ProveedorProductoId,Descripcion,Proveedor,Ca
 1417,8304GYB2Mx,NA,8304-GRAY,Cruz de Alambre Gris 6 pz,California Bridal,Merceria,14/11/2017,0.41,USD,29,MXN,0,0,0,36,36,0,14/11/2017,NA.jpg
 1418,8799SIB2Mx,NA,8799-SILVER,Cruz Chica Plateada 12pz,California Bridal,Merceria,14/11/2017,0.3,USD,25,MXN,0,3,75,21,21,0,5/1/2018,NA.jpg
 1419,8797SIB2Mx,NA,8797-SILVER,Cruz Cristo Plateada 12pz,California Bridal,Merceria,14/11/2017,0.65,USD,39,MXN,0,2,78,10,10,0,12/6/2018,NA.jpg
-1420,820646129053x,NA,PB2500WHT,"Globo 36"" con Confetti",ABI USA,Regalos,14/11/2017,0,USD,200,MXN,0,2,400,10,10,0,3/8/2018,NA.jpg
+1420,820646129053x,NA,PB2500WHT,Globo 36" con Confetti,ABI USA,Regalos,14/11/2017,0,USD,200,MXN,0,2,400,10,10,0,3/8/2018,NA.jpg
 1421,795229810089x,NA,81008X,Canasta Navidena Roja,FourSessons,Merceria,14/11/2017,0.95,USD,55,MXN,0,8,430,40,40,0,24/12/2017,NA.jpg
 1422,6622ASB2Mx,NA,6622-ASSORTED,Sombrillas 48 pc,California Bridal,Merceria,14/11/2017,0,USD,79,MXN,0,5,395,7,7,0,21/09/2018,NA.jpg
 1423,809726064804x,NA,25618,Pinza de Ropa de Madera CH 30pz,FourSessons,Merceria,14/11/2017,0.45,USD,39,MXN,0,0,0,96,96,0,14/11/2017,NA.jpg

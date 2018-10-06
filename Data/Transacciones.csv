@@ -1,1 +1,3 @@
 NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
+8047,,0,Pedidos,,15,1,15,05/10/2018 06:40:10 p. m.,General,Arturo Morales,No,Regular,Efectivo,0
+8047,,0,Articulos,,150,1,150,05/10/2018 06:54:34 p. m.,General,Arturo Morales,No,Regular,Efectivo,0
