@@ -1,0 +1,17 @@
+Merceria
+Regalos
+Liston
+Envoltura
+Cristal
+Madera
+Unicel
+Pedidos
+Impresion
+Flores
+Velas
+Articulos
+Herreria
+Otro
+General
+Navidad
+Halloween
