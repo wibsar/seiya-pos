@@ -66,7 +66,7 @@ namespace Seiya
                 //Check if price has something other than digits or decimal point
                 if (value != "")
                 {
-                    if (value.Substring(value.Length - 1) == ".")
+                    if (value.Substring(value.Length - 1) == "." && !_price.Contains("."))
                     {
                         _price += ".";
                     }
