@@ -2,9 +2,6 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
 using System.Windows.Input;
 using Seiya.WpfBindingUtilities;
 
@@ -41,7 +38,7 @@ namespace Seiya
             set
             {
                 _products = value;
-                OnPropertyChanged("Products");
+                OnPropertyChanged();
             }
         }
 
@@ -54,7 +51,7 @@ namespace Seiya
             set
             {
                 _pageOneButtonTitle = value;
-                OnPropertyChanged("PageOneButtonTitle");
+                OnPropertyChanged();
             }
         }
 
@@ -67,7 +64,7 @@ namespace Seiya
             set
             {
                 _pageTwoButtonTitle = value;
-                OnPropertyChanged("PageTwoButtonTitle");
+                OnPropertyChanged();
             }
         }
 
@@ -80,7 +77,7 @@ namespace Seiya
             set
             {
                 _pageThreeButtonTitle = value;
-                OnPropertyChanged("PageThreeButtonTitle");
+                OnPropertyChanged();
             }
         }
 
@@ -93,7 +90,7 @@ namespace Seiya
             set
             {
                 _pageFourButtonTitle = value;
-                OnPropertyChanged("PageFourButtonTitle");
+                OnPropertyChanged();
             }
         }
 
@@ -106,7 +103,7 @@ namespace Seiya
             set
             {
                 _pageFiveButtonTitle = value;
-                OnPropertyChanged("PageFiveButtonTitle");
+                OnPropertyChanged();
             }
         }
 

@@ -1,13 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Controls;
+using System.Globalization;
 using System.Windows.Input;
-using System.Windows.Media;
 using Seiya.WpfBindingUtilities;
 
 namespace Seiya
@@ -25,7 +19,6 @@ namespace Seiya
         private string _description;
         private string _category;
         private bool _clear;
-        private readonly DelegateCommand _clickCommand;
         private static Product _manualProduct;
         private static ObservableCollection<string> _categoriesList;
 
@@ -73,14 +66,14 @@ namespace Seiya
                     else
                     {
                         decimal.TryParse(value, out var number);
-                        _price = number > 0 ? number.ToString() : "0";
+                        _price = number > 0 ? number.ToString(CultureInfo.CurrentCulture) : "0";
                     }
                 }
                 else
                 {
                     _price = value;
                 }
-                OnPropertyChanged("Price");
+                OnPropertyChanged();
             }
         }
 
@@ -90,7 +83,7 @@ namespace Seiya
         public int Quantity
         {
             get { return _quantity; }
-            set { _quantity = value; OnPropertyChanged("Quantity");}
+            set { _quantity = value; OnPropertyChanged();}
         }
 
         /// <summary>
@@ -112,7 +105,7 @@ namespace Seiya
                         _description += desc[index];
                     }
                 }
-                OnPropertyChanged("Description");
+                OnPropertyChanged();
             }
         }
 
@@ -122,7 +115,7 @@ namespace Seiya
         public string Category
         {
             get { return _category; }
-            set { _category = value; OnPropertyChanged("Category"); }
+            set { _category = value; OnPropertyChanged(); }
         }
 
         /// <summary>
@@ -131,7 +124,7 @@ namespace Seiya
         public bool Clear
         {
             get { return _clear; }
-            set { _clear = value; OnPropertyChanged("Clear"); OnClearChanged();}
+            set { _clear = value; OnPropertyChanged(); OnClearChanged();}
         }
 
         /// <summary>
@@ -140,7 +133,7 @@ namespace Seiya
         public ObservableCollection<string> CategoriesList
         {
             get { return _categoriesList; }
-            set { _categoriesList = value; OnPropertyChanged("CategoriesList"); OnClearChanged(); }
+            set { _categoriesList = value; OnPropertyChanged(); OnClearChanged(); }
         }
 
         #endregion
@@ -155,14 +148,12 @@ namespace Seiya
             set
             {
                 _manualProduct = value;
-                if (_manualProduct != null)
-                {
-                    Description = _manualProduct.Description;
-                    Price = _manualProduct.Price.ToString();
-                    Category = _manualProduct.Category;
-                    Quantity = _manualProduct.LastQuantitySold;
-                    //TODO: Add MXN or USD HERE once implemented
-                }
+                if (_manualProduct == null) return;
+                Description = _manualProduct.Description;
+                Price = _manualProduct.Price.ToString(CultureInfo.CurrentUICulture);
+                Category = _manualProduct.Category;
+                Quantity = _manualProduct.LastQuantitySold;
+                //TODO: Add MXN or USD HERE once implemented
             }
         }
 
@@ -210,7 +201,7 @@ namespace Seiya
             {
                 if (ManualProduct == null)
                 {
-                    ManualProduct = Product.Add(Description, Category.ToString(), decimal.Parse(Price), Quantity);
+                    ManualProduct = Product.Add(Description, Category, decimal.Parse(Price), Quantity);
                 }
                 else
                 {

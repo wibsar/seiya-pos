@@ -2,8 +2,6 @@
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Drawing;
-using System.Drawing.Imaging;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -238,7 +236,7 @@ namespace Seiya
             set
             {
                 _logoImage = value;
-                OnPropertyChanged("LogoImage");
+                OnPropertyChanged();
             }
         }
 
@@ -248,7 +246,7 @@ namespace Seiya
         public ObservableCollection<string> CategoriesList
         {
             get { return _categoriesList; }
-            set { _categoriesList = value; OnPropertyChanged("CategoriesList");}
+            set { _categoriesList = value; OnPropertyChanged();}
         }
 
         /// <summary>
@@ -260,7 +258,7 @@ namespace Seiya
             set
             {
                 _selectedCategoryItem = value;
-                OnPropertyChanged("SelectedCategoryItem");
+                OnPropertyChanged();
             }
         }
 
@@ -273,7 +271,7 @@ namespace Seiya
             set
             {
                 _currentCategoryList = value;
-                OnPropertyChanged("CurrentCategoryList");
+                OnPropertyChanged();
             }
         }
 
@@ -286,7 +284,7 @@ namespace Seiya
             set
             {
                 _newCategoryItem = Formatter.SanitizeInput(value);
-                OnPropertyChanged("NewCategoryItem");                          
+                OnPropertyChanged();                          
             }
         }
 
@@ -300,7 +298,7 @@ namespace Seiya
             {
                 _currentCartProducts = value;
                 PaymentTotalMXN = CalculateCurrentCartTotal();
-                OnPropertyChanged("CurrentCartProducts");
+                OnPropertyChanged();
             }
         }
 
@@ -313,7 +311,7 @@ namespace Seiya
             set
             {
                 _selectedCartProduct = value;
-                OnPropertyChanged("SelectedCartProduct");
+                OnPropertyChanged();
             }
         }
 
@@ -327,7 +325,7 @@ namespace Seiya
             set
             {
                 _selectedPageListProduct = value;
-                OnPropertyChanged("SelectedPageListProduct");
+                OnPropertyChanged();
             }
         }
 
@@ -340,7 +338,7 @@ namespace Seiya
             set
             {
                 _currentPageListProducts = value;
-                OnPropertyChanged("CurrentPageListProducts");
+                OnPropertyChanged();
             }
         }
         
@@ -353,7 +351,7 @@ namespace Seiya
             set
             {
                 _currentPageListTitle = Formatter.SanitizeInput(value);
-                OnPropertyChanged("CurrentPageListTitle");
+                OnPropertyChanged();
             }
         }
 
@@ -366,7 +364,7 @@ namespace Seiya
             set
             {
                 _currentSelectedItemsListPageFileName = value;
-                OnPropertyChanged("CurrentSelectedItemsListPageFileName");
+                OnPropertyChanged();
             }
         }
         /// <summary>
@@ -378,7 +376,7 @@ namespace Seiya
             set
             {
                 _currentCartNumber = value;
-                OnPropertyChanged("CurrentCartNumber");
+                OnPropertyChanged();
             }
         }
 
@@ -391,7 +389,7 @@ namespace Seiya
             set
             {
                 _currentPage = value;
-                OnPropertyChanged("CurrentPage");
+                OnPropertyChanged();
             }
         }
 
@@ -411,7 +409,7 @@ namespace Seiya
                 //    _code = value;
 
                 _code = value;
-                OnPropertyChanged("Code");
+                OnPropertyChanged();
             }
         }
 
@@ -421,7 +419,7 @@ namespace Seiya
             set
             {
                 _checkoutTotal = value;
-                OnPropertyChanged("CheckoutTotal");
+                OnPropertyChanged();
             }
         }
 
@@ -442,7 +440,7 @@ namespace Seiya
             set
             {
                 _products = value;
-                OnPropertyChanged("Products");
+                OnPropertyChanged();
             }
         }
 
@@ -452,7 +450,7 @@ namespace Seiya
             set
             {
                 _productObjects = value;
-                OnPropertyChanged("ProductObjects");
+                OnPropertyChanged();
             }
         }
 
@@ -462,7 +460,7 @@ namespace Seiya
             set
             {
                 _paymentTotalUSD = value;
-                OnPropertyChanged("PaymentTotalUSD");
+                OnPropertyChanged();
             }
         }
 
@@ -476,7 +474,7 @@ namespace Seiya
             {
                 _paymentTotalMXN = Math.Round(value, 2);
                 PaymentTotalUSD = Math.Round(_paymentTotalMXN /_exchangeRate, 2);
-                OnPropertyChanged("PaymentTotalMXN");
+                OnPropertyChanged();
             }
         }
 
@@ -487,7 +485,7 @@ namespace Seiya
             {
                 _paymentReceivedUSD = value;
                 PaymentUpdateRemaining();
-                OnPropertyChanged("PaymentReceivedUSD");
+                OnPropertyChanged();
             }
         }
 
@@ -498,7 +496,7 @@ namespace Seiya
             {
                 _paymentReceivedMXN = value;
                 PaymentUpdateRemaining();
-                OnPropertyChanged("PaymentReceivedMXN");
+                OnPropertyChanged();
             }
         }
 
@@ -508,7 +506,7 @@ namespace Seiya
             set
             {
                 _paymentChangeMXN = value;
-                OnPropertyChanged("PaymentChangeMXN");
+                OnPropertyChanged();
             }
         }
 
@@ -518,7 +516,7 @@ namespace Seiya
             set
             {
                 _paymentChangeUSD = value;
-                OnPropertyChanged("PaymentChangeUSD");
+                OnPropertyChanged();
             }
         }
 
@@ -551,7 +549,7 @@ namespace Seiya
             set
             {
                 _paymentCustomerNumber = value;
-                OnPropertyChanged("PaymentCustomerNumber");
+                OnPropertyChanged();
             }
         }
 
@@ -856,7 +854,6 @@ namespace Seiya
             }
             set
             {
-             //   var x = Formatter.SanitizeInput(value, typeof(User));
                 _userTemporalItem = value;
                 OnPropertyChanged("UserTemporalItem");
             }
@@ -3451,7 +3448,7 @@ namespace Seiya
         /// Method to initialize payment page and make payment
         /// </summary>
         /// <returns></returns>
-        bool ProcessPayment(PaymentTypeEnum paymentType, TransactionType transactionType)
+        private bool ProcessPayment(PaymentTypeEnum paymentType, TransactionType transactionType)
         {
             RecordTransaction(paymentType, transactionType, out var currentTransaction);
             
@@ -3497,7 +3494,6 @@ namespace Seiya
             //Get next receipt number, if applicable
             var receiptNumber = saleType == TransactionType.Regular ? _posInstance.GetNextReceiptNumber() : _posInstance.LastReceiptNumber;
 
-            var productsWithNoPrice = new List<Product>();
             //Record each item in the transactions db
             foreach (var product in CurrentCartProducts)
             {
@@ -3567,7 +3563,7 @@ namespace Seiya
         /// Method to update inventory after a transaction is sucessful
         /// </summary>
         /// <returns></returns>
-        bool UpdateInventory(Product product, DateTime transactionDate, TransactionType transactionType)
+        private bool UpdateInventory(Product product, DateTime transactionDate, TransactionType transactionType)
         {
             if (product.Id == 0) return false;
 
@@ -3885,16 +3881,6 @@ namespace Seiya
         public void SaveProductIntoTemporalProduct()
         {
 
-        }
-
-        #endregion
-
-        #region Test Methods
-
-        public void DoubleClickMethodTest(object sender, MouseButtonEventArgs e)
-        {
-            var x = 1;
-            x++;
         }
 
         #endregion
