@@ -3523,7 +3523,15 @@ namespace Seiya
 
             //Set total due amount and total paid and calculate the change due
             transaction.TotalDue = totalDue;
-            transaction.AmountPaid = paymentType == PaymentTypeEnum.Efectivo ? PaymentReceivedMXN : PaymentTotalMXN;
+            //Calculate amount paid if it is in cash
+            if (PaymentReceivedMXN == 0 && paymentType == PaymentTypeEnum.Efectivo)
+            {
+                transaction.AmountPaid = paymentType == PaymentTypeEnum.Efectivo ? Math.Round(PaymentReceivedUSD * ExchangeRate, 2) : PaymentTotalMXN;
+            }
+            else
+            {
+                transaction.AmountPaid = paymentType == PaymentTypeEnum.Efectivo ? PaymentReceivedMXN : PaymentTotalMXN;
+            }
             transaction.ChangeDue = transaction.AmountPaid - transaction.TotalDue;
 
             //Save inventory
@@ -3924,7 +3932,7 @@ namespace Seiya
 
             if (paymentType == PaymentTypeEnum.Efectivo)
             {
-                PaymentChangeMXN = (PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN;
+                PaymentChangeMXN = Math.Round((PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN);
                 PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
             }
             else
