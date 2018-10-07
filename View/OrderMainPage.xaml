@@ -58,7 +58,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock FontSize="24" VerticalAlignment="Center" Text="PEDIDOS"></TextBlock>
-            <TextBox Grid.Column="1" Text="{Binding OrdersSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" VerticalContentAlignment="Center"/>
+            <TextBox Grid.Column="1" x:Name="OrdersSearchTextBox" Text="{Binding OrdersSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" VerticalContentAlignment="Center"/>
             <Button Grid.Column="2" Command="{Binding OrderStartSearchCommand}" CommandParameter="{Binding OrdersSearchText}">
                 <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png"></Image>
             </Button>

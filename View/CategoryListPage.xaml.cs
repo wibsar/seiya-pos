@@ -22,8 +22,8 @@ namespace Seiya
     {
         public CategoryListPage()
         {
-            InitializeComponent();
             this.DataContext = MainWindowViewModel.GetInstance();
+            InitializeComponent();
         }
 
         private void KeyUpNoSymbolsEvent(object sender, KeyEventArgs e)
