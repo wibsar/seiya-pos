@@ -1114,6 +1114,30 @@ namespace Seiya
             }
         }
 
+        private int _progressBarValue = 0;
+
+        public int ProgressBarValue
+        {
+            get { return _progressBarValue; }
+            set
+            {
+                _progressBarValue = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public string _progressMessage;
+
+        public string ProgressMessage
+        {
+            get { return _progressMessage; }
+            set
+            {
+                _progressMessage = value;
+                OnPropertyChanged();
+            }
+        }
+
         #endregion
 
         #region Exchange Rate Related Properties
@@ -2992,6 +3016,8 @@ namespace Seiya
 
         internal void Execute_OrderSaveChangesCommand(object parameter)
         {
+            ProgressMessage = "Registrando...";
+            ProgressBarValue = 20;
             //Check if code was updated
             if (SelectedOrder != null)
             {
@@ -3003,6 +3029,12 @@ namespace Seiya
                 OrderTemporalItem.Register();
             }
 
+            ProgressBarValue = 65;
+            SendEmailNotification();
+        }
+
+        private void SendEmailNotification()
+        {
             //TODO: Make it generic based on POS data later
             var toName = "Estrella de Regalos";
             var toEmailAddress = "armoag+movvfdhrzrdgpqmw5qcg@boards.trello.com";
@@ -3014,11 +3046,14 @@ namespace Seiya
             var attachmentFilePath = Constants.DataFolderPath + Constants.ImagesFolderPath + OrderTemporalItem.ImageName;
             var fromEmailAddress = "lluviasantafe@gmail.com";
             var fromPassword = "Yadira00";
-            Notification.SendNotification(toName,toEmailAddress, subject,body, attachmentFilePath, fromEmailAddress, fromPassword);
+            Notification.SendNotification(toName, toEmailAddress, subject, body, attachmentFilePath, fromEmailAddress, fromPassword);
+            ProgressBarValue = 90;
             OrdersSearchedEntries = null;
             CurrentPage = "\\View\\OrderMainPage.xaml";
             Code = "¡Pedido Enviado!";
             CodeColor = Constants.ColorCodeSave;
+            ProgressMessage = "";
+            ProgressBarValue = 0;
         }
 
         internal bool CanExecute_OrderSaveChangesCommand(object parameter)
