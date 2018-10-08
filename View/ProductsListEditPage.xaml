@@ -219,7 +219,8 @@
                         <RowDefinition Height="*"></RowDefinition>
 
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="1" Text="Codigo" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="Cuadros libres" Foreground="#2C5066"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="Código" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="2" Text="Descripción" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="3" Text="Categoria" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="4" Text="Precio" VerticalAlignment="Center"></TextBlock>
@@ -237,6 +238,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Margin="5,5,5,2.5" Foreground="Red" FontSize="24" Text="{Binding GroupSquaresAvailable, UpdateSourceTrigger=PropertyChanged}"></TextBlock>
                     <TextBlock Grid.Row="1" Margin="5,5,5,2.5" Foreground="Gray" Text="{Binding SelectedPageListProduct.Code}"></TextBlock>
                     <TextBlock Grid.Row="2" Margin="5,2.5,5,2.5" Foreground="Gray" Text="{Binding SelectedPageListProduct.Description}"></TextBlock>
                     <TextBlock Grid.Row="3" Margin="5,2.5,5,2.5" Foreground="Gray" Text="{Binding SelectedPageListProduct.Category}"></TextBlock>
@@ -263,10 +265,10 @@
                             <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-                        <Button Grid.Column="1" Command="{Binding AddListItemCommand}" CommandParameter="{Binding Text, ElementName=AddToListTxtBox}" Margin="10,0,10,0">
+                        <Button Grid.Column="1" Command="{Binding AddListItemCommand}" CommandParameter="{Binding ElementName=AddToListTxtBox}" Margin="10,0,10,0">
                             <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
                         </Button>
-                        <TextBox Grid.Column="0" Name="AddToListTxtBox" KeyUp="KeyUpNoSymbolsEvent" Height="30" Margin="5"/>
+                        <TextBox Grid.Column="0" x:Name="AddToListTxtBox" KeyUp="KeyUpNoSymbolsEvent" Height="30" Margin="5"/>
                     </Grid>
                 </Grid>
             </Grid>

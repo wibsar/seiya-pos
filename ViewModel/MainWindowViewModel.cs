@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading;
+using System.Windows.Controls;
 using System.Windows.Input;
 //using System.Windows.Interactivity;
 using System.Windows.Media.Imaging;
@@ -40,6 +41,7 @@ namespace Seiya
         private static Product _selectedPageListProduct;
         private static int _lastSelectedProductsPage = 1;
         public ObservableCollection<Product> _productObjects;
+        private int _groupSquaresAvailable;
 
         //Navegation related fields
         private string _currentPage;
@@ -222,7 +224,11 @@ namespace Seiya
         public string CodeColor
         {
             get { return _codeColor; }
-            set { _codeColor = value; OnPropertyChanged();}
+            set
+            {
+                _codeColor = value;
+                OnPropertyChanged();
+            }
         }
 
         private BitmapImage _logoImage;
@@ -339,6 +345,7 @@ namespace Seiya
             {
                 _currentPageListProducts = value;
                 OnPropertyChanged();
+                OnPropertyChanged("GroupSquaresAvailable");
             }
         }
         
@@ -669,7 +676,7 @@ namespace Seiya
             set
             {
                 _pageOneTitle = value;
-                OnPropertyChanged("PageOneTitle");
+                OnPropertyChanged();
             }
         }
 
@@ -682,7 +689,7 @@ namespace Seiya
             set
             {
                 _pageTwoTitle = value;
-                OnPropertyChanged("PageTwoTitle");
+                OnPropertyChanged();
             }
         }
 
@@ -695,7 +702,7 @@ namespace Seiya
             set
             {
                 _pageThreeTitle = value;
-                OnPropertyChanged("PageThreeTitle");
+                OnPropertyChanged();
             }
         }
 
@@ -708,7 +715,7 @@ namespace Seiya
             set
             {
                 _pageFourTitle = value;
-                OnPropertyChanged("PageFourTitle");
+                OnPropertyChanged();
             }
         }
 
@@ -721,10 +728,19 @@ namespace Seiya
             set
             {
                 _pageFiveTitle = value;
-                OnPropertyChanged("PageFiveTitle");
+                OnPropertyChanged();
             }
         }
 
+        public int GroupSquaresAvailable
+        {
+            get { return Constants.MaxNumberListItems - CurrentPageListProducts.Count;}
+            set
+            {
+                _groupSquaresAvailable = value; 
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Inventory Related Properties
@@ -1852,7 +1868,7 @@ namespace Seiya
         }
         internal bool CanExecute_MoveUpListItemCommand(object parameter)
         {
-            return (int)parameter >= 0;
+            return (int?) parameter >= 0;
         }
         #endregion
 
@@ -1867,7 +1883,7 @@ namespace Seiya
         }
         internal bool CanExecute_MoveDownListItemCommand(object parameter)
         {
-            return (int)parameter >= 0;
+            return (int?) parameter >= 0;
         }
         #endregion
 
@@ -1878,11 +1894,69 @@ namespace Seiya
         internal void Execute_DeleteListItemCommand(object parameter)
         {
             CurrentPageListProducts.RemoveAt((int)parameter);
+            GroupSquaresAvailable = Constants.MaxNumberListItems - CurrentPageListProducts.Count;
         }
         internal bool CanExecute_DeleteListItemCommand(object parameter)
         {
-            return (int)parameter >= 0;
+            return (int?) parameter >= 0;
         }
+
+        #region AddListItemCommand
+
+        public ICommand AddListItemCommand { get { return _addListItemCommand ?? (_addListItemCommand = new DelegateCommand(Execute_AddListItemCommand, CanExecute_AddListItemCommand)); } }
+        private ICommand _addListItemCommand;
+
+        internal void Execute_AddListItemCommand(object parameter)
+        {
+            var productFound = _inventoryInstance.GetProduct(((TextBox) parameter).Text);
+            if (productFound.Code != null && CurrentPageListProducts.Count <= Constants.MaxNumberListItems)
+            {
+                CurrentPageListProducts.Add(productFound);
+                GroupSquaresAvailable = Constants.MaxNumberListItems - CurrentPageListProducts.Count;
+            }
+            else
+            {
+                Code = "Código inválido";
+            }
+
+            ((TextBox) parameter).Text = "";
+        }
+
+        internal bool CanExecute_AddListItemCommand(object parameter)
+        {
+            return parameter != null;
+        }
+
+        #endregion
+
+        #region SaveChangesProductListCommand
+        public ICommand SaveChangesProductListCommand { get { return _saveChangesProductListCommand ?? (_saveChangesProductListCommand = new DelegateCommand(Execute_SaveChangesProductListCommand, CanExecute_SaveChangesProductListCommand)); } }
+
+        private ICommand _saveChangesProductListCommand;
+
+        internal void Execute_SaveChangesProductListCommand(object parameter)
+        {
+            CategoryCatalog.UpdateProductListFile(parameter.ToString(), CurrentPageListProducts.ToList(), CurrentPageListTitle);
+            if (LastSelectedProductsPage == 1)
+                PageOneTitle = CurrentPageListTitle;
+            else if (LastSelectedProductsPage == 2)
+                PageTwoTitle = CurrentPageListTitle;
+            else if (LastSelectedProductsPage == 3)
+                PageThreeTitle = CurrentPageListTitle;
+            else if (LastSelectedProductsPage == 4)
+                PageFourTitle = CurrentPageListTitle;
+            else if (LastSelectedProductsPage == 5)
+                PageFiveTitle = CurrentPageListTitle;
+
+            Code = "¡Grupo Actualizado!";
+            CodeColor = Constants.ColorCodeSave;
+        }
+        internal bool CanExecute_SaveChangesProductListCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
         #endregion
 
         #endregion
@@ -3252,56 +3326,6 @@ namespace Seiya
         #endregion
 
         #endregion Returns Commands
-
-        #region AddListItemCommand
-
-        public ICommand AddListItemCommand { get { return _addListItemCommand ?? (_addListItemCommand = new DelegateCommand(Execute_AddListItemCommand, CanExecute_AddListItemCommand)); } }
-        private ICommand _addListItemCommand;
-
-        internal void Execute_AddListItemCommand(object parameter)
-        {
-            var productFound = _inventoryInstance.GetProduct(parameter.ToString());
-            if(productFound.Code != null && CurrentPageListProducts.Count <= Constants.MaxNumberListItems)
-            {
-                CurrentPageListProducts.Add(productFound);
-            }
-            //TODO:Do not let the user to put another in the list if it is the max already
-        }
-
-        internal bool CanExecute_AddListItemCommand(object parameter)
-        {
-            return parameter == null ? false : true;//parameter.ToString() != "";
-        }
-
-        #endregion
-
-        #region SaveChangesProductListCommand
-        public ICommand SaveChangesProductListCommand { get { return _saveChangesProductListCommand ?? (_saveChangesProductListCommand = new DelegateCommand(Execute_SaveChangesProductListCommand, CanExecute_SaveChangesProductListCommand)); } }
-
-        private ICommand _saveChangesProductListCommand;
-
-        internal void Execute_SaveChangesProductListCommand(object parameter)
-        {
-            CategoryCatalog.UpdateProductListFile(parameter.ToString(), CurrentPageListProducts.ToList(), CurrentPageListTitle);
-            if (LastSelectedProductsPage == 1)
-                PageOneTitle = CurrentPageListTitle;
-            else if (LastSelectedProductsPage == 2)
-                PageTwoTitle = CurrentPageListTitle;
-            else if (LastSelectedProductsPage == 3)
-                PageThreeTitle = CurrentPageListTitle;
-            else if (LastSelectedProductsPage == 4)
-                PageFourTitle = CurrentPageListTitle;
-            else if (LastSelectedProductsPage == 5)
-                PageFiveTitle = CurrentPageListTitle;
-
-            Code = "¡Grupo Actualizado!";
-            CodeColor = Constants.ColorCodeSave;
-        }
-        internal bool CanExecute_SaveChangesProductListCommand(object parameter)
-        {
-            return true;
-        }
-        #endregion
 
         #region Exchange Rate Commands
 
