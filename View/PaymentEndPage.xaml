@@ -112,7 +112,7 @@
                 <TextBlock Grid.Column="1" Grid.Row="1" Foreground="#FF009E2B" Margin="2.5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Text="{Binding PaymentChangeUSD}"></TextBlock>
             </Grid>
         </Grid>
-        <Button Grid.Row="6" FontSize="24" FontWeight="Bold" Foreground="DarkGreen" Background="#FF8BD48B" Content="TERMINAR" Command="{Binding ChangePageCommand}" CommandParameter="end_transaction" BorderBrush="{x:Null}"></Button>
+        <Button Grid.Row="4" x:Name="EndTransactionBtn" FontSize="24" FontWeight="Bold" Foreground="DarkGreen" Background="#FF8BD48B" Content="TERMINAR" Command="{Binding ChangePageCommand}" CommandParameter="end_transaction" BorderBrush="{x:Null}"></Button>
         
         
     </Grid>

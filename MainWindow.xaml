@@ -292,7 +292,7 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="txtCode" Grid.Column="0" Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" GotFocus="TxtCode_OnMouseLeftButtonDown" VerticalAlignment="Center" Height="30"  Foreground="{Binding CodeColor}">
+                <TextBox x:Name="txtCode" Grid.Column="0" Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" GotFocus="TxtCode_OnMouseLeftButtonDown" VerticalAlignment="Center" Height="30" Foreground="{Binding CodeColor}">
                     <TextBox.InputBindings>
                         <!--MouseBinding MouseAction="LeftClick" Command="{Binding CodeLeftClickClearCommand}"></ -->
                         <KeyBinding Command="{Binding SearchCodeCommand}" Key="Enter" CommandParameter="{Binding Code}"></KeyBinding>

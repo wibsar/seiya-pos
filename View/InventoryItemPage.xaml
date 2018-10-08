@@ -36,6 +36,17 @@
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
+        <Style x:Key="StyleCalendar" TargetType="{x:Type Calendar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Calendar}">
+                        <Viewbox Height="600" Width="600">
+                            <CalendarItem x:Name="ModifiedCalendarItem" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ></CalendarItem>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     
     <Grid Background="white">
@@ -140,7 +151,7 @@
                 <TextBox Grid.Row="14" Margin="2" Text="{Binding InventoryTemporalItem.LocalQuantityAvailable}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
                 <TextBox Grid.Row="15" Margin="2" Text="{Binding InventoryTemporalItem.TotalQuantityAvailable}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
                 <TextBox Grid.Row="16" Margin="2" Text="{Binding InventoryTemporalItem.MinimumStockQuantity}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
-                <DatePicker Grid.Row="17" Margin="2" SelectedDate="{Binding InventoryTemporalItem.LastPurchaseDate}"></DatePicker>
+                <DatePicker Grid.Row="17" Margin="2" SelectedDate="{Binding InventoryTemporalItem.LastPurchaseDate}" CalendarStyle="{StaticResource StyleCalendar}"></DatePicker>
                 <TextBlock Grid.Row="18" Margin="2" Text="{Binding InventoryTemporalItem.LastSaleDateString}"></TextBlock>
             </Grid>
         </Grid>
