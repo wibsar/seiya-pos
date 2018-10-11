@@ -257,6 +257,56 @@ namespace Seiya
                 }
                 return orders;
             }
+
+            var numberFilter = base.DataTable.AsEnumerable().Where(r => r.Field<string>("NumeroFolio").ToLower().Contains(searchInput));
+            var clientFilter = base.DataTable.AsEnumerable().Where(r => r.Field<string>("Cliente").ToLower().Contains(searchInput));
+
+            foreach (var row in numberFilter)
+            {
+                var order = new Order(base.FilePath)
+                {
+                    Id = Int32.Parse(row["Id"].ToString()),
+                    OrderTicketNumber = Int32.Parse(row["NumeroFolio"].ToString()),
+                    Customer = row["Cliente"].ToString(),
+                    Title = row["Titulo"].ToString(),
+                    Description = row["Descripcion"].ToString(),
+                    Category = row["Categoria"].ToString(),
+                    TotalAmount = Decimal.Parse(row["MontoTotal"].ToString()),
+                    TotalPrePaid = Decimal.Parse(row["Anticipo"].ToString()),
+                    PrePaidTicketNumber = Int32.Parse(row["TicketAnticipo"].ToString()),
+                    RegistrationDate = Convert.ToDateTime(row["FechaOrden"].ToString()),
+                    TotalDue = Decimal.Parse(row["Saldo"].ToString()),
+                    ImageName = row["Imagen"].ToString(),
+                    DueDate = Convert.ToDateTime(row["FechaEntrega"].ToString())
+                };
+
+                orders.Add(order);
+            }
+
+            foreach (var row in clientFilter)
+            {
+                var order = new Order(base.FilePath)
+                {
+                    Id = Int32.Parse(row["Id"].ToString()),
+                    OrderTicketNumber = Int32.Parse(row["NumeroFolio"].ToString()),
+                    Customer = row["Cliente"].ToString(),
+                    Title = row["Titulo"].ToString(),
+                    Description = row["Descripcion"].ToString(),
+                    Category = row["Categoria"].ToString(),
+                    TotalAmount = Decimal.Parse(row["MontoTotal"].ToString()),
+                    TotalPrePaid = Decimal.Parse(row["Anticipo"].ToString()),
+                    PrePaidTicketNumber = Int32.Parse(row["TicketAnticipo"].ToString()),
+                    RegistrationDate = Convert.ToDateTime(row["FechaOrden"].ToString()),
+                    TotalDue = Decimal.Parse(row["Saldo"].ToString()),
+                    ImageName = row["Imagen"].ToString(),
+                    DueDate = Convert.ToDateTime(row["FechaEntrega"].ToString())
+                };
+
+                //Add if it does not exist already
+                if (!orders.Exists(x => x.OrderTicketNumber == order.OrderTicketNumber))
+                    orders.Add(order);
+            }
+
             return orders;
         }
 
