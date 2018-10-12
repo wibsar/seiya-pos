@@ -8,12 +8,9 @@ namespace Seiya
 {
     public enum UserAccessLevelEnum
     {
-        Admin,
-        Advanced,
-        Basic,
-        Unknown,
         Administrador,
         Avanzado,
-        Basico
+        Basico,
+        Desconocido
     }
 }

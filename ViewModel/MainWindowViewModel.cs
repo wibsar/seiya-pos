@@ -1825,7 +1825,7 @@ namespace Seiya
             //Get payment type from string
             var status = PaymentTypeEnum.TryParse(parameter.ToString(), out PaymentTypeEnum paymentType);
             if (status == false)
-                paymentType = PaymentTypeEnum.Cash;
+                paymentType = PaymentTypeEnum.Efectivo;
 
             //TODO: Review if needed
             ProcessPayment(paymentType, TransactionType.Regular);
@@ -1862,7 +1862,7 @@ namespace Seiya
             //Get payment type from string
             var status = PaymentTypeEnum.TryParse(parameter.ToString(), out PaymentTypeEnum paymentType);
             if (status == false)
-                paymentType = PaymentTypeEnum.Cash;
+                paymentType = PaymentTypeEnum.Efectivo;
 
             //TODO: Review if needed
             ProcessPayment(paymentType, TransactionType.Regular);
@@ -2718,7 +2718,7 @@ namespace Seiya
                         Amount = 0,
                         ExpenseCategory = "",
                         Date = DateTime.Now,
-                        PaymentType = PaymentTypeEnum.Cash,
+                        PaymentType = PaymentTypeEnum.Efectivo,
                         CurrencyType = CurrencyTypeEnum.USD
                     };
                     temporalExpense.Id = temporalExpense.GetLastItemNumber() + 1;
@@ -3310,7 +3310,7 @@ namespace Seiya
             switch ((string)parameter)
             {
                 case "transaction_details":
-                    var temporalTransaction = new Transaction(Constants.DataFolderPath + Constants.UsersFileName, true, true)
+                    var temporalTransaction = new Transaction(Constants.DataFolderPath + Constants.TransactionsMasterFileName, true, true)
                     {
                         TransactionNumber = SelectedTransaction.TransactionNumber,
                         ReceiptNumber = SelectedTransaction.ReceiptNumber,
@@ -3348,7 +3348,7 @@ namespace Seiya
         internal void Execute_TransactionStartSearchCommand(object parameter)
         {
             //Inventory search method that returns a list of products for the datagrid
-            TransactionsSearchedEntries = new ObservableCollection<Transaction>(new Transaction(Constants.DataFolderPath + Constants.TransactionsFileName, true, true).Search(TransactionsSearchText));
+            TransactionsSearchedEntries = new ObservableCollection<Transaction>(new Transaction(Constants.DataFolderPath + Constants.TransactionsMasterFileName, true, true).Search(TransactionsSearchText));
             TransactionsSearchText = "";
         }
         internal bool CanExecute_TransactionStartSearchCommand(object parameter)
@@ -3369,6 +3369,8 @@ namespace Seiya
             {
                 SelectedTransaction.UpdateToTable(TransactionTemporalItem);
                 SelectedTransaction.SaveDataTableToCsv();
+                Code = "Cambio Guardado";
+                CodeColor = Constants.ColorCodeSave;
             }
             else
             {
@@ -3677,8 +3679,8 @@ namespace Seiya
 
             var invProduct = _inventoryInstance.GetProduct(product.Code);
 
-            if (transactionType == TransactionType.Regular || transactionType == TransactionType.Internal || transactionType == TransactionType.Interno
-                || transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
+            if (transactionType == TransactionType.Regular || transactionType == TransactionType.Interno || 
+                transactionType == TransactionType.Remover)
             {
                 //
                 if (invProduct.LocalQuantityAvailable > 0)
@@ -3695,18 +3697,17 @@ namespace Seiya
 
                 invProduct.LastSaleDate = transactionDate;
 
-                if (transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
+                if (transactionType == TransactionType.Remover)
                 {
                     invProduct.InternalQuantity = invProduct.InternalQuantity + product.LastQuantitySold;
                 }
 
-                if (transactionType == TransactionType.Regular || transactionType == TransactionType.Interno ||
-                    transactionType == TransactionType.Internal)
+                if (transactionType == TransactionType.Regular || transactionType == TransactionType.Interno)
                 {
                     invProduct.QuantitySold = invProduct.QuantitySold + product.LastQuantitySold;
                 }
 
-                if (transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
+                if (transactionType != TransactionType.Remover)
                 {
                     invProduct.AmountSold = invProduct.AmountSold + product.LastAmountSold;
                 }

@@ -9,12 +9,21 @@ namespace Seiya
     public enum TransactionType
     {
         Regular,
-        Internal,
         Interno,
-        Return,
         DevolucionEfectivo,
         DevolucionTarjeta,
-        Removal,
         Remover
     }
+
+    //public enum TransactionType
+    //{
+    //    Regular,
+    //    Internal,
+    //    Interno,
+    //    Return,
+    //    DevolucionEfectivo,
+    //    DevolucionTarjeta,
+    //    Removal,
+    //    Remover
+    //}
 }

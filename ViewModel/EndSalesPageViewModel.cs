@@ -448,7 +448,7 @@ namespace Seiya
             //Calculate sales from transactions
             CalculateInitialCash();
             CalculateExpenses();
-            CalculateSales(TransactionType.Internal);
+            CalculateSales(TransactionType.Interno);
             CalculateDelta();
         }
 
@@ -474,7 +474,7 @@ namespace Seiya
             //Print Receipt
             PrintReceipt(ReceiptType.DailyRegular, false);
             //Master
-            CalculateSales(TransactionType.Internal);
+            CalculateSales(TransactionType.Interno);
             CalculateDelta();
             CollectEndOfSalesReceiptInformation();
             //Record End Of Sales Transaction in db
@@ -508,7 +508,7 @@ namespace Seiya
         {
             EndOfSalesType = "X";
             SaveRegisterCashAmount();
-            var totalSalesInfo = CalculateSales(TransactionType.Internal);
+            var totalSalesInfo = CalculateSales(TransactionType.Interno);
             TransactionDataStruct totalInternalSalesInfo;
             Transaction.GetTransactionsData(TransactionType.Regular, _pos, out totalInternalSalesInfo);
             CalculateDelta();

@@ -157,7 +157,8 @@ namespace Seiya
                     row["PrecioVendido"] = transaction.ProductPrice;
                     row["UnidadesVendidas"] = transaction.ProductQuantitySold;
                     row["TotalVendido"] = Math.Round(transaction.ProductPrice * transaction.ProductQuantitySold, 2);
-                    row["FechaRegistro"] = transaction.TransactionDate;
+                    row["FechaVenta"] = transaction.TransactionDate;
+                    break;
                 }
             }
             return true;
@@ -174,7 +175,8 @@ namespace Seiya
                     row["PrecioVendido"] = this.ProductPrice;
                     row["UnidadesVendidas"] = this.ProductQuantitySold;
                     row["TotalVendido"] = Math.Round(this.ProductPrice * this.ProductQuantitySold, 2);
-                    row["FechaRegistro"] = this.TransactionDate;
+                    row["FechaVenta"] = this.TransactionDate;
+                    break;
                 }
             }
             return true;
@@ -209,6 +211,7 @@ namespace Seiya
                 {
                     var transaction = new Transaction(base.FilePath, true, true)
                     {
+                        TransactionNumber = Int32.Parse(row["NumeroTransaccion"].ToString()),
                         ReceiptNumber = Int32.Parse(row["NumeroTicket"].ToString()),
                         ProductCode = row["Codigo"].ToString(),
                         ProductCategory = row["CategoriaProducto"].ToString(),
@@ -308,7 +311,6 @@ namespace Seiya
                     return SaveTransaction(_transactionFilePath, dataShort) && SaveTransaction(_transactionMasterFilePath, data) &&
                         SaveTransaction(_transactionHistoryFilePath, data);
                    
-                case TransactionType.Internal:
                 case TransactionType.Interno:
                     var internalData = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
                           TransactionNumber, InternalNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
@@ -317,7 +319,6 @@ namespace Seiya
 
                     return SaveTransaction(_transactionMasterFilePath, internalData) && SaveTransaction(_transactionHistoryFilePath, internalData);
 
-                case TransactionType.Removal:
                 case TransactionType.Remover:
                     var removalData = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
                           TransactionNumber, InternalNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
@@ -326,7 +327,6 @@ namespace Seiya
 
                     return SaveTransaction(_transactionMasterFilePath, removalData) && SaveTransaction(_transactionHistoryFilePath, removalData);
 
-                case TransactionType.Return:
                 case TransactionType.DevolucionEfectivo:
                 case TransactionType.DevolucionTarjeta:
                     var returnData = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
@@ -436,7 +436,7 @@ namespace Seiya
             var categoryData = new List<Tuple<string, int, decimal>>();
 
             //Open current transaction file and get data
-            if (transactionType == TransactionType.Internal || transactionType == TransactionType.Interno)
+            if (transactionType == TransactionType.Interno)
             {
                 selectedFilePath = posData.TransactionMasterDataFilePath;
             }
@@ -545,7 +545,7 @@ namespace Seiya
                 var lastRow = data.Rows[data.Rows.Count - 1];
                 transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
                 transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
-                if (transactionType == TransactionType.Internal || transactionType == TransactionType.Interno)
+                if (transactionType == TransactionType.Interno)
                 {
                     transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
                 }
@@ -556,7 +556,7 @@ namespace Seiya
                 var lastRow = data.Rows[0];
                 transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
                 transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
-                if (transactionType == TransactionType.Internal || transactionType == TransactionType.Interno)
+                if (transactionType == TransactionType.Interno)
                 {
                     transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
                 }

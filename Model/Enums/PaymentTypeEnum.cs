@@ -8,18 +8,29 @@ namespace Seiya
 {
     public enum PaymentTypeEnum
     {
-        Cash,
-        Card,
-        BankTransfer,
-        Points,
-        Check,
         Tarjeta,
         Efectivo,
         Cheque,
         Transferencia,
         Puntos,
         Otro,
-        Desconocido,
-        Unknown
+        Desconocido
     }
+
+    //public enum PaymentTypeEnum
+    //{
+    //    Cash,
+    //    Card,
+    //    BankTransfer,
+    //    Points,
+    //    Check,
+    //    Tarjeta,
+    //    Efectivo,
+    //    Cheque,
+    //    Transferencia,
+    //    Puntos,
+    //    Otro,
+    //    Desconocido,
+    //    Unknown
+    //}
 }
