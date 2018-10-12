@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -10,7 +11,7 @@ using GenericParsing;
 
 namespace Seiya
 {
-    public class Transaction
+    public class Transaction: DataBase
     {
         #region Fields
 
@@ -31,6 +32,15 @@ namespace Seiya
         private decimal _totalDue;
         private decimal _amountPaid;
         private decimal _changeDue;
+
+        //product related fields
+        private string _productCode;
+        private int _productNumber;
+        private string _productCategory;
+        private string _productDescription;
+        private decimal _productPrice;
+        private decimal _productTotalSale;
+        private int _productQuantitySold;
 
         #endregion
 
@@ -86,11 +96,19 @@ namespace Seiya
             }
         }
 
+        public string ProductCode { get => _productCode; set => _productCode = value; }
+        public int ProductNumber { get => _productNumber; set => _productNumber = value; }
+        public string ProductCategory { get => _productCategory; set => _productCategory = value; }
+        public string ProductDescription { get => _productDescription; set => _productDescription = value; }
+        public decimal ProductPrice { get => _productPrice; set => _productPrice = value; }
+        public decimal ProductTotalSale { get => _productTotalSale; set => _productTotalSale = value; }
+        public int ProductQuantitySold { get => _productQuantitySold; set => _productQuantitySold = value; }
+
         #endregion
 
         #region Constructors
 
-        public Transaction(string transactionFilePath)
+        public Transaction(string transactionFilePath) : base (transactionFilePath)
         {
             TranscationFilePath = transactionFilePath;
 
@@ -106,21 +124,165 @@ namespace Seiya
         }
 
         public Transaction(string transactionFilePath, string transactionMasterFilePath, string transactionHistoryFilePath,
-            bool datafile)
+            bool datafile) : base(transactionMasterFilePath)
         {
             _transactionFilePath = transactionFilePath;
             _transactionMasterFilePath = transactionMasterFilePath;
             _transactionHistoryFilePath = transactionHistoryFilePath;
         }
 
-        public Transaction(string transactionFilePath, bool datafile)
+        public Transaction(string transactionFilePath, bool datafile) : base (transactionFilePath)
         {
             _transactionFilePath = transactionFilePath;
+        }
+
+        public Transaction(string transactionFilePath, bool loadFile, bool analysis) : base(transactionFilePath)
+        {
+            _transactionFilePath = transactionFilePath;
+            LoadCsvToDataTable();
         }
 
         #endregion  
 
         #region Methods
+
+        public bool UpdateToTable(Transaction transaction)
+        {
+            for (int index = 0; index < DataTable.Rows.Count; index++)
+            {
+                var row = DataTable.Rows[index];
+                if (row["NumeroTransaccion"].ToString() == transaction.TransactionNumber.ToString() && row["NumeroTicket"].ToString() == transaction.ReceiptNumber.ToString() &&
+                    row["FechaVenta"].ToString() == transaction.TransactionDate.ToString() && row["TipoVenta"].ToString() == transaction.SaleType.ToString())
+                {
+                    row["PrecioVendido"] = transaction.ProductPrice;
+                    row["UnidadesVendidas"] = transaction.ProductQuantitySold;
+                    row["TotalVendido"] = Math.Round(transaction.ProductPrice * transaction.ProductQuantitySold, 2);
+                    row["FechaRegistro"] = transaction.TransactionDate;
+                }
+            }
+            return true;
+        }
+
+        public bool UpdateToTable()
+        {
+            for (int index = 0; index < DataTable.Rows.Count; index++)
+            {
+                var row = DataTable.Rows[index];
+                if (row["NumeroTransaccion"].ToString() == this.TransactionNumber.ToString() && row["NumeroTicket"].ToString() == this.ReceiptNumber.ToString() &&
+                    row["FechaVenta"].ToString() == this.TransactionDate.ToString() && row["TipoVenta"].ToString() == this.SaleType.ToString())
+                {
+                    row["PrecioVendido"] = this.ProductPrice;
+                    row["UnidadesVendidas"] = this.ProductQuantitySold;
+                    row["TotalVendido"] = Math.Round(this.ProductPrice * this.ProductQuantitySold, 2);
+                    row["FechaRegistro"] = this.TransactionDate;
+                }
+            }
+            return true;
+        }
+
+        public void Delete()
+        {
+            for (int index = 0; index < base.DataTable.Rows.Count; index++)
+            {
+                var row = base.DataTable.Rows[index];
+                if (row["NumeroTransaccion"].ToString() == this.TransactionNumber.ToString() && row["NumeroTicket"].ToString() == this.ReceiptNumber.ToString() &&
+                    row["FechaVenta"].ToString() == this.TransactionDate.ToString() && row["TipoVenta"].ToString() == this.SaleType.ToString())
+                {
+                    DataTable.Rows[index].Delete();
+                    return;
+                }
+            }
+        }
+
+        public List<Transaction> Search(string searchInput)
+        {
+            var transactions = new List<Transaction>();
+
+            //Return empty list if invalid inputs are entered for the search
+            if (string.IsNullOrWhiteSpace(searchInput) || searchInput == "x")
+                return transactions;
+
+            if (searchInput == "*")
+            {
+                var allFields = base.DataTable.AsEnumerable();
+                foreach (var row in allFields)
+                {
+                    var transaction = new Transaction(base.FilePath, true, true)
+                    {
+                        ReceiptNumber = Int32.Parse(row["NumeroTicket"].ToString()),
+                        ProductCode = row["Codigo"].ToString(),
+                        ProductCategory = row["CategoriaProducto"].ToString(),
+                        ProductDescription = row["Descripcion"].ToString(),
+                        ProductPrice = Decimal.Parse(row["PrecioVendido"].ToString()),
+                        ProductQuantitySold = Int32.Parse(row["UnidadesVendidas"].ToString()),
+                        ProductTotalSale = Decimal.Parse(row["TotalVendido"].ToString()),
+                        TransactionDate = Convert.ToDateTime(row["FechaVenta"].ToString()),
+                        CustomerName = row["Cliente"].ToString(),
+                        UserName = row["Usuario"].ToString()                  
+                    };
+
+                    transaction.SaleType = (TransactionType)Enum.Parse(typeof(TransactionType), row["TipoVenta"].ToString(), true);
+                    transaction.PaymentType = (PaymentTypeEnum)Enum.Parse(typeof(PaymentTypeEnum), row["MetodoPago"].ToString(), true);
+
+                    transactions.Add(transaction);
+                }
+                return transactions;
+            }
+
+            var ticketFilter = base.DataTable.AsEnumerable().Where(r => r.Field<string>("NumeroTicket").ToLower().Contains(searchInput));
+            var clientFilter = base.DataTable.AsEnumerable().Where(r => r.Field<string>("Cliente").ToLower().Contains(searchInput));
+
+            foreach (var row in ticketFilter)
+            {
+                var transaction = new Transaction(base.FilePath, true, true)
+                {
+                    TransactionNumber = Int32.Parse(row["NumeroTransaccion"].ToString()),
+                    ReceiptNumber = Int32.Parse(row["NumeroTicket"].ToString()),
+                    ProductCode = row["Codigo"].ToString(),
+                    ProductCategory = row["CategoriaProducto"].ToString(),
+                    ProductDescription = row["Descripcion"].ToString(),
+                    ProductPrice = Decimal.Parse(row["PrecioVendido"].ToString()),
+                    ProductQuantitySold = Int32.Parse(row["UnidadesVendidas"].ToString()),
+                    ProductTotalSale = Decimal.Parse(row["TotalVendido"].ToString()),
+                    TransactionDate = Convert.ToDateTime(row["FechaVenta"].ToString()),
+                    CustomerName = row["Cliente"].ToString(),
+                    UserName = row["Usuario"].ToString()
+                };
+
+                transaction.SaleType = (TransactionType)Enum.Parse(typeof(TransactionType), row["TipoVenta"].ToString(), true);
+                transaction.PaymentType = (PaymentTypeEnum)Enum.Parse(typeof(PaymentTypeEnum), row["MetodoPago"].ToString(), true);
+
+                transactions.Add(transaction);
+            }
+
+            foreach (var row in clientFilter)
+            {
+                var transaction = new Transaction(base.FilePath, true, true)
+                {
+                    TransactionNumber = Int32.Parse(row["NumeroTransaccion"].ToString()),
+                    ReceiptNumber = Int32.Parse(row["NumeroTicket"].ToString()),
+                    ProductCode = row["Codigo"].ToString(),
+                    ProductCategory = row["CategoriaProducto"].ToString(),
+                    ProductDescription = row["Descripcion"].ToString(),
+                    ProductPrice = Decimal.Parse(row["PrecioVendido"].ToString()),
+                    ProductQuantitySold = Int32.Parse(row["UnidadesVendidas"].ToString()),
+                    ProductTotalSale = Decimal.Parse(row["TotalVendido"].ToString()),
+                    TransactionDate = Convert.ToDateTime(row["FechaVenta"].ToString()),
+                    CustomerName = row["Cliente"].ToString(),
+                    UserName = row["Usuario"].ToString()
+                };
+
+                transaction.SaleType = (TransactionType)Enum.Parse(typeof(TransactionType), row["TipoVenta"].ToString(), true);
+                transaction.PaymentType = (PaymentTypeEnum)Enum.Parse(typeof(PaymentTypeEnum), row["MetodoPago"].ToString(), true);
+
+                //Add if it does not exist already
+                if (!transactions.Exists(x => x.ReceiptNumber == transaction.ReceiptNumber))
+                    transactions.Add(transaction);
+            }
+
+            return transactions;
+        }
+
         /// <summary>
         /// Record transaction data into database
         /// </summary>
@@ -237,7 +399,7 @@ namespace Seiya
             File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.TransactionMasterBlankFileName,
                 Constants.DataFolderPath + Constants.TransactionsMasterFileName, true);
         }
-        #endregion
+
 
         /// <summary>
         /// Get transaction sales data for end of day sales report
@@ -314,7 +476,7 @@ namespace Seiya
                     {
                         amount += decimal.Parse(row["TotalVendido"].ToString());
 
-                        if(category != "Puntos")
+                        if (category != "Puntos")
                             itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
 
                         //Get payment method
@@ -351,7 +513,7 @@ namespace Seiya
 
                         if (row["Descripcion"].ToString() == "Puntos Descuento")
                         {
-                            transactionData.PointsTotal += double.Parse(row["TotalVendido"].ToString())*-1;
+                            transactionData.PointsTotal += double.Parse(row["TotalVendido"].ToString()) * -1;
                         }
 
                         if (row["TipoVenta"].ToString() == "DevolucionEfectivo")
@@ -359,7 +521,7 @@ namespace Seiya
                             transactionData.ReturnsCash += decimal.Parse(row["TotalVendido"].ToString()) * -1;
                             transactionData.TotalReturnItems -= Int32.Parse(row["UnidadesVendidas"].ToString());
                         }
-                        
+
                         if (row["TipoVenta"].ToString() == "DevolucionTarjeta")
                         {
                             transactionData.ReturnsCard += decimal.Parse(row["TotalVendido"].ToString()) * -1;
@@ -404,44 +566,17 @@ namespace Seiya
         }
 
         public static void RecordEndOfDaySalesTransaction(string filePath, int endOfDayReceiptNumber, int firstReceipt, int lastReceipt,
-            int totalUnitsSold, double totalPointsUsed, decimal totalCashSold, decimal totalCardSold, decimal totalCheckSold, 
-            decimal totalBankSold, decimal totalOthersSold, decimal totalAmountSold, decimal totalReturnCash, decimal totalReturnCard, 
+            int totalUnitsSold, double totalPointsUsed, decimal totalCashSold, decimal totalCardSold, decimal totalCheckSold,
+            decimal totalBankSold, decimal totalOthersSold, decimal totalAmountSold, decimal totalReturnCash, decimal totalReturnCard,
             decimal exchangeRate, string date)
         {
-            var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}", endOfDayReceiptNumber, firstReceipt, 
-                           lastReceipt, totalUnitsSold, totalPointsUsed, totalCashSold, totalCardSold, totalCheckSold, totalBankSold, 
+            var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}", endOfDayReceiptNumber, firstReceipt,
+                           lastReceipt, totalUnitsSold, totalPointsUsed, totalCashSold, totalCardSold, totalCheckSold, totalBankSold,
                            totalOthersSold, totalAmountSold, totalReturnCash, totalReturnCard, exchangeRate, date) + Environment.NewLine;
             //Append to daily receipt
             File.AppendAllText(filePath, data);
         }
-    }
-
-    public enum PaymentTypeEnum
-    {
-        Cash,
-        Card,
-        BankTransfer,
-        Points,
-        Check,
-        Tarjeta,
-        Efectivo,
-        Cheque,
-        Transferencia,
-        Puntos,
-        Otro,
-        Desconocido,
-        Unknown
-    }
-
-    public enum TransactionType
-    {
-        Regular,
-        Internal,
-        Interno,
-        Return,
-        DevolucionEfectivo,
-        DevolucionTarjeta,
-        Removal,
-        Remover
+        
+        #endregion
     }
 }

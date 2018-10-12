@@ -1140,6 +1140,62 @@ namespace Seiya
 
         #endregion
 
+        #region Transaction Related Properties
+
+        private Transaction _transactionTemporalItem;
+
+        public Transaction TransactionTemporalItem
+        {
+            get { return _transactionTemporalItem; }
+            set
+            {
+                _transactionTemporalItem = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _transactionsSearchText;
+        public string TransactionsSearchText
+        {
+            get
+            {
+                return _transactionsSearchText;
+            }
+            set
+            {
+                _transactionsSearchText = value.ToLower();
+                OnPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Hold search results
+        /// </summary>
+        /// 
+        private ObservableCollection<Transaction> _transactionsSearchedEntries;
+
+        public ObservableCollection<Transaction> TransactionsSearchedEntries
+        {
+            get { return _transactionsSearchedEntries; }
+            set
+            {
+                _transactionsSearchedEntries = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private Transaction _selectedTransaction;
+        public Transaction SelectedTransaction
+        {
+            get { return _selectedTransaction; }
+            set
+            {
+                _selectedTransaction = value;
+                OnPropertyChanged();
+            }
+        }
+        #endregion
+
         #region Exchange Rate Related Properties
 
         public decimal ExchangeRate
@@ -1387,6 +1443,9 @@ namespace Seiya
                     Code = "Transaccion Exitosa!";
                     SystemUnlock = true;
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
+                    break;
+                case "transactions":
+                    CurrentPage = "\\View\\TransactionMainPage.xaml";
                     break;
             }
         }
@@ -3250,68 +3309,33 @@ namespace Seiya
             //Change main frame page based on the parameter
             switch ((string)parameter)
             {
-                //case "customer_details":
-                //    var temporalProduct = new User(Constants.DataFolderPath + Constants.UsersFileName)
-                //    {
-                //        Id = SelectedUser.Id,
-                //        Name = SelectedUser.Name,
-                //        Email = SelectedUser.Email,
-                //        Phone = SelectedUser.Phone,
-                //        RegistrationDate = SelectedUser.RegistrationDate,
-                //        Rights = SelectedUser.Rights,
-                //        UserName = SelectedUser.UserName,
-                //        Password = SelectedUser.Password,
-                //        LastLogin = SelectedUser.LastLogin
-                //    };
+                case "transaction_details":
+                    var temporalTransaction = new Transaction(Constants.DataFolderPath + Constants.UsersFileName, true, true)
+                    {
+                        TransactionNumber = SelectedTransaction.TransactionNumber,
+                        ReceiptNumber = SelectedTransaction.ReceiptNumber,
+                        ProductCode = SelectedTransaction.ProductCode,
+                        ProductCategory = SelectedTransaction.ProductCategory,
+                        ProductDescription = SelectedTransaction.ProductDescription,
+                        ProductPrice = SelectedTransaction.ProductPrice,
+                        ProductQuantitySold = SelectedTransaction.ProductQuantitySold,
+                        ProductTotalSale = SelectedTransaction.ProductTotalSale,
+                        TransactionDate = SelectedTransaction.TransactionDate,
+                        CustomerName = SelectedTransaction.CustomerName,
+                        UserName = SelectedTransaction.UserName,
+                        SaleType = SelectedTransaction.SaleType,
+                        PaymentType = SelectedTransaction.PaymentType
+                    };
 
-                //    CurrentPage = "\\View\\UserDetailPage.xaml";
-                //    UserTemporalItem = temporalProduct;
-                //    break;
+                    CurrentPage = "\\View\\TransactionDetailPage.xaml";
+                    TransactionTemporalItem = temporalTransaction;
+                    break;
             }
         }
 
         internal bool CanExecute_TransactionUpdateCommand(object parameter)
         {
-            return SelectedUser != null;
-        }
-
-        #endregion
-
-        #region TransactionAddNewItemCommand
-
-        public ICommand TransactionAddNewItemCommand { get { return _transactionAddNewItemCommand ?? (_transactionAddNewItemCommand = new DelegateCommand(Execute_TransactionAddNewItemCommand, CanExecute_TransactionAddNewItemCommand)); } }
-        private ICommand _transactionAddNewItemCommand;
-
-        internal void Execute_TransactionAddNewItemCommand(object parameter)
-        {
-            //Change main frame page based on the parameter
-            switch ((string)parameter)
-            {
-                //case "user_add":
-                //    SelectedUser = null;    //Clear selected item in the user list
-                //    //Create new productt
-                //    var temporalProduct = new User(Constants.DataFolderPath + Constants.UsersFileName)
-                //    {
-                //        Name = "",
-                //        Email = "",
-                //        Phone = "",
-                //        RegistrationDate = DateTime.Now,
-                //        Rights = UserAccessLevelEnum.Basic,
-                //        UserName = "",
-                //        Password = "",
-                //        LastLogin = DateTime.Now
-                //    };
-                //    temporalProduct.Id = temporalProduct.GetLastItemNumber() + 1;
-
-                //    CurrentPage = "\\View\\UserDetailPage.xaml";
-                //    UserTemporalItem = temporalProduct;
-                //    break;
-            }
-        }
-
-        internal bool CanExecute_TransactionAddNewItemCommand(object parameter)
-        {
-            return true;
+            return SelectedTransaction != null;
         }
 
         #endregion
@@ -3323,13 +3347,13 @@ namespace Seiya
 
         internal void Execute_TransactionStartSearchCommand(object parameter)
         {
-            ////Inventory search method that returns a list of products for the datagrid
-            //UsersSearchedEntries = new ObservableCollection<User>(new User(Constants.DataFolderPath + Constants.UsersFileName).Search(UsersSearchText));
-            //UsersSearchText = "";
+            //Inventory search method that returns a list of products for the datagrid
+            TransactionsSearchedEntries = new ObservableCollection<Transaction>(new Transaction(Constants.DataFolderPath + Constants.TransactionsFileName, true, true).Search(TransactionsSearchText));
+            TransactionsSearchText = "";
         }
         internal bool CanExecute_TransactionStartSearchCommand(object parameter)
         {
-            return true;//InventorySearchText != "" && InventorySearchText != null;
+            return true;
         }
 
         #endregion
@@ -3340,23 +3364,48 @@ namespace Seiya
 
         internal void Execute_TransactionSaveChangesCommand(object parameter)
         {
-            ////Check if code was updated
-            //if (SelectedUser != null)
-            //{
-            //    SelectedUser.UpdateUserToTable(UserTemporalItem);
-            //    SelectedUser.SaveDataTableToCsv();
-            //}
-            //else
-            //{
-            //    UserTemporalItem.Register();
-            //}
-            //UsersSearchedEntries = null;
-            //CurrentPage = "\\View\\UserMainPage.xaml";
+            //Check if code was updated
+            if (SelectedTransaction != null)
+            {
+                SelectedTransaction.UpdateToTable(TransactionTemporalItem);
+                SelectedTransaction.SaveDataTableToCsv();
+            }
+            else
+            {
+                //There is no way to register a transaction through this option
+            }
+            TransactionsSearchedEntries = null;
+            CurrentPage = "\\View\\TransactionMainPage.xaml";
         }
 
         internal bool CanExecute_TransactionSaveChangesCommand(object parameter)
         {
-            return UserTemporalItem.Password == UserTemporalItem.PasswordVerification && UserTemporalItem.Password != "";
+            return true;
+        }
+        #endregion
+
+        #region TransactionDeleteCommand
+
+        public ICommand TransactionDeleteCommand { get { return _transactionDeleteCommand ?? (_transactionDeleteCommand = new DelegateCommand(Execute_TransactionDeleteCommand, CanExecute_TransactionDeleteCommand)); } }
+        private ICommand _transactionDeleteCommand;
+
+        internal void Execute_TransactionDeleteCommand(object parameter)
+        {
+            //Check if code was updated
+            if (SelectedTransaction != null)
+            {
+                SelectedTransaction.Delete();
+                SelectedTransaction.SaveDataTableToCsv();
+            }
+            TransactionsSearchedEntries = null;
+            CurrentPage = "\\View\\TransactionMainPage.xaml";
+            Code = "Transaccion Eliminada";
+            CodeColor = Constants.ColorCodeError;
+        }
+
+        internal bool CanExecute_TransactionDeleteCommand(object parameter)
+        {
+            return true;
         }
         #endregion
 

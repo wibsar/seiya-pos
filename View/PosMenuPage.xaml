@@ -163,7 +163,7 @@
                 <TextBlock Grid.Row="1" Text="Calculadora"></TextBlock>
             </Grid>
         </Button>
-        <Button Grid.Row="2" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="analysis" BorderBrush="{x:Null}">
+        <Button Grid.Row="2" Grid.Column="3" Command="{Binding ChangePageCommand}" CommandParameter="transactions" BorderBrush="{x:Null}">
             <Grid>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>

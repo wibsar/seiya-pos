@@ -1,0 +1,110 @@
+﻿<Page x:Class="Seiya.TransactionMainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Seiya"
+      mc:Ignorable="d" 
+      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DesignHeight="600" d:DesignWidth="800"
+      Title="CustomerMainPage">
+    <Page.Resources>
+        <Style TargetType="Page">
+            <Setter Property="Foreground" Value="#2C5066" />
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="BorderBrush" Value="White"></Setter>
+            <Setter Property="FontSize" Value="14"></Setter>            
+        </Style>
+        <Style TargetType="TextBox">
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Foreground" Value="#2C5066" />
+        </Style>
+        <Style TargetType="DataGrid">
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+        </Style>
+    </Page.Resources>
+
+    <Grid ShowGridLines="False" Background="White">
+        <!--Main Grid definition-->
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="1.5*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!-- Header with search product -->
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"></ColumnDefinition>
+                <ColumnDefinition Width="6*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock Text="TRANSACCIONES" FontSize="24" VerticalAlignment="Center"></TextBlock>
+            <TextBox Grid.Column="1" x:Name="CustomersSearchTextBox" Text="{Binding TransactionsSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="6,0" VerticalContentAlignment="Center"/>
+            <Button Grid.Column="2" Background="White" Command="{Binding TransactionStartSearchCommand}" CommandParameter="{Binding TransactionsSearchText}">
+                <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png"></Image>
+            </Button>
+        </Grid>
+
+        <!-- Table of user items found based on the search -->
+        <DataGrid x:Name="VendorData" Grid.Row="1" Margin="0,6,0,0" HeadersVisibility="Column" ItemsSource="{Binding TransactionsSearchedEntries}" SelectedItem="{Binding SelectedTransaction, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding ReceiptNumber}" ClipboardContentBinding="{x:Null}" Header="Recibo" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ProductCode}" ClipboardContentBinding="{x:Null}" Header="Codigo" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ProductPrice}" ClipboardContentBinding="{x:Null}" Header="Precio" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ProductQuantitySold}" ClipboardContentBinding="{x:Null}" Header="Cantidad" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ProductTotalSale}" ClipboardContentBinding="{x:Null}" Header="Total" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TransactionDate}" ClipboardContentBinding="{x:Null}" Header="Fecha" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding SaleType}" ClipboardContentBinding="{x:Null}" Header="Tipo Venta" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PaymentType}" ClipboardContentBinding="{x:Null}" Header="Metodo Pago" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ProductCategory}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ProductDescription}" ClipboardContentBinding="{x:Null}" Header="Descripcion" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding CustomerName}" ClipboardContentBinding="{x:Null}" Header="Cliente" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding UserName}" ClipboardContentBinding="{x:Null}" Header="Usuario" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!-- Inventory options -->
+        <Grid Grid.Row="2" ShowGridLines="False" Margin="0,3,0,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+            </Grid>
+
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="4*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding TransactionUpdateCommand}" CommandParameter="transaction_details">
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Detalles.png"></Image>
+                </Button>
+                <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Detalle" ></TextBlock>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
