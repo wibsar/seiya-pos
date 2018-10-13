@@ -3501,6 +3501,15 @@ namespace Seiya
             else
             {
                 PosGeneralPageViewModel.GetInstance().ManualProduct = product;
+                //Set price currency based on product
+                if (product.PriceCurrency == CurrencyTypeEnum.USD)
+                {
+                    PosGeneralPageViewModel.GetInstance().UsdEnabled = true;
+                }
+                else
+                {
+                    PosGeneralPageViewModel.GetInstance().UsdEnabled = false;
+                }
                 CurrentPage = "\\View\\PosGeneralPage.xaml";
             }
         }

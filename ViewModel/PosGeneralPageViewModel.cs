@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.ObjectModel;
 using System.Globalization;
+using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using Seiya.WpfBindingUtilities;
 
@@ -21,7 +23,7 @@ namespace Seiya
         private bool _clear;
         private static Product _manualProduct;
         private static ObservableCollection<string> _categoriesList;
-
+        private bool _usdEnabled = false;
         #endregion
 
         #region Constructors
@@ -48,6 +50,29 @@ namespace Seiya
         #endregion
 
         #region Observable Properties
+
+        private string _codeColor = "#2C5066";
+        public string CodeColor
+        {
+            get { return _codeColor; }
+            set
+            {
+                _codeColor = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _currencyTypeContent = "Pesos";
+        public string CurrencyTypeContent
+        {
+            get { return _currencyTypeContent; }
+            set
+            {
+                _currencyTypeContent = value;
+                OnPropertyChanged();
+            }
+        }
+
         /// <summary>
         /// Shows price entered
         /// </summary>
@@ -157,6 +182,25 @@ namespace Seiya
             }
         }
 
+        public bool UsdEnabled
+        {
+            get { return _usdEnabled; }
+            set
+            {
+                _usdEnabled = value;
+                if (value)
+                {
+                    CodeColor = Constants.ColorCodeError;
+                    CurrencyTypeContent = "Dolar";
+                }
+                else
+                {
+                    CodeColor = Constants.ColorCodeSave;
+                    CurrencyTypeContent = "Pesos";
+                }
+            }
+        }
+
         #endregion
 
         #region EnterKeyPadNumberCommand
@@ -201,11 +245,29 @@ namespace Seiya
             {
                 if (ManualProduct == null)
                 {
-                    ManualProduct = Product.Add(Description, Category, decimal.Parse(Price), Quantity);
+                    if (UsdEnabled == true)
+                    {
+                        ManualProduct = Product.Add(Description, Category, Math.Round(decimal.Parse(Price)*MainWindowViewModel.GetInstance().ExchangeRate,2), Quantity);
+                    }
+                    else
+                    {
+                        ManualProduct = Product.Add(Description, Category, decimal.Parse(Price), Quantity);
+                    }
                 }
                 else
                 {
-                    ManualProduct.Price = decimal.Parse(Price);
+                    //Check price currency and current currency state 
+                    if (ManualProduct.PriceCurrency == CurrencyTypeEnum.USD)
+                    {
+                        UsdEnabled = true;
+                        ManualProduct.Price = Math.Round(decimal.Parse(Price) * MainWindowViewModel.GetInstance().ExchangeRate, 2);
+                    }
+                    else
+                    {
+                        UsdEnabled = false;
+                        ManualProduct.Price = decimal.Parse(Price);
+                    }
+        
                     ManualProduct.Description = Description;
                     ManualProduct.Category = Category;
                     ManualProduct.LastQuantitySold = Quantity;
@@ -249,6 +311,30 @@ namespace Seiya
         }
 
         internal bool CanExecute_AddOrSubtractQuantityCommand(object parameter)
+        {
+            //Add logic to check if the command can be executed (if any)
+            return true;
+        }
+        #endregion
+
+        #region ChangeCurrencyCommand
+
+        public ICommand ChangeCurrencyCommand { get { return _changeCurrencyCommand ?? (_changeCurrencyCommand = new DelegateCommand(Execute_ChangeCurrencyCommand, CanExecute_ChangeCurrencyCommand)); } }
+        private ICommand _changeCurrencyCommand;
+
+        internal void Execute_ChangeCurrencyCommand(object parameter)
+        {
+            if (UsdEnabled)
+            {
+                UsdEnabled = false;
+            }
+            else
+            {
+                UsdEnabled = true;
+            }
+        }
+
+        internal bool CanExecute_ChangeCurrencyCommand(object parameter)
         {
             //Add logic to check if the command can be executed (if any)
             return true;
