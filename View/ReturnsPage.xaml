@@ -36,6 +36,17 @@
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
+        <Style x:Key="StyleCalendar" TargetType="{x:Type Calendar}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Calendar}">
+                        <Viewbox Height="500" Width="500">
+                            <CalendarItem x:Name="PART_CalendarItem" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ></CalendarItem>
+                        </Viewbox>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </Page.Resources>
     
     <Grid ShowGridLines="false" Background="White">
@@ -83,7 +94,7 @@
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Motivo"></TextBlock>
 
                 <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TicketNumber, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="5"></TextBox>
-                <DatePicker Grid.Row="2" Grid.Column="1" Text="{Binding PurchaseDate}" Margin="5"></DatePicker>
+                <DatePicker Grid.Row="2" Grid.Column="1" Text="{Binding PurchaseDate}" Margin="5" CalendarStyle="{StaticResource StyleCalendar}"></DatePicker>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
                 <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CustomerNumber, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
                 <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ReturnReason, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>

@@ -1298,37 +1298,40 @@ namespace Seiya
                     CurrentCustomer = null;
                     CurrentPage = "\\View\\PaymentPage.xaml";
                     break;
+                case "remove_inventory":
+                    CurrentPage = "\\View\\RemoveInventoryPage.xaml";
+                    break;
+                case "end_remove_inventory":
+                    transactionType = TransactionType.Remover;
+                    ProcessInventoryRemoval(transactionType);
+                    CurrentPage = "\\View\\PosGeneralPage.xaml";
+                    break;
                 case "product_list_1":
                     LastSelectedProductsPage = 1;
-               //     Products = GetPageItemsList(LastSelectedProductsPage, out pageTitleHolder);
                     ProductObjects = GetPageProductsList(LastSelectedProductsPage, out pageTitleHolder);
                     PageOneTitle = pageTitleHolder;
                     CurrentPage = "\\View\\ProductsPage.xaml";
                     break;
                 case "product_list_2":
                     LastSelectedProductsPage = 2;
-                 //   Products = GetPageItemsList(LastSelectedProductsPage, out pageTitleHolder);
                     ProductObjects = GetPageProductsList(LastSelectedProductsPage, out pageTitleHolder);
                     PageTwoTitle = pageTitleHolder;
                     CurrentPage = "\\View\\ProductsPage.xaml";
                     break;
                 case "product_list_3":
                     LastSelectedProductsPage = 3;
-                   // Products = GetPageItemsList(LastSelectedProductsPage, out pageTitleHolder);
                     ProductObjects = GetPageProductsList(LastSelectedProductsPage, out pageTitleHolder);
                     PageThreeTitle = pageTitleHolder;
                     CurrentPage = "\\View\\ProductsPage.xaml";
                     break;
                 case "product_list_4":
                     LastSelectedProductsPage = 4;
-                   // Products = GetPageItemsList(LastSelectedProductsPage, out pageTitleHolder);
                     ProductObjects = GetPageProductsList(LastSelectedProductsPage, out pageTitleHolder);
                     PageFourTitle = pageTitleHolder;
                     CurrentPage = "\\View\\ProductsPage.xaml";
                     break;
                 case "product_list_5":
                     LastSelectedProductsPage = 5;
-                    //Products = GetPageItemsList(LastSelectedProductsPage, out pageTitleHolder);
                     ProductObjects = GetPageProductsList(LastSelectedProductsPage, out pageTitleHolder);
                     PageFiveTitle = pageTitleHolder;
                     CurrentPage = "\\View\\ProductsPage.xaml";
@@ -1453,6 +1456,26 @@ namespace Seiya
         internal bool CanExecute_ChangePageCommand(object parameter)
         {
             return SystemUnlock || parameter.ToString() == "end_transaction";
+        }
+        #endregion
+
+        #region LoginPageCommand
+
+        public ICommand LoginPageCommand { get { return _loginPageCommand ?? (_loginPageCommand = new DelegateCommand(Execute_LoginPageCommand, CanExecute_LoginPageCommand)); } }
+        private ICommand _loginPageCommand;
+
+        internal void Execute_LoginPageCommand(object parameter)
+        {
+            ClearSearchLists();
+            if ((string) parameter != "login") return;
+            CurrentUser = null;
+            SystemUnlock = false;
+            CurrentPage = "\\View\\LoginPage.xaml";
+        }
+
+        internal bool CanExecute_LoginPageCommand(object parameter)
+        {
+            return true;
         }
         #endregion
 
@@ -3562,6 +3585,16 @@ namespace Seiya
         #endregion
 
         #region CheckOutProcessMethods
+        /// <summary>
+        /// Method to initialize payment page and make payment
+        /// </summary>
+        /// <returns></returns>
+        private bool ProcessInventoryRemoval(TransactionType transactionType)
+        {
+            RecordInventoryRemovalTransaction(PaymentTypeEnum.Desconocido, transactionType, out var currentTransaction);
+            CurrentCartProducts.Clear();
+            return true;
+        }
 
         /// <summary>
         /// Method to initialize payment page and make payment
@@ -3574,6 +3607,62 @@ namespace Seiya
             PrintReceipt(currentTransaction, true);
             //Update POS file ticket info
             //Clean Current Cart
+            
+            return true;
+        }
+
+        /// <summary>
+        /// Method to record transaction
+        /// </summary>
+        /// <returns></returns>
+        private bool RecordInventoryRemovalTransaction(PaymentTypeEnum paymentMethod, TransactionType transactionType, out Transaction transaction)
+        {
+            //Create new instance
+            transaction = new Transaction(Constants.DataFolderPath + Constants.TransactionsFileName,
+                Constants.DataFolderPath + Constants.TransactionsMasterFileName, Constants.DataFolderPath +
+                Constants.TransactionsHistoryFileName, true);
+
+            //General transaction information
+            var transactionNumber = _posInstance.GetNextTransactionNumber();
+            var internalNumber = _posInstance.GetNextInternalNumber();
+            var user = CurrentUser.Name;
+            var fiscalReceipt = "No";
+            var saleType = transactionType;
+            var paymentType = paymentMethod;
+            //TODO: if order is created, add the number of the order here
+            int orderNumber = 0;
+            var transactionDate = DateTime.Now;
+            decimal totalDue = 0M;
+            string customer = "General";
+
+            //Set receipt number to 0 for internal item inventory removal
+            var receiptNumber = 0;
+
+            //Record each item in the transactions db
+            foreach (var product in CurrentCartProducts)
+            {
+                transaction.TransactionNumber = transactionNumber;
+                transaction.InternalNumber = internalNumber;
+                transaction.ReceiptNumber = receiptNumber;
+                transaction.Product = product;
+                transaction.TransactionDate = transactionDate;
+                transaction.CustomerName = customer;
+                transaction.UserName = user;
+                transaction.FiscalReceiptRequired = fiscalReceipt;
+                transaction.SaleType = saleType;
+                transaction.PaymentType = paymentType;
+                transaction.OrderNumber = orderNumber;
+
+                //Record Transaction
+                transaction.Record(saleType);
+
+                //update inventory for each product, if applicable
+                UpdateInventory(product, transactionDate, saleType);
+            }
+
+            //Save inventory
+            _inventoryInstance.SaveDataTableToCsv();
+
             return true;
         }
 
@@ -3723,31 +3812,6 @@ namespace Seiya
 
                 _inventoryInstance.UpdateProductToTable(invProduct);
 
-                ////
-                //if (product.LocalQuantityAvailable > 0)
-                //    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
-                //        (product.LocalQuantityAvailable - product.LastQuantitySold) > 0
-                //        ? (product.LocalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
-
-                //if (product.TotalQuantityAvailable > 0)
-                //    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
-                //        (product.TotalQuantityAvailable - product.LastQuantitySold) > 0
-                //        ? (product.TotalQuantityAvailable - product.LastQuantitySold).ToString() : "0");
-
-                //_inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
-                //    transactionDate.ToString("d"));
-
-                //if (transactionType == TransactionType.Removal || transactionType == TransactionType.Remover)
-                //_inventoryInstance.UpdateItem(product.Code, "CantidadInternoHistorial",
-                //    (product.InternalQuantity + product.LastQuantitySold).ToString());
-
-                //    if (transactionType == TransactionType.Regular || transactionType == TransactionType.Interno || transactionType == TransactionType.Internal)
-                //    _inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
-                //        (product.QuantitySold + product.LastQuantitySold).ToString());
-
-                //if(transactionType != TransactionType.Removal && transactionType != TransactionType.Remover)
-                //    _inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                //        (product.AmountSold + product.LastAmountSold).ToString()); //removed  product.LastQuantitySold * 
             }
             else
             {
@@ -3767,23 +3831,6 @@ namespace Seiya
                 invProduct.AmountSold = invProduct.AmountSold + product.LastAmountSold;
 
                 _inventoryInstance.UpdateProductToTable(invProduct);
-
-                //if (product.LocalQuantityAvailable > 0)
-                //    _inventoryInstance.UpdateItem(product.Code, "CantidadLocal",
-                //        (product.LocalQuantityAvailable + product.LastQuantitySold).ToString());
-
-                //if (product.TotalQuantityAvailable > 0)
-                //    _inventoryInstance.UpdateItem(product.Code, "CantidadDisponibleTotal",
-                //        (product.TotalQuantityAvailable + product.LastQuantitySold).ToString());
-
-                //_inventoryInstance.UpdateItem(product.Code, "UltimaTransaccionFecha",
-                //    transactionDate.ToString("d"));
-
-                //_inventoryInstance.UpdateItem(product.Code, "CantidadVendidoHistorial",
-                //    (product.QuantitySold - product.LastQuantitySold).ToString());
-
-                //_inventoryInstance.UpdateItem(product.Code, "VendidoHistorial",
-                //    (product.AmountSold - product.LastAmountSold).ToString()); // removed product.LastQuantitySold * 
             }
 
             return true;
@@ -4066,6 +4113,12 @@ namespace Seiya
 
             ReturnTransaction = false;
             CurrentCustomer = null;
+        }
+
+        public void InventoryRemovalProcessStart(TransactionType transactionType)
+        {
+            ProcessInventoryRemoval(transactionType);
+            CurrentCartProducts.Clear();
         }
 
         #endregion

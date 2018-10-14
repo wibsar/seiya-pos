@@ -41,7 +41,7 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type Calendar}">
                         <Viewbox Height="500" Width="500">
-                            <CalendarItem x:Name="ModifiedCalendarItem" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ></CalendarItem>
+                            <CalendarItem x:Name="PART_CalendarItem" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" ></CalendarItem>
                         </Viewbox>
                     </ControlTemplate>
                 </Setter.Value>
