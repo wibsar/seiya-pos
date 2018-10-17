@@ -75,9 +75,9 @@
 
                 <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center">Detalles</TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Numero de Recibo:"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Codigo:"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="Descripcion:"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="4" Text="Categoria:"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="2" Text="Código:"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="3" Text="Descripción:"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="4" Text="Categoría:"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="5" Text="Precio:"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="6" Text="Unidades:"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="7" Text="Total:"></TextBlock>
@@ -85,7 +85,7 @@
                 <TextBlock Grid.Column="0" Grid.Row="9" Text="Cliente:"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="10" Text="Usuario:"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="11" Text="Tipo Venta:"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="12" Text="Metodo de Pago:"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="12" Text="Método de Pago:"></TextBlock>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ReceiptNumber}" KeyUp="KeyUpNoSymbolsEvent"></TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductCode}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBlock>

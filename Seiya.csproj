@@ -117,6 +117,9 @@
     <Compile Include="ViewModel\ProductsPageViewModel.cs" />
     <Compile Include="ViewModel\ReturnsViewModel.cs" />
     <Compile Include="ViewModel\SystemViewModel.cs" />
+    <Compile Include="View\AnalysisMainPage.xaml.cs">
+      <DependentUpon>AnalysisMainPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RemoveInventoryPage.xaml.cs">
       <DependentUpon>RemoveInventoryPage.xaml</DependentUpon>
     </Compile>
@@ -218,6 +221,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="View\AnalysisMainPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="View\RemoveInventoryPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -455,6 +462,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\icon retail.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\Transacciones.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -76,7 +76,7 @@
                 <TextBlock Grid.Row="0" FontSize="18" Foreground="Gray" Grid.ColumnSpan="2" Text="Registro de Proveedor" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Row="1" Text="Nombre"></TextBlock>
                 <TextBlock Grid.Row="2" Text="Correo Electrónico"></TextBlock>
-                <TextBlock Grid.Row="3" Text="Telefono"></TextBlock>
+                <TextBlock Grid.Row="3" Text="Teléfono"></TextBlock>
                 <TextBlock Grid.Row="4" Text="RFC"></TextBlock>
                 <TextBlock Grid.Row="5" Text="Razón Social"></TextBlock>
                 <TextBlock Grid.Row="6" Text="Banco"></TextBlock>

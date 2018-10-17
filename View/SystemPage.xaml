@@ -39,100 +39,174 @@
     </Page.Resources>
 
     <Grid ShowGridLines="false" Background="White">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".5*"></RowDefinition>
+            <RowDefinition Height=".5*"></RowDefinition>           
             <RowDefinition Height="8*"></RowDefinition>
             <RowDefinition Height="1.5*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- header -->
         <TextBlock Grid.Row="0" Text="SISTEMA" FontSize="24"></TextBlock>
-        <Grid Grid.Row="1" Background="White" Margin="5">
+        <Grid Grid.Row="1">
+            <TabControl>
+                <!--TAB Configuracion de Ticket-->
+                <TabItem  Header="Configuración del Ticket" Height="30" Background="#FFF3F3F3" Foreground="#2C5066">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
 
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"/>
+                            </Grid.ColumnDefinitions>
 
-            <Grid Grid.Column="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1.5*"></ColumnDefinition>
-                    <ColumnDefinition Width="3*"/>
-                </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="4"></RowDefinition>                                
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="*"></RowDefinition>
+                            </Grid.RowDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>                    
-                </Grid.RowDefinitions>
+                            <!-- List of items -->
+                            <TextBlock Grid.Row="0" Grid.Column="0" Text="Nombre de la impresora" FontSize="18"></TextBlock>
+                            <TextBlock Grid.Row="1" Grid.Column="0" Background="LightGray" Height="2" VerticalAlignment="Top"></TextBlock>
+                            <TextBlock Grid.Row="2" Grid.Column="0" Text="RFC"></TextBlock>
+                            <TextBlock Grid.Row="3" Grid.Column="0" Text="Razón Social"></TextBlock>
+                            <TextBlock Grid.Row="4" Grid.Column="0" Text="Calle y Numero"></TextBlock>
+                            <TextBlock Grid.Row="5" Grid.Column="0" Text="Ciudad y Codigo Postal"></TextBlock>
+                            <TextBlock Grid.Row="6" Grid.Column="0" Text="Teléfono"></TextBlock>
+                            <TextBlock Grid.Row="7" Grid.Column="0" Text="Correo Electrónico"></TextBlock>
+                            <TextBlock Grid.Row="8" Grid.Column="0" Text="Facebook"></TextBlock>
+                            <TextBlock Grid.Row="9" Grid.Column="0" Text="Instagram"></TextBlock>
+                            <TextBlock Grid.Row="10" Grid.Column="0" Text="Página de Internet"></TextBlock>
+                            <TextBlock Grid.Row="11" Grid.Column="0" Text="Mensaje Pie de Ticket"></TextBlock>
 
-                <!-- List of items -->
-                <TextBlock Grid.Row="0" Grid.Column="0" Text="Nombre de la impresora" FontSize="18"></TextBlock>
-                <TextBlock Grid.Row="1" Grid.Column="0" Text="Configuracion de Ticket" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
-                <TextBlock Grid.Row="2" Grid.Column="0" Text="RFC"></TextBlock>
-                <TextBlock Grid.Row="3" Grid.Column="0" Text="Razón Social"></TextBlock>
-                <TextBlock Grid.Row="4" Grid.Column="0" Text="Calle y Numero"></TextBlock>
-                <TextBlock Grid.Row="5" Grid.Column="0" Text="Ciudad y Codigo Postal"></TextBlock>
-                <TextBlock Grid.Row="6" Grid.Column="0" Text="Teléfono"></TextBlock>
-                <TextBlock Grid.Row="7" Grid.Column="0" Text="Correo Electrónico"></TextBlock>
-                <TextBlock Grid.Row="8" Grid.Column="0" Text="Facebook"></TextBlock>
-                <TextBlock Grid.Row="9" Grid.Column="0" Text="Instagram"></TextBlock>
-                <TextBlock Grid.Row="10" Grid.Column="0" Text="Pagina de Internet"></TextBlock>
-                <TextBlock Grid.Row="11" Grid.Column="0" Text="Mensaje Pie de Ticket"></TextBlock>
-
-                <!-- Users input -->
-                <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Printers, Mode=TwoWay}" SelectedItem="{Binding PrinterName, Mode=TwoWay}" Margin="5"></ComboBox>
-                <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding FiscalNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding FiscalName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Facebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Instagram, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding FooterMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
-            </Grid>
-            
+                            <!-- Users input -->
+                            <ComboBox Grid.Row="0" Grid.Column="1" ItemsSource="{Binding Printers, Mode=TwoWay}" SelectedItem="{Binding PrinterName, Mode=TwoWay}" Margin="0,0,5,0" MinHeight="30" VerticalContentAlignment="Center"></ComboBox>
+                            <TextBlock Grid.Row="1" Grid.Column="1" Background="LightGray" Height="2" VerticalAlignment="Top"></TextBlock>
+                            <TextBox Grid.Row="2" Grid.Column="1" Text="{Binding FiscalNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="0,5,5,0"></TextBox>
+                            <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding FiscalName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="0,5,5,0"></TextBox>
+                            <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding Address, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="0,5,5,0"></TextBox>
+                            <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding City, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="0,5,5,0"></TextBox>
+                            <TextBox Grid.Row="6" Grid.Column="1" Text="{Binding PhoneNumber, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="0,5,5,0"></TextBox>
+                            <TextBox Grid.Row="7" Grid.Column="1" Text="{Binding Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="0,5,5,0"></TextBox>
+                            <TextBox Grid.Row="8" Grid.Column="1" Text="{Binding Facebook, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="0,5,5,0"></TextBox>
+                            <TextBox Grid.Row="9" Grid.Column="1" Text="{Binding Instagram, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="0,5,5,0"></TextBox>
+                            <TextBox Grid.Row="10" Grid.Column="1" Text="{Binding Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="0,5,5,0"></TextBox>
+                            <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding FooterMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="0,5,5,0"></TextBox>                           
+                        </Grid>
+                    </Grid>
+                    <!--TAB Avanzado-->
+                </TabItem>
+                <TabItem Header="Avanzado" Height="30" Background="#FFF3F3F3" Foreground="#2C5066">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height=".2*"></RowDefinition>
+                            <RowDefinition Height="2*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <!--Cargar Logo-->
+                        <Grid Grid.Row="0">
+                            <Button  Command="{Binding SystemSaveLogoCommand}" CommandParameter="add"  Background="{x:Null}" BorderBrush="{x:Null}" Margin="0,20,0,0">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                        <ColumnDefinition Width="*"></ColumnDefinition>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid Grid.Column="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="50"></ColumnDefinition>
+                                            <ColumnDefinition Width="*"></ColumnDefinition>
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="1" Source="C:\Projects\seiya-pos\Resources\Images\AddPhoto.png" Margin="10" MinWidth="300" HorizontalAlignment="Left"></Image>
+                                    </Grid>
+                                    
+                                    <TextBlock Grid.Column="0" Text="Agregar Logotipo:" MinWidth="350" TextAlignment="Right"></TextBlock>
+                                </Grid>
+                            </Button>                            
+                        </Grid>
+                        <!--Correo Para Pedidos-->
+                        <Grid Grid.Row="2" Background="#FFF0F0F0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"></RowDefinition>
+                                <RowDefinition Height="2*"></RowDefinition>                               
+                            </Grid.RowDefinitions>
+                            <TextBlock Grid.Row="0" Text="Registro de Correo Electrónico" HorizontalAlignment="Center"></TextBlock>
+                            <Grid Grid.Row="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                    <RowDefinition Height="*"></RowDefinition>
+                                </Grid.RowDefinitions>
+                                <TextBlock Text="Correo:" HorizontalAlignment="Right" ></TextBlock>
+                                <TextBlock Grid.Row="1" Text="Contraseña:" HorizontalAlignment="Right" ></TextBlock>
+                                <TextBox Grid.Column="1" MinWidth="320" Height="30" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBox>
+                                <PasswordBox Grid.Row="1" Grid.Column="1" MinWidth="320" Height="30" HorizontalAlignment="Left" Margin="50,0,0,0"></PasswordBox>
+                            </Grid>
+                        </Grid>
+                        <!--Valor de Descuento-->
+                        <Grid Grid.Row="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>                                                              
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Valor de Botón de Descuento:" HorizontalAlignment="Right"></TextBlock>
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="1" Width="50" Height="30" HorizontalAlignment="Left" HorizontalContentAlignment="Center"></TextBox>
+                                <TextBlock Grid.Column="2" Text="%" Margin="5,0,0,0"></TextBlock>
+                            </Grid>
+                        </Grid>
+                        <!--Valor de Puntos-->
+                        <Grid Grid.Row="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Column="0" Text="Valor de Bonificación de Puntos" HorizontalAlignment="Right"></TextBlock>
+                            <Grid Grid.Column="1">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="50"></ColumnDefinition>
+                                    <ColumnDefinition Width="*"></ColumnDefinition>
+                                </Grid.ColumnDefinitions>
+                                <TextBox Grid.Column="1" Width="50" Height="30" HorizontalAlignment="Left" HorizontalContentAlignment="Center"></TextBox>
+                                <TextBlock Grid.Column="2" Text="%" Margin="5,0,0,0"></TextBlock>
+                            </Grid>                            
+                        </Grid>                        
+                        
+                    </Grid>
+                </TabItem>
+            </TabControl>
         </Grid>
-
+        
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <!-- System version -->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <TextBlock Grid.Column="0" Foreground="LightGray" FontSize="18" HorizontalAlignment="Right" Text="Wibsar Retail V."></TextBlock>
-                <TextBlock Grid.Column="1" Foreground="LightGray" FontSize="18" HorizontalAlignment="Left" Margin="5,0,0,0" Text="{Binding Version}"></TextBlock>
-                </Grid>
-            <Button Grid.Column="1" Command="{Binding SystemSaveLogoCommand}" CommandParameter="add" Background="{x:Null}" BorderBrush="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\AddPhoto.png"></Image>
-                    <TextBlock Grid.Row="1" FontSize="16" Text="Cargar Logo" ></TextBlock>
-                </Grid>
-            </Button>
-            <!-- Save Button -->
+            <TextBlock Grid.Column="0" Foreground="LightGray" FontSize="18" HorizontalAlignment="Right" Text="Wibsar Retail V."></TextBlock>
+            <TextBlock Grid.Column="1" Foreground="LightGray" FontSize="18" HorizontalAlignment="Left" Margin="5,0,0,0" Text="{Binding Version}"></TextBlock>
             <Button Grid.Column="2" Command="{Binding SystemSaveChangesCommand}"  Background="{x:Null}" BorderBrush="{x:Null}">
                 <Grid>
                     <Grid.RowDefinitions>
@@ -143,6 +217,8 @@
                     <TextBlock Grid.Row="1" Text="Guardar" HorizontalAlignment="Center" FontSize="16"></TextBlock>
                 </Grid>
             </Button>
+
         </Grid>
+
     </Grid>
 </Page>
