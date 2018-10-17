@@ -30,6 +30,12 @@
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
+        <Style TargetType="{x:Type PasswordBox}">
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="FontSize" Value="18"/>
+            <Setter Property="Foreground" Value="#2C5066" />
+        </Style>
     </Page.Resources>
 
     <Grid ShowGridLines="false" Background="White">
@@ -86,8 +92,8 @@
                 <TextBox Grid.Row="3" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Phone, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
                 <ComboBox Grid.Row="4" Grid.Column="2" Margin="5" ItemsSource="{Binding UserAccessLevelTypes, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectedItem ="{Binding UserTemporalItem.Rights, Mode=TwoWay}" FontSize="20" VerticalContentAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
                 <TextBox Grid.Row="5" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.UserName, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" CharacterCasing="Lower"></TextBox>
-                <TextBox Grid.Row="6" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.Password, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
-                <TextBox Grid.Row="7" Grid.Column="2" Margin="5" Text="{Binding UserTemporalItem.PasswordVerification, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <PasswordBox Grid.Row="6" Grid.Column="2" x:Name="PasswordBox" Margin="5" PasswordChar="•" VerticalContentAlignment="Center" PasswordChanged="PasswordBox_OnPasswordChanged"></PasswordBox>
+                <PasswordBox Grid.Row="7" Grid.Column="2" x:Name="PasswordVerificationBox" Margin="5" PasswordChar="•" VerticalContentAlignment="Center" PasswordChanged="PasswordVerificationBox_OnPasswordChanged"></PasswordBox>
             </Grid>
         </Grid>
 
@@ -129,7 +135,6 @@
                     <TextBlock Grid.Row="1" Text="Guardar"></TextBlock>
                 </Grid>
             </Button>
-
         </Grid>
     </Grid>
 </Page>

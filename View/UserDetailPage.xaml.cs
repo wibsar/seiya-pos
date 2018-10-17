@@ -48,5 +48,49 @@ namespace Seiya
                 MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
             }
         }
+
+        private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var password = PasswordBox.Password;
+            Formatter.RemoveInvalidCharacters(password, out var status);
+            if (status)
+            {
+                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
+                ((PasswordBox) sender).Password = "";
+                return;
+            }
+
+            Formatter.RemoveWhiteSpace(password, out var spaceStatus);
+            if (spaceStatus)
+            {
+                MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
+                ((PasswordBox)sender).Password = "";
+                return;
+            }
+
+            MainWindowViewModel.GetInstance().UserTemporalItem.Password = password;
+        }
+
+        private void PasswordVerificationBox_OnPasswordChanged(object sender, RoutedEventArgs e)
+        {
+            var password = PasswordVerificationBox.Password;
+            Formatter.RemoveInvalidCharacters(password, out var status);
+            if (status)
+            {
+                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
+                ((PasswordBox)sender).Password = "";
+                return;
+            }
+
+            Formatter.RemoveWhiteSpace(password, out var spaceStatus);
+            if (spaceStatus)
+            {
+                MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
+                ((PasswordBox)sender).Password = "";
+                return;
+            }
+
+            MainWindowViewModel.GetInstance().UserTemporalItem.PasswordVerification = password;
+        }
     }
 }

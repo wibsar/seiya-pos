@@ -2023,7 +2023,7 @@ namespace Seiya
         internal void Execute_AddListItemCommand(object parameter)
         {
             var productFound = _inventoryInstance.GetProduct(((TextBox) parameter).Text);
-            if (productFound.Code != null && CurrentPageListProducts.Count <= Constants.MaxNumberListItems)
+            if (productFound.Code != null && (CurrentPageListProducts.Count < Constants.MaxNumberListItems))
             {
                 CurrentPageListProducts.Add(productFound);
                 GroupSquaresAvailable = Constants.MaxNumberListItems - CurrentPageListProducts.Count;
@@ -2506,7 +2506,8 @@ namespace Seiya
 
         internal bool CanExecute_UserSaveChangesCommand(object parameter)
         {
-            return UserTemporalItem.Password == UserTemporalItem.PasswordVerification && UserTemporalItem.Password != "";
+            return UserTemporalItem.Password == UserTemporalItem.PasswordVerification &&
+                   UserTemporalItem.Password != "" && UserTemporalItem.Name != "" && UserTemporalItem.UserName != "";
         }
         #endregion
 
