@@ -137,9 +137,10 @@ namespace Seiya
                 _image = value;
             }
         }
+        
         #endregion
 
-        #region Constructors
+            #region Constructors
 
         public Order(string dbPath) : base(dbPath)
         {

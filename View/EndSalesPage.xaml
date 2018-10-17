@@ -17,7 +17,7 @@
         </Style>
         <Style TargetType="Button">
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>            
+            <Setter Property="FontSize" Value="14"></Setter>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
@@ -46,7 +46,7 @@
 
         <!-- header -->
         <TextBlock Grid.Column="0" Text="CORTE DE CAJA" FontSize="24" VerticalAlignment="Center"></TextBlock>
-      
+
 
         <!-- Users input for quantities -->
         <Grid Grid.Row="1" Grid.Column="0" Margin="5,5,0,0">
@@ -111,7 +111,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF590C0C" Foreground="White" Text="(USD)   DOLAR" FontSize="18"/>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF2A5128" Foreground="White" Text="(USD)   DOLAR" FontSize="18"/>
                 <TextBlock Grid.Row="1"  TextAlignment="Right" Text="$ 100  X   "></TextBlock>
                 <TextBlock Grid.Row="2"  TextAlignment="Right" Background="#FFECECEC" Text="$ 50  X   "></TextBlock>
                 <TextBlock Grid.Row="3"  TextAlignment="Right" Text="$ 20  X   "></TextBlock>
@@ -131,7 +131,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF590C0C" Foreground="White" Text="CANTIDAD"/>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF28512A" Foreground="White" Text="CANTIDAD"/>
                 <TextBox Grid.Row="1" Text="{Binding UsdDollar100, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBox Grid.Row="2" Text="{Binding UsdDollar50, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC"></TextBox>
                 <TextBox Grid.Row="3" Text="{Binding UsdDollar20, UpdateSourceTrigger=PropertyChanged}"></TextBox>
@@ -181,7 +181,7 @@
                 <TextBlock Grid.Row="10" Text="Balance de Efectivo" ></TextBlock>
                 <TextBlock Grid.Row="11" Text="Diferencia"/>
                 <TextBlock Grid.Row="12" Text="Puntos Usados:" ></TextBlock>
-                <TextBlock Grid.Row="13" Text="Caja Chica Nueva" ></TextBlock>
+                <TextBlock Grid.Row="13" Text="Caja Chica Nueva" FontWeight="Bold" ></TextBlock>
 
             </Grid>
 
@@ -202,7 +202,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height=".2*"></RowDefinition>
-                    
+
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Text="{Binding CashTotalSales}"></TextBlock>
                 <TextBlock Grid.Row="1" Text="{Binding CardTotalSales}"></TextBlock>
@@ -217,7 +217,7 @@
                 <TextBlock Grid.Row="10" Text="{Binding MxnCashBalance}"></TextBlock>
                 <TextBlock Grid.Row="11" Text="{Binding Delta}"></TextBlock>
                 <TextBlock Grid.Row="12" Text="{Binding PointsTotalUsed}"></TextBlock>
-                <TextBox Grid.Row="13" Text="{Binding RegisterNewCash, UpdateSourceTrigger=PropertyChanged}"></TextBox>
+                <TextBox Grid.Row="13" Text="{Binding RegisterNewCash, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"></TextBox>
 
             </Grid>
         </Grid>
@@ -228,7 +228,7 @@
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="2*"></RowDefinition>
             </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" TextAlignment="Center" Background="#FF0E801E" Foreground="White" Text="COMENTARIOS"></TextBlock>
+            <TextBlock Grid.Row="0" TextAlignment="Center" Text="COMENTARIOS" Foreground="White" Background="#FF515151"/>
             <TextBox Grid.Row="1" Text="{Binding Comments, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" TextWrapping="Wrap"></TextBox>
         </Grid>
 
@@ -240,12 +240,12 @@
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0"  Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="x" BorderBrush="{x:Null}" Background="{x:Null}">
                 <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="/Seiya;component/Resources/Images/Cortex.png"></Image>
-                <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" HorizontalAlignment="Center" Text="Corte X"></TextBlock>
+                    <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" HorizontalAlignment="Center" Text="Corte X"></TextBlock>
                 </Grid>
             </Button>
             <Button Grid.Column="1" BorderBrush="{x:Null}" Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="z" Background="{x:Null}">
@@ -258,8 +258,8 @@
                     <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="16" Text="Corte Z"></TextBlock>
                 </Grid>
             </Button>
-                
-           
+
+
         </Grid>
     </Grid>
 </Page>

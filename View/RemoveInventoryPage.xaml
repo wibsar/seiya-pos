@@ -55,37 +55,7 @@
         <!--Separador-->
         <TextBlock Grid.Row="2" Background="#FFECECEC" Height="2" VerticalAlignment="Top"></TextBlock>
         <!--Quantity paid shortcuts-->
-        <Grid Grid.Row="3" ShowGridLines="False">
-            <!--Main Grid definition-->
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"></RowDefinition>
-                <RowDefinition Height="0"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <!-- Paid Amount and process payment in MXN-->
-            <Grid Grid.Row="0">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                </Grid.RowDefinitions>
-              </Grid>
-            <!-- Paid Amount and process payment in USD-->
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                </Grid.RowDefinitions>
-           </Grid>
-        </Grid>
-        <Button Grid.Row="4" x:Name="ConfirmInventoryRemovalBtn" FontSize="24" FontWeight="Bold" Foreground="White" Background="OrangeRed" Content="CONFIRMAR REMOVER DE INVENTARIO" Command="{Binding ChangePageCommand}" CommandParameter="end_remove_inventory" BorderBrush="{x:Null}"></Button>
+        <TextBlock Grid.Row="3" Text="El producto será eliminado del inventario." FontSize="30" HorizontalAlignment="Center"></TextBlock>
+        <Button Grid.Row="4" x:Name="ConfirmInventoryRemovalBtn" FontSize="24" FontWeight="Bold" Foreground="White" Background="OrangeRed" Content="CONFIRMAR" Command="{Binding ChangePageCommand}" CommandParameter="end_remove_inventory" BorderBrush="{x:Null}"></Button>
     </Grid>
 </Page>

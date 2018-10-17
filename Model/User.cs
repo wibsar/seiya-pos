@@ -303,6 +303,11 @@ namespace Seiya
 
             return true;
         }
+
+        public static implicit operator User(string v)
+        {
+            throw new NotImplementedException();
+        }
         #endregion
     }
 }

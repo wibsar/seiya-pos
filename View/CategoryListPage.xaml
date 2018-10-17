@@ -128,7 +128,7 @@
                     <RowDefinition Height=".74*"></RowDefinition>
                     <RowDefinition Height="3*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="1" FontSize="24" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Agregar Categoria"></TextBlock>
+                <TextBlock Grid.Row="1" FontSize="24" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Agregar Categoría"></TextBlock>
                 <!-- New Category Text -->
                 <Grid Grid.Row="2">
                     <Grid.ColumnDefinitions>

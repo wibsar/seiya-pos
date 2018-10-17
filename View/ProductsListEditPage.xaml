@@ -219,10 +219,10 @@
                         <RowDefinition Height="*"></RowDefinition>
 
                     </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" Text="Cuadros libres" Foreground="#2C5066"></TextBlock>
+                    <TextBlock Grid.Row="0" Text="Espacios libres" Foreground="#2C5066"></TextBlock>
                     <TextBlock Grid.Row="1" Text="Código" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="2" Text="Descripción" VerticalAlignment="Center"></TextBlock>
-                    <TextBlock Grid.Row="3" Text="Categoria" VerticalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Row="3" Text="Categoría" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="4" Text="Precio" VerticalAlignment="Center"></TextBlock>
                     <TextBlock Grid.Row="5" Text="Moneda" VerticalAlignment="Center"></TextBlock>
                 </Grid>
@@ -251,7 +251,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nombre del Grupo"></TextBlock>
-                    <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Agregar Codigo"></TextBlock>
+                    <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Agregar Código"></TextBlock>
         </Grid>
 
                 <Grid Grid.Column="1" Grid.Row="0">

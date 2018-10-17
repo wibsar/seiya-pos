@@ -51,7 +51,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Manual.png" HorizontalAlignment="Center" Margin="0,0,0,15"></Image>
-                    <TextBlock Grid.Row="1" Text="Guia de Usuario" FontSize="20"  HorizontalAlignment="Center"></TextBlock>
+                    <TextBlock Grid.Row="1" Text="Guía de Usuario" FontSize="20"  HorizontalAlignment="Center"></TextBlock>
                 </Grid>
             </Button>
 
