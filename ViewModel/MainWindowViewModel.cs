@@ -3763,7 +3763,7 @@ namespace Seiya
 
             if (CurrentCustomer != null)
             {
-                PaymentPointsReceived = Math.Round(Convert.ToDouble(transaction.TotalDue / PointsConvertionRatio), 2);
+                PaymentPointsReceived = Math.Round(Convert.ToDouble(transaction.TotalDue * PointsConvertionRatio), 2);
 
                 if (transactionType != TransactionType.DevolucionEfectivo && transactionType != TransactionType.DevolucionTarjeta && transactionType != TransactionType.Remover)
                 {

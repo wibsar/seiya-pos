@@ -150,21 +150,19 @@
                                     <RowDefinition Height="*"></RowDefinition>
                                 </Grid.RowDefinitions>
                                 <TextBlock Text="Correo:" HorizontalAlignment="Right" ></TextBlock>
-                                <TextBlock Grid.Row="1" Text="Contraseña:" HorizontalAlignment="Right" ></TextBlock>
-                                <TextBox Grid.Column="1" MinWidth="320" Height="30" HorizontalAlignment="Left" Margin="50,0,0,5"></TextBox>
-                                <PasswordBox Grid.Row="1" Grid.Column="1" MinWidth="320" Height="30" HorizontalAlignment="Left" Margin="50,0,0,5"></PasswordBox>
+                                <TextBlock Grid.Column="0" Grid.Row="1" Text="Contraseña:" HorizontalAlignment="Right" ></TextBlock>
+                                <TextBox Grid.Column="1" Grid.Row="0" MinWidth="320" Height="30" Text="{Binding EmailSender, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="50,0,0,5"></TextBox>
+                                <TextBox Grid.Column="1" Grid.Row="1" MinWidth="320" Height="30" Text="{Binding EmailSenderPassword, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="50,0,0,5"></TextBox>
                             </Grid>
                         </Grid>
                         <!--Correo Pedidos-->
                         <Grid Grid.Row="2">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                    <ColumnDefinition Width="*"></ColumnDefinition>
-                                </Grid.ColumnDefinitions>
-
-                                <TextBlock Grid.Row="0" Text="Correo Entrante General" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"></TextBlock>
-                                <TextBox Grid.Column="1" MinWidth="320" Height="30" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBox>                                
-                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <TextBlock Grid.Row="0" Text="Correo Entrante General" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"></TextBlock>
+                            <TextBox Grid.Column="1" MinWidth="320" Height="30" Text="{Binding EmailReports, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBox>                                                          
                         </Grid>
                         <!--Correo General-->
                         <Grid Grid.Row="3" Background="#FFF0F0F0">
@@ -172,9 +170,8 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-
                             <TextBlock Grid.Row="0" Text="Correo Entrante Pedidos" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="5"></TextBlock>
-                            <TextBox Grid.Column="1" MinWidth="320" Height="30" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBox>
+                            <TextBox Grid.Column="1" MinWidth="320" Height="30" Text="{Binding EmailOrders, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="50,0,0,0"></TextBox>
                         </Grid>
                         <!--Valor de Descuento-->
                         <Grid Grid.Row="4">
@@ -189,7 +186,7 @@
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBox Grid.Column="1" Width="50" Height="30" HorizontalAlignment="Left" HorizontalContentAlignment="Center"></TextBox>
+                                <TextBox Grid.Column="1" Width="50" Height="30" Text="{Binding DiscountPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" HorizontalContentAlignment="Center"></TextBox>
                                 <TextBlock Grid.Column="2" Text="%" Margin="5,0,0,0"></TextBlock>
                             </Grid>
                         </Grid>
@@ -206,7 +203,7 @@
                                     <ColumnDefinition Width="50"></ColumnDefinition>
                                     <ColumnDefinition Width="*"></ColumnDefinition>
                                 </Grid.ColumnDefinitions>
-                                <TextBox Grid.Column="1" Width="50" Height="30" HorizontalAlignment="Left" HorizontalContentAlignment="Center"></TextBox>
+                                <TextBox Grid.Column="1" Width="50" Height="30" Text="{Binding PointsPercent, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" HorizontalContentAlignment="Center"></TextBox>
                                 <TextBlock Grid.Column="2" Text="%" Margin="5,0,0,0"></TextBlock>
                             </Grid>                            
                         </Grid>                        

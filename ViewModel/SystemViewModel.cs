@@ -59,6 +59,12 @@ namespace Seiya
             Website = _posInstance.Website;
             FooterMessage = _posInstance.FooterMessage;
             Version = _posInstance.System;
+            EmailSender = _posInstance.EmailSender;
+            EmailSenderPassword = _posInstance.EmailSenderPassword;
+            EmailReports = _posInstance.EmailReports;
+            EmailOrders = _posInstance.EmailOrders;
+            DiscountPercent = _posInstance.DiscountPercent;
+            PointsPercent = _posInstance.PointsPercent;
 
             //Get list of printers installed
             Printers = new ObservableCollection<string>(Utilities.GetAvailablePrinters());
