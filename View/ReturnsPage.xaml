@@ -81,9 +81,8 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height="2*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Row="0" Grid.Column="0" FontSize="18" Text="Registro de Devolución" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
@@ -93,11 +92,11 @@
                 <TextBlock Grid.Row="4" Grid.Column="0" Text="Numero Cliente"></TextBlock>
                 <TextBlock Grid.Row="5" Grid.Column="0" Text="Motivo"></TextBlock>
 
-                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TicketNumber, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="5"></TextBox>
-                <DatePicker Grid.Row="2" Grid.Column="1" Text="{Binding PurchaseDate}" Margin="5" CalendarStyle="{StaticResource StyleCalendar}"></DatePicker>
-                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CustomerNumber, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="5" Grid.Column="1" Text="{Binding ReturnReason, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
+                <TextBox Grid.Row="1" Grid.Column="1" Text="{Binding TicketNumber, UpdateSourceTrigger=PropertyChanged}" Height="40" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="5"></TextBox>
+                <DatePicker Grid.Row="2" Grid.Column="1" Text="{Binding PurchaseDate}" Margin="5,0,5,0" Height="40"  VerticalContentAlignment="Center" BorderBrush="#FFB2B2B2" CalendarStyle="{StaticResource StyleCalendar}"></DatePicker>
+                <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" Height="40" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
+                <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CustomerNumber, UpdateSourceTrigger=PropertyChanged}" Height="40" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
+                <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding ReturnReason, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" KeyUp="KeyUpNoSymbolsEvent" Margin="0,2,5,0"></TextBox>
             </Grid>
         </Grid>
 
@@ -109,13 +108,13 @@
             </Grid.ColumnDefinitions>
 
             <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"></ColumnDefinition>
+                    <ColumnDefinition Width="3*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
 
-                <TextBlock Grid.Row="0"  Margin="5,0,0,0" Foreground="Gray" Text="No. de Folio" VerticalAlignment="Bottom"></TextBlock>
-                <TextBlock Grid.Row="1" Margin="5,0,0,0" FontSize="28" Foreground="Red" Text="{Binding ReturnID, Mode=TwoWay}"></TextBlock>
+                <TextBlock Grid.Column="0"  Margin="5,0,0,0" Foreground="Gray" Text="No. de Folio:" VerticalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Column="1" Margin="5,0,0,0" FontSize="20" Foreground="Red" HorizontalAlignment="Left" Text="{Binding ReturnID, Mode=TwoWay}"></TextBlock>
             </Grid>
 
             <Button Grid.Column="2" Command="{Binding ReturnSaveChangesCommand}"  Background="{x:Null}" BorderBrush="{x:Null}">

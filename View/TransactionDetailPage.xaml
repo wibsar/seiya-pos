@@ -12,11 +12,11 @@
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
-            <Setter Property="Background" Value="White"></Setter>                       
+            <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>            
+            <Setter Property="FontSize" Value="14"></Setter>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
@@ -43,7 +43,7 @@
 
         <!-- header -->
         <TextBlock Grid.Row="0" Text="TRANSACCION" FontSize="24" HorizontalAlignment="Left"></TextBlock>
-        
+
 
         <Grid Grid.Row="1" Background="White" Margin="5">
 
@@ -58,22 +58,22 @@
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="36"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="37*"></RowDefinition>
+                    <RowDefinition Height="36*"></RowDefinition>
+                    <RowDefinition Height="37*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center">Detalles</TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" HorizontalAlignment="Center">Detalles</TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="1" Text="Numero de Recibo:"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="2" Text="Código:"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="3" Text="Descripción:"></TextBlock>
@@ -91,8 +91,8 @@
                 <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductCode}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBlock>
                 <TextBlock Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductDescription}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBlock>
                 <TextBlock Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductCategory}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBlock>
-                <TextBox Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductPrice}"></TextBox>
-                <TextBox Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductQuantitySold}"></TextBox>
+                <TextBox Grid.Row="5" Grid.Column="1" Margin="5,0,400,2" VerticalContentAlignment="Center" Text="{Binding TransactionTemporalItem.ProductPrice}"></TextBox>
+                <TextBox Grid.Row="6" Grid.Column="1" Margin="5,2,400,0" VerticalContentAlignment="Center" Text="{Binding TransactionTemporalItem.ProductQuantitySold}"></TextBox>
                 <TextBlock Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductTotalSale}"></TextBlock>
                 <TextBlock Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.TransactionDate}"></TextBlock>
                 <TextBlock Grid.Row="9" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.CustomerName}"></TextBlock>
