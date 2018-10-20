@@ -67,23 +67,22 @@
         <!-- Table of user items found based on the search -->
         <DataGrid x:Name="OrderData" Grid.Row="1" Margin="0,6,0,0" HeadersVisibility="Column" ItemsSource="{Binding OrdersSearchedEntries}" SelectedItem="{Binding SelectedOrder, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header="Id" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding OrderTicketNumber}" ClipboardContentBinding="{x:Null}" Header="No. Folio" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Customer}" ClipboardContentBinding="{x:Null}" Header="Cliente" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding DueDate}" ClipboardContentBinding="{x:Null}" Header="Fecha Entrega" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Title}" ClipboardContentBinding="{x:Null}" Header="Titulo" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Description}" ClipboardContentBinding="{x:Null}" Header="Descripcion" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding TotalAmount}" ClipboardContentBinding="{x:Null}" Header="Monto Total" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding CurrencyType}" ClipboardContentBinding="{x:Null}" Header="Moneda" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding TotalPrePaid}" ClipboardContentBinding="{x:Null}" Header="Anticipo" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TotalDue}" ClipboardContentBinding="{x:Null}" Header="Saldo" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding PrePaidTicketNumber}" ClipboardContentBinding="{x:Null}" Header="No. Ticket Anticipo" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding RegistrationDate}" ClipboardContentBinding="{x:Null}" Header="Fecha Pedido" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding TotalDue}" ClipboardContentBinding="{x:Null}" Header="Saldo" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding DueDate}" ClipboardContentBinding="{x:Null}" Header="Fecha Entrega" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 
         <!-- Inventory options -->
-        <Grid Grid.Row="3" ShowGridLines="False" Margin="0,3,0,0">
+        <Grid Grid.Row="2" ShowGridLines="False" Margin="0,3,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>

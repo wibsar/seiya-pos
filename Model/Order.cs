@@ -27,6 +27,7 @@ namespace Seiya
         private int _prePaidTicketNumber;
         private int _orderTicketNumber;
         private BitmapImage _image;
+        private CurrencyTypeEnum _currency;
 
         #endregion
 
@@ -137,10 +138,22 @@ namespace Seiya
                 _image = value;
             }
         }
-        
+
+        public CurrencyTypeEnum CurrencyType
+        {
+            get
+            {
+                return _currency;
+            }
+            set
+            {
+                _currency = value;
+            }
+        }
+
         #endregion
 
-            #region Constructors
+        #region Constructors
 
         public Order(string dbPath) : base(dbPath)
         {
@@ -151,7 +164,7 @@ namespace Seiya
         }
 
         public Order(string dbPath, int id, int orderTicketNumber, string customer, string title, DateTime dueDate, string category,
-            decimal totalAmount, decimal totalPrePaid, int prePaidTicketNumber, decimal totalDue, string description, 
+            decimal totalAmount, decimal totalPrePaid, int prePaidTicketNumber, decimal totalDue, CurrencyTypeEnum currencyType, string description, 
             string imageName) : base(dbPath)
         {
             //TODO: Check if path exists
@@ -163,6 +176,7 @@ namespace Seiya
             DueDate = dueDate;
             Category = category;
             TotalAmount = totalAmount;
+            CurrencyType = currencyType;
             TotalPrePaid = totalPrePaid;
             PrePaidTicketNumber = prePaidTicketNumber;
             TotalDue = totalDue;
@@ -176,13 +190,13 @@ namespace Seiya
 
         public static void RegisterOrder(string filePath, int id, int orderTickerNumber, string customer, string title,
             string description, string category, decimal totalAmount, decimal totalPrePaid, int prePaidTicketNumber,
-            decimal totalDue, string imageName, DateTime dueDate)
+            decimal totalDue, CurrencyTypeEnum currencyType, string imageName, DateTime dueDate)
         {
             //TODO: Check if username already exists
             //TODO: Implement feature
-            string data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}", id, orderTickerNumber.ToString(),
+            string data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}", id, orderTickerNumber.ToString(),
                      customer, title, description, category, totalAmount.ToString(), totalPrePaid.ToString(),
-                     prePaidTicketNumber.ToString(), DateTime.Now.ToString(), totalDue.ToString(), imageName, dueDate.ToString())
+                     prePaidTicketNumber.ToString(), DateTime.Now.ToString(), totalDue.ToString(), currencyType.ToString(), imageName, dueDate.ToString())
                      + Environment.NewLine;
 
             File.AppendAllText(filePath, data);
@@ -190,9 +204,9 @@ namespace Seiya
 
         public void Register()
         { 
-            string data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12}", Id, OrderTicketNumber,
+            string data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13}", Id, OrderTicketNumber,
                      Customer, Title, Description, Category, TotalAmount.ToString(), TotalPrePaid.ToString(),
-                     PrePaidTicketNumber.ToString(), DateTime.Now.ToString(), TotalDue.ToString(), ImageName, DueDate.ToString())
+                     PrePaidTicketNumber.ToString(), DateTime.Now.ToString(), TotalDue.ToString(), CurrencyType.ToString(), ImageName, DueDate.ToString())
                      + Environment.NewLine;
 
             File.AppendAllText(DbPath, data);
@@ -254,6 +268,11 @@ namespace Seiya
                         ImageName = row["Imagen"].ToString(),
                         DueDate = Convert.ToDateTime(row["FechaEntrega"].ToString())
                     };
+                    if (row["Moneda"].ToString().ToUpper() == "USD")
+                        order.CurrencyType = CurrencyTypeEnum.USD;
+                    else
+                        order.CurrencyType = CurrencyTypeEnum.MXN;
+
                     orders.Add(order);
                 }
                 return orders;
@@ -280,6 +299,10 @@ namespace Seiya
                     ImageName = row["Imagen"].ToString(),
                     DueDate = Convert.ToDateTime(row["FechaEntrega"].ToString())
                 };
+                if (row["Moneda"].ToString().ToUpper() == "USD")
+                    order.CurrencyType = CurrencyTypeEnum.USD;
+                else
+                    order.CurrencyType = CurrencyTypeEnum.MXN;
 
                 orders.Add(order);
             }
@@ -302,6 +325,11 @@ namespace Seiya
                     ImageName = row["Imagen"].ToString(),
                     DueDate = Convert.ToDateTime(row["FechaEntrega"].ToString())
                 };
+
+                if (row["Moneda"].ToString().ToUpper() == "USD")
+                    order.CurrencyType = CurrencyTypeEnum.USD;
+                else
+                    order.CurrencyType = CurrencyTypeEnum.MXN;
 
                 //Add if it does not exist already
                 if (!orders.Exists(x => x.OrderTicketNumber == order.OrderTicketNumber))
@@ -331,6 +359,7 @@ namespace Seiya
                     row["Descripcion"] = order.Description;
                     row["Categoria"] = order.Category;
                     row["MontoTotal"] = order.TotalAmount.ToString();
+                    row["Moneda"] = order.CurrencyType.ToString();
                     row["Anticipo"] = order.TotalPrePaid.ToString();
                     row["TicketAnticipo"] = order.PrePaidTicketNumber.ToString();
                     row["FechaOrden"] = order.RegistrationDate.ToString();
@@ -359,6 +388,7 @@ namespace Seiya
             row["Descripcion"] = order.Description;
             row["Categoria"] = order.Category;
             row["MontoTotal"] = order.TotalAmount.ToString();
+            row["Moneda"] = order.CurrencyType.ToString();
             row["Anticipo"] = order.TotalPrePaid.ToString();
             row["TicketAnticipo"] = order.PrePaidTicketNumber.ToString();
             row["FechaOrden"] = order.RegistrationDate.ToString();

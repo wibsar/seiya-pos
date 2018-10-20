@@ -149,7 +149,7 @@ namespace Seiya
             set
             {
                 _inventoryTemporalItem = value;
-                OnPropertyChanged("InventoryTemporalItem");
+                OnPropertyChanged();
             }
         }
 
@@ -211,7 +211,17 @@ namespace Seiya
                 _returnID = value;
             }
         }
-        
+
+        public decimal PointsConvertionRatio
+        {
+            get { return _posInstance.PointsPercent / 100; }
+        }
+
+        public decimal DiscountPercent
+        {
+            get { return _posInstance.DiscountPercent / 100; }
+        }
+
         #region Orders Properties
 
         #endregion
@@ -616,7 +626,7 @@ namespace Seiya
             set
             {
                 _paymentTypes = value;
-                OnPropertyChanged("PaymentTypes");
+                OnPropertyChanged();
             }
         }
 
@@ -627,7 +637,7 @@ namespace Seiya
             set
             {
                 _currencyTypes = value;
-                OnPropertyChanged("CurrencyTypes");
+                OnPropertyChanged();
             }
         }
 
@@ -638,7 +648,7 @@ namespace Seiya
             set
             {
                 _inventoryPriceCurrencyTypes = value;
-                OnPropertyChanged("InventoryPriceCurrencyTypes");
+                OnPropertyChanged();
             }
         }
 
@@ -649,7 +659,7 @@ namespace Seiya
             set
             {
                 _inventoryCostCurrencyTypes = value;
-                OnPropertyChanged("InventoryCostCurrencyTypes");
+                OnPropertyChanged();
             }
         }
 
@@ -660,7 +670,7 @@ namespace Seiya
             set
             {
                 _userAccessLevelTypes = value;
-                OnPropertyChanged("UserAccessLevelTypes");
+                OnPropertyChanged();
             }
         }
         #endregion
@@ -756,7 +766,7 @@ namespace Seiya
             set
             {
                 _productImage = value;
-                OnPropertyChanged("ProductImage");
+                OnPropertyChanged();
             }
         }
 
@@ -770,7 +780,7 @@ namespace Seiya
             set
             {
                 _inventorySearchText = value.ToLower();
-                OnPropertyChanged("InventorySearchText");
+                OnPropertyChanged();
             }
         }
 
@@ -786,7 +796,7 @@ namespace Seiya
             set
             {
                 _inventorySearchedProducts = value;
-                OnPropertyChanged("InventorySearchedProducts");
+                OnPropertyChanged();
             }
         }
 
@@ -797,7 +807,7 @@ namespace Seiya
             set
             {
                 _selectedInventoryProduct = value;
-                OnPropertyChanged("SelectedInventoryProduct");
+                OnPropertyChanged();
             }
         }
         #endregion
@@ -813,7 +823,7 @@ namespace Seiya
             set
             {
                 _vendorTemporalItem = value;
-                OnPropertyChanged("VendorTemporalItem");
+                OnPropertyChanged();
             }
         }
 
@@ -827,7 +837,7 @@ namespace Seiya
             set
             {
                 _vendorsSearchText = value.ToLower();
-                OnPropertyChanged("VendorsSearchText");
+                OnPropertyChanged();
             }
         }
 
@@ -843,7 +853,7 @@ namespace Seiya
             set
             {
                 _vendorsSearchedEntries = value;
-                OnPropertyChanged("VendorsSearchedEntries");
+                OnPropertyChanged();
             }
         }
 
@@ -854,7 +864,7 @@ namespace Seiya
             set
             {
                 _selectedVendor = value;
-                OnPropertyChanged("SelectedVendor");
+                OnPropertyChanged();
             }
         }
 
@@ -871,7 +881,7 @@ namespace Seiya
             set
             {
                 _userTemporalItem = value;
-                OnPropertyChanged("UserTemporalItem");
+                OnPropertyChanged();
             }
         }
 
@@ -885,7 +895,7 @@ namespace Seiya
             set
             {
                 _usersSearchText = Formatter.SanitizeInput(value.ToLower());
-                OnPropertyChanged("UsersSearchText");
+                OnPropertyChanged();
             }
         }
 
@@ -901,7 +911,7 @@ namespace Seiya
             set
             {
                 _usersSearchedEntries = value;
-                OnPropertyChanged("UsersSearchedEntries");
+                OnPropertyChanged();
             }
         }
 
@@ -912,7 +922,7 @@ namespace Seiya
             set
             {
                 _selectedUser = value;
-                OnPropertyChanged("SelectedUser");
+                OnPropertyChanged();
             }
         }
 
@@ -929,7 +939,7 @@ namespace Seiya
             set
             {
                 _customerTemporalItem = value;
-                OnPropertyChanged("CustomerTemporalItem");
+                OnPropertyChanged();
             }
         }
 
@@ -943,7 +953,7 @@ namespace Seiya
             set
             {
                 _customersSearchText = value.ToLower();
-                OnPropertyChanged("CustomersSearchText");
+                OnPropertyChanged();
             }
         }
 
@@ -959,7 +969,7 @@ namespace Seiya
             set
             {
                 _customersSearchedEntries = value;
-                OnPropertyChanged("CustomersSearchedEntries");
+                OnPropertyChanged();
             }
         }
 
@@ -970,7 +980,7 @@ namespace Seiya
             set
             {
                 _selectedCustomer = value;
-                OnPropertyChanged("SelectedCustomer");
+                OnPropertyChanged();
             }
         }
 
@@ -987,6 +997,7 @@ namespace Seiya
         #endregion
 
         #region Expenses Related Properties
+
         private Expense _expenseTemporalItem;
         public Expense ExpenseTemporalItem
         {
@@ -997,7 +1008,7 @@ namespace Seiya
             set
             {
                 _expenseTemporalItem = value;
-                OnPropertyChanged("ExpenseTemporalItem");
+                OnPropertyChanged();
             }
         }
 
@@ -1011,7 +1022,7 @@ namespace Seiya
             set
             {
                 _expensesSearchText = value.ToLower();
-                OnPropertyChanged("ExpensesSearchText");
+                OnPropertyChanged();
             }
         }
 
@@ -1027,7 +1038,7 @@ namespace Seiya
             set
             {
                 _expensesSearchedEntries = value;
-                OnPropertyChanged("ExpensesSearchedEntries");
+                OnPropertyChanged();
             }
         }
 
@@ -1038,7 +1049,7 @@ namespace Seiya
             set
             {
                 _selectedExpense = value;
-                OnPropertyChanged("SelectedExpense");
+                OnPropertyChanged();
             }
         }
 
@@ -1054,7 +1065,7 @@ namespace Seiya
             set
             {
                 _orderTemporalItem = value;
-                OnPropertyChanged("OrderTemporalItem");
+                OnPropertyChanged();
             }
         }
         
@@ -1068,7 +1079,7 @@ namespace Seiya
             set
             {
                 _ordersSearchText = value.ToLower();
-                OnPropertyChanged("OrdersSearchText");
+                OnPropertyChanged();
             }
         }
 
@@ -1084,7 +1095,7 @@ namespace Seiya
             set
             {
                 _ordersSearchedEntries = value;
-                OnPropertyChanged("OrdersSearchedEntries");
+                OnPropertyChanged();
             }
         }
 
@@ -1095,7 +1106,7 @@ namespace Seiya
             set
             {
                 _selectedOrder = value;
-                OnPropertyChanged("SelectedOrder");
+                OnPropertyChanged();
             }
         }
 
@@ -1110,7 +1121,7 @@ namespace Seiya
             set
             {
                 _orderImage = value;
-                OnPropertyChanged("OrderImage");
+                OnPropertyChanged();
             }
         }
 
@@ -1348,8 +1359,7 @@ namespace Seiya
                     CurrentPage = "\\View\\EndSalesPage.xaml";
                     break;
                 case "product_list":
-                    string currentProductListTitle;
-                    GetPageProductsList(LastSelectedProductsPage, out currentProductListTitle);
+                    GetPageProductsList(LastSelectedProductsPage, out var currentProductListTitle);
                     CurrentPage = "\\View\\ProductsListEditPage.xaml";
                     break;
                 case "inventory_add":
@@ -1644,11 +1654,10 @@ namespace Seiya
 
         internal void Execute_ApplyDiscountToProductListCommand(object parameter)
         {
-            var discountPercentage = 10M;
             var index = CurrentCartProducts.IndexOf((Product)parameter);
             var activeProduct = (Product)parameter;
             CurrentCartProducts.RemoveAt(index);
-            activeProduct.Price = activeProduct.Price*(1 - discountPercentage/100);
+            activeProduct.Price = activeProduct.Price*(1 - DiscountPercent);
             CurrentCartProducts.Insert(index, activeProduct);
             SelectedCartProduct = activeProduct;
             PaymentTotalMXN = CalculateCurrentCartTotal();
@@ -1872,7 +1881,7 @@ namespace Seiya
                 PaymentChangeUSD = 0;
             }
 
-            PaymentPointsReceived = Convert.ToDouble(PaymentTotalMXN / _pointsConvertionRatio);
+            PaymentPointsReceived = Convert.ToDouble(PaymentTotalMXN * PointsConvertionRatio);
 
             CurrentCartProducts.Clear();
             CurrentPage = "\\View\\PaymentEndPage.xaml";
@@ -1909,7 +1918,7 @@ namespace Seiya
                 PaymentChangeUSD = 0;
             }
 
-            PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN / _pointsConvertionRatio);
+            PaymentPointsReceived = Convert.ToInt32(PaymentTotalMXN * PointsConvertionRatio);
 
             CurrentCartProducts.Clear();
             PaymentTotalMXN = 0;
@@ -2752,7 +2761,7 @@ namespace Seiya
                         ExpenseCategory = "",
                         Date = DateTime.Now,
                         PaymentType = PaymentTypeEnum.Efectivo,
-                        CurrencyType = CurrencyTypeEnum.USD
+                        CurrencyType = CurrencyTypeEnum.MXN
                     };
                     temporalExpense.Id = temporalExpense.GetLastItemNumber() + 1;
 
@@ -3129,15 +3138,15 @@ namespace Seiya
         {
             //TODO: Make it generic based on POS data later
             var toName = "Estrella de Regalos";
-            var toEmailAddress = "armoag+movvfdhrzrdgpqmw5qcg@boards.trello.com";
+            var toEmailAddress = _posInstance.EmailOrders; //"armoag+movvfdhrzrdgpqmw5qcg@boards.trello.com";
             var subject = OrderTemporalItem.Customer + " " + OrderTemporalItem.OrderTicketNumber;
             Thread.CurrentThread.CurrentCulture = new CultureInfo("en-US");
             var body = OrderTemporalItem.Description + Environment.NewLine +
                        OrderTemporalItem.DueDate.ToString("G", CultureInfo.CreateSpecificCulture("mx"));
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             var attachmentFilePath = Constants.DataFolderPath + Constants.ImagesFolderPath + OrderTemporalItem.ImageName;
-            var fromEmailAddress = "lluviasantafe@gmail.com";
-            var fromPassword = "Yadira00";
+            var fromEmailAddress = _posInstance.EmailSender; //"lluviasantafe@gmail.com";
+            var fromPassword = _posInstance.EmailSenderPassword; //"Yadira00";
             Notification.SendNotification(toName, toEmailAddress, subject, body, attachmentFilePath, fromEmailAddress, fromPassword);
             ProgressBarValue = 90;
             OrdersSearchedEntries = null;
@@ -3754,7 +3763,7 @@ namespace Seiya
 
             if (CurrentCustomer != null)
             {
-                PaymentPointsReceived = Math.Round(Convert.ToDouble(transaction.TotalDue / _pointsConvertionRatio), 2);
+                PaymentPointsReceived = Math.Round(Convert.ToDouble(transaction.TotalDue / PointsConvertionRatio), 2);
 
                 if (transactionType != TransactionType.DevolucionEfectivo && transactionType != TransactionType.DevolucionTarjeta && transactionType != TransactionType.Remover)
                 {

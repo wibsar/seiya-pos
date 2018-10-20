@@ -28,6 +28,7 @@ namespace Seiya
         #endregion
 
         #region Constructors
+
         public Expense(string expensesFilePath, string expensesHistoryFilePath) : base(expensesFilePath)
         {
             //TODO: Check if path exists

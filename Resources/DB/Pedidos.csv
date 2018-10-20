@@ -1,1 +1,1 @@
-Id,NumeroFolio,Cliente,Titulo,Descripcion,Categoria,MontoTotal,Anticipo,TicketAnticipo,FechaOrden,Saldo,Imagen,FechaEntrega
+Id,NumeroFolio,Cliente,Titulo,Descripcion,Categoria,MontoTotal,Anticipo,TicketAnticipo,FechaOrden,Saldo,Moneda,Imagen,FechaEntrega
