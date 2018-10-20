@@ -35,6 +35,13 @@ namespace Seiya
         private string _twitter;
         private string _website;
         private string _logoName;
+        private string _emailSender;
+        private string _emailSenderPassword;
+        private string _emailReports;
+        private string _emailOrders;
+        private decimal _discountPercent;
+        private decimal _pointsPercent; 
+
         #endregion
 
         #region FilePaths
@@ -158,7 +165,6 @@ namespace Seiya
                 _businessName = value;
             }
         }
-
         public string System
         {
             get
@@ -170,7 +176,6 @@ namespace Seiya
                 _system = value;
             }
         }
-
         public string Facebook
         {
             get
@@ -182,7 +187,6 @@ namespace Seiya
                 _facebook = value;
             }
         }
-
         public string Instagram
         {
             get
@@ -194,7 +198,6 @@ namespace Seiya
                 _instagram = value;
             }
         }
-
         public string Twitter
         {
             get
@@ -206,7 +209,6 @@ namespace Seiya
                 _twitter = value;
             }
         }
-
         public string Website
         {
             get
@@ -218,7 +220,6 @@ namespace Seiya
                 _website = value;
             }
         }
-
         public string FooterMessage
         {
             get
@@ -230,7 +231,6 @@ namespace Seiya
                 _footerMessage = value;
             }
         }
-
         public string License
         {
             get
@@ -242,31 +242,59 @@ namespace Seiya
                 _license = value;
             }
         }
-
         public string LogoName
         {
             get { return _logoName; }
             set { _logoName = value; }
         }
+
+        public string EmailSender
+        {
+            get { return _emailSender; }
+            set { _emailSender = value; }
+        }
+        public string EmailSenderPassword
+        {
+            get { return _emailSenderPassword; }
+            set { _emailSenderPassword = value; }
+        }
+        public string EmailReports
+        {
+            get { return _emailReports; }
+            set { _emailReports = value; }
+        }
+        public string EmailOrders
+        {
+            get { return _emailOrders; }
+            set { _emailOrders = value; }
+        }
+
+        public decimal DiscountPercent
+        {
+            get { return _discountPercent; }
+            set { _discountPercent = value; }
+        }
+
+        public decimal PointsPercent
+        {
+            get { return _pointsPercent; }
+            set { _pointsPercent = value; }
+        }
+        
         public decimal RegisterCashUSD { get; set; }
-
         public decimal RegisterCashMXN { get; set; }
-
         public string TransactionBackUpPath
         {
             get { return _transactionBackUpPath; }
         }
-
         public string ReceiptMasterBackUpPath
         {
             get { return _receiptMasterBackUpPath; }
         }
-
         public string ReceiptCustomerBackUpPath
         {
             get { return _receiptCustomerBackUpPath; }
         }
-
         public string InventoryBackUpPath
         {
             get { return _inventoryBackUpPath; }
@@ -398,6 +426,12 @@ namespace Seiya
                 Website = row["PaginaInternet"].ToString();
                 FooterMessage = row["MensajePie"].ToString();
                 LogoName = row["LogoImagen"].ToString();
+                EmailSender = row["EmailSaliente"].ToString();
+                EmailSenderPassword = row["EmailSalientePassword"].ToString();
+                EmailReports = row["EmailReportes"].ToString();
+                EmailOrders = row["EmailPedidos"].ToString();
+                DiscountPercent = decimal.Parse(row["DescuentoPorcentaje"].ToString());
+                PointsPercent = decimal.Parse(row["PuntosPorcentaje"].ToString());
             }
         }
 
@@ -451,6 +485,14 @@ namespace Seiya
             row["PaginaInternet"] = Website;
             row["MensajePie"] = FooterMessage;
             row["LogoImagen"] = LogoName;
+            row["EmailSaliente"] = EmailSender;
+            row["EmailSalientePassword"] = EmailSenderPassword;
+            row["EmailReportes"] = EmailReports;
+            row["EmailPedidos"] = EmailOrders;
+            row["DescuentoPorcentaje"] = DiscountPercent.ToString();
+            row["PuntosPorcentaje"] = PointsPercent.ToString();
+
+
         }
 
         /// <summary>

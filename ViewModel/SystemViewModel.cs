@@ -29,6 +29,13 @@ namespace Seiya
         private string _website;
         private string _footerMessage;
         private string _version;
+        private string _emailSender;
+        private string _emailSenderPassword;
+        private string _emailReports;
+        private string _emailOrders;
+        private decimal _discountPercent;
+        private decimal _pointsPercent;
+
         private ObservableCollection<string> _printers;
 
         #endregion
@@ -223,6 +230,70 @@ namespace Seiya
             }
         }
 
+        public string EmailSender
+        {
+            get
+            {
+                return _emailSender;
+            }
+            set
+            {
+                _emailSender = Formatter.SanitizeInput(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string EmailSenderPassword
+        {
+            get
+            {
+                return _emailSenderPassword;
+            }
+            set
+            {
+                _emailSenderPassword = Formatter.SanitizeInput(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string EmailReports
+        {
+            get
+            {
+                return _emailReports;
+            }
+            set
+            {
+                _emailReports = Formatter.SanitizeInput(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public string EmailOrders
+        {
+            get
+            {
+                return _emailOrders;
+            }
+            set
+            {
+                _emailOrders = Formatter.SanitizeInput(value);
+                OnPropertyChanged();
+            }
+        }
+
+        public decimal DiscountPercent
+        {
+            get { return _discountPercent; }
+            set { _discountPercent = value; OnPropertyChanged(); }
+        }
+
+        public decimal PointsPercent
+        {
+            get { return _pointsPercent; }
+            set { _pointsPercent = value; OnPropertyChanged(); }
+        }
+
         #endregion
 
         #region Commands
@@ -245,6 +316,12 @@ namespace Seiya
             _posInstance.Website = Website;
             _posInstance.FooterMessage = FooterMessage;
             _posInstance.System = Version;
+            _posInstance.EmailSender = EmailSender;
+            _posInstance.EmailSenderPassword = EmailSenderPassword;
+            _posInstance.EmailReports = EmailReports;
+            _posInstance.EmailOrders = EmailOrders;
+            _posInstance.DiscountPercent = DiscountPercent;
+            _posInstance.PointsPercent = PointsPercent;
             //Save Data
             _posInstance.UpdateAllData();
             _posInstance.SaveDataTableToCsv();

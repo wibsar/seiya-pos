@@ -15,7 +15,7 @@
                 <TextBlock Text="Price" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" ></TextBlock>
                 <TextBlock Text=" x " HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" Foreground="Gray"></TextBlock>
                 <TextBlock Text="Quantity" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" ></TextBlock>
-                <TextBlock Text="Total" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20" Foreground="DarkGreen"></TextBlock>               
+                <TextBlock Text="Total" HorizontalAlignment="Left" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20" Foreground="DarkGreen"></TextBlock>
             </StackPanel>
         </StackPanel>    
     </Grid>
