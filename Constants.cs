@@ -66,5 +66,8 @@ namespace Seiya
         public const string ColorCodeSave = "#0285BD";
         public const string ColorCodeRegular = "##0285BD0";
 
+        //log
+        public const string LogFileName = "Log.txt";
+
     }
 }

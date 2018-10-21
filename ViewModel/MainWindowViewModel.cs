@@ -5,6 +5,8 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Reflection.Emit;
+using System.Reflection;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -23,6 +25,7 @@ namespace Seiya
         private static Pos _posInstance = null;
         private static User _userInstance = null;
         private static Expense _expenseInstance = null;
+        private static Logger _logInstance = null;
         private static UserAccessLevelEnum _accessLevelGranted;
         private static bool _systemUnlock = false;
         private static User _currentUser;
@@ -93,6 +96,9 @@ namespace Seiya
 
         private MainWindowViewModel()
         {
+            //Log
+            _logInstance = Logger.GetInstance(Constants.DataFolderPath + Constants.LogFileName);
+            _logInstance.Write("Desconocido", this.ToString() + MethodBase.GetCurrentMethod().Name, "Iniciando programa");
             //Initialize current cart and list number
             CurrentCartNumber = 1;
             CurrentCartProducts = _cartOneProducts;
@@ -105,6 +111,8 @@ namespace Seiya
             //Initial Categories
             if (CategoriesList == null)
                 CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
+            //Log
+            _logInstance.Write("Desconocido", this.ToString() + " " + MethodBase.GetCurrentMethod().Name, "Inicio de programa completado" + " " + ExchangeRate.ToString());
             //Set default page
             CurrentPage = "\\View\\LoginPage.xaml";
         }
@@ -2392,6 +2400,34 @@ namespace Seiya
         }
         #endregion
 
+        #region InventoryDeleteCommand
+
+        public ICommand InventoryDeleteCommand { get { return _inventoryDeleteCommand ?? (_inventoryDeleteCommand = new DelegateCommand(Execute_InventoryDeleteCommand, CanExecute_InventoryDeleteCommand)); } }
+        private ICommand _inventoryDeleteCommand;
+
+        internal void Execute_InventoryDeleteCommand(object parameter)
+        {
+            //Check if code was updated
+            if (SelectedInventoryProduct != null)
+            {
+                _inventoryInstance.DeleteItemInDataTable(SelectedInventoryProduct.Code, "Codigo");
+                _inventoryInstance.SaveDataTableToCsv();
+                CurrentPage = "\\View\\InventoryMainPage.xaml";
+
+                Code = "Producto Eliminado";
+                CodeColor = Constants.ColorCodeSave;
+                //Reset list
+                InventorySearchedProducts = null;
+                SelectedInventoryProduct = null;
+            }
+        }
+
+        internal bool CanExecute_InventoryDeleteCommand(object parameter)
+        {
+            return SelectedInventoryProduct != null;
+        }
+        #endregion
+
         #endregion Inventory Commands
 
         #region Users Commands
@@ -3470,8 +3506,8 @@ namespace Seiya
             Code = "Tipo de Cambio Actualizado";
             CodeColor = Constants.ColorCodeSave;
             CurrentPage = "\\View\\PosGeneralPage.xaml";
-            //Log message to display success
-            //Code = Log.ExchangeRateSaved;
+            //Log
+            _logInstance.Write(CurrentUser.Name, System.Reflection.MethodBase.GetCurrentMethod().Name, "Tipo de cambio actualizado");
         }
         internal bool CanExecute_ExchangeRateSaveCommand(object parameter)
         {

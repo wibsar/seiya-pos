@@ -137,6 +137,24 @@ namespace Seiya
         }
 
         /// <summary>
+        /// Removes a full entry in the inventory
+        /// </summary>
+        /// <param name="inputSearch"></param>
+        /// <param name="columnName"></param>
+        public void DeleteItemInDataTable(string inputSearch, string columnName)
+        {
+            for (int index = 0; index < _dictofdata.Rows.Count; index++)
+            {
+                var row = _dictofdata.Rows[index];
+                if (row[columnName].ToString() == inputSearch)
+                {
+                    _dictofdata.Rows[index].Delete();
+                    return;
+                }
+            }
+        }
+
+        /// <summary>
         /// Update the number of items sold
         /// </summary>
         /// <param name="code"></param>
