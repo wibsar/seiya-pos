@@ -52,7 +52,7 @@ namespace Seiya
         {
             //Get date time
             var time = DateTime.Now.ToString("G");
-            string data = string.Format("{0}{1}{2}{3}", time.PadRight(30), username.PadRight(30), location.PadRight(40), message) + Environment.NewLine;
+            string data = string.Format("{0}{1}{2}{3}", time.PadRight(30), username.PadRight(25), location.PadRight(80), message) + Environment.NewLine;
 
             File.AppendAllText(LogFilePath, data);
         }
