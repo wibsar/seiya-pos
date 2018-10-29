@@ -1880,7 +1880,7 @@ namespace Seiya
 
             if (paymentType == PaymentTypeEnum.Efectivo)
             {
-                PaymentChangeMXN = (PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN;
+                PaymentChangeMXN = Math.Round((PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN, 2);
                 PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
             }
             else
@@ -1917,7 +1917,7 @@ namespace Seiya
 
             if (paymentType == PaymentTypeEnum.Efectivo)
             {
-                PaymentChangeMXN = (PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN;
+                PaymentChangeMXN = Math.Round((PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN, 2);
                 PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
             }
             else
@@ -2369,12 +2369,24 @@ namespace Seiya
                     var imageSelected = SelectImage();
                     if (imageSelected != null)
                     {
-                        InventoryTemporalItem.ImageName = imageSelected;
-                        ProductImage = InventoryTemporalItem.Image;
+                        try
+                        {
+                            InventoryTemporalItem.ImageName = imageSelected;
+                            ProductImage = InventoryTemporalItem.Image;
+                        }
+                        catch (Exception e)
+                        {
+                            //Log
+                            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Error al cargar imagen: " + InventoryTemporalItem.ImageName);
+                            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Exception: " + e.Message);
+                            InventoryTemporalItem.ImageName = "NA.jpg";
+                            ProductImage = InventoryTemporalItem.Image;
+                        }
                     }
                     //Log
                     _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Agregar Imagen Completado Producto:" + " " + InventoryTemporalItem.Code);
                     break;
+
                 case "remove":                    
                     InventoryTemporalItem.ImageName = "NA.jpg";
                     ProductImage = InventoryTemporalItem.Image;
@@ -4207,7 +4219,7 @@ namespace Seiya
 
             if (paymentType == PaymentTypeEnum.Efectivo)
             {
-                PaymentChangeMXN = Math.Round((PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN);
+                PaymentChangeMXN = Math.Round((PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN, 2);
                 PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
             }
             else
