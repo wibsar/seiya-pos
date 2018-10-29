@@ -71,5 +71,19 @@ namespace Seiya
             }
             return false;
         }
+
+        public static void MoveFileToUserDefinedFolder(string sourceFileFullPath)
+        {
+            //Open dialog and select jpg image
+            var dialog = new Microsoft.Win32.SaveFileDialog(){AddExtension = true, DefaultExt = "csv"};
+            //Display dialog
+            bool? result = dialog.ShowDialog();
+
+            if (result == true)
+            {
+                var fullName = dialog.FileName;
+                File.Copy(sourceFileFullPath, fullName);
+            }
+        }
     }
 }

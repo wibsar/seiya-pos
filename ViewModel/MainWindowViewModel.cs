@@ -1474,6 +1474,9 @@ namespace Seiya
                     SystemUnlock = true;
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     break;
+                case "save_transactions":
+                    FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
+                    break;
                
             }
         }

@@ -39,13 +39,17 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
 
-            <Button Grid.Row="0" Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="transactions" Margin="50" BorderBrush="{x:Null}" Background="{x:Null}">
+            <Button Grid.Row="0" Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="transactions" BorderBrush="{x:Null}" Background="{x:Null}">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="4*"></RowDefinition>
@@ -53,6 +57,16 @@
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Transacciones.png"></Image>
                     <TextBlock Grid.Row="1" Text="Transacciones" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom"></TextBlock>
+                </Grid>
+            </Button>
+            <Button Grid.Row="0" Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="save_transactions" BorderBrush="{x:Null}" Background="{x:Null}">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Transacciones.png"></Image>
+                    <TextBlock Grid.Row="1" Text="Guardar Transacciones" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom"></TextBlock>
                 </Grid>
             </Button>
         </Grid>
