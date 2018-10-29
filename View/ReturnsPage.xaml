@@ -96,7 +96,7 @@
                 <DatePicker Grid.Row="2" Grid.Column="1" Text="{Binding PurchaseDate}" Margin="5,0,5,0" Height="40"  VerticalContentAlignment="Center" BorderBrush="#FFB2B2B2" CalendarStyle="{StaticResource StyleCalendar}"></DatePicker>
                 <TextBox Grid.Row="3" Grid.Column="1" Text="{Binding CustomerName, UpdateSourceTrigger=PropertyChanged}" Height="40" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
                 <TextBox Grid.Row="4" Grid.Column="1" Text="{Binding CustomerNumber, UpdateSourceTrigger=PropertyChanged}" Height="40" KeyUp="KeyUpNoSymbolsEvent" Margin="5"></TextBox>
-                <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding ReturnReason, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" KeyUp="KeyUpNoSymbolsEvent" Margin="0,2,5,0"></TextBox>
+                <TextBox Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="2" Text="{Binding ReturnReason, UpdateSourceTrigger=PropertyChanged}" TextWrapping="Wrap" VerticalContentAlignment="Top" KeyUp="KeyUpNoSymbolsEvent" Margin="0,2,5,0"></TextBox>
             </Grid>
         </Grid>
 
