@@ -115,6 +115,7 @@ namespace Seiya
             _logInstance.Write("Desconocido", this.ToString() + " " + MethodBase.GetCurrentMethod().Name, "Inicio de programa completado");
             //Set default page
             CurrentPage = "\\View\\LoginPage.xaml";
+            LoginMessage = "¡Bienvenido!";
         }
 
         public static MainWindowViewModel GetInstance()
@@ -1184,7 +1185,7 @@ namespace Seiya
             {
                 _transactionsSearchText = value.ToLower();
                 OnPropertyChanged();
-            }
+            }            
         }
 
         /// <summary>
@@ -1311,6 +1312,8 @@ namespace Seiya
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     break;
                 case "payment":
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Iniciado Cantidad: " + PaymentTotalMXN );
                     PaymentCustomerSearchInput = "";
                     PaymentReceivedMXN = 0;
                     PaymentReceivedUSD = 0;
@@ -1398,10 +1401,16 @@ namespace Seiya
                 case "calculator":
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     System.Diagnostics.Process.Start("Calc.exe");
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio de Calculadora");
                     break;
                 case "users_guide":
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Guia de Usuario Inicio");
                     System.Diagnostics.Process.Start(@"C:\Projects\seiya-pos\Resources\UsersGuide\GuiaUsuario.pdf");
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Guia de Usuario Completado");
                     break;
                 case "categories_edit":
                     CurrentCategoryList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
@@ -1425,6 +1434,7 @@ namespace Seiya
                     break;
                 case "transactions":
                     CurrentPage = "\\View\\TransactionMainPage.xaml";
+
                     break;
                 case "login":
                     CurrentUser = null;
@@ -1439,16 +1449,21 @@ namespace Seiya
                         PaymentProcessStart(parameter.ToString(), transactionType);
                         SystemUnlock = false;
                         CurrentPage = "\\View\\PaymentEndPage.xaml";
+                        //Log
+                        _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Efectivo");
                     }
                     else
                     {
                         Code = "Efectivo Inválido";
                         CodeColor = Constants.ColorCodeError;
                     }
+                    
                     break;
                 case "Tarjeta":
                     transactionType = TransactionType.Regular;
                     PaymentProcessStart(parameter.ToString(), transactionType);
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Tarjeta");
                     SystemUnlock = false;
                     CurrentPage = "\\View\\PaymentEndPage.xaml";
                     break;
@@ -1458,6 +1473,8 @@ namespace Seiya
                     {
                         transactionType = TransactionType.Regular;
                         PaymentProcessStart(parameter.ToString(), transactionType);
+                        //Log
+                        _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Cheque");
                         SystemUnlock = false;
                         CurrentPage = "\\View\\PaymentEndPage.xaml";
                     }
@@ -1475,7 +1492,11 @@ namespace Seiya
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     break;
                 case "save_transactions":
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
                     FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
                     break;
                
             }
@@ -1857,6 +1878,8 @@ namespace Seiya
                 }
                 AddManualProductToCart(productMimic);
             }
+            //Log
+            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Puntos Utilizados: " + PaymentPointsInUse);
         }
 
         internal bool CanExecute_PaymentUsePointsCommand(object parameter)
@@ -2827,6 +2850,8 @@ namespace Seiya
                     ExpenseTemporalItem = temporalExpense;
                     break;
             }
+            //Log
+            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Gasto Ticket: " + SelectedExpense.TicketNumber);
         }
 
         internal bool CanExecute_ExpenseUpdateCommand(object parameter)
@@ -2866,6 +2891,8 @@ namespace Seiya
                     ExpenseTemporalItem = temporalExpense;
                     break;
             }
+            //Log
+            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio Gasto Nuevo");
         }
 
         internal bool CanExecute_ExpenseAddNewItemCommand(object parameter)
@@ -2885,6 +2912,8 @@ namespace Seiya
             //Inventory search method that returns a list of products for the datagrid
             ExpensesSearchedEntries = new ObservableCollection<Expense>(new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, 
                 Constants.DataFolderPath + Constants.ExpenseHistoryFileName).Search(ExpensesSearchText));
+            //Log
+            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Gastos: " + ExpensesSearchText);
             ExpensesSearchText = "";
         }
         internal bool CanExecute_ExpenseStartSearchCommand(object parameter)
@@ -2910,7 +2939,8 @@ namespace Seiya
             {
                 ExpenseTemporalItem.Register();
             }
-
+            //Log
+            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gasto Guardado Ticket: " + ExpenseTemporalItem.TicketNumber);
             Code = "Gasto Guardado";
             ExpensesSearchedEntries = null;
             CurrentPage = "\\View\\ExpenseMainPage.xaml";
@@ -2936,7 +2966,9 @@ namespace Seiya
                 SelectedExpense.Delete();
                 SelectedExpense.SaveDataTableToCsv();
             }
-            ExpensesSearchedEntries = null;
+            //Log
+            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gasto Eliminado Ticket: " + SelectedExpense.TicketNumber);
+            ExpensesSearchedEntries = null;          
             CurrentPage = "\\View\\ExpenseMainPage.xaml";
             Code = "Gasto Eliminado";
             CodeColor = Constants.ColorCodeError;
@@ -3316,12 +3348,18 @@ namespace Seiya
             switch (parameter)
             {
                 case "add":
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio Carga de Imagen Pedido: " + OrderTemporalItem.OrderTicketNumber);
                     OrderTemporalItem.ImageName = SelectImage();
                     OrderImage = OrderTemporalItem.Image;
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Carga de Imagen Completa Pedido: " + OrderTemporalItem.OrderTicketNumber);
                     break;
                 case "remove":
                     OrderTemporalItem.ImageName = "NA.jpg";
                     OrderImage = OrderTemporalItem.Image;
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Imagen eliminada Pedido: " + OrderTemporalItem.OrderTicketNumber);
                     break;
             }
         }
@@ -3486,7 +3524,8 @@ namespace Seiya
                         SaleType = SelectedTransaction.SaleType,
                         PaymentType = SelectedTransaction.PaymentType
                     };
-
+                    //Log
+                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Transaccion: " + SelectedTransaction.TransactionNumber);
                     CurrentPage = "\\View\\TransactionDetailPage.xaml";
                     TransactionTemporalItem = temporalTransaction;
                     break;
@@ -3509,6 +3548,8 @@ namespace Seiya
         {
             //Inventory search method that returns a list of products for the datagrid
             TransactionsSearchedEntries = new ObservableCollection<Transaction>(new Transaction(Constants.DataFolderPath + Constants.TransactionsMasterFileName, true, true).Search(TransactionsSearchText));
+            //Log
+            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Transacciones: " + TransactionsSearchText);
             TransactionsSearchText = "";
         }
         internal bool CanExecute_TransactionStartSearchCommand(object parameter)
@@ -3536,6 +3577,8 @@ namespace Seiya
             {
                 //There is no way to register a transaction through this option
             }
+            //Log
+            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transaccion Guardada: " + SelectedTransaction.TransactionNumber);
             TransactionsSearchedEntries = null;
             CurrentPage = "\\View\\TransactionMainPage.xaml";
         }
@@ -3559,6 +3602,8 @@ namespace Seiya
                 SelectedTransaction.Delete();
                 SelectedTransaction.SaveDataTableToCsv();
             }
+            //Log
+            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transaccion Eliminada: " + SelectedTransaction.TransactionNumber);
             TransactionsSearchedEntries = null;
             CurrentPage = "\\View\\TransactionMainPage.xaml";
             Code = "Transaccion Eliminada";
@@ -3609,6 +3654,7 @@ namespace Seiya
 
         internal void Execute_LoginCheckCommand(object parameter)
         {
+            
             var userFound = new User(Constants.DataFolderPath + Constants.UsersFileName).GetByUserName(LoginUserNameText);
             if (userFound.Password == LoginPasswordText)
             {
@@ -3616,15 +3662,20 @@ namespace Seiya
                 LoginMessage = String.Format("Welcome {0}", userFound.Name);
                 SystemUnlock = true;
                 CurrentUser = userFound;
+                //Log
+                _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Sesion Iniciada Usuario: " + CurrentUser.UserName);
                 CurrentPage = "\\View\\PosGeneralPage.xaml";
                 LoginMessage = "¡Bienvenido!";
                 LoginUserNameText = "";
                 LoginPasswordText = "";
+                
             }
             else
             {
                 SystemUnlock = false;
-                LoginMessage = "¡Usuario o Contraseña Incorrecto! Intente de Nuevo...";                
+                LoginMessage = "¡Usuario o Contraseña Incorrecto! Intente de Nuevo...";
+                //Log
+                _logInstance.Write("Desconocido", this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio de Sesion Fallida: " + LoginUserNameText);
             }
         }
         internal bool CanExecute_LoginCheckCommand(object parameter)
