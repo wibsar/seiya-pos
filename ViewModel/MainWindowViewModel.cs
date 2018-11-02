@@ -97,8 +97,8 @@ namespace Seiya
         private MainWindowViewModel()
         {
             //Log
-            _logInstance = Logger.GetInstance(Constants.DataFolderPath + Constants.LogFileName);
-            _logInstance.Write("Desconocido", this.ToString() + MethodBase.GetCurrentMethod().Name, "<<<Iniciando programa>>>");
+            Log = Logger.GetInstance(Constants.DataFolderPath + Constants.LogFileName);
+            Log.Write("Desconocido", this.ToString() + MethodBase.GetCurrentMethod().Name, "<<<Iniciando programa>>>");
             //Initialize current cart and list number
             CurrentCartNumber = 1;
             CurrentCartProducts = _cartOneProducts;
@@ -112,7 +112,7 @@ namespace Seiya
             if (CategoriesList == null)
                 CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
             //Log
-            _logInstance.Write("Desconocido", this.ToString() + " " + MethodBase.GetCurrentMethod().Name, "Inicio de programa completado");
+            Log.Write("Desconocido", this.ToString() + " " + MethodBase.GetCurrentMethod().Name, "Inicio de programa completado");
             //Set default page
             CurrentPage = "\\View\\LoginPage.xaml";
             LoginMessage = "¡Bienvenido!";
@@ -129,6 +129,11 @@ namespace Seiya
 
         #region Properties
 
+        public Logger Log
+        {
+            get { return _logInstance; }
+            private set { _logInstance = value; }
+        }
         public BitmapImage Image
         {
             get
@@ -1313,7 +1318,7 @@ namespace Seiya
                     break;
                 case "payment":
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Iniciado Cantidad: " + PaymentTotalMXN );
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Iniciado Cantidad: " + PaymentTotalMXN );
                     PaymentCustomerSearchInput = "";
                     PaymentReceivedMXN = 0;
                     PaymentReceivedUSD = 0;
@@ -1402,15 +1407,15 @@ namespace Seiya
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     System.Diagnostics.Process.Start("Calc.exe");
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio de Calculadora");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio de Calculadora");
                     break;
                 case "users_guide":
                     CurrentPage = "\\View\\PosGeneralPage.xaml";
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Guia de Usuario Inicio");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Guia de Usuario Inicio");
                     System.Diagnostics.Process.Start(@"C:\Projects\seiya-pos\Resources\UsersGuide\GuiaUsuario.pdf");
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Guia de Usuario Completado");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Guia de Usuario Completado");
                     break;
                 case "categories_edit":
                     CurrentCategoryList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
@@ -1450,7 +1455,7 @@ namespace Seiya
                         SystemUnlock = false;
                         CurrentPage = "\\View\\PaymentEndPage.xaml";
                         //Log
-                        _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Efectivo");
+                        Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Efectivo");
                     }
                     else
                     {
@@ -1463,7 +1468,7 @@ namespace Seiya
                     transactionType = TransactionType.Regular;
                     PaymentProcessStart(parameter.ToString(), transactionType);
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Tarjeta");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Tarjeta");
                     SystemUnlock = false;
                     CurrentPage = "\\View\\PaymentEndPage.xaml";
                     break;
@@ -1474,7 +1479,7 @@ namespace Seiya
                         transactionType = TransactionType.Regular;
                         PaymentProcessStart(parameter.ToString(), transactionType);
                         //Log
-                        _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Cheque");
+                        Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Cheque");
                         SystemUnlock = false;
                         CurrentPage = "\\View\\PaymentEndPage.xaml";
                     }
@@ -1493,10 +1498,10 @@ namespace Seiya
                     break;
                 case "save_transactions":
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
                     FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
                     break;
                
             }
@@ -1879,7 +1884,7 @@ namespace Seiya
                 AddManualProductToCart(productMimic);
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Puntos Utilizados: " + PaymentPointsInUse);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Puntos Utilizados: " + PaymentPointsInUse);
         }
 
         internal bool CanExecute_PaymentUsePointsCommand(object parameter)
@@ -2070,7 +2075,7 @@ namespace Seiya
             {
                 CurrentPageListProducts.Add(productFound);
                 //Log
-                _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Codigo:" + productFound.Code + " " + "Agregado a Grupo:" + CurrentPageListTitle);
+                Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Codigo:" + productFound.Code + " " + "Agregado a Grupo:" + CurrentPageListTitle);
                 GroupSquaresAvailable = Constants.MaxNumberListItems - CurrentPageListProducts.Count;
             }
             else
@@ -2111,7 +2116,7 @@ namespace Seiya
             Code = "Grupo Actualizado";
             CodeColor = Constants.ColorCodeSave;
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Grupo Modificado:" + " " + CurrentPageListTitle);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Grupo Modificado:" + " " + CurrentPageListTitle);
         }
         internal bool CanExecute_SaveChangesProductListCommand(object parameter)
         {
@@ -2192,7 +2197,7 @@ namespace Seiya
             CategoriesList = new ObservableCollection<string>(CategoryCatalog.GetList(Constants.DataFolderPath + Constants.CategoryListFileName));
             PosGeneralPageViewModel.GetInstance().CategoriesList = CategoriesList;
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Categorias Actualizadas");
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Categorias Actualizadas");
             Code = "Categorías Actualizadas";
             CodeColor = Constants.ColorCodeSave;
         }
@@ -2213,7 +2218,7 @@ namespace Seiya
             if (!CurrentCategoryList.Contains(Formatter.FirstLetterUpperConverter(NewCategoryItem)))
                 CurrentCategoryList.Add(Formatter.FirstLetterUpperConverter(NewCategoryItem));
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Agregar Nueva Categoria:" + " " + NewCategoryItem);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Agregar Nueva Categoria:" + " " + NewCategoryItem);
             NewCategoryItem = "";
         }
         internal bool CanExecute_AddCategoryListCommand(object parameter)
@@ -2271,7 +2276,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Producto:" + " " + SelectedInventoryProduct.Code);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Producto:" + " " + SelectedInventoryProduct.Code);
         }
 
         internal bool CanExecute_InventorModifyItemCommand(object parameter)
@@ -2326,7 +2331,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Producto Iniciado");
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Producto Iniciado");
         }
 
         internal bool CanExecute_InventoryAddNewItemCommand(object parameter)
@@ -2348,7 +2353,7 @@ namespace Seiya
             var product = new Product((Product)parameter) { LastQuantitySold = 1 };
             AddProductToCart(product);
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda Agregada al Carrito:" + " " + product.Code);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda Agregada al Carrito:" + " " + product.Code);
         }
 
         internal bool CanExecute_InventoryAddItemToCartCommand(object parameter)
@@ -2368,7 +2373,7 @@ namespace Seiya
             //Inventory search method that returns a list of products for the datagrid
             InventorySearchedProducts = new ObservableCollection<Product>(_inventoryInstance.Search(InventorySearchText));
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Inventario:" + " " + InventorySearchText);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Inventario:" + " " + InventorySearchText);
             InventorySearchText = "";
                        
         }
@@ -2391,7 +2396,7 @@ namespace Seiya
             {
                 case "add":
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Agregar Imagen Iniciado Producto:" + " " + InventoryTemporalItem.Code);
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Agregar Imagen Iniciado Producto:" + " " + InventoryTemporalItem.Code);
                     var imageSelected = SelectImage();
                     if (imageSelected != null)
                     {
@@ -2403,21 +2408,21 @@ namespace Seiya
                         catch (Exception e)
                         {
                             //Log
-                            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Error al cargar imagen: " + InventoryTemporalItem.ImageName);
-                            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Exception: " + e.Message);
+                            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Error al cargar imagen: " + InventoryTemporalItem.ImageName);
+                            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Exception: " + e.Message);
                             InventoryTemporalItem.ImageName = "NA.jpg";
                             ProductImage = InventoryTemporalItem.Image;
                         }
                     }
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Agregar Imagen Completado Producto:" + " " + InventoryTemporalItem.Code);
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Agregar Imagen Completado Producto:" + " " + InventoryTemporalItem.Code);
                     break;
 
                 case "remove":                    
                     InventoryTemporalItem.ImageName = "NA.jpg";
                     ProductImage = InventoryTemporalItem.Image;
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Imagen Eliminada Producto:" + " " + InventoryTemporalItem.Code);
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Imagen Eliminada Producto:" + " " + InventoryTemporalItem.Code);
                     break;
             }
            
@@ -2453,7 +2458,7 @@ namespace Seiya
             Code = "Producto Guardado";
             CodeColor = Constants.ColorCodeSave;
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Producto Guardado:" + " " + InventoryTemporalItem.Code);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Producto Guardado:" + " " + InventoryTemporalItem.Code);
             //Reset list
             InventorySearchedProducts = null;
             SelectedInventoryProduct = null;
@@ -2481,7 +2486,7 @@ namespace Seiya
                 Code = "Producto Eliminado";
                 CodeColor = Constants.ColorCodeError;
                 //Log
-                _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Producto Eliminado:" + " " + SelectedInventoryProduct.Code);
+                Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Producto Eliminado:" + " " + SelectedInventoryProduct.Code);
                 //Reset list
                 InventorySearchedProducts = null;
                 SelectedInventoryProduct = null;
@@ -2527,7 +2532,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Usuario:" + " " + SelectedUser.UserName);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Usuario:" + " " + SelectedUser.UserName);
         }
          
         internal bool CanExecute_UserUpdateCommand(object parameter)
@@ -2568,7 +2573,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Usuario Iniciado");
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Usuario Iniciado");
         }
 
         internal bool CanExecute_UserAddNewItemCommand(object parameter)
@@ -2588,7 +2593,7 @@ namespace Seiya
             //Inventory search method that returns a list of products for the datagrid
             UsersSearchedEntries = new ObservableCollection<User>(new User(Constants.DataFolderPath + Constants.UsersFileName).Search(UsersSearchText));
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda de Usuario:" + " " + UsersSearchText );
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda de Usuario:" + " " + UsersSearchText );
             UsersSearchText = "";
         }
         internal bool CanExecute_UserStartSearchCommand(object parameter)
@@ -2618,7 +2623,7 @@ namespace Seiya
             Code = "Usuario Guardado";
             CodeColor = Constants.ColorCodeSave;
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuario Guardado:" + " " + UserTemporalItem.UserName);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuario Guardado:" + " " + UserTemporalItem.UserName);
             UsersSearchedEntries = null;
             CurrentPage = "\\View\\UserMainPage.xaml";
         }
@@ -2644,7 +2649,7 @@ namespace Seiya
                 SelectedUser.SaveDataTableToCsv();
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuario Eliminado:" + " " + SelectedUser.UserName);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuario Eliminado:" + " " + SelectedUser.UserName);
             UsersSearchedEntries = null;
             CurrentPage = "\\View\\UserMainPage.xaml";
             Code = "Usuario Eliminado";
@@ -2685,7 +2690,7 @@ namespace Seiya
                         TotalVisits = SelectedCustomer.TotalVisits,
                     };
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Cliente:" + " " + SelectedCustomer.Name);
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Cliente:" + " " + SelectedCustomer.Name);
                     CurrentPage = "\\View\\CustomerDetailPage.xaml";
                     CustomerTemporalItem = temporalCustomer;
                     break;
@@ -2727,7 +2732,7 @@ namespace Seiya
                     };
                     temporalCustomer.Id = temporalCustomer.GetLastItemNumber() + 1;
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Cliente Iniciado:");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Cliente Iniciado:");
                     CurrentPage = "\\View\\CustomerDetailPage.xaml";
                     CustomerTemporalItem = temporalCustomer;
                     break;
@@ -2751,7 +2756,7 @@ namespace Seiya
             //Inventory search method that returns a list of products for the datagrid
             CustomersSearchedEntries = new ObservableCollection<Customer>(new Customer(Constants.DataFolderPath + Constants.CustomersFileName).Search(CustomersSearchText));
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda de Cliente:" + " " + CustomersSearchText);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda de Cliente:" + " " + CustomersSearchText);
             CustomersSearchText = "";
         }
         internal bool CanExecute_CustomerStartSearchCommand(object parameter)
@@ -2778,7 +2783,7 @@ namespace Seiya
                 CustomerTemporalItem.Register();
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuario Guardado:" + " " + CustomerTemporalItem.Name);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuario Guardado:" + " " + CustomerTemporalItem.Name);
             CustomersSearchedEntries = null;
             CurrentPage = "\\View\\CustomerMainPage.xaml";
             Code = "Cliente Guardado";
@@ -2805,7 +2810,7 @@ namespace Seiya
                 SelectedCustomer.SaveDataTableToCsv();
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Cliente Eliminado:" + " " + SelectedCustomer.Name);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Cliente Eliminado:" + " " + SelectedCustomer.Name);
             CustomersSearchedEntries = null;
             CurrentPage = "\\View\\CustomerMainPage.xaml";
             Code = "Cliente Eliminado";
@@ -2851,7 +2856,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Gasto Ticket: " + SelectedExpense.TicketNumber);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Gasto Ticket: " + SelectedExpense.TicketNumber);
         }
 
         internal bool CanExecute_ExpenseUpdateCommand(object parameter)
@@ -2892,7 +2897,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio Gasto Nuevo");
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio Gasto Nuevo");
         }
 
         internal bool CanExecute_ExpenseAddNewItemCommand(object parameter)
@@ -2913,7 +2918,7 @@ namespace Seiya
             ExpensesSearchedEntries = new ObservableCollection<Expense>(new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, 
                 Constants.DataFolderPath + Constants.ExpenseHistoryFileName).Search(ExpensesSearchText));
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Gastos: " + ExpensesSearchText);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Gastos: " + ExpensesSearchText);
             ExpensesSearchText = "";
         }
         internal bool CanExecute_ExpenseStartSearchCommand(object parameter)
@@ -2940,7 +2945,7 @@ namespace Seiya
                 ExpenseTemporalItem.Register();
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gasto Guardado Ticket: " + ExpenseTemporalItem.TicketNumber);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gasto Guardado Ticket: " + ExpenseTemporalItem.TicketNumber);
             Code = "Gasto Guardado";
             ExpensesSearchedEntries = null;
             CurrentPage = "\\View\\ExpenseMainPage.xaml";
@@ -2967,7 +2972,7 @@ namespace Seiya
                 SelectedExpense.SaveDataTableToCsv();
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gasto Eliminado Ticket: " + SelectedExpense.TicketNumber);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gasto Eliminado Ticket: " + SelectedExpense.TicketNumber);
             ExpensesSearchedEntries = null;          
             CurrentPage = "\\View\\ExpenseMainPage.xaml";
             Code = "Gasto Eliminado";
@@ -3014,7 +3019,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Vendedor:" + " " + SelectedVendor.Name);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Vendedor:" + " " + SelectedVendor.Name);
         }
 
         internal bool CanExecute_VendorUpdateCommand(object parameter)
@@ -3055,7 +3060,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Proveedor Iniciado:");
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Proveedor Iniciado:");
         }
 
         internal bool CanExecute_VendorAddNewItemCommand(object parameter)
@@ -3075,7 +3080,7 @@ namespace Seiya
             //Inventory search method that returns a list of products for the datagrid
             VendorsSearchedEntries = new ObservableCollection<Vendor>(new Vendor(Constants.DataFolderPath + Constants.VendorsFileName).Search(VendorsSearchText));
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda de Proveedor:" + " " + VendorsSearchText);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda de Proveedor:" + " " + VendorsSearchText);
             VendorsSearchText = "";
         }
         internal bool CanExecute_VendorStartSearchCommand(object parameter)
@@ -3099,7 +3104,7 @@ namespace Seiya
                 SelectedVendor.SaveDataTableToCsv();
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Proveedor Eliminado:" + " " + SelectedVendor.Name);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Proveedor Eliminado:" + " " + SelectedVendor.Name);
             VendorsSearchedEntries = null;
             CurrentPage = "\\View\\VendorMainPage.xaml";
             Code = "Proveedor Eliminado";
@@ -3130,7 +3135,7 @@ namespace Seiya
                 VendorTemporalItem.Register();
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Proveedor Guardado:" + " " + VendorTemporalItem.Name);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Proveedor Guardado:" + " " + VendorTemporalItem.Name);
             VendorsSearchedEntries = null;
             Code = "Proveedor Guardado";
             CodeColor = Constants.ColorCodeSave;
@@ -3181,7 +3186,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Pedido:" + " " + SelectedOrder.OrderTicketNumber);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Pedido:" + " " + SelectedOrder.OrderTicketNumber);
         }
 
         internal bool CanExecute_OrderUpdateCommand(object parameter)
@@ -3225,7 +3230,7 @@ namespace Seiya
                     break;
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Pedido Iniciado:");
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Pedido Iniciado:");
         }
 
         internal bool CanExecute_OrderAddNewItemCommand(object parameter)
@@ -3245,7 +3250,7 @@ namespace Seiya
             //Inventory search method that returns a list of products for the datagrid
             OrdersSearchedEntries = new ObservableCollection<Order>(new Order(Constants.DataFolderPath + Constants.OrdersFileName).Search(OrdersSearchText));
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda de Pedido:" + " " + OrdersSearchText);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda de Pedido:" + " " + OrdersSearchText);
             OrdersSearchText = "";
         }
         internal bool CanExecute_OrderStartSearchCommand(object parameter)
@@ -3262,7 +3267,7 @@ namespace Seiya
         internal void Execute_OrderSaveChangesCommand(object parameter)
         {
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicia el Envio del Pedido:" + OrderTemporalItem.OrderTicketNumber);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicia el Envio del Pedido:" + OrderTemporalItem.OrderTicketNumber);
             ProgressMessage = "Enviando...";
             ProgressBarValue = 20;
             //Check if code was updated
@@ -3279,7 +3284,7 @@ namespace Seiya
             ProgressBarValue = 65;
             SendEmailNotification();
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Envio Terminado Pedido Guardado:" + OrderTemporalItem.OrderTicketNumber);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Envio Terminado Pedido Guardado:" + OrderTemporalItem.OrderTicketNumber);
         }
 
         private void SendEmailNotification()
@@ -3325,7 +3330,7 @@ namespace Seiya
                 SelectedOrder.SaveDataTableToCsv();
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pedido Eliminado:" + " " + SelectedOrder.OrderTicketNumber);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pedido Eliminado:" + " " + SelectedOrder.OrderTicketNumber);
             OrdersSearchedEntries = null;
             CurrentPage = "\\View\\OrderMainPage.xaml";
             Code = "Pedido Eliminado";
@@ -3349,17 +3354,17 @@ namespace Seiya
             {
                 case "add":
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio Carga de Imagen Pedido: " + OrderTemporalItem.OrderTicketNumber);
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio Carga de Imagen Pedido: " + OrderTemporalItem.OrderTicketNumber);
                     OrderTemporalItem.ImageName = SelectImage();
                     OrderImage = OrderTemporalItem.Image;
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Carga de Imagen Completa Pedido: " + OrderTemporalItem.OrderTicketNumber);
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Carga de Imagen Completa Pedido: " + OrderTemporalItem.OrderTicketNumber);
                     break;
                 case "remove":
                     OrderTemporalItem.ImageName = "NA.jpg";
                     OrderImage = OrderTemporalItem.Image;
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Imagen eliminada Pedido: " + OrderTemporalItem.OrderTicketNumber);
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Imagen eliminada Pedido: " + OrderTemporalItem.OrderTicketNumber);
                     break;
             }
         }
@@ -3525,7 +3530,7 @@ namespace Seiya
                         PaymentType = SelectedTransaction.PaymentType
                     };
                     //Log
-                    _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Transaccion: " + SelectedTransaction.TransactionNumber);
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Transaccion: " + SelectedTransaction.TransactionNumber);
                     CurrentPage = "\\View\\TransactionDetailPage.xaml";
                     TransactionTemporalItem = temporalTransaction;
                     break;
@@ -3549,7 +3554,7 @@ namespace Seiya
             //Inventory search method that returns a list of products for the datagrid
             TransactionsSearchedEntries = new ObservableCollection<Transaction>(new Transaction(Constants.DataFolderPath + Constants.TransactionsMasterFileName, true, true).Search(TransactionsSearchText));
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Transacciones: " + TransactionsSearchText);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Transacciones: " + TransactionsSearchText);
             TransactionsSearchText = "";
         }
         internal bool CanExecute_TransactionStartSearchCommand(object parameter)
@@ -3578,7 +3583,7 @@ namespace Seiya
                 //There is no way to register a transaction through this option
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transaccion Guardada: " + SelectedTransaction.TransactionNumber);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transaccion Guardada: " + SelectedTransaction.TransactionNumber);
             TransactionsSearchedEntries = null;
             CurrentPage = "\\View\\TransactionMainPage.xaml";
         }
@@ -3603,7 +3608,7 @@ namespace Seiya
                 SelectedTransaction.SaveDataTableToCsv();
             }
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transaccion Eliminada: " + SelectedTransaction.TransactionNumber);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transaccion Eliminada: " + SelectedTransaction.TransactionNumber);
             TransactionsSearchedEntries = null;
             CurrentPage = "\\View\\TransactionMainPage.xaml";
             Code = "Transaccion Eliminada";
@@ -3633,7 +3638,7 @@ namespace Seiya
             Code = "Tipo de Cambio Actualizado";
             CodeColor = Constants.ColorCodeSave;
             //Log
-            _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Tipo de Cambio Actualizado:" + " " + ExchangeRateString);
+            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Tipo de Cambio Actualizado:" + " " + ExchangeRateString);
             CurrentPage = "\\View\\PosGeneralPage.xaml";
             
         }
@@ -3663,7 +3668,7 @@ namespace Seiya
                 SystemUnlock = true;
                 CurrentUser = userFound;
                 //Log
-                _logInstance.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Sesion Iniciada Usuario: " + CurrentUser.UserName);
+                Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Sesion Iniciada Usuario: " + CurrentUser.UserName);
                 CurrentPage = "\\View\\PosGeneralPage.xaml";
                 LoginMessage = "¡Bienvenido!";
                 LoginUserNameText = "";
@@ -3675,7 +3680,7 @@ namespace Seiya
                 SystemUnlock = false;
                 LoginMessage = "¡Usuario o Contraseña Incorrecto! Intente de Nuevo...";
                 //Log
-                _logInstance.Write("Desconocido", this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio de Sesion Fallida: " + LoginUserNameText);
+                Log.Write("Desconocido", this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inicio de Sesion Fallida: " + LoginUserNameText);
             }
         }
         internal bool CanExecute_LoginCheckCommand(object parameter)
