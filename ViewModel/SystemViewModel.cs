@@ -350,7 +350,7 @@ namespace Seiya
         public ICommand SystemSaveLogoCommand { get { return _systemSaveLogoCommand ?? (_systemSaveLogoCommand = new DelegateCommand(Execute_SystemSaveLogoCommand, CanExecute_SystemSaveLogoCommand)); } }
 
         internal void Execute_SystemSaveLogoCommand(object parameter)
-        {
+        {           
             SelectImage();
         }
         internal bool CanExecute_SystemSaveLogoCommand(object parameter)
