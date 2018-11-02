@@ -78,13 +78,26 @@
         <!-- Inventory options -->
         <Grid Grid.Row="2" ShowGridLines="False" Margin="0,3,0,0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="4*"></ColumnDefinition>
+                <ColumnDefinition Width="3*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
 
             <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition Height="17"></RowDefinition>
+                </Grid.RowDefinitions>
+
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding InventorModifyItemCommand}" CommandParameter="inventory_add_clone">
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
+                </Button>
+                <TextBlock TextAlignment="Center" Grid.Row="1" Text="Clonar"></TextBlock>
+            </Grid>
+
+            <Grid Grid.Column="2">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
@@ -96,7 +109,7 @@
                 <TextBlock TextAlignment="Center" Grid.Row="1" Text="Al Carrito"></TextBlock>
             </Grid>
 
-            <Grid Grid.Column="2">
+            <Grid Grid.Column="3">
                 <Grid.RowDefinitions>
                     <RowDefinition/>
                     <RowDefinition Height="17"></RowDefinition>
@@ -108,7 +121,7 @@
                 <TextBlock TextAlignment="Center" Grid.Row="1" Text="Nuevo"></TextBlock>
             </Grid>
 
-            <Grid Grid.Column="3">
+            <Grid Grid.Column="4">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>

@@ -2273,10 +2273,49 @@ namespace Seiya
 
                     CurrentPage = "\\View\\InventoryItemPage.xaml";
                     InventoryTemporalItem = temporalProduct;
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Producto:" + " " + SelectedInventoryProduct.Code);
+                    break;
+
+                case "inventory_add_clone":
+                    //Create new productt
+                    var temporalClonedProduct = new Product()
+                    {
+                        Id = _inventoryInstance.GetLastItemNumber()+1,
+                        Code = "",
+                        AlternativeCode = "NA",
+                        AmountSold = 0,
+                        Category = SelectedInventoryProduct.Category,
+                        Cost = SelectedInventoryProduct.Cost,
+                        CostCurrency = SelectedInventoryProduct.CostCurrency,
+                        Description = SelectedInventoryProduct.Description,
+                        Image = SelectedInventoryProduct.Image,
+                        ImageName = SelectedInventoryProduct.ImageName,
+                        InternalQuantity = 0,
+                        LastPurchaseDate = DateTime.Today,
+                        LastQuantitySold = 0,
+                        LastSaleDate = DateTime.Today,
+                        LocalQuantityAvailable = 0,
+                        MinimumStockQuantity = SelectedInventoryProduct.MinimumStockQuantity,
+                        Name = SelectedInventoryProduct.Name,
+                        Price = SelectedInventoryProduct.Price,
+                        PriceCurrency = SelectedInventoryProduct.PriceCurrency,
+                        Provider = SelectedInventoryProduct.Provider,
+                        ProviderProductId = SelectedInventoryProduct.ProviderProductId,
+                        QuantitySold = 0,
+                        TotalQuantityAvailable = 0,
+                        Brand = SelectedInventoryProduct.Brand
+                    };
+
+                    var clonedCode = SelectedInventoryProduct.Code;
+                    SelectedInventoryProduct = null;
+                    CurrentPage = "\\View\\InventoryItemPage.xaml";
+                    InventoryTemporalItem = temporalClonedProduct;
+
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Clon de Producto:" + " " + clonedCode);
                     break;
             }
             //Log
-            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Detalle de Producto:" + " " + SelectedInventoryProduct.Code);
         }
 
         internal bool CanExecute_InventorModifyItemCommand(object parameter)
@@ -2328,10 +2367,11 @@ namespace Seiya
 
                     CurrentPage = "\\View\\InventoryItemPage.xaml";
                     InventoryTemporalItem = temporalProduct;
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Producto Iniciado");
                     break;
             }
-            //Log
-            Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Nuevo Producto Iniciado");
+
         }
 
         internal bool CanExecute_InventoryAddNewItemCommand(object parameter)
