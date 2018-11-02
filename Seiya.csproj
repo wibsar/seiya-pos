@@ -120,6 +120,9 @@
     <Compile Include="View\AnalysisMainPage.xaml.cs">
       <DependentUpon>AnalysisMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\PaymentPartialPage.xaml.cs">
+      <DependentUpon>PaymentPartialPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\RemoveInventoryPage.xaml.cs">
       <DependentUpon>RemoveInventoryPage.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,10 @@
     <Page Include="View\AnalysisMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\PaymentPartialPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\RemoveInventoryPage.xaml">
       <Generator>MSBuild:Compile</Generator>

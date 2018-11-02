@@ -576,7 +576,18 @@ namespace Seiya
             //Append to daily receipt
             File.AppendAllText(filePath, data);
         }
-        
+
+        public static void RecordPaymentTransaction(string filePath, int receiptNumber, string user, string customer, string date, decimal exchangeRate, 
+            string fiscalReceipt, decimal totalSold, CurrencyTypeEnum currencySold, TransactionType transactionType, decimal cashMxn, decimal cashUsd,
+            decimal cardMxn, decimal checkMxn, decimal transferMxn, decimal otherMxn)
+        {
+            var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}", receiptNumber, user, customer, date, exchangeRate, 
+                           fiscalReceipt, totalSold.ToString(), currencySold.ToString(), transactionType.ToString(), cashMxn.ToString(), cashUsd.ToString(),
+                           cardMxn, checkMxn, transferMxn, otherMxn) + Environment.NewLine;
+            //Append to payments file
+            File.AppendAllText(filePath, data);
+        }
+
         #endregion
     }
 }

@@ -188,7 +188,8 @@
         <!--Payment Options-->
         <Grid Grid.Row="4" ShowGridLines="False">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="2*"></ColumnDefinition>
+                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -199,6 +200,7 @@
             <Button Grid.Column="2" Margin="2.5,5,2.5,5" Content="Transferencia" Command="{Binding ChangePageCommand}" CommandParameter="Transferencia" Background="#FFFFFFE6" BorderBrush="{x:Null}"></Button>
             <Button Grid.Column="3" Margin="2.5,5,5,5" Content="Cheque" Command="{Binding ChangePageCommand}" CommandParameter="Cheque" Background="#FFFFCFCF" BorderBrush="{x:Null}"></Button>
             <Button Grid.Column="4" Margin="2.5,5,2.5,5" Content="Usar Puntos" Background="#FFEEE2FF" Command="{Binding PaymentUsePointsCommand}" CommandParameter="Puntos" BorderBrush="{x:Null}"></Button>
+            <Button Grid.Column="5" Margin="2.5,5,2.5,5" x:Name="PartialPaymentBtn" Content="Parcial" Background="#FFE0E0E0" Command="{Binding ChangePageCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="partial_start" BorderBrush="{x:Null}"></Button>
         </Grid>
     </Grid>
 </Page>

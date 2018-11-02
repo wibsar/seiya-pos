@@ -74,6 +74,7 @@ namespace Seiya
         private string _exchangeRateString;
         private decimal _pointsConvertionRatio = 100M; //TODO: add this to the UI after it is defined
         private double _paymentPointsInUse;
+        private bool _partialPaymentEnabled = false;
 
         //Inventory Related Fields
         private Product _inventoryTemporalItem;
@@ -531,6 +532,78 @@ namespace Seiya
             }
         }
 
+        private decimal _paymentPartialCashUSD;
+        public decimal PaymentPartialCashUSD
+        {
+            get { return _paymentPartialCashUSD; }
+            set
+            {
+                _paymentPartialCashUSD = value;
+                PaymentPartialUpdateRemaining();
+                OnPropertyChanged();
+            }
+        }
+
+        private decimal _paymentPartialCashMXN;
+        public decimal PaymentPartialCashMXN
+        {
+            get { return _paymentPartialCashMXN; }
+            set
+            {
+                _paymentPartialCashMXN = value;
+                PaymentPartialUpdateRemaining();
+                OnPropertyChanged();
+            }
+        }
+
+        private decimal _paymentPartialCardMXN;
+        public decimal PaymentPartialCardMXN
+        {
+            get { return _paymentPartialCardMXN; }
+            set
+            {
+                _paymentPartialCardMXN = value;
+                PaymentPartialUpdateRemaining();
+                OnPropertyChanged();
+            }
+        }
+
+        private decimal _paymentPartialCheckMXN;
+        public decimal PaymentPartialCheckMXN
+        {
+            get { return _paymentPartialCheckMXN; }
+            set
+            {
+                _paymentPartialCheckMXN = value;
+                PaymentPartialUpdateRemaining();
+                OnPropertyChanged();
+            }
+        }
+
+        private decimal _paymentPartialTransferMXN;
+        public decimal PaymentPartialTransferMXN
+        {
+            get { return _paymentPartialTransferMXN; }
+            set
+            {
+                _paymentPartialTransferMXN = value;
+                PaymentPartialUpdateRemaining();
+                OnPropertyChanged();
+            }
+        }
+
+        private decimal _paymentPartialOtherMXN;
+        public decimal PaymentPartialOtherMXN
+        {
+            get { return _paymentPartialOtherMXN; }
+            set
+            {
+                _paymentPartialOtherMXN = value;
+                PaymentPartialUpdateRemaining();
+                OnPropertyChanged();
+            }
+        }
+
         public decimal PaymentChangeMXN
         {
             get { return _paymentChangeMXN; }
@@ -603,6 +676,23 @@ namespace Seiya
             {
                 _paymentPointsReceived = value;
                 OnPropertyChanged();
+            }
+        }
+
+        public bool PartialPaymentEnabled
+        {
+            get { return _partialPaymentEnabled; }
+            set
+            {
+                _partialPaymentEnabled = value;
+                if (value)
+                {
+                    CodeColor = Constants.ColorCodeError;
+                }
+                else
+                {
+                    CodeColor = Constants.ColorCodeSave;
+                }
             }
         }
 
@@ -1472,6 +1562,18 @@ namespace Seiya
                     SystemUnlock = false;
                     CurrentPage = "\\View\\PaymentEndPage.xaml";
                     break;
+
+                case "partial_start":
+                    CurrentPage = "\\View\\PaymentPartialPage.xaml";
+                    break;
+                case "Parcial":
+                    transactionType = TransactionType.Regular;
+                    PaymentProcessStart(parameter.ToString(), transactionType);
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Parcial");
+ //                   SystemUnlock = false;
+                    CurrentPage = "\\View\\PaymentEndPage.xaml";
+                    break;
                 case "Transferencia":
                 case "Cheque":
                     if (!ReturnTransaction)
@@ -1892,8 +1994,7 @@ namespace Seiya
             return CurrentCustomer != null && ReturnTransaction == false;
         }
         #endregion
-
-
+        
         #region PaymentCashProcessCommand
 
         public ICommand PaymentCashProcessCommand { get { return _paymentCashProcessCommand ?? (_paymentCashProcessCommand = new DelegateCommand(Execute_PaymentCashProcessCommand, CanExecute_PaymentCashProcessCommand)); } }
@@ -2013,7 +2114,31 @@ namespace Seiya
             return true;
         }
 
-        #endregion     
+        #endregion
+
+        #region ChangeParcialPaymentCommand
+
+        public ICommand ChangeParcialPaymentCommand { get { return _changeParcialPaymentCommand ?? (_changeParcialPaymentCommand = new DelegateCommand(Execute_ChangeParcialPaymentCommand, CanExecute_ChangeParcialPaymentCommand)); } }
+        private ICommand _changeParcialPaymentCommand;
+
+        internal void Execute_ChangeParcialPaymentCommand(object parameter)
+        {
+            if (PartialPaymentEnabled)
+            {
+                PartialPaymentEnabled = false;
+            }
+            else
+            {
+                PartialPaymentEnabled = true;
+            }
+        }
+
+        internal bool CanExecute_ChangeParcialPaymentCommand(object parameter)
+        {
+            return true;
+        }
+
+        #endregion
 
         #endregion
 
@@ -4290,6 +4415,12 @@ namespace Seiya
         public void PaymentUpdateRemaining()
         {
             PaymentRemainingMXN = PaymentTotalMXN - PaymentReceivedMXN - Math.Round(PaymentReceivedUSD*ExchangeRate, 2);
+            PaymentRemainingUSD = Math.Round(PaymentRemainingMXN / ExchangeRate, 2);
+        }
+
+        public void PaymentPartialUpdateRemaining()
+        {
+            PaymentRemainingMXN = PaymentTotalMXN - PaymentPartialCashMXN - PaymentPartialCardMXN - PaymentPartialCheckMXN - PaymentPartialTransferMXN - PaymentPartialOtherMXN - Math.Round(PaymentPartialCashUSD * ExchangeRate, 2);
             PaymentRemainingUSD = Math.Round(PaymentRemainingMXN / ExchangeRate, 2);
         }
 

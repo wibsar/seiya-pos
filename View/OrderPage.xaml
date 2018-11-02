@@ -130,8 +130,8 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBlock Grid.Column="0" Text="{Binding ProgressMessage, Mode=TwoWay}" Foreground="Green"></TextBlock>
-                    <ProgressBar Grid.Column ="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Value="{Binding ProgressBarValue, Mode=TwoWay}" Background="White" Margin="2"/>
+                    <!--<TextBlock Grid.Column="0" Text="{Binding ProgressMessage, Mode=TwoWay}" Foreground="Green"></TextBlock>
+                    <ProgressBar Grid.Column ="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Value="{Binding ProgressBarValue, Mode=TwoWay}" Background="White" Margin="2"/>-->
                 </Grid>
             </Grid>
             <!-- Inputs for Product properties -->
