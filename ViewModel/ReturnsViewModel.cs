@@ -133,7 +133,7 @@ namespace Seiya
                 MainWindowViewModel.GetInstance().ReturnTransaction = true;
                 MainWindowViewModel.GetInstance().PaymentReceivedMXN = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();
                 //Log
-                _logInstance.Write(MainWindowViewModel.GetInstance().CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Devolucion Registrada Folio: " + ReturnID.ToString() );
+                MainWindowViewModel.GetInstance().Log.Write(MainWindowViewModel.GetInstance().CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Devolucion Registrada Folio: " + ReturnID);               
                 MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PaymentPage.xaml";
             }
             else
