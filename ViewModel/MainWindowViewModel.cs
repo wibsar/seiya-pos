@@ -1408,10 +1408,9 @@ namespace Seiya
                     break;
                 case "payment":
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Iniciado Cantidad: " + PaymentTotalMXN );
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Iniciado Cantidad: " + PaymentTotalMXN);
                     PaymentCustomerSearchInput = "";
-                    PaymentReceivedMXN = 0;
-                    PaymentReceivedUSD = 0;
+                    ClearPaymentInput();
                     CurrentCustomer = null;
                     CurrentPage = "\\View\\PaymentPage.xaml";
                     break;
@@ -1552,7 +1551,6 @@ namespace Seiya
                         Code = "Efectivo Inválido";
                         CodeColor = Constants.ColorCodeError;
                     }
-                    
                     break;
                 case "Tarjeta":
                     transactionType = TransactionType.Regular;
@@ -1562,16 +1560,18 @@ namespace Seiya
                     SystemUnlock = false;
                     CurrentPage = "\\View\\PaymentEndPage.xaml";
                     break;
-
                 case "partial_start":
+                    PaymentCustomerSearchInput = "";
+                    ClearPaymentInput();
                     CurrentPage = "\\View\\PaymentPartialPage.xaml";
                     break;
+
                 case "Parcial":
                     transactionType = TransactionType.Regular;
                     PaymentProcessStart(parameter.ToString(), transactionType);
                     //Log
                     Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Parcial");
- //                   SystemUnlock = false;
+                    SystemUnlock = false;
                     CurrentPage = "\\View\\PaymentEndPage.xaml";
                     break;
                 case "Transferencia":
@@ -3963,10 +3963,54 @@ namespace Seiya
         private bool ProcessPayment(PaymentTypeEnum paymentType, TransactionType transactionType)
         {
             RecordTransaction(paymentType, transactionType, out var currentTransaction);
-            
+
+            //Check if it is a partial payment based on the properties
+            var total = PaymentPartialOtherMXN + PaymentPartialCardMXN + PaymentPartialCashMXN + Math.Round(PaymentPartialCashUSD * ExchangeRate, 2) +
+                        PaymentPartialCheckMXN + PaymentPartialTransferMXN;
+
+            if (total > 0)
+            {
+                PaymentChangeMXN = Math.Round(total - currentTransaction.TotalDue, 2);
+                PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
+                PaymentReceivedMXN = PaymentPartialOtherMXN + PaymentPartialCardMXN + PaymentPartialCashMXN +
+                                     PaymentPartialCheckMXN + PaymentPartialTransferMXN;
+                PaymentReceivedUSD = PaymentPartialCashUSD;
+            }
+            else
+            {
+                switch (paymentType)
+                {
+                    case PaymentTypeEnum.Efectivo:
+                        PaymentPartialCashMXN = PaymentReceivedMXN;
+                        PaymentPartialCashUSD = PaymentReceivedUSD;
+                        PaymentChangeMXN = Math.Round((PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN, 2);
+                        PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
+                        break;
+                    case PaymentTypeEnum.Tarjeta:
+                        PaymentPartialCardMXN = PaymentTotalMXN;
+                        PaymentChangeMXN = 0;
+                        PaymentChangeUSD = 0;
+                        break;
+                    case PaymentTypeEnum.Cheque:
+                        PaymentPartialCheckMXN = PaymentTotalMXN;
+                        PaymentChangeMXN = 0;
+                        PaymentChangeUSD = 0;
+                        break;
+                    case PaymentTypeEnum.Transferencia:
+                        PaymentPartialTransferMXN = PaymentTotalMXN;
+                        PaymentChangeMXN = 0;
+                        PaymentChangeUSD = 0;
+                        break;
+                }
+            }
+
+            //Record transaction in general sales page
+            Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
+                CurrentCustomer != null ? CurrentUser.Name : "General", currentTransaction.TransactionDate.ToString("G"), ExchangeRate, currentTransaction.FiscalReceiptRequired,
+                currentTransaction.TotalDue, CurrencyTypeEnum.MXN, transactionType, PaymentPartialCashMXN, PaymentPartialCashUSD, PaymentPartialCardMXN,
+                PaymentPartialCheckMXN, PaymentPartialTransferMXN, PaymentPartialOtherMXN, PaymentChangeMXN, currentTransaction.TotalDue);
+
             PrintReceipt(currentTransaction, true);
-            //Update POS file ticket info
-            //Clean Current Cart
             
             return true;
         }
@@ -4447,17 +4491,6 @@ namespace Seiya
 
             ProcessPayment(paymentType, transactionType);
 
-            if (paymentType == PaymentTypeEnum.Efectivo)
-            {
-                PaymentChangeMXN = Math.Round((PaymentReceivedMXN + PaymentReceivedUSD * ExchangeRate) - PaymentTotalMXN, 2);
-                PaymentChangeUSD = Math.Round(PaymentChangeMXN / ExchangeRate, 2);
-            }
-            else
-            {
-                PaymentChangeMXN = 0;
-                PaymentChangeUSD = 0;
-            }
-
             CurrentCartProducts.Clear();
             if(paymentType != PaymentTypeEnum.Efectivo)
                 PaymentTotalMXN = 0;
@@ -4476,6 +4509,12 @@ namespace Seiya
             PaymentPointsInUse = 0;
             Code = "";
             ReturnID = 0;
+            PaymentPartialOtherMXN = 0;
+            PaymentPartialCardMXN = 0;
+            PaymentPartialCashMXN = 0;
+            PaymentPartialCashUSD = 0;
+            PaymentPartialCheckMXN = 0;
+            PaymentPartialTransferMXN = 0;
 
             ReturnTransaction = false;
             CurrentCustomer = null;
@@ -4507,6 +4546,18 @@ namespace Seiya
             SelectedOrder = null;
             ExpensesSearchedEntries = null;
             SelectedExpense = null;
+        }
+
+        private void ClearPaymentInput()
+        {
+            PaymentReceivedMXN = 0;
+            PaymentReceivedUSD = 0;
+            PaymentPartialCashMXN = 0;
+            PaymentPartialCashUSD = 0;
+            PaymentPartialCheckMXN = 0;
+            PaymentPartialTransferMXN = 0;
+            PaymentPartialCardMXN = 0;
+            PaymentPartialOtherMXN = 0;
         }
 
         #endregion

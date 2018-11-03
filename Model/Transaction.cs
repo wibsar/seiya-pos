@@ -4,6 +4,7 @@ using System.Data;
 using System.Globalization;
 using System.IO;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -562,7 +563,52 @@ namespace Seiya
                 }
             }
             transactionData.SalesInfoPerCategory = categoryData;
+
+            //Get total from the payment section regarding partialpayments
+            decimal cashMxn, cashUsd, cardMxn, transferMxn, checkMxn, otherMxn, totalChangeMxn, totalSoldMxn;
+            GetSalePaymentTotalPerType(out cashMxn, out cashUsd, out cardMxn, out transferMxn, out checkMxn,
+                out otherMxn, out totalChangeMxn, out totalSoldMxn);
+
+            transactionData.CashTotal = cashMxn + Math.Round(cashUsd * MainWindowViewModel.GetInstance().ExchangeRate, 2) - totalChangeMxn;
+            transactionData.CardTotal = cardMxn;
+            transactionData.CheckTotal = checkMxn;
+            transactionData.BankTotal = transferMxn;
+            transactionData.OtherTotal = otherMxn;
+
             return categoryData;
+        }
+
+        private static void GetSalePaymentTotalPerType(out decimal cashMxn, out decimal cashUsd, out decimal cardMxn,
+            out decimal transferMxn, out decimal checkMxn, out decimal otherMxn, out decimal totalChangeMxn, out decimal totalSoldMxn)
+        {
+            cashMxn = 0;
+            cashUsd = 0;
+            cardMxn = 0;
+            transferMxn = 0;
+            checkMxn = 0;
+            otherMxn = 0;
+            totalChangeMxn = 0;
+            totalSoldMxn = 0;
+
+            var data = Utilities.LoadCsvToDataTable(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
+            for (var index = 0; index < data.Rows.Count; index++)
+            {
+                var row = data.Rows[index];
+
+                ///TODO: Verify functionality with returns and removal
+                if (row["TipoVenta"].ToString() == "DevolucionEfectivo" &&
+                    row["TipoVenta"].ToString() == "DevolucionTarjeta" &&
+                    row["TipoVenta"].ToString() == "Remover") continue;
+
+                cashMxn += decimal.Parse(row["EfectivoMXN"].ToString());
+                cashUsd += decimal.Parse(row["EfectivoUSD"].ToString());
+                cardMxn += decimal.Parse(row["TarjetaMXN"].ToString());
+                checkMxn += decimal.Parse(row["ChequeMXN"].ToString());
+                transferMxn += decimal.Parse(row["TransferenciaMXN"].ToString());
+                otherMxn += decimal.Parse(row["OtroMXN"].ToString());
+                totalChangeMxn += decimal.Parse(row["CambioMXN"].ToString());
+                totalSoldMxn += decimal.Parse(row["TotalVendidoMXN"].ToString());
+            }
         }
 
         public static void RecordEndOfDaySalesTransaction(string filePath, int endOfDayReceiptNumber, int firstReceipt, int lastReceipt,
@@ -579,11 +625,11 @@ namespace Seiya
 
         public static void RecordPaymentTransaction(string filePath, int receiptNumber, string user, string customer, string date, decimal exchangeRate, 
             string fiscalReceipt, decimal totalSold, CurrencyTypeEnum currencySold, TransactionType transactionType, decimal cashMxn, decimal cashUsd,
-            decimal cardMxn, decimal checkMxn, decimal transferMxn, decimal otherMxn)
+            decimal cardMxn, decimal checkMxn, decimal transferMxn, decimal otherMxn, decimal changeDueMxn, decimal totalSoldMxn)
         {
-            var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}", receiptNumber, user, customer, date, exchangeRate, 
+            var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}", receiptNumber, user, customer, date, exchangeRate, 
                            fiscalReceipt, totalSold.ToString(), currencySold.ToString(), transactionType.ToString(), cashMxn.ToString(), cashUsd.ToString(),
-                           cardMxn, checkMxn, transferMxn, otherMxn) + Environment.NewLine;
+                           cardMxn, checkMxn, transferMxn, otherMxn, changeDueMxn, totalSoldMxn) + Environment.NewLine;
             //Append to payments file
             File.AppendAllText(filePath, data);
         }

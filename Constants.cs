@@ -29,6 +29,7 @@ namespace Seiya
         public const string ExpenseFileName = "Gastos.csv";
         public const string ExpenseHistoryFileName = "GastosHistorial.csv";
         public const string ExpenseBlankFileName = "GastosBlank.csv";
+        public const string TransactionsPaymentsFileName = "Pagos.csv";
 
         //End of day reports
         public const string EndOfDaySalesFileName = "CorteZ.csv";
