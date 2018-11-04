@@ -87,7 +87,7 @@
     <Compile Include="Model\Order.cs" />
     <Compile Include="Model\Interfaces\IBasicEntityInfo.cs" />
     <Compile Include="Model\CategoryCatalog.cs" />
-    <Compile Include="Model\CurrencyTypeEnum.cs" />
+    <Compile Include="Model\Enums\CurrencyTypeEnum.cs" />
     <Compile Include="Model\Customer.cs" />
     <Compile Include="Model\DataBase.cs" />
     <Compile Include="Model\Enums\UserAccessLevelEnum.cs" />
@@ -97,6 +97,7 @@
     <Compile Include="Model\Pos.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Receipt.cs" />
+    <Compile Include="Model\SalesDataStruct.cs" />
     <Compile Include="Model\SalesReceipt.cs" />
     <Compile Include="Model\SalesSummaryReport.cs" />
     <Compile Include="Model\Transaction.cs" />

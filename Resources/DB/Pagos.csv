@@ -1,36 +1,14 @@
-NumeroTicket,Usuario,Cliente,FechaVenta,TipoDeCambio,FacturaRequerida,TotalVendido,Moneda,TipoVenta,EfectivoMXN,EfectivoUSD,TarjetaMXN,ChequeMXN,TransferenciaMXN,OtroMXN
-8029,Arturo Morales,General,08/09/2018 04:36:09 p. m.,18,No,150,MXN,DevolucionEfectivo,150,0,0,0,0,0
-8030,Arturo Morales,General,08/09/2018 05:13:04 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,08/09/2018 05:13:39 p. m.,18,No,150,MXN,DevolucionTarjeta,150,0,0,0,0,0
-8030,Arturo Morales,Rene,08/09/2018 05:20:05 p. m.,18,No,150,MXN,Interno,150,0,0,0,0,0
-8030,Arturo Morales,Rene,08/09/2018 05:20:05 p. m.,18,No,150,MXN,Interno,150,0,0,0,0,0
-8031,Arturo Morales,Evy Martinez,08/09/2018 05:22:16 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8031,Arturo Morales,General,08/09/2018 05:24:17 p. m.,18,No,150,MXN,DevolucionEfectivo,150,0,0,0,0,0
-8031,Arturo Morales,Evy Martinez,08/09/2018 05:25:08 p. m.,18,No,150,MXN,DevolucionEfectivo,150,0,0,0,0,0
-8030,Arturo Morales,General,08/09/2018 06:13:43 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8031,Arturo Morales,General,08/09/2018 06:14:38 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8031,Arturo Morales,General,08/09/2018 06:14:38 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8032,Arturo Morales,General,08/09/2018 06:15:07 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8032,Arturo Morales,General,08/09/2018 06:15:07 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,08/09/2018 06:26:40 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,08/09/2018 06:26:40 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8029,Arturo Morales,General,09/09/2018 10:50:17 a. m.,18,No,150,MXN,Interno,150,0,0,0,0,0
-8030,Arturo Morales,General,09/09/2018 10:51:24 a. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,09/09/2018 10:52:59 a. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,09/09/2018 01:57:38 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8031,Arturo Morales,General,09/09/2018 01:58:10 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8032,Arturo Morales,General,09/09/2018 01:58:37 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8033,Arturo Morales,General,09/09/2018 02:49:04 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8034,Arturo Morales,General,09/09/2018 02:49:27 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8035,Arturo Morales,General,09/09/2018 02:49:59 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8029,Arturo Morales,General,09/09/2018 04:14:25 p. m.,18,No,150,MXN,DevolucionTarjeta,150,0,0,0,0,0
-8030,Arturo Morales,General,09/09/2018 04:15:18 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8031,Arturo Morales,General,09/09/2018 04:15:43 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8032,Arturo Morales,General,09/09/2018 04:16:04 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,09/09/2018 04:20:00 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,09/09/2018 04:21:20 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,09/09/2018 07:07:08 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,13/09/2018 11:28:59 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8030,Arturo Morales,General,13/09/2018 11:28:59 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8047,Arturo Morales,General,29/10/2018 03:17:41 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
-8047,Arturo Morales,General,29/10/2018 03:18:16 p. m.,18,No,150,MXN,Regular,150,0,0,0,0,0
+NumeroTicket,Usuario,Cliente,FechaVenta,TipoDeCambio,FacturaRequerida,TotalVendido,Moneda,TipoVenta,EfectivoMXN,EfectivoUSD,TarjetaMXN,ChequeMXN,TransferenciaMXN,OtroMXN,CambioMXN,TotalVendidoMXN
+8047,Arturo Morales,General,02/11/2018 06:41:54 p. m.,20,No,150,MXN,Regular,0,0,0,0,0,0,0,150
+8048,Arturo Morales,General,02/11/2018 06:42:03 p. m.,20,No,200,MXN,Regular,0,0,0,0,0,0,0,200
+8049,Arturo Morales,General,02/11/2018 06:42:09 p. m.,20,No,300,MXN,Regular,0,0,0,0,0,0,0,300
+8049,Arturo Morales,General,02/11/2018 06:42:18 p. m.,20,No,400,MXN,Interno,400,0,0,0,0,0,0,400
+8049,Arturo Morales,General,02/11/2018 06:42:34 p. m.,20,No,500,MXN,Interno,600,0,0,0,0,0,100,500
+8050,Arturo Morales,General,02/11/2018 06:42:59 p. m.,20,No,1000,MXN,Regular,100,10,750,0,0,0,50,1000
+8047,Arturo Morales,General,02/11/2018 06:47:46 p. m.,20,No,100,MXN,Regular,20,5,0,0,0,0,20,100
+8048,Arturo Morales,General,02/11/2018 06:48:20 p. m.,20,No,100,MXN,Regular,0,0,100,0,0,0,0,100
+8049,Arturo Morales,General,02/11/2018 06:48:25 p. m.,20,No,150,MXN,Regular,0,0,0,0,150,0,0,150
+8050,Arturo Morales,General,02/11/2018 06:48:31 p. m.,20,No,200,MXN,Regular,0,0,0,200,0,0,0,200
+8051,Arturo Morales,General,02/11/2018 06:51:14 p. m.,20,No,3000,MXN,Regular,150,95,400,300,200,100,50,3000
+8047,Arturo Morales,General,02/11/2018 06:59:36 p. m.,20,No,1000,MXN,Regular,1500,0,0,0,0,0,500,1000
+8047,Arturo Morales,General,02/11/2018 07:09:46 p. m.,20,No,1500,MXN,Regular,100,10,1000,300,0,0,100,1500

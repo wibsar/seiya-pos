@@ -13,24 +13,8 @@ namespace Seiya
         Cheque,
         Transferencia,
         Puntos,
+        Parcial,
         Otro,
         Desconocido
     }
-
-    //public enum PaymentTypeEnum
-    //{
-    //    Cash,
-    //    Card,
-    //    BankTransfer,
-    //    Points,
-    //    Check,
-    //    Tarjeta,
-    //    Efectivo,
-    //    Cheque,
-    //    Transferencia,
-    //    Puntos,
-    //    Otro,
-    //    Desconocido,
-    //    Unknown
-    //}
 }

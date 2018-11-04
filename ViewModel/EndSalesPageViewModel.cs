@@ -492,6 +492,9 @@ namespace Seiya
             //BackUp Expenses files
             Expense.BackUpExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
             Expense.ClearExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
+            //Backup Paymenets Files
+            Transaction.BackUpPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
+            Transaction.ClearPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
             //Update POS Data
             _pos.LastReceiptNumber = TransactionData.LastReceiptNumber;
             _pos.LastTransactionNumber = TransactionData.LastTransactionNumber;

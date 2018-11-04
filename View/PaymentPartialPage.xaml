@@ -91,10 +91,10 @@
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column ="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Pesos Recibidos"></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column ="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Efectivo Pesos"></TextBlock>
                 <TextBox Grid.Row="1" Grid.Column ="0" Margin="5,5,5,5" FontSize="24" Foreground="Red" Text="{Binding PaymentPartialCashMXN, Mode=TwoWay}" MinHeight="40" MaxWidth="150" VerticalAlignment="Top" HorizontalContentAlignment="Center"></TextBox>
                 <TextBlock Grid.Row="2" Grid.Column ="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PaymentRemainingMXN, Mode=TwoWay}"></TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column ="1" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Dolar Recibidos"></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column ="1" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Efectivo Dolares"></TextBlock>
                 <TextBox Grid.Row="1" Grid.Column ="1" Margin="5,5,5,5" FontSize="24" Foreground="Red" Text="{Binding PaymentPartialCashUSD, Mode=TwoWay}" MinHeight="40" MaxWidth="150" VerticalAlignment="Top" HorizontalContentAlignment="Center"></TextBox>
                 <TextBlock Grid.Row="2" Grid.Column ="1" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PaymentRemainingMXN, Mode=TwoWay}"></TextBlock>
                 <TextBlock Grid.Row="0" Grid.Column ="2" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Tarjeta Pesos"></TextBlock>
@@ -113,14 +113,14 @@
                     <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Grid.Column ="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Cheque"></TextBlock>
-                <TextBox Grid.Row="1" Grid.Column ="0" Margin="5,5,5,5" FontSize="24" Foreground="Red" Text="{Binding PaymentPartialCashMXN, Mode=TwoWay}" MinHeight="40" MaxWidth="150" VerticalAlignment="Top" HorizontalContentAlignment="Center"></TextBox>
+                <TextBlock Grid.Row="0" Grid.Column ="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Cheque Pesos"></TextBlock>
+                <TextBox Grid.Row="1" Grid.Column ="0" Margin="5,5,5,5" FontSize="24" Foreground="Red" Text="{Binding PaymentPartialCheckMXN, Mode=TwoWay}" MinHeight="40" MaxWidth="150" VerticalAlignment="Top" HorizontalContentAlignment="Center"></TextBox>
                 <TextBlock Grid.Row="2" Grid.Column ="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PaymentRemainingMXN, Mode=TwoWay}"></TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column ="1" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Transferencia"></TextBlock>
-                <TextBox Grid.Row="1" Grid.Column ="1" Margin="5,5,5,5" FontSize="24" Foreground="Red" Text="{Binding PaymentPartialCashUSD, Mode=TwoWay}" MinHeight="40" MaxWidth="150" VerticalAlignment="Top" HorizontalContentAlignment="Center"></TextBox>
+                <TextBlock Grid.Row="0" Grid.Column ="1" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Transferencia Pesos"></TextBlock>
+                <TextBox Grid.Row="1" Grid.Column ="1" Margin="5,5,5,5" FontSize="24" Foreground="Red" Text="{Binding PaymentPartialTransferMXN, Mode=TwoWay}" MinHeight="40" MaxWidth="150" VerticalAlignment="Top" HorizontalContentAlignment="Center"></TextBox>
                 <TextBlock Grid.Row="2" Grid.Column ="1" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PaymentRemainingMXN, Mode=TwoWay}"></TextBlock>
-                <TextBlock Grid.Row="0" Grid.Column ="2" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Otro"></TextBlock>
-                <TextBox Grid.Row="1" Grid.Column ="2" Margin="5,5,5,5" FontSize="24" Foreground="Red" Text="{Binding PaymentPartialCardMXN, Mode=TwoWay}" MinHeight="40" MaxWidth="150" VerticalAlignment="Top" HorizontalContentAlignment="Center"></TextBox>
+                <TextBlock Grid.Row="0" Grid.Column ="2" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Otro Pesos"></TextBlock>
+                <TextBox Grid.Row="1" Grid.Column ="2" Margin="5,5,5,5" FontSize="24" Foreground="Red" Text="{Binding PaymentPartialOtherMXN, Mode=TwoWay}" MinHeight="40" MaxWidth="150" VerticalAlignment="Top" HorizontalContentAlignment="Center"></TextBox>
                 <TextBlock Grid.Row="2" Grid.Column ="2" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding PaymentRemainingMXN, Mode=TwoWay}"></TextBlock>
             </Grid>
         </Grid>

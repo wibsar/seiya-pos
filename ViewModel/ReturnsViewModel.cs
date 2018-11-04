@@ -22,8 +22,6 @@ namespace Seiya
         private DateTime _purchaseDate;
         private string _customerName;
         private string _customerNumber;
-        private static Logger _logInstance = null;
-
 
         #endregion
 
@@ -133,7 +131,7 @@ namespace Seiya
                 MainWindowViewModel.GetInstance().ReturnTransaction = true;
                 MainWindowViewModel.GetInstance().PaymentReceivedMXN = MainWindowViewModel.GetInstance().CalculateCurrentCartTotal();
                 //Log
-                MainWindowViewModel.GetInstance().Log.Write(MainWindowViewModel.GetInstance().CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Devolucion Registrada Folio: " + ReturnID);               
+                MainWindowViewModel.GetInstance().Log.Write(MainWindowViewModel.GetInstance().CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Devolucion Registrada Folio: " + ReturnID.ToString() );
                 MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PaymentPage.xaml";
             }
             else
