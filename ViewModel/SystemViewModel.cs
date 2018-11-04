@@ -331,6 +331,8 @@ namespace Seiya
             //Save Data
             _posInstance.UpdateAllData();
             _posInstance.SaveDataTableToCsv();
+            //Log
+            MainWindowViewModel.GetInstance().Log.Write(MainWindowViewModel.GetInstance().CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Menu de Sistema Actualizado");
             //Message
             MainWindowViewModel.GetInstance().Code = "¡Datos Actualizados!";
             MainWindowViewModel.GetInstance().CodeColor = Constants.ColorCodeSave;

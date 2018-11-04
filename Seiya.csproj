@@ -211,6 +211,9 @@
     <Compile Include="View\VendorMainPage.xaml.cs">
       <DependentUpon>VendorMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\Yonke.xaml.cs">
+      <DependentUpon>Yonke.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WpfBindingUtilities\DelegateCommand.cs" />
     <Compile Include="WpfBindingUtilities\ObservableObject.cs" />
     <Page Include="MainWindow.xaml">
@@ -348,6 +351,10 @@
     <Page Include="View\VendorMainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\Yonke.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
