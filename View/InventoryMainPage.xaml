@@ -101,7 +101,7 @@
                 </Grid.RowDefinitions>
 
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding InventorModifyItemCommand}" CommandParameter="inventory_add_clone">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
+                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Clonar.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" Text="Clonar"></TextBlock>
             </Grid>
