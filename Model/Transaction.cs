@@ -401,6 +401,25 @@ namespace Seiya
                 Constants.DataFolderPath + Constants.TransactionsMasterFileName, true);
         }
 
+        //Method to create a backup file
+        public static void BackUpPaymentsFile(string paymentsFilePath)
+        {
+            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+            var currentTime = DateTime.Now;
+            //Load inventory csv file and create a backup copy
+            string PaymentsFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + "Pagos" +
+                currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") +
+                currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".csv";
+
+            File.Copy(paymentsFilePath, PaymentsFileBackUpCopyName);
+        }
+
+        //Method to clear file
+        public static void ClearPaymentsFile(string paymentsFilePath)
+        {
+            File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.TransactionsPaymentsBlankFileName,
+                Constants.DataFolderPath + Constants.TransactionsPaymentsFileName, true);
+        }
 
         /// <summary>
         /// Get transaction sales data for end of day sales report
@@ -413,6 +432,15 @@ namespace Seiya
             Pos posData, out TransactionDataStruct transactionData)
         {
             System.Data.DataTable data;
+            decimal cashMxnOffset = 0;
+            decimal cashUsdOffset = 0;
+            decimal cardUsdOffset = 0;
+            decimal transferMxnOffset = 0;
+            decimal checkMxnOffset = 0;
+            decimal otherMxnOffset = 0;
+            decimal tempPartialTotalMxn = 0;
+            var ticketsList = new List<int>();
+
             transactionData = new TransactionDataStruct
             {
                 TotalAmountSold = 0,
@@ -481,7 +509,6 @@ namespace Seiya
                             itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
 
                         //Get payment method
-                        //row["Descripcion"].ToString() != "Puntos Descuento" && 
                         if (row["TipoVenta"].ToString() != "DevolucionEfectivo" && row["TipoVenta"].ToString() != "DevolucionTarjeta")
                         {
                             switch (row["MetodoPago"].ToString())
@@ -505,6 +532,15 @@ namespace Seiya
                                 case "Other":
                                 case "Otro":
                                     transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
+                                    break;
+                                case "Partial":
+                                case "Parcial":
+                                    //add ticket number to list so it can be searched later
+                                    if (!ticketsList.Contains(Int32.Parse(row["NumeroTicket"].ToString())))
+                                    {
+                                        ticketsList.Add(Int32.Parse(row["NumeroTicket"].ToString()));
+                                    }
+                                    tempPartialTotalMxn += decimal.Parse(row["TotalVendido"].ToString());
                                     break;
                                 default:
                                     transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
@@ -564,21 +600,24 @@ namespace Seiya
             }
             transactionData.SalesInfoPerCategory = categoryData;
 
-            //Get total from the payment section regarding partialpayments
-            decimal cashMxn, cashUsd, cardMxn, transferMxn, checkMxn, otherMxn, totalChangeMxn, totalSoldMxn;
-            GetSalePaymentTotalPerType(out cashMxn, out cashUsd, out cardMxn, out transferMxn, out checkMxn,
-                out otherMxn, out totalChangeMxn, out totalSoldMxn);
+            //Search for partial payment tickets in payments db
+            decimal cashMxn = 0, cashUsd = 0, cardMxn = 0, transferMxn = 0, checkMxn = 0, otherMxn = 0, totalChangeMxn = 0, totalSoldMxn = 0;
+            if (ticketsList.Count > 0)
+            {
+                GetSalePaymentTotalPerType(ticketsList, out cashMxn, out cashUsd, out cardMxn, out transferMxn, out checkMxn,
+                    out otherMxn, out totalChangeMxn, out totalSoldMxn);
+            }
 
-            transactionData.CashTotal = cashMxn + Math.Round(cashUsd * MainWindowViewModel.GetInstance().ExchangeRate, 2) - totalChangeMxn;
-            transactionData.CardTotal = cardMxn;
-            transactionData.CheckTotal = checkMxn;
-            transactionData.BankTotal = transferMxn;
-            transactionData.OtherTotal = otherMxn;
+            transactionData.CashTotal += (cashMxn + Math.Round(cashUsd * MainWindowViewModel.GetInstance().ExchangeRate, 2) - totalChangeMxn);
+            transactionData.CardTotal += cardMxn;
+            transactionData.CheckTotal += checkMxn;
+            transactionData.BankTotal += transferMxn;
+            transactionData.OtherTotal += otherMxn;
 
             return categoryData;
         }
 
-        private static void GetSalePaymentTotalPerType(out decimal cashMxn, out decimal cashUsd, out decimal cardMxn,
+        private static void GetSalePaymentTotalPerType(List<int> ticketNumbers, out decimal cashMxn, out decimal cashUsd, out decimal cardMxn,
             out decimal transferMxn, out decimal checkMxn, out decimal otherMxn, out decimal totalChangeMxn, out decimal totalSoldMxn)
         {
             cashMxn = 0;
@@ -591,23 +630,28 @@ namespace Seiya
             totalSoldMxn = 0;
 
             var data = Utilities.LoadCsvToDataTable(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
-            for (var index = 0; index < data.Rows.Count; index++)
+            foreach (var ticketNumber in ticketNumbers)
             {
-                var row = data.Rows[index];
+                for (var index = 0; index < data.Rows.Count; index++)
+                {
+                    var row = data.Rows[index];
+                    if (Int32.Parse(row["NumeroTicket"].ToString()) != ticketNumber) continue;
 
-                ///TODO: Verify functionality with returns and removal
-                if (row["TipoVenta"].ToString() == "DevolucionEfectivo" &&
-                    row["TipoVenta"].ToString() == "DevolucionTarjeta" &&
-                    row["TipoVenta"].ToString() == "Remover") continue;
+                    ///TODO: Verify functionality with returns and removal
+                    if (row["TipoVenta"].ToString() == "DevolucionEfectivo" &&
+                        row["TipoVenta"].ToString() == "DevolucionTarjeta" &&
+                        row["TipoVenta"].ToString() == "Remover") continue;
 
-                cashMxn += decimal.Parse(row["EfectivoMXN"].ToString());
-                cashUsd += decimal.Parse(row["EfectivoUSD"].ToString());
-                cardMxn += decimal.Parse(row["TarjetaMXN"].ToString());
-                checkMxn += decimal.Parse(row["ChequeMXN"].ToString());
-                transferMxn += decimal.Parse(row["TransferenciaMXN"].ToString());
-                otherMxn += decimal.Parse(row["OtroMXN"].ToString());
-                totalChangeMxn += decimal.Parse(row["CambioMXN"].ToString());
-                totalSoldMxn += decimal.Parse(row["TotalVendidoMXN"].ToString());
+                    cashMxn += decimal.Parse(row["EfectivoMXN"].ToString());
+                    cashUsd += decimal.Parse(row["EfectivoUSD"].ToString());
+                    cardMxn += decimal.Parse(row["TarjetaMXN"].ToString());
+                    checkMxn += decimal.Parse(row["ChequeMXN"].ToString());
+                    transferMxn += decimal.Parse(row["TransferenciaMXN"].ToString());
+                    otherMxn += decimal.Parse(row["OtroMXN"].ToString());
+                    totalChangeMxn += decimal.Parse(row["CambioMXN"].ToString());
+                    totalSoldMxn += decimal.Parse(row["TotalVendidoMXN"].ToString());
+                    break;
+                }
             }
         }
 

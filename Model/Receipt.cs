@@ -37,6 +37,8 @@ namespace Seiya
         private int _lastReceiptNumber;
         private Pos _pos;
         private ObservableCollection<Product> _products;
+
+        private int maxCharPerLine = 35;
         #endregion
 
         #region Properties
@@ -88,17 +90,19 @@ namespace Seiya
 
         public TransactionDataStruct EndOfDayReceiptData { get; set; }
         public EndOfSalesDataStruct EndOfDayAmountData { get; set; }
+        public SalesDataStruct SalesData { get; set; }
 
         #endregion
 
         #region Constructors
 
-        public Receipt(Pos posData, Transaction transaction, ReceiptType receiptType, ObservableCollection<Product> products)
+        public Receipt(Pos posData, Transaction transaction, SalesDataStruct salesData)
         {
-            _receiptType = receiptType;
+            _receiptType = salesData.ReceiptType;
             Pos = posData;
             Transaction = transaction;
-            _products = products;
+            _products = salesData.Products;
+            SalesData = salesData;
         }
 
         public Receipt(Pos posData, ReceiptType receiptType, TransactionDataStruct endOfDayReceiptData, EndOfSalesDataStruct endOfDayAmountData)
@@ -195,6 +199,11 @@ namespace Seiya
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
 
+            //User
+            graphic.DrawString("Usuario: " + SalesData.User.UserName, storeInfoFont, new SolidBrush(Color.Black), startX,
+                startY + offset);
+            offset = offset + (int)storeInfoFontHeight + 2;
+
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             var date = DateTime.Now.ToString("g");
             var ticketNumber = "No. " + Pos.LastReceiptNumber.ToString();
@@ -239,6 +248,23 @@ namespace Seiya
             graphic.DrawString(("Articulos: " + itemsNumber.ToString()).PadLeft(21), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
+            if (SalesData.Customer != null || SalesData.Customer.Name != "General")
+            {
+                offset = offset + (int)fontHeight;// + 10;
+
+                graphic.DrawString(("Cliente: " + SalesData.Customer.Name).PadLeft(21), font,
+                    new SolidBrush(Color.Black), startX, startY + offset);
+
+                offset = offset + (int)fontHeight;// + 10;
+
+                graphic.DrawString(("Puntos Obtenidos: " + SalesData.PointsObtained.ToString()).PadLeft(21), font,
+                    new SolidBrush(Color.Black), startX, startY + offset);
+
+                offset = offset + (int)fontHeight;// + 10;
+
+                graphic.DrawString(("Puntos Disponibles: " + SalesData.Customer.PointsAvailable.ToString()).PadLeft(21), font,
+                    new SolidBrush(Color.Black), startX, startY + offset);
+            }
 
             offset = offset + (int)fontHeight + 5;// + 15;
 

@@ -4247,7 +4247,16 @@ namespace Seiya
         private bool PrintReceipt(Transaction transaction, bool printToFileOnly = false)
         {
             //Receipt for individual sale
-            var receipt = new Receipt(_posInstance, transaction, ReceiptType.RegularSale, CurrentCartProducts);
+            var salesData = new SalesDataStruct()
+            {
+                User = CurrentUser,
+                Customer = CurrentCustomer,
+                PointsObtained = PaymentPointsReceived,
+                ReceiptType = ReceiptType.RegularSale,
+                Products = CurrentCartProducts      
+            };
+
+            var receipt = new Receipt(_posInstance, transaction, salesData);
             receipt.PrintSalesReceipt();
             return true;
         }
