@@ -211,8 +211,8 @@
     <Compile Include="View\VendorMainPage.xaml.cs">
       <DependentUpon>VendorMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\Yonke.xaml.cs">
-      <DependentUpon>Yonke.xaml</DependentUpon>
+    <Compile Include="View\CarRegistrationPage.xaml.cs">
+      <DependentUpon>CarRegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="WpfBindingUtilities\DelegateCommand.cs" />
     <Compile Include="WpfBindingUtilities\ObservableObject.cs" />
@@ -352,7 +352,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\Yonke.xaml">
+    <Page Include="View\CarRegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
