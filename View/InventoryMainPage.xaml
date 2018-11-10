@@ -89,7 +89,7 @@
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ChangePageCommand}" CommandParameter="save_transactions">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ExportDataBaseCommand}" CommandParameter="save_inventory">
                     <Image Source="C:\Projects\seiya-pos\Resources\Images\Export.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Exportar" ></TextBlock>
