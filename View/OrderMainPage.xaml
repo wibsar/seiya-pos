@@ -71,10 +71,10 @@
                 <DataGridTextColumn Binding="{Binding Customer}" ClipboardContentBinding="{x:Null}" Header="Cliente" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding DueDate}" ClipboardContentBinding="{x:Null}" Header="Fecha Entrega" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Title}" ClipboardContentBinding="{x:Null}" Header="Titulo" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding TotalAmount}" ClipboardContentBinding="{x:Null}" Header="Monto Total" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TotalAmount, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header="Monto Total" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding CurrencyType}" ClipboardContentBinding="{x:Null}" Header="Moneda" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding TotalPrePaid}" ClipboardContentBinding="{x:Null}" Header="Anticipo" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding TotalDue}" ClipboardContentBinding="{x:Null}" Header="Saldo" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TotalPrePaid, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header="Anticipo" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TotalDue, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header="Saldo" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding PrePaidTicketNumber}" ClipboardContentBinding="{x:Null}" Header="No. Ticket Anticipo" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding RegistrationDate}" ClipboardContentBinding="{x:Null}" Header="Fecha Pedido" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="True"/>

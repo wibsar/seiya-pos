@@ -91,9 +91,9 @@
                 <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductCode}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBlock>
                 <TextBlock Grid.Row="3" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductDescription}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBlock>
                 <TextBlock Grid.Row="4" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductCategory}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBlock>
-                <TextBox Grid.Row="5" Grid.Column="1" Margin="5,0,400,2" VerticalContentAlignment="Center" Text="{Binding TransactionTemporalItem.ProductPrice}"></TextBox>
+                <TextBox Grid.Row="5" Grid.Column="1" Margin="5,0,400,2" VerticalContentAlignment="Center" Text="{Binding TransactionTemporalItem.ProductPrice, StringFormat='${0}'}"></TextBox>
                 <TextBox Grid.Row="6" Grid.Column="1" Margin="5,2,400,0" VerticalContentAlignment="Center" Text="{Binding TransactionTemporalItem.ProductQuantitySold}"></TextBox>
-                <TextBlock Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductTotalSale}"></TextBlock>
+                <TextBlock Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductTotalSale, StringFormat='${0}'}"></TextBlock>
                 <TextBlock Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.TransactionDate}"></TextBlock>
                 <TextBlock Grid.Row="9" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.CustomerName}"></TextBlock>
                 <TextBlock Grid.Row="10" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.UserName}"></TextBlock>

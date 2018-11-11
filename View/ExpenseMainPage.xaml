@@ -70,7 +70,7 @@
                 <DataGridTextColumn Binding="{Binding Vendor}" ClipboardContentBinding="{x:Null}" Header="Proveedor" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding TicketNumber}" ClipboardContentBinding="{x:Null}" Header="Numero de Ticket" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Description}" ClipboardContentBinding="{x:Null}" Header="Descripcion" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Amount}" ClipboardContentBinding="{x:Null}" Header="Monto" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Amount, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header="Monto" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding CurrencyTypeString}" ClipboardContentBinding="{x:Null}" Header="Moneda" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding PaymentTypeString}" ClipboardContentBinding="{x:Null}" Header="Metodo de Pago" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding ExpenseCategory}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="True"/>

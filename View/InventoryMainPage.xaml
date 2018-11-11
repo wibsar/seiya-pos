@@ -68,8 +68,8 @@
                 <DataGridTextColumn Binding="{Binding Code}" ClipboardContentBinding="{x:Null}" Header="Codigo" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Description}" ClipboardContentBinding="{x:Null}" Header="Descripcion" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Price}" ClipboardContentBinding="{x:Null}" Header="Precio" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PriceCurrency}" ClipboardContentBinding="{x:Null}" Header="Moneda" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Price, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header="Precio" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PriceCurrency, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header="Moneda" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding LocalQuantityAvailable}" ClipboardContentBinding="{x:Null}" Header="Existencia" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding TotalQuantityAvailable}" ClipboardContentBinding="{x:Null}" Header="Existencia Total" IsReadOnly="True"/>
             </DataGrid.Columns>

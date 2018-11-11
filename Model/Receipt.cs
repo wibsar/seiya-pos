@@ -248,7 +248,7 @@ namespace Seiya
             graphic.DrawString(("Articulos: " + itemsNumber.ToString()).PadLeft(21), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
-            if (SalesData.Customer != null || SalesData.Customer.Name != "General")
+            if (SalesData.Customer != null)
             {
                 offset = offset + (int)fontHeight;// + 10;
 

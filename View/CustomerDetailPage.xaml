@@ -86,7 +86,7 @@
                 <TextBlock Grid.Row="5" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.PointsAvailable}"></TextBlock>
                 <TextBlock Grid.Row="6" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.PointsUsed}"></TextBlock>
                 <TextBlock Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalVisits}"></TextBlock>
-                <TextBlock Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalSpent}"></TextBlock>
+                <TextBlock Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalSpent, StringFormat='${0}'}"></TextBlock>
             </Grid>
         </Grid>
 

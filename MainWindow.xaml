@@ -87,7 +87,7 @@
                         <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Usuario.png" Margin="5"></Image>
                     </Grid>
                 </Button>
-                <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name}" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Right"  ></TextBlock>
+                <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name, StringFormat='Usuario: {0}'}" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Right"  ></TextBlock>
             </Grid>
         </Grid>
         <!-- Grid for checkout section -->
@@ -138,11 +138,11 @@
                                 <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch" FontSize="18" Foreground="#FF0E2D3B"></TextBlock>
                                 <TextBlock Text="{Binding Category}" HorizontalAlignment="Stretch" FontSize="14" Foreground="Gray"></TextBlock>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding LastQuantitySold}" HorizontalAlignment="Left" FontSize="18" Foreground="#FF0054B9"></TextBlock>
+                                    <TextBlock Text="{Binding LastQuantitySold}" HorizontalAlignment="Left" FontSize="18" Foreground="#FF0074FF"></TextBlock>
                                     <TextBlock Text=" x " FontSize="14" Foreground="gray" VerticalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="{Binding Price}" FontSize="18" Foreground="#FF0E2D3B"></TextBlock>
+                                    <TextBlock Text="{Binding Price, StringFormat='${0}'}" FontSize="18" Foreground="#FF0E2D3B"></TextBlock>
                                     <TextBlock Text="  =  " FontSize="14" Foreground="gray" VerticalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="{Binding LastAmountSold}" FontSize="18" Foreground="#FF00BB00"></TextBlock>
+                                    <TextBlock Text="{Binding LastAmountSold, StringFormat='${0}'}" FontSize="18" Foreground="#FF00BB00"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
@@ -176,15 +176,8 @@
                 </Grid>
                 <!-- Bottom for price display and payment -->
                 <Grid Row="3" ShowGridLines="True">
-                    <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" BorderBrush="{x:Null}"  FontSize="24" Background="Red" Margin="0,0,0,1">                        
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                                <ColumnDefinition Width="*"></ColumnDefinition>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Pagar: $" VerticalAlignment="Center" FontSize="18" Foreground="White"></TextBlock>
-                            <TextBlock Grid.Column="1" Text="{Binding PaymentTotalMXN, Mode=TwoWay}" FontSize="20" FontWeight="Bold" VerticalAlignment="Center" Margin="5" Foreground="White" ></TextBlock>
-                        </Grid>
+                    <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" BorderBrush="{x:Null}"  FontSize="24" Background="Red" Margin="0,0,0,1">
+                        <TextBlock Grid.Column="1" Text="{Binding PaymentTotalMXN, Mode=TwoWay, StringFormat='Pagar: ${0}'}" FontSize="24" VerticalAlignment="Center" Margin="5" Foreground="White" ></TextBlock>                       
                     </Button>
                 </Grid>
             </Grid>

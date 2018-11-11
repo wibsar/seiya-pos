@@ -65,9 +65,9 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding ReceiptNumber}" ClipboardContentBinding="{x:Null}" Header="Recibo" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding ProductCode}" ClipboardContentBinding="{x:Null}" Header="Codigo" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding ProductPrice}" ClipboardContentBinding="{x:Null}" Header="Precio" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ProductPrice, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header="Precio" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding ProductQuantitySold}" ClipboardContentBinding="{x:Null}" Header="Cantidad" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding ProductTotalSale}" ClipboardContentBinding="{x:Null}" Header="Total" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ProductTotalSale, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header="Total" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding TransactionDate}" ClipboardContentBinding="{x:Null}" Header="Fecha" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding SaleType}" ClipboardContentBinding="{x:Null}" Header="Tipo Venta" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding PaymentType}" ClipboardContentBinding="{x:Null}" Header="Metodo Pago" IsReadOnly="True"/>
