@@ -92,8 +92,8 @@
 
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Recibido en Pesos" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" ></TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="0" Text="Recibido en Dólar" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" ></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,5,2.5,5" HorizontalAlignment="Center" FontSize="24" Text="{Binding PaymentReceivedMXN}" VerticalAlignment="Top"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" Margin="2.5,5,5,5" HorizontalAlignment="Center" FontSize="24" Text="{Binding PaymentReceivedUSD}" VerticalAlignment="Top"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,5,2.5,5" HorizontalAlignment="Center" FontSize="24" Text="{Binding PaymentReceivedMXN, StringFormat='${0}'}" VerticalAlignment="Top"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Margin="2.5,5,5,5" HorizontalAlignment="Center" FontSize="24" Text="{Binding PaymentReceivedUSD, StringFormat='${0}'}" VerticalAlignment="Top"></TextBlock>
             </Grid>
             <!-- Paid Amount and process payment in USD-->
             <Grid Grid.Row="2">
@@ -108,8 +108,8 @@
 
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Cambio en Pesos" Foreground="Gray" HorizontalAlignment="Center" FontSize="24" ></TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="0" Text="Cambio en Dólar" Foreground="Gray" HorizontalAlignment="Center" FontSize="24" ></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="1" Foreground="#FFD10202" Margin="5,5,2.5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Text="{Binding PaymentChangeMXN}"></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="1" Foreground="#FF009E2B" Margin="2.5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Text="{Binding PaymentChangeUSD}"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="1" Foreground="#FFD10202" Margin="5,5,2.5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Text="{Binding PaymentChangeMXN, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="1" Foreground="#FF009E2B" Margin="2.5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Text="{Binding PaymentChangeUSD, StringFormat='${0}'}"></TextBlock>
             </Grid>
         </Grid>
         <Button Grid.Row="4" x:Name="EndTransactionBtn" FontSize="24" FontWeight="Bold" Foreground="DarkGreen" Background="#FF8BD48B" Content="TERMINAR" Command="{Binding ChangePageCommand}" CommandParameter="end_transaction" BorderBrush="{x:Null}"></Button>

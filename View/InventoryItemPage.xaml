@@ -140,14 +140,14 @@
                 <TextBox Grid.Row="3" Margin="2" Text="{Binding InventoryTemporalItem.ProviderProductId}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
                 <TextBox Grid.Row="4" Margin="2" Text="{Binding InventoryTemporalItem.Description}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
                 <TextBox Grid.Row="5" Margin="2" Text="{Binding InventoryTemporalItem.Category}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
-                <TextBox Grid.Row="6" Margin="2" Text="{Binding InventoryTemporalItem.Price}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <TextBox Grid.Row="6" Margin="2" Text="{Binding InventoryTemporalItem.Price, StringFormat='${0}'}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
                 <ComboBox Grid.Row="7" Margin="2" ItemsSource="{Binding InventoryPriceCurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding InventoryTemporalItem.PriceCurrency, Mode=TwoWay}" FontSize="18" VerticalContentAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
                 <TextBlock Grid.Row="8" Background="LightGray" Height="2" Margin="0"></TextBlock>
-                <TextBox Grid.Row="9" Margin="2" Text="{Binding InventoryTemporalItem.Cost}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
+                <TextBox Grid.Row="9" Margin="2" Text="{Binding InventoryTemporalItem.Cost, StringFormat='${0}'}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
                 <ComboBox Grid.Row="10" Margin="2" ItemsSource="{Binding InventoryCostCurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding InventoryTemporalItem.CostCurrency, Mode=TwoWay}" FontSize="18" VerticalContentAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
                 <TextBlock Grid.Row="11" Margin="2" Text="{Binding InventoryTemporalItem.InternalQuantity}"></TextBlock>
                 <TextBlock Grid.Row="12" Margin="2" Text="{Binding InventoryTemporalItem.QuantitySold}"></TextBlock>
-                <TextBlock Grid.Row="13" Margin="2" Text="{Binding InventoryTemporalItem.AmountSold}"></TextBlock>
+                <TextBlock Grid.Row="13" Margin="2" Text="{Binding InventoryTemporalItem.AmountSold, StringFormat='${0}'}"></TextBlock>
                 <TextBox Grid.Row="14" Margin="2" Text="{Binding InventoryTemporalItem.LocalQuantityAvailable}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
                 <TextBox Grid.Row="15" Margin="2" Text="{Binding InventoryTemporalItem.TotalQuantityAvailable}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
                 <TextBox Grid.Row="16" Margin="2" Text="{Binding InventoryTemporalItem.MinimumStockQuantity}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>

@@ -69,7 +69,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="Gray" Padding="10,0,0,0" Grid.Row="0" VerticalAlignment="Bottom" Text="Precio"/>
-                <TextBox VerticalContentAlignment="Center" Grid.Row="1" Text="{Binding Price , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" FontWeight="Bold" FontSize="24" Margin="5,0"></TextBox>
+                <TextBox VerticalContentAlignment="Center" Grid.Row="1" Text="{Binding Price , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat='${0}'}" AcceptsReturn="False" AcceptsTab="False" FontWeight="Bold" FontSize="24" Margin="5,0"></TextBox>
                 <Button Grid.Column="1" Grid.Row="1" x:Name="CurrencyTypeToggle" Foreground="{Binding CodeColor, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ChangeCurrencyCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=CurrencyTypeToggle}" FontSize="18" Width="Auto" Margin="5,0,5,0"  BorderBrush="{x:Null}" Background="LightGray" Content="{Binding CurrencyTypeContent}" HorizontalAlignment = "Stretch"  />
             </Grid>
         </Grid>

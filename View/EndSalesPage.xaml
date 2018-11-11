@@ -204,20 +204,20 @@
                     <RowDefinition Height=".2*"></RowDefinition>
 
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="{Binding CashTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="1" Text="{Binding CardTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="2" Text="{Binding CheckTotalSales}"></TextBlock>
-                <TextBlock Grid.Row="3" Text="{Binding BankTransferTotalSales}"></TextBlock>
+                <TextBlock Grid.Row="0" Text="{Binding CashTotalSales, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="1" Text="{Binding CardTotalSales, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="2" Text="{Binding CheckTotalSales, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="3" Text="{Binding BankTransferTotalSales, StringFormat='${0}'}"></TextBlock>
                 <TextBlock Grid.Row="4" Background="#FFD4D4D4" Height="1"></TextBlock>
-                <TextBlock Grid.Row="5" Text="{Binding ExpensesTotal}"></TextBlock>
-                <TextBlock Grid.Row="6" Text="{Binding ExpensesCashTotal}"></TextBlock>
-                <TextBlock Grid.Row="7" Text="{Binding ReturnsCashTotal}"></TextBlock>
-                <TextBlock Grid.Row="8" Text="{Binding ReturnsCardTotal}"></TextBlock>
-                <TextBlock Grid.Row="9" Text="{Binding RegisterPreviousCash}"></TextBlock>
-                <TextBlock Grid.Row="10" Text="{Binding MxnCashBalance}"></TextBlock>
-                <TextBlock Grid.Row="11" Text="{Binding Delta}"></TextBlock>
+                <TextBlock Grid.Row="5" Text="{Binding ExpensesTotal, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="6" Text="{Binding ExpensesCashTotal, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="7" Text="{Binding ReturnsCashTotal, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="8" Text="{Binding ReturnsCardTotal, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="9" Text="{Binding RegisterPreviousCash, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="10" Text="{Binding MxnCashBalance, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="11" Text="{Binding Delta, StringFormat='${0}'}"></TextBlock>
                 <TextBlock Grid.Row="12" Text="{Binding PointsTotalUsed}"></TextBlock>
-                <TextBox Grid.Row="13" Text="{Binding RegisterNewCash, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"></TextBox>
+                <TextBox Grid.Row="13" Text="{Binding RegisterNewCash, UpdateSourceTrigger=PropertyChanged, StringFormat='${0}'}" FontWeight="Bold"></TextBox>
 
             </Grid>
         </Grid>
