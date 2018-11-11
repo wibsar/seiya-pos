@@ -30,6 +30,7 @@
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
+        
     </Window.Resources>
 
     <!-- Main Window Grid -->

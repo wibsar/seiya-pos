@@ -496,6 +496,15 @@ namespace Seiya
             }
         }
 
+        public string PaymentTotalUSDString
+        {
+            get { return "+$" + _paymentTotalUSD.ToString(); }
+            set
+            {
+                OnPropertyChanged();
+            }
+        }
+
         public decimal PaymentTotalMXN
         {
             get
@@ -506,6 +515,18 @@ namespace Seiya
             {
                 _paymentTotalMXN = Math.Round(value, 2);
                 PaymentTotalUSD = Math.Round(_paymentTotalMXN /_exchangeRate, 2);
+                OnPropertyChanged();
+            }
+        }
+        
+        public string PaymentTotalMXNString
+        {
+            get
+            {
+                return "+$" + _paymentTotalMXN.ToString();
+            }
+            set
+            {                
                 OnPropertyChanged();
             }
         }
@@ -1330,7 +1351,7 @@ namespace Seiya
         {
             get
             {
-                return "$ " + _posInstance.ExchangeRate.ToString();
+                return _posInstance.ExchangeRate.ToString();
             }
             set
             {
@@ -1570,7 +1591,7 @@ namespace Seiya
                     transactionType = TransactionType.Regular;
                     PaymentProcessStart(parameter.ToString(), transactionType);
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Parcial");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Parcial");
                     SystemUnlock = false;
                     CurrentPage = "\\View\\PaymentEndPage.xaml";
                     break;
@@ -1681,6 +1702,8 @@ namespace Seiya
             }
             return true;
         }
+       
+
         #endregion
 
         #region SampleClickCommand

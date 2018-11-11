@@ -131,7 +131,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Row="0" Grid.Column="0" Background="#FFF3F3F3" BorderBrush="{x:Null}" Margin="5,5,2.5,2.5" Content="{Binding PaymentTotalMXN}" Command="{Binding PaymentBillClickCommand}" CommandParameter="exact_mxn"></Button>
+                    <Button Grid.Row="0" Grid.Column="0" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="24" Foreground="Black" Margin="5,5,2.5,2.5" Content="{Binding PaymentTotalMXNString}" Command="{Binding PaymentBillClickCommand}" CommandParameter="exact_mxn"></Button>
                     <Button Grid.Row="0" Grid.Column="1" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="24" Foreground="#FF0074FF" Margin="2.5,5,2.5,2.5" Content="+$20" Command="{Binding PaymentBillClickCommand}" CommandParameter="20_mxn"></Button>
                     <Button Grid.Row="0" Grid.Column="2" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="24" Foreground="#FFF32E2E"  Margin="2.5,5,5,2.5"   Content="+$50" Command="{Binding PaymentBillClickCommand}" CommandParameter="50_mxn"></Button>
                     <Button Grid.Row="1" Grid.Column="0" Background="#FFF3F3F3" BorderBrush="{x:Null}" FontSize="24" Foreground="#FFE2A502"  Margin="5,2.5,2.5,5"   Content="+$100" Command="{Binding PaymentBillClickCommand}" CommandParameter="100_mxn"></Button>
@@ -174,7 +174,7 @@
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
 
-                    <Button Grid.Row="0" Grid.Column="0" Background="#FFF3F3F3" Foreground="Black" FontSize="24" BorderBrush="{x:Null}"  Margin="5,5,2.5,2.5"   Content="{Binding PaymentTotalUSD}" Command="{Binding PaymentBillClickCommand}" CommandParameter="exact_usd"></Button>
+                    <Button Grid.Row="0" Grid.Column="0" Background="#FFF3F3F3" FontSize="24" Foreground="Black" BorderBrush="{x:Null}"  Margin="5,5,2.5,2.5"   Content="{Binding PaymentTotalUSDString}" Command="{Binding PaymentBillClickCommand}" CommandParameter="exact_usd"></Button>
                     <Button Grid.Row="0" Grid.Column="1" Background="#FFF3F3F3" Foreground="#FF009B00" FontSize="24" BorderBrush="{x:Null}" Margin="2.5,5,2.5,2.5" Content="+$1" Command="{Binding PaymentBillClickCommand}" CommandParameter="1_usd"></Button>
                     <Button Grid.Row="0" Grid.Column="2" Background="#FFF3F3F3" Foreground="#FF009B00" FontSize="24" BorderBrush="{x:Null}" Margin="2.5,5,5,2.5"   Content="+$5" Command="{Binding PaymentBillClickCommand}" CommandParameter="5_usd"></Button>
                     <Button Grid.Row="1" Grid.Column="0" Background="#FFF3F3F3" Foreground="#FF009B00" FontSize="24" BorderBrush="{x:Null}" Margin="5,2.5,2.5,5"   Content="+$10" Command="{Binding PaymentBillClickCommand}" CommandParameter="10_usd"></Button>
