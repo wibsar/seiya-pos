@@ -5,12 +5,11 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
+
 using System.Reflection;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
-//using System.Windows.Interactivity;
 using System.Windows.Media.Imaging;
 
 namespace Seiya
@@ -3880,52 +3879,52 @@ namespace Seiya
                     break;
                 case "save_customers":
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Clientes Exportacion Iniciada");
                     FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.CustomersFileName);
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Clientes Exportacion Completada");
                     break;
                 case "save_vendors":
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Proveedores Exportacion Iniciada");
                     FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.VendorsFileName);
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Proveedores Exportacion Completada");
                     break;
                 case "save_inventory":
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inventario Exportacion Iniciada");
                     FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.InventoryFileName);
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inventario Exportacion Completada");
                     break;
                 case "save_expenses":
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gastos Exportacion Iniciada");
                     FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.ExpenseFileName);
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gastos Exportacion Completada");
                     break;
                 case "save_orders":
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pedidos Exportacion Iniciada");
                     FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.OrdersFileName);
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pedidos Exportacion Completada");
                     break;
                 case "save_returns":
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Devoluciones Exportacion Iniciada");
                     FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.ReturnsFileName);
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Devoluciones Exportacion Completada");
                     break;
                 case "save_users":
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuarios Exportacion Iniciada");
                     FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.UsersFileName);
                     //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuarios Exportacion Completada");
                     break;
             }
         }
