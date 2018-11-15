@@ -1,1 +1,2 @@
-NumeroTransaccion,NumeroInterno,NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
+NumeroTransaccion,NumeroTicket,Codigo,NumeroProducto,CategoriaProducto,Descripcion,PrecioVendido,UnidadesVendidas,TotalVendido,FechaVenta,Cliente,Usuario,FacturaRequerida,TipoVenta,MetodoPago,NumeroPedido
+11,13,,0,Articulos,,150,1,150,10/11/2018 03:49:56 p. m.,General,Arturo Morales,No,Regular,Tarjeta,0

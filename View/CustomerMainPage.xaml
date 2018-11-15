@@ -78,7 +78,7 @@
         </DataGrid>
 
         <!-- Inventory options -->
-        <Grid Grid.Row="3" ShowGridLines="False" Margin="0,3,0,0">
+        <Grid Grid.Row="2" ShowGridLines="False" Margin="0,3,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -90,7 +90,7 @@
                     <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ChangePageCommand}" CommandParameter="save_transactions">
+                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ChangePageCommand}" CommandParameter="save_customers">
                     <Image Source="C:\Projects\seiya-pos\Resources\Images\Export.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Exportar" ></TextBlock>

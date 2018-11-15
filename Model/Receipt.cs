@@ -117,6 +117,9 @@ namespace Seiya
 
         #region Methods
 
+        /// <summary>
+        /// Prints regular sales receipt
+        /// </summary>
         public void PrintSalesReceipt()
         {
             bool printToFileOnly = false;
@@ -125,9 +128,8 @@ namespace Seiya
 
             printDocument.PrintPage += new PrintPageEventHandler(printReceipt);
 
-            var fullReceiptName = Constants.DataFolderPath + Constants.ReceiptBackupFolderPath + "Recibo" +
-                                  Pos.LastReceiptNumber.ToString() + "In" + Pos.LastInternalNumber + "Tr" +
-                                  Pos.LastTransactionNumber + ".xps";
+            var fullReceiptName = Constants.DataFolderPath + Constants.ReceiptBackupFolderPath + "Recibo_" +
+                                  Pos.LastReceiptNumber.ToString() + ".xps";
 
             if (!printToFileOnly)
             {
@@ -138,7 +140,7 @@ namespace Seiya
 
             try
             {
-                printDocument.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";//"CutePDF Writer";//"Microsoft Print to PDF";
+                printDocument.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";
                 printDocument.PrinterSettings.PrintToFile = true;
                 printDocument.PrinterSettings.PrintFileName = fullReceiptName;
                 printDocument.Print();
@@ -152,6 +154,11 @@ namespace Seiya
             printDocument.PrintPage -= printReceipt;
         }
 
+        /// <summary>
+        /// Prints regular sale receipt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void printReceipt(object sender, PrintPageEventArgs e)
         {
             Graphics graphic = e.Graphics;
@@ -160,6 +167,7 @@ namespace Seiya
             Font storeNameFont = new Font("Courier New", 14, System.Drawing.FontStyle.Bold);
             Font storeInfoFont = new Font("Courier New", 8, System.Drawing.FontStyle.Bold);
 
+            ///TODO: might be good to add returns to ticket to be noticable
             string paymentMethod = Transaction.PaymentType.ToString();
 
             var buf = string.Empty;
@@ -173,6 +181,7 @@ namespace Seiya
 
             int itemsNumber = 0;
 
+            //Ticket header with business information
             buf = "  " + Pos.BusinessName;
             graphic.DrawString(buf, storeNameFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
@@ -192,18 +201,18 @@ namespace Seiya
             buf = "   " + Pos.FiscalCityAndZipCode + "  " +Pos.FiscalPhoneNumber;
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
-            offset = offset + (int)storeInfoFontHeight;
-            
+            offset = offset + (int)storeInfoFontHeight;         
             buf = "        " + Pos.FiscalEmail;
             graphic.DrawString(buf, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
 
-            //User
+            //Username
             graphic.DrawString("Usuario: " + SalesData.User.UserName, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 2;
 
+            //Date and ticket number
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             var date = DateTime.Now.ToString("g");
             var ticketNumber = "No. " + Pos.LastReceiptNumber.ToString();
@@ -211,6 +220,7 @@ namespace Seiya
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
 
+            //Product loop
             foreach (var product in _products)
             {
                 //TODO: poner descripcion en vez de solo la categoria como default o opcion a elegir
@@ -221,7 +231,7 @@ namespace Seiya
                 //product line
                 graphic.DrawString(product.ToString(), font, new SolidBrush(Color.Black), startX, startY + offset);
 
-                offset = offset + (int)fontHeight;// + 5;
+                offset = offset + (int)fontHeight;
 
                 if (product.Category != "Puntos")
                 {
@@ -233,47 +243,51 @@ namespace Seiya
             graphic.DrawString("Total: ".PadLeft(20) + string.Format("{0:c}", Transaction.TotalDue), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
-            offset = offset + (int)fontHeight;// + 5;
+            offset = offset + (int)fontHeight;
 
             graphic.DrawString(string.Format("{0}: ", Transaction.PaymentType.ToString()).PadLeft(20) + string.Format("{0:c}", Transaction.AmountPaid), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
-            offset = offset + (int)fontHeight;// + 5;
+            offset = offset + (int)fontHeight;
 
             graphic.DrawString("Cambio: ".PadLeft(20) + string.Format("{0:c}", Transaction.ChangeDue), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
-            offset = offset + (int)fontHeight;// + 10;
+            offset = offset + (int)fontHeight;
 
             graphic.DrawString(("Articulos: " + itemsNumber.ToString()).PadLeft(21), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
+            //Customer info, if available
             if (SalesData.Customer != null)
             {
-                offset = offset + (int)fontHeight;// + 10;
+                offset = offset + (int)fontHeight;
 
                 graphic.DrawString(("Cliente: " + SalesData.Customer.Name).PadLeft(21), font,
                     new SolidBrush(Color.Black), startX, startY + offset);
 
-                offset = offset + (int)fontHeight;// + 10;
+                offset = offset + (int)fontHeight;
 
                 graphic.DrawString(("Puntos Obtenidos: " + SalesData.PointsObtained.ToString()).PadLeft(21), font,
                     new SolidBrush(Color.Black), startX, startY + offset);
 
-                offset = offset + (int)fontHeight;// + 10;
+                offset = offset + (int)fontHeight;
 
                 graphic.DrawString(("Puntos Disponibles: " + SalesData.Customer.PointsAvailable.ToString()).PadLeft(21), font,
                     new SolidBrush(Color.Black), startX, startY + offset);
             }
 
-            offset = offset + (int)fontHeight + 5;// + 15;
+            offset = offset + (int)fontHeight + 5;
 
+            //Footer message
             graphic.DrawString("       " + Pos.FooterMessage, font, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight;
-
         }
 
+        /// <summary>
+        /// Prints end of day Z receipt
+        /// </summary>
         public void PrintEndOfDaySalesReceipt()
         {
             bool printToFileOnly = false;
@@ -294,7 +308,7 @@ namespace Seiya
 
             try
             {
-                printDocument.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";//"CutePDF Writer";//"Microsoft Print to PDF";
+                printDocument.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";
                 printDocument.PrinterSettings.PrintToFile = true;
                 printDocument.PrinterSettings.PrintFileName = fullReceiptName;
                 printDocument.Print();
@@ -307,6 +321,9 @@ namespace Seiya
             printDocument.PrintPage -= PrintEndOfDaySalesReceipt;
         }
 
+        /// <summary>
+        /// Prints end of day X receipt
+        /// </summary>
         public void PrintEndOfDaySalesFullReceipt()
         {
             bool printToFileOnly = false;
@@ -327,7 +344,7 @@ namespace Seiya
 
             try
             {
-                printDocument.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";//"CutePDF Writer";//"Microsoft Print to PDF";
+                printDocument.PrinterSettings.PrinterName = "Microsoft XPS Document Writer";
                 printDocument.PrinterSettings.PrintToFile = true;
                 printDocument.PrinterSettings.PrintFileName = fullReceiptName;
                 printDocument.PrinterSettings.PrintRange = PrintRange.AllPages;
@@ -341,6 +358,11 @@ namespace Seiya
             printDocument.PrintPage -= PrintEndOfDaySalesFullReceipt;
         }
 
+        /// <summary>
+        /// Prints end of day Z receipt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void PrintEndOfDaySalesReceipt(object sender, PrintPageEventArgs e)
         {
             Graphics graphic = e.Graphics;
@@ -360,6 +382,7 @@ namespace Seiya
 
             int itemsNumber = 0;
 
+            //Header business information
             buf = "  " + Pos.BusinessName;
             graphic.DrawString(buf, storeNameFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
@@ -386,6 +409,7 @@ namespace Seiya
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
 
+            //Receipt number and tickets number range
             graphic.DrawString("Corte Z    " + "Folio " + EndOfDayReceiptData.FirstReceiptNumber.ToString() + " al " +
                 EndOfDayReceiptData.LastReceiptNumber, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
@@ -399,6 +423,7 @@ namespace Seiya
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
 
+            //Gets each category information
             foreach (var catInfo in EndOfDayReceiptData.SalesInfoPerCategory)
             {
                 //mimic a product just to use the ToString overwrite
@@ -412,23 +437,13 @@ namespace Seiya
                 if (cat.LastQuantitySold != 0 || cat.Price != 0)
                 {
                     graphic.DrawString(cat.ToString(ReceiptType.DailyRegular), font, new SolidBrush(Color.Black), startX, startY + offset);
-                    offset = offset + (int)fontHeight;// + 5;
+                    offset = offset + (int)fontHeight;
                 }
             }
 
             offset = offset + 10;
 
-            graphic.DrawString("Puntos Usados: ".PadLeft(20) + string.Format("{0}", EndOfDayReceiptData.PointsTotal), font,
-                new SolidBrush(Color.Black), startX, startY + offset);
-
-            offset = offset + (int)fontHeight + 5;
-
             graphic.DrawString("Articulos: ".PadLeft(20) + string.Format("{0}", EndOfDayReceiptData.TotalItemsSold), font,
-                new SolidBrush(Color.Black), startX, startY + offset);
-
-            offset = offset + (int)fontHeight + 5;
-
-            graphic.DrawString("Total: ".PadLeft(20) + string.Format("{0:c}", EndOfDayReceiptData.TotalAmountSold), font,
                 new SolidBrush(Color.Black), startX, startY + offset);
 
             offset = offset + (int)fontHeight + 5;
@@ -449,12 +464,22 @@ namespace Seiya
 
             offset = offset + (int)fontHeight + 5;
 
+            graphic.DrawString("Total: ".PadLeft(20) + string.Format("{0:c}", EndOfDayReceiptData.TotalAmountSold), font,
+                new SolidBrush(Color.Black), startX, startY + offset);
+
+            offset = offset + (int)fontHeight + 5;
+
             graphic.DrawString(string.Format("  Final Corte {0} {1}", EndOfDayAmountData.EndOfSalesReceiptType, date), storeInfoFont, new SolidBrush(Color.Black),
                 startX, startY + offset);
             offset = offset + (int)storeInfoFontHeight;
 
         }
 
+        /// <summary>
+        /// Prints end of sales X receipt
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         public void PrintEndOfDaySalesFullReceipt(object sender, PrintPageEventArgs e)
         {
             Graphics graphic = e.Graphics;
@@ -464,9 +489,9 @@ namespace Seiya
             Font storeInfoFont = new Font("Courier New", 8, System.Drawing.FontStyle.Bold);
 
             var buf = string.Empty;
-            float fontHeight = 9.0f + 4.5f; //font.GetHeight();
+            float fontHeight = 9.0f + 4.5f;
             float storeNameFontHeight = storeNameFont.GetHeight();
-            float storeInfoFontHeight = 8 + 6f; //storeInfoFont.GetHeight();
+            float storeInfoFontHeight = 8 + 6f;
 
             //Parse Description
             var commentsLines = new List<string>();
@@ -476,11 +501,12 @@ namespace Seiya
                 commentsLines = Formatter.BreakDownString(EndOfDayAmountData.Comments, 35);
 
             int startX = 5;
-            int startY = 1; //changed from 5
+            int startY = 1;
             int offset = 10;
 
             int itemsNumber = 0;
 
+            //Header business info
             buf = "  " + Pos.BusinessName;
             graphic.DrawString(buf, storeNameFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
@@ -507,7 +533,8 @@ namespace Seiya
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
 
-            graphic.DrawString("Corte Z    " + "Folio " + EndOfDayReceiptData.FirstReceiptNumber.ToString() + " al " +
+            //Ticket numbers and range
+            graphic.DrawString("Corte X    " + "Folio " + EndOfDayReceiptData.FirstReceiptNumber.ToString() + " al " +
                 EndOfDayReceiptData.LastReceiptNumber, storeInfoFont, new SolidBrush(Color.Black), startX,
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
@@ -520,6 +547,7 @@ namespace Seiya
                 startY + offset);
             offset = offset + (int)storeInfoFontHeight + 10;
 
+            //Sales per category loop
             foreach (var catInfo in EndOfDayReceiptData.SalesInfoPerCategory)
             {
                 //mimic a product just to use the ToString overwrite
@@ -833,11 +861,6 @@ namespace Seiya
             _lastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
 
             return categoryData;
-        }
-
-        public int GetNextNumber()
-        {
-            return 0;
         }
 
         //Get customer information, if available

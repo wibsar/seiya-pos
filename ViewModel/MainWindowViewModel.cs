@@ -5,12 +5,11 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.IO;
 using System.Linq;
-using System.Reflection.Emit;
+
 using System.Reflection;
 using System.Threading;
 using System.Windows.Controls;
 using System.Windows.Input;
-//using System.Windows.Interactivity;
 using System.Windows.Media.Imaging;
 
 namespace Seiya
@@ -1549,7 +1548,6 @@ namespace Seiya
                     break;
                 case "transactions":
                     CurrentPage = "\\View\\TransactionMainPage.xaml";
-
                     break;
                 case "login":
                     CurrentUser = null;
@@ -3884,6 +3882,81 @@ namespace Seiya
 
         #endregion
 
+        #region ChangePageCommand
+
+        public ICommand ExportDataBaseCommand { get { return _exportDataBaseCommand ?? (_exportDataBaseCommand = new DelegateCommand(Execute_ExportDataBaseCommand, CanExecute_ExportDataBaseCommand)); } }
+        private ICommand _exportDataBaseCommand;
+
+        internal void Execute_ExportDataBaseCommand(object parameter)
+        {
+            //Change main frame page based on the parameter
+            switch ((string)parameter)
+            {
+                case "save_transactions":
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Iniciada");
+                    FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
+                    break;
+                case "save_customers":
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Clientes Exportacion Iniciada");
+                    FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.CustomersFileName);
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Clientes Exportacion Completada");
+                    break;
+                case "save_vendors":
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Proveedores Exportacion Iniciada");
+                    FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.VendorsFileName);
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Proveedores Exportacion Completada");
+                    break;
+                case "save_inventory":
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inventario Exportacion Iniciada");
+                    FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.InventoryFileName);
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Inventario Exportacion Completada");
+                    break;
+                case "save_expenses":
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gastos Exportacion Iniciada");
+                    FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.ExpenseFileName);
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Gastos Exportacion Completada");
+                    break;
+                case "save_orders":
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pedidos Exportacion Iniciada");
+                    FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.OrdersFileName);
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pedidos Exportacion Completada");
+                    break;
+                case "save_returns":
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Devoluciones Exportacion Iniciada");
+                    FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.ReturnsFileName);
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Devoluciones Exportacion Completada");
+                    break;
+                case "save_users":
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuarios Exportacion Iniciada");
+                    FileIO.MoveFileToUserDefinedFolder(Constants.DataFolderPath + Constants.UsersFileName);
+                    //Log
+                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Usuarios Exportacion Completada");
+                    break;
+            }
+        }
+
+        internal bool CanExecute_ExportDataBaseCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
         #endregion
 
         #region Methods
@@ -3983,17 +4056,21 @@ namespace Seiya
         }
 
         /// <summary>
-        /// Method to initialize payment page and make payment
+        /// Method to initialize payment process based on user input
         /// </summary>
+        /// <param name="paymentType"></param>
+        /// <param name="transactionType"></param>
         /// <returns></returns>
         private bool ProcessPayment(PaymentTypeEnum paymentType, TransactionType transactionType)
         {
+            //Get all transaction info and push it to the db
             RecordTransaction(paymentType, transactionType, out var currentTransaction);
 
             //Check if it is a partial payment based on the properties
             var total = PaymentPartialOtherMXN + PaymentPartialCardMXN + PaymentPartialCashMXN + Math.Round(PaymentPartialCashUSD * ExchangeRate, 2) +
                         PaymentPartialCheckMXN + PaymentPartialTransferMXN;
 
+            //If it is partial payment
             if (total > 0)
             {
                 PaymentChangeMXN = Math.Round(total - currentTransaction.TotalDue, 2);
@@ -4030,8 +4107,14 @@ namespace Seiya
                 }
             }
 
+            //Record transaction in both sales pages
+            Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsXFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
+                CurrentCustomer != null ? CurrentUser.Name : "General", currentTransaction.TransactionDate.ToString("G"), ExchangeRate, currentTransaction.FiscalReceiptRequired,
+                currentTransaction.TotalDue, CurrencyTypeEnum.MXN, transactionType, PaymentPartialCashMXN, PaymentPartialCashUSD, PaymentPartialCardMXN,
+                PaymentPartialCheckMXN, PaymentPartialTransferMXN, PaymentPartialOtherMXN, PaymentChangeMXN, currentTransaction.TotalDue);
+
             //Record transaction in general sales page
-            Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
+            Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsZFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
                 CurrentCustomer != null ? CurrentUser.Name : "General", currentTransaction.TransactionDate.ToString("G"), ExchangeRate, currentTransaction.FiscalReceiptRequired,
                 currentTransaction.TotalDue, CurrencyTypeEnum.MXN, transactionType, PaymentPartialCashMXN, PaymentPartialCashUSD, PaymentPartialCardMXN,
                 PaymentPartialCheckMXN, PaymentPartialTransferMXN, PaymentPartialOtherMXN, PaymentChangeMXN, currentTransaction.TotalDue);
@@ -4097,24 +4180,30 @@ namespace Seiya
         }
 
         /// <summary>
-        /// Method to record transaction
+        /// Analyze and record transactions and return the transaction information
         /// </summary>
+        /// <param name="paymentMethod">Method of payment</param>
+        /// <param name="transactionType">Transaction type</param>
+        /// <param name="transaction">Output transaction information</param>
         /// <returns></returns>
         private bool RecordTransaction(PaymentTypeEnum paymentMethod, TransactionType transactionType, out Transaction transaction)
         {
             //Create new instance
-            transaction = new Transaction(Constants.DataFolderPath + Constants.TransactionsFileName,
-                Constants.DataFolderPath + Constants.TransactionsMasterFileName, Constants.DataFolderPath + 
+            //transaction = new Transaction(Constants.DataFolderPath + Constants.TransactionsFileName,
+            //    Constants.DataFolderPath + Constants.TransactionsMasterFileName, Constants.DataFolderPath + 
+            //    Constants.TransactionsHistoryFileName, true);
+
+            transaction = new Transaction(Constants.DataFolderPath + Constants.TransactionsXFileName,
+                Constants.DataFolderPath + Constants.TransactionsZFileName, Constants.DataFolderPath +
                 Constants.TransactionsHistoryFileName, true);
-            
+
             //General transaction information
             var transactionNumber = _posInstance.GetNextTransactionNumber();
-            var internalNumber = _posInstance.GetNextInternalNumber();
+ //           var internalNumber = _posInstance.GetNextInternalNumber();
             var user = CurrentUser.Name;
             var fiscalReceipt = "No";
             var saleType = transactionType;
             var paymentType = paymentMethod;
-            //TODO: if order is created, add the number of the order here
             int orderNumber = 0;
             var transactionDate = DateTime.Now;
             decimal totalDue = 0M;
@@ -4129,14 +4218,17 @@ namespace Seiya
             {
                 orderNumber = ReturnID;
             }
+
             //Get next receipt number, if applicable
-            var receiptNumber = saleType == TransactionType.Regular ? _posInstance.GetNextReceiptNumber() : _posInstance.LastReceiptNumber;
+            //var receiptNumber = saleType == TransactionType.Regular ? _posInstance.GetNextReceiptNumber() : _posInstance.LastReceiptNumber;
+            var receiptNumber = _posInstance.GetNextReceiptNumber();
 
             //Record each item in the transactions db
             foreach (var product in CurrentCartProducts)
             {
                 transaction.TransactionNumber = transactionNumber;
-                transaction.InternalNumber = internalNumber;
+                //transaction.InternalNumber = internalNumber;
+                transaction.InternalNumber = 0;
                 transaction.ReceiptNumber = receiptNumber;
                 transaction.Product = product;
                 transaction.TransactionDate = transactionDate;
@@ -4147,7 +4239,7 @@ namespace Seiya
                 transaction.PaymentType = paymentType;
                 transaction.OrderNumber = orderNumber;
 
-                //Record Transaction
+                //Record Transaction in all the transaction files
                 transaction.Record(saleType);
 
                 //update inventory for each product, if applicable
@@ -4170,6 +4262,9 @@ namespace Seiya
 
             //Save inventory
             _inventoryInstance.SaveDataTableToCsv();
+
+            //Save pos data
+            _posInstance.SaveDataTableToCsv();
 
             if (CurrentCustomer != null)
             {
@@ -4200,6 +4295,9 @@ namespace Seiya
         /// <summary>
         /// Method to update inventory after a transaction is sucessful
         /// </summary>
+        /// <param name="product"></param>
+        /// <param name="transactionDate"></param>
+        /// <param name="transactionType"></param>
         /// <returns></returns>
         private bool UpdateInventory(Product product, DateTime transactionDate, TransactionType transactionType)
         {
@@ -4210,7 +4308,6 @@ namespace Seiya
             if (transactionType == TransactionType.Regular || transactionType == TransactionType.Interno || 
                 transactionType == TransactionType.Remover)
             {
-                //
                 if (invProduct.LocalQuantityAvailable > 0)
                 {
                     invProduct.LocalQuantityAvailable = (invProduct.LocalQuantityAvailable - product.LastQuantitySold) > 0 ?
@@ -4241,7 +4338,6 @@ namespace Seiya
                 }
 
                 _inventoryInstance.UpdateProductToTable(invProduct);
-
             }
             else
             {
@@ -4284,6 +4380,7 @@ namespace Seiya
 
             var receipt = new Receipt(_posInstance, transaction, salesData);
             receipt.PrintSalesReceipt();
+
             return true;
         }
 
@@ -4503,20 +4600,31 @@ namespace Seiya
             PaymentRemainingUSD = Math.Round(PaymentRemainingMXN / ExchangeRate, 2);
         }
 
+        /// <summary>
+        /// Initializes main payment procedure
+        /// </summary>
+        /// <param name="parameter">Method of payment</param>
+        /// <param name="transactionType">Payment transaction type</param>
         public void PaymentProcessStart(string parameter, TransactionType transactionType)
         {
             //Get payment type from string
             var status = PaymentTypeEnum.TryParse(parameter, out PaymentTypeEnum paymentType);
             if (status == false)
+            {
                 paymentType = PaymentTypeEnum.Efectivo;
+            }
 
             //Check if it is a return
             if (ReturnTransaction)
             {
                 if (paymentType == PaymentTypeEnum.Efectivo)
+                {
                     transactionType = TransactionType.DevolucionEfectivo;
+                }
                 else if (paymentType == PaymentTypeEnum.Tarjeta)
-                    transactionType =  TransactionType.DevolucionTarjeta;
+                {
+                    transactionType = TransactionType.DevolucionTarjeta;
+                }
                 else
                 {
                     Code = "Transaccion Invalida";
