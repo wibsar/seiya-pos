@@ -18,7 +18,7 @@ namespace Seiya
         public const string InventoryBackupFolderPath = @"InventoryBackUp\";
         public const string InventoryFileName = "Inventario.csv";
 
-        //Transactions and Expenses Files
+        //Transactions Files
         public const string TransactionsBackupFolderPath = @"TransactionBackUp\";
         public const string TransactionsFileName = "Transacciones.csv";
         public const string TransactionsMasterFileName = "TransaccionesMaster.csv";
@@ -26,11 +26,23 @@ namespace Seiya
         public const string TransactionsTypesFileName = "TransactionTypes.txt";
         public const string TransactionBlankFileName = "TransaccionesBlank.csv";
         public const string TransactionMasterBlankFileName = "TransaccionesMasterBlank.csv";
-        public const string ExpenseFileName = "Gastos.csv";
-        public const string ExpenseHistoryFileName = "GastosHistorial.csv";
-        public const string ExpenseBlankFileName = "GastosBlank.csv";
         public const string TransactionsPaymentsFileName = "Pagos.csv";
         public const string TransactionsPaymentsBlankFileName = "PagosBlank.csv";
+
+        //New transaction Files
+        public const string TransactionsFullFileName = "TransaccionesHistorial.csv";
+        public const string TransactionsXFileName = "TransaccionesX.csv";
+        public const string TransactionsZFileName = "TransaccionesZ.csv";
+        public const string TransactionsPaymentsXFileName = "PagosX.csv";
+        public const string TransactionsPaymentsYFileName = "PagosZ.csv";
+
+        //Expenses Files
+        public const string ExpenseFileName = "Gastos.csv";
+        public const string ExpenseXFileName = "GastosX.csv";
+        public const string ExpenseZFileName = "GastosZ.csv";
+        public const string ExpenseHistoryFileName = "GastosHistorial.csv";
+        public const string ExpenseBlankFileName = "GastosBlank.csv";
+
 
         //End of day reports
         public const string EndOfDaySalesFileName = "CorteZ.csv";

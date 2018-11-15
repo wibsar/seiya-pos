@@ -288,7 +288,7 @@ namespace Seiya
         }
 
         /// <summary>
-        /// Record transaction data into database
+        /// Record transaction data into databases
         /// </summary>
         /// <param name="transactionType"></param>
         /// <returns></returns>
@@ -298,49 +298,33 @@ namespace Seiya
             {
                
                 case TransactionType.Regular:
+                case TransactionType.Interno:
 
-                    var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
-                         TransactionNumber, InternalNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
+                    var data = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
+                         TransactionNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
                          Product.Description, Product.Price, Product.LastQuantitySold, Product.LastQuantitySold * Product.Price,
                          TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
-
-                    var dataShort = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}",
-                         ReceiptNumber, Product.Code, Product.Id, Product.Category,
-                         Product.Description, Product.Price, Product.LastQuantitySold, Product.LastQuantitySold * Product.Price,
-                         TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
-
-                    return SaveTransaction(_transactionFilePath, dataShort) && SaveTransaction(_transactionMasterFilePath, data) &&
+                     
+                    return SaveTransaction(_transactionFilePath, data) && SaveTransaction(_transactionMasterFilePath, data) &&
                         SaveTransaction(_transactionHistoryFilePath, data);
                    
-                case TransactionType.Interno:
-                    var internalData = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
-                          TransactionNumber, InternalNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
-                          Product.Description, Product.Price, Product.LastQuantitySold, Product.LastQuantitySold * Product.Price,
-                          TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
-
-                    return SaveTransaction(_transactionMasterFilePath, internalData) && SaveTransaction(_transactionHistoryFilePath, internalData);
-
                 case TransactionType.Remover:
-                    var removalData = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
-                          TransactionNumber, InternalNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
+                    var removalData = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
+                          TransactionNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
                           Product.Description, Product.Price * 0, Product.LastQuantitySold, Product.LastQuantitySold * Product.Price * 0,
                           TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
 
-                    return SaveTransaction(_transactionMasterFilePath, removalData) && SaveTransaction(_transactionHistoryFilePath, removalData);
+                    return SaveTransaction(_transactionFilePath, removalData) && SaveTransaction(_transactionMasterFilePath, removalData)
+                           && SaveTransaction(_transactionHistoryFilePath, removalData);
 
                 case TransactionType.DevolucionEfectivo:
                 case TransactionType.DevolucionTarjeta:
-                    var returnData = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15},{16}",
-                        TransactionNumber, InternalNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
+                    var returnData = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14},{15}",
+                        TransactionNumber, ReceiptNumber, Product.Code, Product.Id, Product.Category,
                         Product.Description, -1 * Product.Price, -1 * Product.LastQuantitySold, -1 * Product.LastQuantitySold * Product.Price,
                         TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
 
-                    var returnDataShort = string.Format("{0},{1},{2},{3},{4},{5},{6},{7},{8},{9},{10},{11},{12},{13},{14}",
-                         ReceiptNumber, Product.Code, Product.Id, Product.Category,
-                         Product.Description, -1 * Product.Price, -1 * Product.LastQuantitySold, -1 * Product.LastQuantitySold * Product.Price,
-                         TransactionDate, CustomerName, UserName, FiscalReceiptRequired, SaleType, PaymentType.ToString(), OrderNumber) + Environment.NewLine;
-
-                    return SaveTransaction(_transactionFilePath, returnDataShort) && SaveTransaction(_transactionMasterFilePath, returnData) &&
+                    return SaveTransaction(_transactionFilePath, returnData) && SaveTransaction(_transactionMasterFilePath, returnData) &&
                         SaveTransaction(_transactionHistoryFilePath, returnData);
 
                 default:
