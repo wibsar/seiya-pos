@@ -6,6 +6,7 @@
       xmlns:local="clr-namespace:Seiya"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="1000"
+      d:DataContext="{d:DesignInstance local:CarRegistrationViewModel}"
       Title="Yonke">
     <Page.Resources>
         <Style TargetType="Page">
@@ -48,7 +49,7 @@
     </Page.Resources>
     
     
-    <Grid>
+    <Grid x:Name="CarRegistrationInfo">
         <Grid.RowDefinitions>
             <RowDefinition Height=".5*"></RowDefinition>
             <RowDefinition Height="8*"></RowDefinition>
@@ -317,9 +318,27 @@
                 <TabItem Header="Eléctrico"></TabItem>
                 <TabItem Header="Suspensión" ></TabItem>
                 <TabItem Header="Carrocería" ></TabItem>
-                <TabItem Header="Accesorios" ></TabItem>
-
+                <TabItem Header="Accesorios" >
+                    <Grid>
+        <DataGrid x:Name="CarAccessoriesData" Margin="0,6,0,0" HeadersVisibility="Column" ItemsSource="{Binding CarPartsSearchedEntries}" SelectedItem="{Binding SelectedCarPart, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header="Id" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Vin}" ClipboardContentBinding="{x:Null}" Header="Vin" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Model}" ClipboardContentBinding="{x:Null}" Header="Modelo" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Description}" ClipboardContentBinding="{x:Null}" Header="Descripcion" IsReadOnly="False"/>
+                <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="False"/>
+                <DataGridTextColumn Binding="{Binding Price}" ClipboardContentBinding="{x:Null}" Header="Monto" IsReadOnly="False"/>
+                <DataGridTextColumn Binding="{Binding PriceCurrency}" ClipboardContentBinding="{x:Null}" Header="Moneda" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Binding="{Binding Enabled}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="False"></DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+                    </Grid>
+                </TabItem>
             </TabControl>
+        </Grid>
+        
+        <Grid Grid.Row="2">
+            <Button Content="Registrar Carro" Command="{Binding RegisterCarCommand}"></Button>
         </Grid>
 
     </Grid>

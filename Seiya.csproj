@@ -56,9 +56,22 @@
     <Reference Include="GenericParsing">
       <HintPath>.\GenericParsing.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Protobuf, Version=3.5.1.0, Culture=neutral, PublicKeyToken=a7d26565bac4d604, processorArchitecture=MSIL">
+      <HintPath>..\wibsar-pos-solution\packages\Google.Protobuf.3.5.1\lib\net45\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data, Version=8.0.13.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
+      <HintPath>..\wibsar-pos-solution\packages\MySql.Data.8.0.13\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Drawing.Design" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>.\System.Windows.Interactivity.dll</HintPath>
@@ -82,6 +95,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Constants.cs" />
+    <Compile Include="Model\MySqlDataBase.cs" />
     <Compile Include="Model\Enums\PaymentTypeEnum.cs" />
     <Compile Include="Model\Enums\TransactionType.cs" />
     <Compile Include="Model\Order.cs" />
@@ -95,6 +109,7 @@
     <Compile Include="Model\Interfaces\IDataBase.cs" />
     <Compile Include="Model\Inventory.cs" />
     <Compile Include="Model\Pos.cs" />
+    <Compile Include="Model\CarPart.cs" />
     <Compile Include="Model\Product.cs" />
     <Compile Include="Model\Receipt.cs" />
     <Compile Include="Model\SalesDataStruct.cs" />
@@ -116,6 +131,7 @@
     <Compile Include="ViewModel\MainWindowViewModel.cs" />
     <Compile Include="ViewModel\PosGeneralPageViewModel.cs" />
     <Compile Include="ViewModel\ProductsPageViewModel.cs" />
+    <Compile Include="ViewModel\CarRegistrationViewModel.cs" />
     <Compile Include="ViewModel\ReturnsViewModel.cs" />
     <Compile Include="ViewModel\SystemViewModel.cs" />
     <Compile Include="View\AnalysisMainPage.xaml.cs">
@@ -377,6 +393,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
