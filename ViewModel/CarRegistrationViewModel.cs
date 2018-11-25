@@ -16,11 +16,21 @@ namespace Seiya
     public class CarRegistrationViewModel : ObservableObject
     {
         #region Fields
+        private static CarRegistrationViewModel _carRegistrationInstance = null;
+
         private ObservableCollection<CarPart> _carPartsSearchedEntries;
         private CarPart _selectedCarPart;
         #endregion
 
         #region Constructors
+
+        public static CarRegistrationViewModel GetInstance()
+        {
+            if (_carRegistrationInstance == null)
+                _carRegistrationInstance = new CarRegistrationViewModel();
+            return _carRegistrationInstance;
+        }
+
         public CarRegistrationViewModel()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");

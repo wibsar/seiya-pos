@@ -18,9 +18,9 @@ namespace Seiya
     /// <summary>
     /// Lógica de interacción para Yonke.xaml
     /// </summary>
-    public partial class CarRegistrationMain : Page
+    public partial class CarRegistrationMainPage : Page
     {
-        public CarRegistrationMain()
+        public CarRegistrationMainPage()
         {
             InitializeComponent();
         }

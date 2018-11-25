@@ -18,9 +18,9 @@ namespace Seiya
     /// <summary>
     /// Lógica de interacción para CarRegistrationList.xaml
     /// </summary>
-    public partial class CarRegistrationList : Page
+    public partial class CarRegistrationListPage : Page
     {
-        public CarRegistrationList()
+        public CarRegistrationListPage()
         {
             InitializeComponent();
         }

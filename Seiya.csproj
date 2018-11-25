@@ -140,11 +140,11 @@
     <Compile Include="View\CarRegistrationInfoPage.xaml.cs">
       <DependentUpon>CarRegistrationInfoPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CarRegistrationList.xaml.cs">
-      <DependentUpon>CarRegistrationList.xaml</DependentUpon>
+    <Compile Include="View\CarRegistrationListPage.xaml.cs">
+      <DependentUpon>CarRegistrationListPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CarRegistrationMain.xaml.cs">
-      <DependentUpon>CarRegistrationMain.xaml</DependentUpon>
+    <Compile Include="View\CarRegistrationMainPage.xaml.cs">
+      <DependentUpon>CarRegistrationMainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PaymentPartialPage.xaml.cs">
       <DependentUpon>PaymentPartialPage.xaml</DependentUpon>
@@ -258,11 +258,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\CarRegistrationList.xaml">
+    <Page Include="View\CarRegistrationListPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="View\CarRegistrationMain.xaml">
+    <Page Include="View\CarRegistrationMainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -3918,7 +3918,7 @@ namespace Seiya
 
         #endregion
 
-        #region ChangePageCommand
+        #region ExportDataBaseCommand
 
         public ICommand ExportDataBaseCommand { get { return _exportDataBaseCommand ?? (_exportDataBaseCommand = new DelegateCommand(Execute_ExportDataBaseCommand, CanExecute_ExportDataBaseCommand)); } }
         private ICommand _exportDataBaseCommand;
