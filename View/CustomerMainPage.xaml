@@ -29,9 +29,33 @@
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
-        <Style TargetType="DataGrid">
-            <Setter Property="FontSize" Value="18"></Setter>
+        
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="#FFF" />
+            <Setter Property="Foreground" Value="#2C5066" />
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="AlternationCount" Value="2" />
+            <Setter Property="VerticalGridLinesBrush" Value="#FFE8E8E8"></Setter>
+            <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}"></Setter>            
+        </Style>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Height" Value="25"></Setter>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="#FFEDF4F5"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="LightGray"></Setter>
+            <Setter Property="Foreground" Value="#2C5066"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
         </Style>
     </Page.Resources>
 
@@ -63,17 +87,17 @@
         <!-- Table of user items found based on the search -->
         <DataGrid x:Name="VendorData" Grid.Row="1" Margin="0,6,0,0" HeadersVisibility="Column" ItemsSource="{Binding CustomersSearchedEntries}" SelectedItem="{Binding SelectedCustomer, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header="Id" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header="Nombre de Contacto" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Email}" ClipboardContentBinding="{x:Null}" Header="Correo" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Phone}" ClipboardContentBinding="{x:Null}" Header="Telefono" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding RegistrationDate}" ClipboardContentBinding="{x:Null}" Header="Fecha de Registro" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Rfc}" ClipboardContentBinding="{x:Null}" Header="RFC" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PointsAvailable}" ClipboardContentBinding="{x:Null}" Header="Puntos Disponibles" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PointsUsed}" ClipboardContentBinding="{x:Null}" Header="Puntos Usados" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding TotalVisits}" ClipboardContentBinding="{x:Null}" Header="Visitas" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding TotalSpent}" ClipboardContentBinding="{x:Null}" Header="Total Gastado" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding LastVisitDate}" ClipboardContentBinding="{x:Null}" Header="Ultima Visita" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header=" Id " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header=" Nombre " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Email}" ClipboardContentBinding="{x:Null}" Header=" Correo " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Phone}" ClipboardContentBinding="{x:Null}" Header=" Telefono " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding RegistrationDate}" ClipboardContentBinding="{x:Null}" Header=" Fecha de Registro " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Rfc}" ClipboardContentBinding="{x:Null}" Header=" RFC " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PointsAvailable}" ClipboardContentBinding="{x:Null}" Header=" Puntos Disponible s" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PointsUsed}" ClipboardContentBinding="{x:Null}" Header=" Puntos Usados " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TotalVisits}" ClipboardContentBinding="{x:Null}" Header=" Visitas " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TotalSpent, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header=" Total Gastado " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding LastVisitDate}" ClipboardContentBinding="{x:Null}" Header=" Ultima Visita " IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

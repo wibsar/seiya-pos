@@ -31,9 +31,32 @@
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
-        <Style TargetType="DataGrid">
-            <Setter Property="FontSize" Value="18"></Setter>
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="#FFF" />
+            <Setter Property="Foreground" Value="#2C5066" />
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="AlternationCount" Value="2" />
+            <Setter Property="VerticalGridLinesBrush" Value="#FFE8E8E8"></Setter>
+            <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}"></Setter>
+        </Style>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Height" Value="25"></Setter>
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="#FFEDF4F5"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="LightGray"></Setter>
+            <Setter Property="Foreground" Value="#2C5066"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
         </Style>
     </Page.Resources>
 
@@ -65,16 +88,16 @@
         <!-- Table of user items found based on the search -->
         <DataGrid x:Name="VendorData" Grid.Row="1" Margin="0,6,0,0" HeadersVisibility="Column" ItemsSource="{Binding ExpensesSearchedEntries}" SelectedItem="{Binding SelectedExpense, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single" >
             <DataGrid.Columns>
-                <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header="Id" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding User}" ClipboardContentBinding="{x:Null}" Header="Usuario" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Vendor}" ClipboardContentBinding="{x:Null}" Header="Proveedor" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding TicketNumber}" ClipboardContentBinding="{x:Null}" Header="Numero de Ticket" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Description}" ClipboardContentBinding="{x:Null}" Header="Descripcion" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Amount, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header="Monto" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding CurrencyTypeString}" ClipboardContentBinding="{x:Null}" Header="Moneda" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PaymentTypeString}" ClipboardContentBinding="{x:Null}" Header="Metodo de Pago" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding ExpenseCategory}" ClipboardContentBinding="{x:Null}" Header="Categoria" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header="Fecha de Registro" IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header=" Id " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding User}" ClipboardContentBinding="{x:Null}" Header=" Usuario " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Vendor}" ClipboardContentBinding="{x:Null}" Header=" Proveedor " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding TicketNumber}" ClipboardContentBinding="{x:Null}" Header=" Numero de Ticket " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Description}" ClipboardContentBinding="{x:Null}" Header=" Descripcion " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Amount, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header=" Monto " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding CurrencyTypeString}" ClipboardContentBinding="{x:Null}" Header=" Moneda " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PaymentTypeString}" ClipboardContentBinding="{x:Null}" Header=" Metodo de Pago " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding ExpenseCategory}" ClipboardContentBinding="{x:Null}" Header=" Categoria " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Date}" ClipboardContentBinding="{x:Null}" Header=" Fecha de Registro " IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
 

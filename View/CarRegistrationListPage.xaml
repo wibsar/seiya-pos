@@ -5,10 +5,51 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
       mc:Ignorable="d" 
-      d:DesignHeight="450" d:DesignWidth="800"
+      d:DesignHeight="600" d:DesignWidth="1000"
+      d:DataContext="{d:DesignInstance local:CarRegistrationViewModel}"
       Title="CarRegistrationList">
-
+    <Page.Resources>        
+        <Style TargetType="{x:Type DataGrid}">
+            <Setter Property="Background" Value="#FFF" />
+            <Setter Property="Foreground" Value="#2C5066" />                  
+            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="AlternationCount" Value="2" />
+            <Setter Property="VerticalGridLinesBrush" Value="#FFE8E8E8"></Setter>
+            <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}"></Setter>            
+        </Style>
+        <Style TargetType="{x:Type DataGridRow}">
+            <Setter Property="Height" Value="25"></Setter>            
+            <Style.Triggers>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="0">
+                    <Setter Property="Background" Value="White"></Setter>
+                </Trigger>
+                <Trigger Property="ItemsControl.AlternationIndex" Value="1">
+                    <Setter Property="Background" Value="#FFEDF4F5"></Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="DataGridCell">
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>             
+        </Style>
+        <Style TargetType="DataGridColumnHeader">
+            <Setter Property="Background" Value="Gray"></Setter>
+            <Setter Property="Foreground" Value="White"></Setter>
+            <Setter Property="Height" Value="25"></Setter>
+        </Style>
+    </Page.Resources>
     <Grid>
+        <DataGrid x:Name="CarAccessoriesData" Margin="0,6,0,0" HeadersVisibility="Column" ItemsSource="{Binding CarPartsSearchedEntries}" SelectedItem="{Binding SelectedCarPart, Mode =TwoWay}" CanUserSortColumns="False" CanUserReorderColumns="False" AutoGenerateColumns="False" BorderBrush="{x:Null}" SelectionMode="Single">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="*" Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header=" Id" IsReadOnly="True"/>
+                <DataGridTextColumn Width="3*" Binding="{Binding Vin}" ClipboardContentBinding="{x:Null}" Header=" Vin" IsReadOnly="True"/>
+                <DataGridTextColumn Width="2*" Binding="{Binding Model}" ClipboardContentBinding="{x:Null}" Header=" Modelo" IsReadOnly="True"/>
+                <DataGridTextColumn Width="5*" Binding="{Binding Description}" ClipboardContentBinding="{x:Null}" Header=" Descripción" IsReadOnly="False"/>
+                <DataGridTextColumn Width="1.5*" Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header=" Categoria" IsReadOnly="False"/>
+                <DataGridTextColumn Width="*" Binding="{Binding Price}" ClipboardContentBinding="{x:Null}" Header="Monto" IsReadOnly="False"/>
+                <DataGridTextColumn Width="*" Binding="{Binding PriceCurrency}" ClipboardContentBinding="{x:Null}" Header=" Moneda" IsReadOnly="False"/>
+                <DataGridCheckBoxColumn Width="*" Binding="{Binding Enabled}" ClipboardContentBinding="{x:Null}" Header=" Incluír" IsReadOnly="False"></DataGridCheckBoxColumn>
+            </DataGrid.Columns>
+        </DataGrid>
         
     </Grid>
 </Page>
