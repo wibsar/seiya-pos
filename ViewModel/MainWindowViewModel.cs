@@ -1661,7 +1661,7 @@ namespace Seiya
                     Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
                     break;
                 case "others":
-                    CurrentPage = "\\View\\CarRegistrationPage.xaml";
+                    CurrentPage = "\\View\\CarRegistrationListPage.xaml";
                     break;
                
             }
