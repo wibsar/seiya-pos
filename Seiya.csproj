@@ -137,6 +137,15 @@
     <Compile Include="View\AnalysisMainPage.xaml.cs">
       <DependentUpon>AnalysisMainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="View\CarRegistrationInfoPage.xaml.cs">
+      <DependentUpon>CarRegistrationInfoPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CarRegistrationList.xaml.cs">
+      <DependentUpon>CarRegistrationList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="View\CarRegistrationMain.xaml.cs">
+      <DependentUpon>CarRegistrationMain.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\PaymentPartialPage.xaml.cs">
       <DependentUpon>PaymentPartialPage.xaml</DependentUpon>
     </Compile>
@@ -227,9 +236,6 @@
     <Compile Include="View\VendorMainPage.xaml.cs">
       <DependentUpon>VendorMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CarRegistrationPage.xaml.cs">
-      <DependentUpon>CarRegistrationPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="WpfBindingUtilities\DelegateCommand.cs" />
     <Compile Include="WpfBindingUtilities\ObservableObject.cs" />
     <Page Include="MainWindow.xaml">
@@ -247,6 +253,18 @@
     <Page Include="View\AnalysisMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\CarRegistrationInfoPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CarRegistrationList.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CarRegistrationMain.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\PaymentPartialPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -367,10 +385,6 @@
     <Page Include="View\VendorMainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\CarRegistrationPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

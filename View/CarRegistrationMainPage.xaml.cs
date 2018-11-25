@@ -16,11 +16,11 @@ using System.Windows.Shapes;
 namespace Seiya
 {
     /// <summary>
-    /// Lógica de interacción para CarRegistrationList.xaml
+    /// Lógica de interacción para Yonke.xaml
     /// </summary>
-    public partial class CarRegistrationList : Page
+    public partial class CarRegistrationMain : Page
     {
-        public CarRegistrationList()
+        public CarRegistrationMain()
         {
             InitializeComponent();
         }
