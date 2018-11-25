@@ -464,125 +464,7 @@ namespace Seiya
         {
             EndOfSalesType = "Z";
 
-            if (master)
-            {
-                //Regular
-                CalculateSales(TransactionType.Regular);
-                //Record End Of Sales Transaction in db
-                Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.EndOfDaySalesFileName,
-                    _pos.GetNextCorteZNumber(), TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
-                    TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
-                    TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
-                    TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
-                //Print Receipt
-                PrintReceipt(ReceiptType.DailyRegular, false);
-            }
-            else
-            {
-                CalculateSales(TransactionType.Regular);
-                CalculateDelta();
-                CollectEndOfSalesReceiptInformation();
-                //Record End Of Sales Transaction in db
-                Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.EndOfDaySalesFileName,
-                    _pos.LastCorteZNumber, TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
-                    TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
-                    TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
-                    TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
-                //Print Receipt
-                PrintReceipt(ReceiptType.DailyRegular, true);
-            }
-
-            //TODO:Change file names to Z file names
-            //BackUp Z Files and Clear
-            Transaction.BackUpTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
-            Transaction.BackUpTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
-            Transaction.ClearTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
-            Transaction.ClearTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
-            Inventory.InventoryBackUp(Constants.DataFolderPath + Constants.InventoryFileName);
-            //BackUp Z Expenses files
-            Expense.BackUpExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
-            Expense.ClearExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
-            //Backup Z Paymenets Files
-            Transaction.BackUpPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
-            Transaction.ClearPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
-
-            //Update POS Data
-            _pos.LastReceiptNumber = TransactionData.LastReceiptNumber;
-            _pos.LastTransactionNumber = TransactionData.LastTransactionNumber;
-            _pos.LastCashierAmountMxn = RegisterNewCash;
-            _pos.UpdateAllData();
-            _pos.SaveDataTableToCsv();
-        }
-
-        /// <summary>
-        /// Method to calculate the sales, record transaction, print receipt, and backup files
-        /// </summary>
-        //void GenerateEndOfDaySalesReport()
-        //{
-        //    EndOfSalesType = "Z";
-        //    SaveRegisterCashAmount();
-        //    //Regular
-        //    CalculateSales(TransactionType.Regular);
-        //    //Record End Of Sales Transaction in db
-        //    Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.EndOfDaySalesFileName,
-        //        _pos.GetNextCorteZNumber(), TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
-        //        TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
-        //        TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
-        //        TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
-        //    //Print Receipt
-        //    PrintReceipt(ReceiptType.DailyRegular, false);
-        //    //Master
-        //    CalculateSales(TransactionType.Interno);
-        //    CalculateDelta();
-        //    CollectEndOfSalesReceiptInformation();
-        //    //Record End Of Sales Transaction in db
-        //    Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.MasterEndOfDaySalesFileName,
-        //        _pos.LastCorteZNumber, TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
-        //        TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
-        //        TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
-        //        TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
-        //    //BackUp Files and Clear
-        //    Transaction.BackUpTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
-        //    Transaction.BackUpTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
-        //    Transaction.ClearTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
-        //    Transaction.ClearTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
-        //    Inventory.InventoryBackUp(Constants.DataFolderPath + Constants.InventoryFileName);
-        //    //BackUp Expenses files
-        //    Expense.BackUpExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
-        //    Expense.ClearExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
-        //    //Backup Paymenets Files
-        //    Transaction.BackUpPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
-        //    Transaction.ClearPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
-        //    //Update POS Data
-        //    _pos.LastReceiptNumber = TransactionData.LastReceiptNumber;
-        //    _pos.LastTransactionNumber = TransactionData.LastTransactionNumber;
-        //    _pos.LastCashierAmountMxn = RegisterNewCash;
-        //    _pos.UpdateAllData();
-        //    _pos.SaveDataTableToCsv();
-        //    //Print Receipt
-        //    PrintReceipt(ReceiptType.DailyInternal, true);
-        //}
-        /// <summary>
-        /// Method to view current sales report and print receipt X
-        /// </summary>
-        //void GenerateCurrentSalesReport()
-        //{
-        //    EndOfSalesType = "X";
-        //    SaveRegisterCashAmount();
-        //    var totalSalesInfo = CalculateSales(TransactionType.Interno);
-        //    TransactionDataStruct totalInternalSalesInfo;
-        //    Transaction.GetTransactionsData(TransactionType.Regular, _pos, out totalInternalSalesInfo);
-        //    CalculateDelta();
-        //    CollectEndOfSalesReceiptInformation();
-        //    //Print Receipt
-        //    PrintReceipt(ReceiptType.DailyInternal, false);
-        //}
-     
-        public void GenerateCurrentSalesReport()
-        {
-            EndOfSalesType = "X";
-            SaveRegisterCashAmount();
-
+            //Calculate sales and print receipts
             if (master)
             {
                 //Regular
@@ -597,10 +479,66 @@ namespace Seiya
                 PrintReceipt(ReceiptType.DailyRegular, false);
 
                 CalculateSales(TransactionType.Interno);
+                //Record End Of Sales Transaction in db
+                Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.MasterEndOfDaySalesFileName,
+                    _pos.GetNextCorteZNumber(), TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
+                    TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
+                    TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
+                    TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
+                //Print Receipt
+                PrintReceipt(ReceiptType.DailyRegular, false);
+            }
+            else
+            {
+                CalculateSales(TransactionType.Regular);
                 CalculateDelta();
                 CollectEndOfSalesReceiptInformation();
                 //Record End Of Sales Transaction in db
-                Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.MasterEndOfDaySalesFileName,
+                Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.EndOfDaySalesFileName,
+                    _pos.LastCorteZNumber, TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
+                    TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
+                    TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
+                    TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
+                //Print Full Detailed Receipt
+                PrintReceipt(ReceiptType.DailyRegular, false);
+            }
+
+            //BackUp Z Files and Clear
+            Transaction.BackUpTransactionFile(Constants.DataFolderPath + Constants.TransactionsZFileName);
+           //Transaction.BackUpTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
+            Transaction.ClearTransactionFile(Constants.DataFolderPath + Constants.TransactionsZFileName);
+           //Transaction.ClearTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
+            Inventory.InventoryBackUp(Constants.DataFolderPath + Constants.InventoryFileName);
+            //BackUp Z Expenses files
+            Expense.BackUpExpensesFile(Constants.DataFolderPath + Constants.ExpenseZFileName);
+            Expense.ClearExpensesFile(Constants.DataFolderPath + Constants.ExpenseZFileName);
+            //Backup Z Paymenets Files
+            Transaction.BackUpPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsZFileName);
+            Transaction.ClearPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsZFileName);
+
+            //Update POS Data
+ //           _pos.LastReceiptNumber = TransactionData.LastReceiptNumber;
+ //           _pos.LastTransactionNumber = TransactionData.LastTransactionNumber;
+  //          _pos.LastCashierAmountMxn = RegisterNewCash;
+    //        _pos.UpdateAllData();
+      //      _pos.SaveDataTableToCsv();
+        }
+
+        /// <summary>
+        /// Method to generate current sales report and print receipt X
+        /// </summary>
+        public void GenerateCurrentSalesReport()
+        {
+            EndOfSalesType = "X";
+            SaveRegisterCashAmount();
+
+            if (master)
+            {
+                CalculateSales(TransactionType.Interno);
+                CalculateDelta();
+                CollectEndOfSalesReceiptInformation();
+                //Record End Of Sales Transaction in db
+                Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.CurrentDaySalesFileName,
                     _pos.LastCorteZNumber, TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
                     TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
                     TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
@@ -614,7 +552,7 @@ namespace Seiya
                 CalculateDelta();
                 CollectEndOfSalesReceiptInformation();
                 //Record End Of Sales Transaction in db
-                Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.EndOfDaySalesFileName,
+                Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.CurrentDaySalesFileName,
                     _pos.LastCorteZNumber, TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
                     TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
                     TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
@@ -623,19 +561,18 @@ namespace Seiya
                 PrintReceipt(ReceiptType.DailyRegular, true);
             }
 
-            //TODO:Change file names to X file names
-            //BackUp X Files and Clear
-            Transaction.BackUpTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
-            Transaction.BackUpTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
-            Transaction.ClearTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
-            Transaction.ClearTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
+            //BackUp X Files
+            Transaction.BackUpTransactionFile(Constants.DataFolderPath + Constants.TransactionsXFileName);
+            //Transaction.BackUpTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
+            Transaction.ClearTransactionFile(Constants.DataFolderPath + Constants.TransactionsXFileName);
+            //Transaction.ClearTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
             Inventory.InventoryBackUp(Constants.DataFolderPath + Constants.InventoryFileName);
             //BackUp X Expenses files
-            Expense.BackUpExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
-            Expense.ClearExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
-            //Backup X Paymenets Files
-            Transaction.BackUpPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
-            Transaction.ClearPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
+            Expense.BackUpExpensesFile(Constants.DataFolderPath + Constants.ExpenseXFileName);
+            Expense.ClearExpensesFile(Constants.DataFolderPath + Constants.ExpenseXFileName);
+            //Backup X Payments Files
+            Transaction.BackUpPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsXFileName);
+            Transaction.ClearPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsXFileName);
 
             //Update POS Data
             _pos.LastReceiptNumber = TransactionData.LastReceiptNumber;
@@ -645,52 +582,11 @@ namespace Seiya
             _pos.SaveDataTableToCsv();
         }
 
-        //public void GenerateCurrentSalesReport() OLDDDDDDDDDDDDD
-        //{
-        //    EndOfSalesType = "X";
-        //    SaveRegisterCashAmount();
-        //    //Regular
-        //    CalculateSales(TransactionType.Regular);
-        //    //Record End Of Sales Transaction in db
-        //    Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.EndOfDaySalesFileName,
-        //        _pos.GetNextCorteZNumber(), TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
-        //        TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
-        //        TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
-        //        TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
-        //    //Print Receipt
-        //    PrintReceipt(ReceiptType.DailyRegular, false);
-        //    //Master
-        //    CalculateSales(TransactionType.Interno);
-        //    CalculateDelta();
-        //    CollectEndOfSalesReceiptInformation();
-        //    //Record End Of Sales Transaction in db
-        //    Transaction.RecordEndOfDaySalesTransaction(Constants.DataFolderPath + Constants.MasterEndOfDaySalesFileName,
-        //        _pos.LastCorteZNumber, TransactionData.FirstReceiptNumber, TransactionData.LastReceiptNumber, TransactionData.TotalItemsSold,
-        //        TransactionData.PointsTotal, TransactionData.CashTotal, TransactionData.CardTotal, TransactionData.CheckTotal,
-        //        TransactionData.BankTotal, TransactionData.OtherTotal, TransactionData.TotalAmountSold, TransactionData.ReturnsCash,
-        //        TransactionData.ReturnsCard, _pos.ExchangeRate, DateTime.Now.ToString(CultureInfo.CurrentCulture));
-        //    //BackUp Files and Clear
-        //    Transaction.BackUpTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
-        //    Transaction.BackUpTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
-        //    Transaction.ClearTransactionFile(Constants.DataFolderPath + Constants.TransactionsFileName);
-        //    Transaction.ClearTransactionMasterFile(Constants.DataFolderPath + Constants.TransactionsMasterFileName);
-        //    Inventory.InventoryBackUp(Constants.DataFolderPath + Constants.InventoryFileName);
-        //    //BackUp Expenses files
-        //    Expense.BackUpExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
-        //    Expense.ClearExpensesFile(Constants.DataFolderPath + Constants.ExpenseFileName);
-        //    //Backup Paymenets Files
-        //    Transaction.BackUpPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
-        //    Transaction.ClearPaymentsFile(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
-        //    //Update POS Data
-        //    _pos.LastReceiptNumber = TransactionData.LastReceiptNumber;
-        //    _pos.LastTransactionNumber = TransactionData.LastTransactionNumber;
-        //    _pos.LastCashierAmountMxn = RegisterNewCash;
-        //    _pos.UpdateAllData();
-        //    _pos.SaveDataTableToCsv();
-        //    //Print Receipt
-        //    PrintReceipt(ReceiptType.DailyInternal, true);
-        //}
-
+        /// <summary>
+        /// Calculate sales and return transactions summary
+        /// </summary>
+        /// <param name="transactionType"></param>
+        /// <returns></returns>
         private TransactionDataStruct CalculateSales(TransactionType transactionType)
         {
             Transaction.GetTransactionsData(transactionType, _pos, out var transactionData);
@@ -714,6 +610,9 @@ namespace Seiya
             return TransactionData;
         }
 
+        /// <summary>
+        /// Collect information required for the end of sales receipt based on user inputs during procedure
+        /// </summary>
         private void CollectEndOfSalesReceiptInformation()
         {
             EndOfSalesData = new EndOfSalesDataStruct()
@@ -749,6 +648,9 @@ namespace Seiya
             };
         }
 
+        /// <summary>
+        /// Calculate the expenses for the current period
+        /// </summary>
         private void CalculateExpenses()
         {
             var expenses = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, Constants.DataFolderPath + Constants.ExpenseHistoryFileName);
@@ -757,6 +659,9 @@ namespace Seiya
             ExpensesCashTotal = expensesCashMxn + expensesCashUsd * _pos.ExchangeRate;
         }
 
+        /// <summary>
+        /// Calculate the delta between the sales, expenses, and available cash
+        /// </summary>
         private void CalculateDelta()
         {
             //Total cash available in register
@@ -767,16 +672,27 @@ namespace Seiya
             Delta = totalCash + ExpensesCashTotal + ReturnsCashTotal - RegisterPreviousCash - CashTotalSales;     
         }
 
+        /// <summary>
+        /// Get initial register cash
+        /// </summary>
         private void CalculateInitialCash()
         {
             RegisterPreviousCash = _pos.GetRegisterCashAmount();
         }
 
+        /// <summary>
+        /// Save current register cash amount
+        /// </summary>
         private void SaveRegisterCashAmount()
         {
             _pos.UpdateRegisterCashAmount(RegisterNewCash);
         }
 
+        /// <summary>
+        /// Print the sales summary receipt either with or without details
+        /// </summary>
+        /// <param name="receiptType"></param>
+        /// <param name="fullReceipt"></param>
         private void PrintReceipt(ReceiptType receiptType, bool fullReceipt)
         {
             var receipt = new Receipt(_pos, receiptType, TransactionData, EndOfSalesData);

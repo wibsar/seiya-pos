@@ -34,7 +34,7 @@ namespace Seiya
         public const string TransactionsXFileName = "TransaccionesX.csv";
         public const string TransactionsZFileName = "TransaccionesZ.csv";
         public const string TransactionsPaymentsXFileName = "PagosX.csv";
-        public const string TransactionsPaymentsYFileName = "PagosZ.csv";
+        public const string TransactionsPaymentsZFileName = "PagosZ.csv";
 
         //Expenses Files
         public const string ExpenseFileName = "Gastos.csv";
@@ -46,6 +46,7 @@ namespace Seiya
 
         //End of day reports
         public const string EndOfDaySalesFileName = "CorteZ.csv";
+        public const string CurrentDaySalesFileName = "CorteX.csv";
         public const string MasterEndOfDaySalesFileName = "CorteZMaster.csv";
         public const string EndOfDaySalesBackupFolderPath = @"CorteZBackUp\";
 
