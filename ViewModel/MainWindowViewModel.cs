@@ -97,39 +97,39 @@ namespace Seiya
 
         private MainWindowViewModel()
         {
-       //     //Testing
-       //     try
-       //     {
-       //         var conn = new MySqlConnection(@"Server=wibsarlicencias.csqn2onotlww.us-east-1.rds.amazonaws.com;Database=Licenses;Uid=armoag;Pwd=Yadira00;");
-       //         conn.Open();
+            //Testing
+            try
+            {
+                var conn = new MySqlConnection(@"Server=wibsarlicencias.csqn2onotlww.us-east-1.rds.amazonaws.com;Database=Licenses;Uid=armoag;Pwd=Yadira00;");
+                conn.Open();
 
-       //         string sql = @"SELECT LicenseKey, CurrentUser FROM Licenses WHERE idLicenses=2";
+                string sql = @"SELECT LicenseKey, CurrentUser FROM Licenses WHERE idLicenses=2";
 
-       //         var cmd = new MySqlCommand(sql, conn);
+                var cmd = new MySqlCommand(sql, conn);
 
-       //         MySqlDataReader reader = cmd.ExecuteReader();
-       //         if (reader.Read())
-       //         {
-       //             var license = reader["LicenseKey"].ToString();
-       //             var currentUser = reader["CurrentUser"].ToString();
-       //         }
+                MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    var license = reader["LicenseKey"].ToString();
+                    var currentUser = reader["CurrentUser"].ToString();
+                }
 
-       //         sql = @"SELECT LicenseKey, CurrentUser FROM Licenses WHERE idLicenses=1";
+                sql = @"SELECT LicenseKey, CurrentUser FROM Licenses WHERE idLicenses=1";
 
-       //         var cmd2 = new MySqlCommand(sql, conn);
-       ////         MySqlDataReader reader = cmd.ExecuteReader();
-       //         if (reader.Read())
-       //         {
-       //             var license = reader["LicenseKey"].ToString();
-       //             var currentUser = reader["CurrentUser"].ToString();
-       //         }
+                var cmd2 = new MySqlCommand(sql, conn);
+                //         MySqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    var license = reader["LicenseKey"].ToString();
+                    var currentUser = reader["CurrentUser"].ToString();
+                }
 
-       //         conn.Close();
-       //     }
-       //     catch (Exception e)
-       //     {
-       //         var x = 1;
-       //     }
+                conn.Close();
+            }
+            catch (Exception e)
+            {
+                var x = 1;
+            }
 
 
             //Log
