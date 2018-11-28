@@ -3063,7 +3063,8 @@ namespace Seiya
             switch ((string)parameter)
             {
                 case "expense_details":
-                    var temporalExpense = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, Constants.DataFolderPath + Constants.ExpenseHistoryFileName)
+                    var temporalExpense = new Expense(Constants.DataFolderPath + Constants.ExpenseXFileName, Constants.DataFolderPath + Constants.ExpenseZFileName, 
+                        Constants.DataFolderPath + Constants.ExpenseHistoryFileName)
                     {
                         Id = SelectedExpense.Id,
                         User = SelectedExpense.User,
@@ -3104,7 +3105,8 @@ namespace Seiya
                 case "expense_add":
                     SelectedExpense = null;    //Clear selected item in the user list
                     //Create new productt
-                    var temporalExpense = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, Constants.DataFolderPath + Constants.ExpenseHistoryFileName)
+                    var temporalExpense = new Expense(Constants.DataFolderPath + Constants.ExpenseXFileName, Constants.DataFolderPath + Constants.ExpenseZFileName, 
+                        Constants.DataFolderPath + Constants.ExpenseHistoryFileName)
                     {
                         Vendor = "",
                         TicketNumber = "",
@@ -3140,8 +3142,8 @@ namespace Seiya
         internal void Execute_ExpenseStartSearchCommand(object parameter)
         {
             //Inventory search method that returns a list of products for the datagrid
-            ExpensesSearchedEntries = new ObservableCollection<Expense>(new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, 
-                Constants.DataFolderPath + Constants.ExpenseHistoryFileName).Search(ExpensesSearchText));
+            ExpensesSearchedEntries = new ObservableCollection<Expense>(new Expense(Constants.DataFolderPath + Constants.ExpenseXFileName, 
+                Constants.DataFolderPath + Constants.ExpenseZFileName, Constants.DataFolderPath + Constants.ExpenseHistoryFileName).Search(ExpensesSearchText));
             //Log
             Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Gastos: " + ExpensesSearchText);
             ExpensesSearchText = "";
@@ -4143,18 +4145,20 @@ namespace Seiya
                 }
             }
 
-            //Record transaction in both sales pages
-            Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsXFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
+            //Record transaction in both payments tables db
+            Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsPaymentsXFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
                 CurrentCustomer != null ? CurrentUser.Name : "General", currentTransaction.TransactionDate.ToString("G"), ExchangeRate, currentTransaction.FiscalReceiptRequired,
                 currentTransaction.TotalDue, CurrencyTypeEnum.MXN, transactionType, PaymentPartialCashMXN, PaymentPartialCashUSD, PaymentPartialCardMXN,
                 PaymentPartialCheckMXN, PaymentPartialTransferMXN, PaymentPartialOtherMXN, PaymentChangeMXN, currentTransaction.TotalDue);
 
             //Record transaction in general sales page
-            Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsZFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
+            Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsPaymentsZFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
                 CurrentCustomer != null ? CurrentUser.Name : "General", currentTransaction.TransactionDate.ToString("G"), ExchangeRate, currentTransaction.FiscalReceiptRequired,
                 currentTransaction.TotalDue, CurrencyTypeEnum.MXN, transactionType, PaymentPartialCashMXN, PaymentPartialCashUSD, PaymentPartialCardMXN,
                 PaymentPartialCheckMXN, PaymentPartialTransferMXN, PaymentPartialOtherMXN, PaymentChangeMXN, currentTransaction.TotalDue);
 
+            ///TODO: Do we need a history payments page?
+    
             PrintReceipt(currentTransaction, true);
             
             return true;

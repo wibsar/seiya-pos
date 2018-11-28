@@ -534,6 +534,7 @@ namespace Seiya
 
             if (master)
             {
+                ///TODO: Need transactionsX and Y master?
                 CalculateSales(TransactionType.Interno);
                 CalculateDelta();
                 CollectEndOfSalesReceiptInformation();
@@ -653,7 +654,8 @@ namespace Seiya
         /// </summary>
         private void CalculateExpenses()
         {
-            var expenses = new Expense(Constants.DataFolderPath + Constants.ExpenseFileName, Constants.DataFolderPath + Constants.ExpenseHistoryFileName);
+            var expenses = new Expense(Constants.DataFolderPath + Constants.ExpenseXFileName, Constants.DataFolderPath + Constants.ExpenseZFileName, 
+                Constants.DataFolderPath + Constants.ExpenseXFileName);
             expenses.GetTotal(out var expensesMxn, out var expensesUsd, out var expensesCashMxn, out var expensesCashUsd);
             ExpensesTotal = expensesMxn + expensesUsd * _pos.ExchangeRate;
             ExpensesCashTotal = expensesCashMxn + expensesCashUsd * _pos.ExchangeRate;

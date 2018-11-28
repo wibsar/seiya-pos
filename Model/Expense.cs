@@ -21,7 +21,8 @@ namespace Seiya
         private string _description;
         private string _expenseCategory;
         private PaymentTypeEnum _paymentType;
-        private string _expensesFilePath;
+        private string _expensesXFilePath;
+        private string _expensesZFilePath;
         private string _expensesHistoryFilePath;
         private string _user;
         private DateTime _date;
@@ -29,19 +30,21 @@ namespace Seiya
 
         #region Constructors
 
-        public Expense(string expensesFilePath, string expensesHistoryFilePath) : base(expensesFilePath)
+        public Expense(string expensesXFilePath, string expensesZFilePath, string expensesHistoryFilePath) : base(expensesXFilePath)
         {
             //TODO: Check if path exists
-            ExpensesFilePath = expensesFilePath;
+            ExpensesXFilePath = expensesXFilePath;
+            ExpensesZFilePath = expensesZFilePath;
             ExpensesHistoryFilePath = expensesHistoryFilePath;
             LoadCsvToDataTable();
         }
 
-        public Expense(string expensesFilePath, string expensesHistoryFilePath, int id, string user, string vendor, string description, decimal amount, 
-            CurrencyTypeEnum currencyType, PaymentTypeEnum paymentType, string expenseCategory = "General") : base(expensesFilePath)
+        public Expense(string expensesXFilePath, string expensesZFilePath, string expensesHistoryFilePath, int id, string user, string vendor, string description, decimal amount, 
+            CurrencyTypeEnum currencyType, PaymentTypeEnum paymentType, string expenseCategory = "General") : base(expensesXFilePath)
         {
             Id = id;
-            ExpensesFilePath = expensesFilePath;
+            ExpensesXFilePath = expensesXFilePath;
+            ExpensesZFilePath = expensesZFilePath;
             ExpensesHistoryFilePath = expensesHistoryFilePath;
             User = user;
             Vendor = vendor;
@@ -144,15 +147,26 @@ namespace Seiya
         {
             get { return _paymentType.ToString(); }
         }
-        public string ExpensesFilePath
+        public string ExpensesXFilePath
         {
             get
             {
-                return _expensesFilePath;
+                return _expensesXFilePath;
             }
             set
             {
-                _expensesFilePath = value;
+                _expensesXFilePath = value;
+            }
+        }
+        public string ExpensesZFilePath
+        {
+            get
+            {
+                return _expensesZFilePath;
+            }
+            set
+            {
+                _expensesZFilePath = value;
             }
         }
         public string ExpensesHistoryFilePath
@@ -211,7 +225,8 @@ namespace Seiya
             
             try
             {
-                File.AppendAllText(ExpensesFilePath, data);
+                File.AppendAllText(ExpensesXFilePath, data);
+                File.AppendAllText(ExpensesZFilePath, data);
                 File.AppendAllText(ExpensesHistoryFilePath, data);
             }
             catch (Exception e)
@@ -233,7 +248,7 @@ namespace Seiya
                 var allFields = base.DataTable.AsEnumerable();
                 foreach (var row in allFields)
                 {
-                    var expense = new Expense(ExpensesFilePath, ExpensesHistoryFilePath)
+                    var expense = new Expense(ExpensesXFilePath, ExpensesZFilePath, ExpensesHistoryFilePath)
                     {
                         Id = Int32.Parse(row["Id"].ToString()),
                         User = row["Usuario"].ToString(),
@@ -262,7 +277,7 @@ namespace Seiya
 
             foreach (var row in searchField1)
             {
-                var expense = new Expense(ExpensesFilePath, ExpensesHistoryFilePath)
+                var expense = new Expense(ExpensesXFilePath, ExpensesZFilePath, ExpensesHistoryFilePath)
                 {
                     Id = Int32.Parse(row["Usuario"].ToString()),
                     User = row["Usuario"].ToString(),
@@ -286,7 +301,7 @@ namespace Seiya
 
             foreach (var row in searchField2)
             {
-                var expense = new Expense(ExpensesFilePath, ExpensesHistoryFilePath)
+                var expense = new Expense(ExpensesXFilePath, ExpensesZFilePath, ExpensesHistoryFilePath)
                 {
                     Id = Int32.Parse(row["Usuario"].ToString()),
                     User = row["Usuario"].ToString(),

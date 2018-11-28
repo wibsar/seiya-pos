@@ -53,8 +53,8 @@ namespace Seiya
         private const string _ordersDataFilePath = Constants.DataFolderPath + Constants.OrdersFileName;
         private const string _posDataFilePath = Constants.DataFolderPath + Constants.PosDataFileName;
         private const string _vendorsDatafilePath = Constants.DataFolderPath + Constants.VendorsFileName;
-        private const string _transactionsDataFilePath = Constants.DataFolderPath + Constants.TransactionsFileName;
-        private const string _transactionMasterDataFilePath = Constants.DataFolderPath + Constants.TransactionsMasterFileName;
+        private const string _transactionsDataFilePath = Constants.DataFolderPath + Constants.TransactionsXFileName;
+        private const string _transactionMasterDataFilePath = Constants.DataFolderPath + Constants.TransactionsZFileName;
         private const string _transactionHistoryDataFilePath = Constants.DataFolderPath + Constants.TransactionsHistoryFileName;
         private const string _transactionTypes = Constants.DataFolderPath + Constants.TransactionsTypesFileName;
         private const string _transactionBackUpPath = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath;

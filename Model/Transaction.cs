@@ -296,7 +296,6 @@ namespace Seiya
         {
             switch (transactionType)
             {
-               
                 case TransactionType.Regular:
                 case TransactionType.Interno:
 
