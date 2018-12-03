@@ -449,7 +449,7 @@ namespace Seiya
             //Calculate sales from transactions
             CalculateInitialCash();
             CalculateExpenses();
-            CalculateSales(TransactionType.Interno);
+            CalculateSales(TransactionType.Regular);
             CalculateDelta();
         }
 
@@ -535,7 +535,7 @@ namespace Seiya
             if (master)
             {
                 ///TODO: Need transactionsX and Y master?
-                CalculateSales(TransactionType.Interno);
+                CalculateSales(TransactionType.Regular);
                 CalculateDelta();
                 CollectEndOfSalesReceiptInformation();
                 //Record End Of Sales Transaction in db

@@ -70,7 +70,7 @@ namespace Seiya
         private decimal _paymentChangeUSD;
         private decimal _paymentRemainingMXN;
         private decimal _paymentRemainingUSD;
-        private decimal _exchangeRate = 1;
+        private decimal _exchangeRate;
         private string _exchangeRateString;
         private decimal _pointsConvertionRatio = 100M; //TODO: add this to the UI after it is defined
         private double _paymentPointsInUse;
@@ -98,38 +98,38 @@ namespace Seiya
         private MainWindowViewModel()
         {
             //Testing
-            try
-            {
-                var conn = new MySqlConnection(@"Server=wibsarlicencias.csqn2onotlww.us-east-1.rds.amazonaws.com;Database=Licenses;Uid=armoag;Pwd=Yadira00;");
-                conn.Open();
+            //try
+            //{
+            //    var conn = new MySqlConnection(@"Server=wibsarlicencias.csqn2onotlww.us-east-1.rds.amazonaws.com;Database=Licenses;Uid=armoag;Pwd=Yadira00;");
+            //    conn.Open();
 
-                string sql = @"SELECT LicenseKey, CurrentUser FROM Licenses WHERE idLicenses=2";
+            //    string sql = @"SELECT LicenseKey, CurrentUser FROM Licenses WHERE idLicenses=2";
 
-                var cmd = new MySqlCommand(sql, conn);
+            //    var cmd = new MySqlCommand(sql, conn);
 
-                MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    var license = reader["LicenseKey"].ToString();
-                    var currentUser = reader["CurrentUser"].ToString();
-                }
+            //    MySqlDataReader reader = cmd.ExecuteReader();
+            //    if (reader.Read())
+            //    {
+            //        var license = reader["LicenseKey"].ToString();
+            //        var currentUser = reader["CurrentUser"].ToString();
+            //    }
 
-                sql = @"SELECT LicenseKey, CurrentUser FROM Licenses WHERE idLicenses=1";
+            //    sql = @"SELECT LicenseKey, CurrentUser FROM Licenses WHERE idLicenses=1";
 
-                var cmd2 = new MySqlCommand(sql, conn);
-                //         MySqlDataReader reader = cmd.ExecuteReader();
-                if (reader.Read())
-                {
-                    var license = reader["LicenseKey"].ToString();
-                    var currentUser = reader["CurrentUser"].ToString();
-                }
+            //    var cmd2 = new MySqlCommand(sql, conn);
+            //    //         MySqlDataReader reader = cmd.ExecuteReader();
+            //    if (reader.Read())
+            //    {
+            //        var license = reader["LicenseKey"].ToString();
+            //        var currentUser = reader["CurrentUser"].ToString();
+            //    }
 
-                conn.Close();
-            }
-            catch (Exception e)
-            {
-                var x = 1;
-            }
+            //    conn.Close();
+            //}
+            //catch (Exception e)
+            //{
+            //    var x = 1;
+            //}
 
 
             //Log
@@ -549,7 +549,8 @@ namespace Seiya
             set
             {
                 _paymentTotalMXN = Math.Round(value, 2);
-                PaymentTotalUSD = Math.Round(_paymentTotalMXN /_exchangeRate, 2);
+                if(_exchangeRate != 0)
+                    PaymentTotalUSD = Math.Round(_paymentTotalMXN /_exchangeRate, 2);
                 OnPropertyChanged();
             }
         }
@@ -1386,7 +1387,7 @@ namespace Seiya
         {
             get
             {
-                return _posInstance.ExchangeRate.ToString();
+                return _posInstance.ExchangeRate.ToString(CultureInfo.CurrentCulture);
             }
             set
             {
@@ -4151,14 +4152,17 @@ namespace Seiya
                 currentTransaction.TotalDue, CurrencyTypeEnum.MXN, transactionType, PaymentPartialCashMXN, PaymentPartialCashUSD, PaymentPartialCardMXN,
                 PaymentPartialCheckMXN, PaymentPartialTransferMXN, PaymentPartialOtherMXN, PaymentChangeMXN, currentTransaction.TotalDue);
 
-            //Record transaction in general sales page
             Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsPaymentsZFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
                 CurrentCustomer != null ? CurrentUser.Name : "General", currentTransaction.TransactionDate.ToString("G"), ExchangeRate, currentTransaction.FiscalReceiptRequired,
                 currentTransaction.TotalDue, CurrencyTypeEnum.MXN, transactionType, PaymentPartialCashMXN, PaymentPartialCashUSD, PaymentPartialCardMXN,
                 PaymentPartialCheckMXN, PaymentPartialTransferMXN, PaymentPartialOtherMXN, PaymentChangeMXN, currentTransaction.TotalDue);
 
-            ///TODO: Do we need a history payments page?
-    
+            //Record transaction in history
+            Transaction.RecordPaymentTransaction(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName, currentTransaction.ReceiptNumber, CurrentUser.Name,
+                CurrentCustomer != null ? CurrentUser.Name : "General", currentTransaction.TransactionDate.ToString("G"), ExchangeRate, currentTransaction.FiscalReceiptRequired,
+                currentTransaction.TotalDue, CurrencyTypeEnum.MXN, transactionType, PaymentPartialCashMXN, PaymentPartialCashUSD, PaymentPartialCardMXN,
+                PaymentPartialCheckMXN, PaymentPartialTransferMXN, PaymentPartialOtherMXN, PaymentChangeMXN, currentTransaction.TotalDue);
+
             PrintReceipt(currentTransaction, true);
             
             return true;

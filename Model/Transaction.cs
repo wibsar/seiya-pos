@@ -374,14 +374,14 @@ namespace Seiya
         public static void ClearTransactionFile(string transactionFilePath)
         {
             File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.TransactionBlankFileName,
-                Constants.DataFolderPath + Constants.TransactionsFileName, true);
+                transactionFilePath, true);
         }
 
         //Method to clear file
         public static void ClearTransactionMasterFile(string transactionFilePath)
         {
             File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.TransactionMasterBlankFileName,
-                Constants.DataFolderPath + Constants.TransactionsMasterFileName, true);
+                transactionFilePath, true);
         }
 
         //Method to create a backup file
@@ -401,7 +401,7 @@ namespace Seiya
         public static void ClearPaymentsFile(string paymentsFilePath)
         {
             File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.TransactionsPaymentsBlankFileName,
-                Constants.DataFolderPath + Constants.TransactionsPaymentsFileName, true);
+                paymentsFilePath, true);
         }
 
         /// <summary>
@@ -587,7 +587,7 @@ namespace Seiya
             decimal cashMxn = 0, cashUsd = 0, cardMxn = 0, transferMxn = 0, checkMxn = 0, otherMxn = 0, totalChangeMxn = 0, totalSoldMxn = 0;
             if (ticketsList.Count > 0)
             {
-                GetSalePaymentTotalPerType(ticketsList, out cashMxn, out cashUsd, out cardMxn, out transferMxn, out checkMxn,
+                GetSalePaymentTotalPerType(transactionType, ticketsList, out cashMxn, out cashUsd, out cardMxn, out transferMxn, out checkMxn,
                     out otherMxn, out totalChangeMxn, out totalSoldMxn);
             }
 
@@ -600,7 +600,19 @@ namespace Seiya
             return categoryData;
         }
 
-        private static void GetSalePaymentTotalPerType(List<int> ticketNumbers, out decimal cashMxn, out decimal cashUsd, out decimal cardMxn,
+        /// <summary>
+        /// Gets the total payment method per type for partial payments
+        /// </summary>
+        /// <param name="ticketNumbers"></param>
+        /// <param name="cashMxn"></param>
+        /// <param name="cashUsd"></param>
+        /// <param name="cardMxn"></param>
+        /// <param name="transferMxn"></param>
+        /// <param name="checkMxn"></param>
+        /// <param name="otherMxn"></param>
+        /// <param name="totalChangeMxn"></param>
+        /// <param name="totalSoldMxn"></param>
+        private static void GetSalePaymentTotalPerType(TransactionType transactionType, List<int> ticketNumbers, out decimal cashMxn, out decimal cashUsd, out decimal cardMxn,
             out decimal transferMxn, out decimal checkMxn, out decimal otherMxn, out decimal totalChangeMxn, out decimal totalSoldMxn)
         {
             cashMxn = 0;
@@ -612,7 +624,10 @@ namespace Seiya
             totalChangeMxn = 0;
             totalSoldMxn = 0;
 
-            var data = Utilities.LoadCsvToDataTable(Constants.DataFolderPath + Constants.TransactionsPaymentsFileName);
+            System.Data.DataTable data;
+            data = transactionType == TransactionType.Regular ? Utilities.LoadCsvToDataTable(Constants.DataFolderPath + Constants.TransactionsPaymentsXFileName) : 
+                Utilities.LoadCsvToDataTable(Constants.DataFolderPath + Constants.TransactionsPaymentsZFileName);
+
             foreach (var ticketNumber in ticketNumbers)
             {
                 for (var index = 0; index < data.Rows.Count; index++)

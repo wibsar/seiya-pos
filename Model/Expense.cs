@@ -450,7 +450,7 @@ namespace Seiya
         public static void ClearExpensesFile(string expensesFilePath)
         {
             File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.ExpenseBlankFileName,
-                Constants.DataFolderPath + Constants.ExpenseFileName, true);
+                expensesFilePath, true);
         }
         #endregion
     }

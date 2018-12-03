@@ -103,7 +103,7 @@
                         <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Usuario.png" Margin="5"></Image>
                     </Grid>
                 </Button>
-                <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name, StringFormat='Usuario: {0}'}" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Right"  ></TextBlock>
+                <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name}" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Right"  ></TextBlock>
             </Grid>
         </Grid>
         <!-- Grid for checkout section -->
