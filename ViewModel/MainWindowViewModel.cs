@@ -1857,7 +1857,7 @@ namespace Seiya
             var index = CurrentCartProducts.IndexOf((Product)parameter);
             var activeProduct = (Product)parameter;
             CurrentCartProducts.RemoveAt(index);
-            activeProduct.Price = activeProduct.Price*(1 - DiscountPercent);
+            activeProduct.Price = Math.Round(activeProduct.Price*(1 - DiscountPercent), 2);
             CurrentCartProducts.Insert(index, activeProduct);
             SelectedCartProduct = activeProduct;
             PaymentTotalMXN = CalculateCurrentCartTotal();
