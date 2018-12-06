@@ -4264,8 +4264,7 @@ namespace Seiya
             }
 
             //Get next receipt number, if applicable
-            //var receiptNumber = saleType == TransactionType.Regular ? _posInstance.GetNextReceiptNumber() : _posInstance.LastReceiptNumber;
-            var receiptNumber = _posInstance.GetNextReceiptNumber();
+            var receiptNumber = saleType == TransactionType.Interno ?_posInstance.LastReceiptNumber : _posInstance.GetNextReceiptNumber();
 
             //Record each item in the transactions db
             foreach (var product in CurrentCartProducts)

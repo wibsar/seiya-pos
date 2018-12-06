@@ -433,20 +433,29 @@ namespace Seiya
             base.RemoveEntryInDataTable(this.Id.ToString(), "Id");
         }
 
-        //Method to create a backup file
-        public static void BackUpExpensesFile(string expensesFilePath)
+        /// <summary>
+        /// Backup expenses file
+        /// </summary>
+        /// <param name="expensesFilePath"></param>
+        /// <param name="endDayFlag"></param>
+        public static void BackUpExpensesFile(string expensesFilePath, bool endDayFlag)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             var currentTime = DateTime.Now;
-            //Load inventory csv file and create a backup copy
-            string expensesFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + "Gastos" +
+            var transFileType = endDayFlag ? "Z" : "X";
+
+            string expensesFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + "Gastos" + transFileType + "_" + 
                                                    currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") +
                                                    currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".csv";
 
             File.Copy(expensesFilePath, expensesFileBackUpCopyName);
         }
 
-        //Method to clear file
+
+        /// <summary>
+        /// Clears expenses file
+        /// </summary>
+        /// <param name="expensesFilePath"></param>
         public static void ClearExpensesFile(string expensesFilePath)
         {
             File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.ExpenseBlankFileName,

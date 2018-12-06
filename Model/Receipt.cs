@@ -296,8 +296,10 @@ namespace Seiya
 
             printDocument.PrintPage += new PrintPageEventHandler(PrintEndOfDaySalesReceipt);
 
-            var fullReceiptName = Constants.DataFolderPath + Constants.EndOfDaySalesBackupFolderPath + "CorteInNum" +
-                                  Pos.LastCorteZNumber + ".xps";
+            var currentTime = DateTime.Now;
+            var fullReceiptName = Constants.DataFolderPath + Constants.EndOfDaySalesBackupFolderPath + "CorteZ_No_" +
+                                  Pos.LastCorteZNumber + "_" + currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") +
+                                  currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".xps";
 
             if (!printToFileOnly)
             {
@@ -332,8 +334,10 @@ namespace Seiya
 
             printDocument.PrintPage += new PrintPageEventHandler(PrintEndOfDaySalesFullReceipt);
 
-            var fullReceiptName = Constants.DataFolderPath + Constants.EndOfDaySalesBackupFolderPath + "CorteFullNum" +
-                                  Pos.LastCorteZNumber + ".xps";
+            var currentTime = DateTime.Now;
+            var fullReceiptName = Constants.DataFolderPath + Constants.EndOfDaySalesBackupFolderPath + "CorteX_No_" +
+                                  Pos.LastCorteZNumber + "_" + currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") +
+                                  currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".xps";
 
             if (!printToFileOnly)
             {

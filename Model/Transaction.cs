@@ -345,52 +345,62 @@ namespace Seiya
         }
 
         //Method to create a backup file
-        public static void BackUpTransactionFile(string transactionFilePath)
+        public static void BackUpTransactionFile(string transactionFilePath, bool endDayFlag)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             var currentTime = DateTime.Now;
-            //Load inventory csv file and create a backup copy
-            string TransactionFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + "Transacciones" +
-                currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") +
-                currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".csv";
 
-            File.Copy(transactionFilePath, TransactionFileBackUpCopyName);
-        }
-        //Method to create a backup file
-        public static void BackUpTransactionMasterFile(string transactionFilePath)
-        {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
-            var currentTime = DateTime.Now;
-            //Load inventory csv file and create a backup copy
+            var transFileType = endDayFlag ? "Z" : "X";
+
             string TransactionFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath +
-                "TransaccionesMaster" + currentTime.Day.ToString("00") + currentTime.Month.ToString("00") +
-                currentTime.Year.ToString("0000") + currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") +
+                "Transacciones" + transFileType + "_" + currentTime.Day.ToString("00") + currentTime.Month.ToString("00") +
+                currentTime.Year.ToString("0000") + currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + 
                 currentTime.Second.ToString("00") + ".csv";
 
             File.Copy(transactionFilePath, TransactionFileBackUpCopyName);
         }
+        ////Method to create a backup file
+        //public static void BackUpTransactionMasterFile(string transactionFilePath)
+        //{
+        //    Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+        //    var currentTime = DateTime.Now;
+        //    //Load inventory csv file and create a backup copy
+        //    string TransactionFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath +
+        //        "TransaccionesMaster" + currentTime.Day.ToString("00") + currentTime.Month.ToString("00") +
+        //        currentTime.Year.ToString("0000") + currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") +
+        //        currentTime.Second.ToString("00") + ".csv";
 
-        //Method to clear file
+        //    File.Copy(transactionFilePath, TransactionFileBackUpCopyName);
+        //}
+
+        /// <summary>
+        /// Clears the transaction file
+        /// </summary>
+        /// <param name="transactionFilePath"></param>
         public static void ClearTransactionFile(string transactionFilePath)
         {
             File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.TransactionBlankFileName,
                 transactionFilePath, true);
         }
 
-        //Method to clear file
-        public static void ClearTransactionMasterFile(string transactionFilePath)
-        {
-            File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.TransactionMasterBlankFileName,
-                transactionFilePath, true);
-        }
+        ////Method to clear file
+        //public static void ClearTransactionMasterFile(string transactionFilePath)
+        //{
+        //    File.Copy(Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + Constants.TransactionMasterBlankFileName,
+        //        transactionFilePath, true);
+        //}
 
-        //Method to create a backup file
-        public static void BackUpPaymentsFile(string paymentsFilePath)
+        /// <summary>
+        /// Cleans payment file
+        /// </summary>
+        /// <param name="paymentsFilePath"></param>
+        /// <param name="endDayFlag"></param>
+        public static void BackUpPaymentsFile(string paymentsFilePath, bool endDayFlag)
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
             var currentTime = DateTime.Now;
-            //Load inventory csv file and create a backup copy
-            string PaymentsFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + "Pagos" +
+            var transFileType = endDayFlag ? "Z" : "X";
+            string PaymentsFileBackUpCopyName = Constants.DataFolderPath + Constants.TransactionsBackupFolderPath + "Pagos" + transFileType + "_" +
                 currentTime.Day.ToString("00") + currentTime.Month.ToString("00") + currentTime.Year.ToString("0000") +
                 currentTime.Hour.ToString("00") + currentTime.Minute.ToString("00") + currentTime.Second.ToString("00") + ".csv";
 
@@ -404,204 +414,204 @@ namespace Seiya
                 paymentsFilePath, true);
         }
 
+        ///// <summary>
+        ///// Get transaction sales data for end of day sales report
+        ///// </summary>
+        ///// <param name="transactionType"></param>
+        ///// <param name="posData"></param>
+        ///// <param name="transactionData"></param>
+        ///// <returns></returns>
+        //public static List<Tuple<string, int, decimal>> GetTransactionsData(TransactionType transactionType,
+        //    Pos posData, out TransactionDataStruct transactionData)
+        //{
+        //    System.Data.DataTable data;
+        //    decimal cashMxnOffset = 0;
+        //    decimal cashUsdOffset = 0;
+        //    decimal cardUsdOffset = 0;
+        //    decimal transferMxnOffset = 0;
+        //    decimal checkMxnOffset = 0;
+        //    decimal otherMxnOffset = 0;
+        //    decimal tempPartialTotalMxn = 0;
+        //    var ticketsList = new List<int>();
+
+        //    transactionData = new TransactionDataStruct
+        //    {
+        //        TotalAmountSold = 0,
+        //        TotalItemsSold = 0,
+        //        CashTotal = 0,
+        //        CardTotal = 0,
+        //        CheckTotal = 0,
+        //        BankTotal = 0,
+        //        OtherTotal = 0,
+        //        PointsTotal = 0,
+        //        ReturnsCash = 0,
+        //        ReturnsCard = 0,
+        //        TotalReturnItems = 0,
+        //        LastTransactionNumber = 0,
+        //        LastInternalTransactionNumber = 0,
+        //        EndOfSalesNumber = 0,
+        //        LastReceiptNumber = 0
+        //    };
+
+        //    string selectedFilePath = String.Empty;
+
+        //    var categoryData = new List<Tuple<string, int, decimal>>();
+
+        //    //Open current transaction file and get data
+        //    if (transactionType == TransactionType.Interno)
+        //    {
+        //        selectedFilePath = posData.TransactionMasterDataFilePath;
+        //    }
+        //    else if (transactionType == TransactionType.Regular)
+        //    {
+        //        selectedFilePath = posData.TransactionsDataFilePath;
+        //    }
+
+        //    using (var parser = new GenericParserAdapter(selectedFilePath))
+        //    {
+        //        parser.ColumnDelimiter = ',';
+        //        parser.FirstRowHasHeader = true;
+        //        parser.SkipStartingDataRows = 0;
+        //        parser.SkipEmptyRows = true;
+        //        parser.MaxBufferSize = 4096;
+        //        parser.MaxRows = 8000;
+
+        //        data = parser.GetDataTable();
+        //    }
+
+        //    var categories = CategoryCatalog.GetList(posData.Catalog);
+
+        //    //Add points category
+        //    categories.Add("Puntos");
+
+        //    //Get each category
+        //    foreach (var category in categories)
+        //    {
+        //        var amount = 0M;
+        //        var itemsNumber = 0;
+
+        //        for (var index = 0; index < data.Rows.Count; index++)
+        //        {
+        //            var row = data.Rows[index];
+        //            //Separate categories
+        //            if (row["CategoriaProducto"].ToString() == category)
+        //            {
+        //                amount += decimal.Parse(row["TotalVendido"].ToString());
+
+        //                if (category != "Puntos")
+        //                    itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
+
+        //                //Get payment method
+        //                if (row["TipoVenta"].ToString() != "DevolucionEfectivo" && row["TipoVenta"].ToString() != "DevolucionTarjeta")
+        //                {
+        //                    switch (row["MetodoPago"].ToString())
+        //                    {
+        //                        case "Cash":
+        //                        case "Efectivo":
+        //                            transactionData.CashTotal += decimal.Parse(row["TotalVendido"].ToString());
+        //                            break;
+        //                        case "Card":
+        //                        case "Tarjeta":
+        //                            transactionData.CardTotal += decimal.Parse(row["TotalVendido"].ToString());
+        //                            break;
+        //                        case "Check":
+        //                        case "Cheque":
+        //                            transactionData.CheckTotal += decimal.Parse(row["TotalVendido"].ToString());
+        //                            break;
+        //                        case "BankTransfer":
+        //                        case "Transferencia":
+        //                            transactionData.BankTotal += decimal.Parse(row["TotalVendido"].ToString());
+        //                            break;
+        //                        case "Other":
+        //                        case "Otro":
+        //                            transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
+        //                            break;
+        //                        case "Partial":
+        //                        case "Parcial":
+        //                            //add ticket number to list so it can be searched later
+        //                            if (!ticketsList.Contains(Int32.Parse(row["NumeroTicket"].ToString())))
+        //                            {
+        //                                ticketsList.Add(Int32.Parse(row["NumeroTicket"].ToString()));
+        //                            }
+        //                            tempPartialTotalMxn += decimal.Parse(row["TotalVendido"].ToString());
+        //                            break;
+        //                        default:
+        //                            transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
+        //                            break;
+        //                    }
+        //                }
+
+        //                if (row["Descripcion"].ToString() == "Puntos Descuento")
+        //                {
+        //                    transactionData.PointsTotal += double.Parse(row["TotalVendido"].ToString()) * -1;
+        //                }
+
+        //                if (row["TipoVenta"].ToString() == "DevolucionEfectivo")
+        //                {
+        //                    transactionData.ReturnsCash += decimal.Parse(row["TotalVendido"].ToString()) * -1;
+        //                    transactionData.TotalReturnItems -= Int32.Parse(row["UnidadesVendidas"].ToString());
+        //                }
+
+        //                if (row["TipoVenta"].ToString() == "DevolucionTarjeta")
+        //                {
+        //                    transactionData.ReturnsCard += decimal.Parse(row["TotalVendido"].ToString()) * -1;
+        //                    transactionData.TotalReturnItems -= Int32.Parse(row["UnidadesVendidas"].ToString());
+        //                }
+        //            }
+        //        }
+
+        //        categoryData.Add(new Tuple<string, int, decimal>(category.ToString(), itemsNumber, amount));
+        //        transactionData.TotalAmountSold += amount;
+        //        transactionData.TotalItemsSold += itemsNumber;
+        //    }
+
+        //    //Subtract returns
+        //    transactionData.TotalAmountSold = transactionData.TotalAmountSold + transactionData.ReturnsCash + transactionData.ReturnsCard;
+
+        //    //Get first and last receipt number
+        //    if (data.Rows.Count > 1)
+        //    {
+        //        var firstRow = data.Rows[0];
+        //        var lastRow = data.Rows[data.Rows.Count - 1];
+        //        transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
+        //        transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+        //        if (transactionType == TransactionType.Interno)
+        //        {
+        //            transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
+        //        }
+        //    }
+        //    else if (data.Rows.Count == 1)
+        //    {
+        //        var firstRow = data.Rows[0];
+        //        var lastRow = data.Rows[0];
+        //        transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
+        //        transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+        //        if (transactionType == TransactionType.Interno)
+        //        {
+        //            transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
+        //        }
+        //    }
+        //    transactionData.SalesInfoPerCategory = categoryData;
+
+        //    //Search for partial payment tickets in payments db
+        //    decimal cashMxn = 0, cashUsd = 0, cardMxn = 0, transferMxn = 0, checkMxn = 0, otherMxn = 0, totalChangeMxn = 0, totalSoldMxn = 0;
+        //    if (ticketsList.Count > 0)
+        //    {
+        //        GetSalePaymentTotalPerType(transactionType, ticketsList, out cashMxn, out cashUsd, out cardMxn, out transferMxn, out checkMxn,
+        //            out otherMxn, out totalChangeMxn, out totalSoldMxn);
+        //    }
+
+        //    transactionData.CashTotal += (cashMxn + Math.Round(cashUsd * MainWindowViewModel.GetInstance().ExchangeRate, 2) - totalChangeMxn);
+        //    transactionData.CardTotal += cardMxn;
+        //    transactionData.CheckTotal += checkMxn;
+        //    transactionData.BankTotal += transferMxn;
+        //    transactionData.OtherTotal += otherMxn;
+
+        //    return categoryData;
+        //}
+
         /// <summary>
-        /// Get transaction sales data for end of day sales report
-        /// </summary>
-        /// <param name="transactionType"></param>
-        /// <param name="posData"></param>
-        /// <param name="transactionData"></param>
-        /// <returns></returns>
-        public static List<Tuple<string, int, decimal>> GetTransactionsData(TransactionType transactionType,
-            Pos posData, out TransactionDataStruct transactionData)
-        {
-            System.Data.DataTable data;
-            decimal cashMxnOffset = 0;
-            decimal cashUsdOffset = 0;
-            decimal cardUsdOffset = 0;
-            decimal transferMxnOffset = 0;
-            decimal checkMxnOffset = 0;
-            decimal otherMxnOffset = 0;
-            decimal tempPartialTotalMxn = 0;
-            var ticketsList = new List<int>();
-
-            transactionData = new TransactionDataStruct
-            {
-                TotalAmountSold = 0,
-                TotalItemsSold = 0,
-                CashTotal = 0,
-                CardTotal = 0,
-                CheckTotal = 0,
-                BankTotal = 0,
-                OtherTotal = 0,
-                PointsTotal = 0,
-                ReturnsCash = 0,
-                ReturnsCard = 0,
-                TotalReturnItems = 0,
-                LastTransactionNumber = 0,
-                LastInternalTransactionNumber = 0,
-                EndOfSalesNumber = 0,
-                LastReceiptNumber = 0
-            };
-
-            string selectedFilePath = String.Empty;
-
-            var categoryData = new List<Tuple<string, int, decimal>>();
-
-            //Open current transaction file and get data
-            if (transactionType == TransactionType.Interno)
-            {
-                selectedFilePath = posData.TransactionMasterDataFilePath;
-            }
-            else if (transactionType == TransactionType.Regular)
-            {
-                selectedFilePath = posData.TransactionsDataFilePath;
-            }
-
-            using (var parser = new GenericParserAdapter(selectedFilePath))
-            {
-                parser.ColumnDelimiter = ',';
-                parser.FirstRowHasHeader = true;
-                parser.SkipStartingDataRows = 0;
-                parser.SkipEmptyRows = true;
-                parser.MaxBufferSize = 4096;
-                parser.MaxRows = 8000;
-
-                data = parser.GetDataTable();
-            }
-
-            var categories = CategoryCatalog.GetList(posData.Catalog);
-
-            //Add points category
-            categories.Add("Puntos");
-
-            //Get each category
-            foreach (var category in categories)
-            {
-                var amount = 0M;
-                var itemsNumber = 0;
-
-                for (var index = 0; index < data.Rows.Count; index++)
-                {
-                    var row = data.Rows[index];
-                    //Separate categories
-                    if (row["CategoriaProducto"].ToString() == category)
-                    {
-                        amount += decimal.Parse(row["TotalVendido"].ToString());
-
-                        if (category != "Puntos")
-                            itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
-
-                        //Get payment method
-                        if (row["TipoVenta"].ToString() != "DevolucionEfectivo" && row["TipoVenta"].ToString() != "DevolucionTarjeta")
-                        {
-                            switch (row["MetodoPago"].ToString())
-                            {
-                                case "Cash":
-                                case "Efectivo":
-                                    transactionData.CashTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                    break;
-                                case "Card":
-                                case "Tarjeta":
-                                    transactionData.CardTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                    break;
-                                case "Check":
-                                case "Cheque":
-                                    transactionData.CheckTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                    break;
-                                case "BankTransfer":
-                                case "Transferencia":
-                                    transactionData.BankTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                    break;
-                                case "Other":
-                                case "Otro":
-                                    transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                    break;
-                                case "Partial":
-                                case "Parcial":
-                                    //add ticket number to list so it can be searched later
-                                    if (!ticketsList.Contains(Int32.Parse(row["NumeroTicket"].ToString())))
-                                    {
-                                        ticketsList.Add(Int32.Parse(row["NumeroTicket"].ToString()));
-                                    }
-                                    tempPartialTotalMxn += decimal.Parse(row["TotalVendido"].ToString());
-                                    break;
-                                default:
-                                    transactionData.OtherTotal += decimal.Parse(row["TotalVendido"].ToString());
-                                    break;
-                            }
-                        }
-
-                        if (row["Descripcion"].ToString() == "Puntos Descuento")
-                        {
-                            transactionData.PointsTotal += double.Parse(row["TotalVendido"].ToString()) * -1;
-                        }
-
-                        if (row["TipoVenta"].ToString() == "DevolucionEfectivo")
-                        {
-                            transactionData.ReturnsCash += decimal.Parse(row["TotalVendido"].ToString()) * -1;
-                            transactionData.TotalReturnItems -= Int32.Parse(row["UnidadesVendidas"].ToString());
-                        }
-
-                        if (row["TipoVenta"].ToString() == "DevolucionTarjeta")
-                        {
-                            transactionData.ReturnsCard += decimal.Parse(row["TotalVendido"].ToString()) * -1;
-                            transactionData.TotalReturnItems -= Int32.Parse(row["UnidadesVendidas"].ToString());
-                        }
-                    }
-                }
-
-                categoryData.Add(new Tuple<string, int, decimal>(category.ToString(), itemsNumber, amount));
-                transactionData.TotalAmountSold += amount;
-                transactionData.TotalItemsSold += itemsNumber;
-            }
-
-            //Subtract returns
-            transactionData.TotalAmountSold = transactionData.TotalAmountSold + transactionData.ReturnsCash + transactionData.ReturnsCard;
-
-            //Get first and last receipt number
-            if (data.Rows.Count > 1)
-            {
-                var firstRow = data.Rows[0];
-                var lastRow = data.Rows[data.Rows.Count - 1];
-                transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
-                transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
-                if (transactionType == TransactionType.Interno)
-                {
-                    transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
-                }
-            }
-            else if (data.Rows.Count == 1)
-            {
-                var firstRow = data.Rows[0];
-                var lastRow = data.Rows[0];
-                transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
-                transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
-                if (transactionType == TransactionType.Interno)
-                {
-                    transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
-                }
-            }
-            transactionData.SalesInfoPerCategory = categoryData;
-
-            //Search for partial payment tickets in payments db
-            decimal cashMxn = 0, cashUsd = 0, cardMxn = 0, transferMxn = 0, checkMxn = 0, otherMxn = 0, totalChangeMxn = 0, totalSoldMxn = 0;
-            if (ticketsList.Count > 0)
-            {
-                GetSalePaymentTotalPerType(transactionType, ticketsList, out cashMxn, out cashUsd, out cardMxn, out transferMxn, out checkMxn,
-                    out otherMxn, out totalChangeMxn, out totalSoldMxn);
-            }
-
-            transactionData.CashTotal += (cashMxn + Math.Round(cashUsd * MainWindowViewModel.GetInstance().ExchangeRate, 2) - totalChangeMxn);
-            transactionData.CardTotal += cardMxn;
-            transactionData.CheckTotal += checkMxn;
-            transactionData.BankTotal += transferMxn;
-            transactionData.OtherTotal += otherMxn;
-
-            return categoryData;
-        }
-
-        /// <summary>
-        /// Get transaction sales data for end of day sales report
+        /// Get transaction sales data for sales report with flag
         /// </summary>
         /// <param name="posData"></param>
         /// <param name="endDayFlag"></param>
@@ -676,7 +686,14 @@ namespace Seiya
                     //Separate categories
                     if (row["CategoriaProducto"].ToString() == category)
                     {
-                        amount += decimal.Parse(row["TotalVendido"].ToString());
+                        if ((row["TipoVenta"].ToString() == "Interno" && intFlag))
+                        {
+                            amount += decimal.Parse(row["TotalVendido"].ToString());
+                        }
+                        else if (row["TipoVenta"].ToString() != "Interno")
+                        {
+                            amount += decimal.Parse(row["TotalVendido"].ToString());
+                        }
 
                         if (category != "Puntos")
                             itemsNumber += int.Parse(row["UnidadesVendidas"].ToString());
@@ -756,13 +773,22 @@ namespace Seiya
             transactionData.TotalAmountSold = transactionData.TotalAmountSold + transactionData.ReturnsCash + transactionData.ReturnsCard;
 
             //Get first and last receipt number
-            DataRow lastRow;
-            lastRow = data.Rows.Count == 1 ? data.Rows[0] : data.Rows[data.Rows.Count - 1];
-            var firstRow = data.Rows[0];
-            transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
-            transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
-            transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
-
+            if (data.Rows.Count > 1)
+            {
+                var firstRow = data.Rows[0];
+                var lastRow = data.Rows[data.Rows.Count - 1];
+                transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
+                transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+                transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
+            }
+            else if (data.Rows.Count == 1)
+            {
+                var firstRow = data.Rows[0];
+                var lastRow = data.Rows[0];
+                transactionData.FirstReceiptNumber = Int32.Parse(firstRow["NumeroTicket"].ToString());
+                transactionData.LastReceiptNumber = Int32.Parse(lastRow["NumeroTicket"].ToString());
+                transactionData.LastTransactionNumber = Int32.Parse(lastRow["NumeroTransaccion"].ToString());
+            }
             transactionData.SalesInfoPerCategory = categoryData;
 
             //Search for partial payment tickets in payments db
@@ -817,7 +843,6 @@ namespace Seiya
                     var row = data.Rows[index];
                     if (Int32.Parse(row["NumeroTicket"].ToString()) != ticketNumber) continue;
 
-                    ///TODO: Verify functionality with returns and removal
                     if (row["TipoVenta"].ToString() == "DevolucionEfectivo" &&
                         row["TipoVenta"].ToString() == "DevolucionTarjeta" &&
                         row["TipoVenta"].ToString() == "Remover") continue;
