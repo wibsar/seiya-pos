@@ -1623,12 +1623,20 @@ namespace Seiya
                     break;
 
                 case "Parcial":
-                    transactionType = TransactionType.Regular;
-                    PaymentProcessStart(parameter.ToString(), transactionType);
-                    //Log
-                    Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Parcial");
-                    SystemUnlock = false;
-                    CurrentPage = "\\View\\PaymentEndPage.xaml";
+                    if (PaymentTotalMXN != 0M && (PaymentTotalMXN <= (PaymentReceivedMXN + PaymentReceivedUSD * _exchangeRate)))
+                    {
+                        transactionType = TransactionType.Regular;
+                        PaymentProcessStart(parameter.ToString(), transactionType);
+                        //Log
+                        Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Pago Terminado en Parcial");
+                        SystemUnlock = false;
+                        CurrentPage = "\\View\\PaymentEndPage.xaml";
+                    }
+                    else
+                    {
+                        Code = "Pago Inválido";
+                        CodeColor = Constants.ColorCodeError;
+                    }
                     break;
                 case "Transferencia":
                 case "Cheque":

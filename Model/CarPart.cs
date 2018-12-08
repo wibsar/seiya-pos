@@ -11,7 +11,7 @@ namespace Seiya
     /// <summary>
     /// Class for products to be used in the inventory and point of sale system
     /// </summary>
-    public class CarPart
+    public class CarPart : Product
     {
         #region Fields
         private BitmapImage _image;
@@ -31,7 +31,6 @@ namespace Seiya
         public CurrencyTypeEnum PriceCurrency { get; set; }
         public int TotalQuantityAvailable { get; set; }
         public string ImageName { get; set; }
-
 
         public BitmapImage Image
         {

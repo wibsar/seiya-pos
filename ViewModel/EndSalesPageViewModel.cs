@@ -741,7 +741,16 @@ namespace Seiya
 
         internal bool CanExecute_GenerateEndOfDaySalesReportCommand(object parameter)
         {
-            return RegisterNewCash != 0;
+            switch ((string)parameter)
+            {
+                case "x":
+                    return RegisterNewCash != 0;
+                case "z":
+                    return CashTotalSales + CardTotalSales + CheckTotalSales + BankTransferTotalSales +
+                           ExpensesCashTotal + ExpensesTotal + ReturnsCashTotal + ReturnsCardTotal == 0;
+                default:
+                    return false;
+            }
         }
         #endregion
 
