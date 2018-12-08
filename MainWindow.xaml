@@ -46,6 +46,7 @@
                 </Trigger>
             </Style.Triggers>
         </Style>       
+        
     </Window.Resources>
 
     <!-- Main Window Grid -->
@@ -129,7 +130,7 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
-                    <Grid Column="0">
+                    <Grid Column="0" >
                         <Button Command="{Binding CartNumberClickCommand}" CommandParameter="1">
                             <Image Source="C:\Projects\seiya-pos\Resources\Images\1 inactivo.png"></Image>
                         </Button>

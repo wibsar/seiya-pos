@@ -726,17 +726,19 @@ namespace Seiya
                     GenerateCurrentSalesReport();
                     //Log
                     MainWindowViewModel.GetInstance().Log.Write(MainWindowViewModel.GetInstance().CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Corte X realizado");
-                    MainWindowViewModel.GetInstance().Code = "Corte X realizado!";
+                    MainWindowViewModel.GetInstance().Code = "Corte X realizado!";                    
                     break;
+                  
                 case "z":
                     GenerateEndOfDaySalesReport();
                     //Log
                     MainWindowViewModel.GetInstance().Log.Write(MainWindowViewModel.GetInstance().CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Corte Z realizado");
-                    MainWindowViewModel.GetInstance().Code = "Corte Z realizado!";
+                    MainWindowViewModel.GetInstance().Code = "Corte Z realizado!";                                     
                     break;
+                    
             }
-
             MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PosGeneralPage.xaml";
+
         }
 
         internal bool CanExecute_GenerateEndOfDaySalesReportCommand(object parameter)
