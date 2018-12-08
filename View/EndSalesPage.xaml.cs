@@ -49,5 +49,10 @@ namespace Seiya
                 MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
             }
         }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
     }
 }
