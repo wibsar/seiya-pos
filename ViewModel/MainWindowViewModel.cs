@@ -91,6 +91,8 @@ namespace Seiya
 
         };
 
+        private bool _transactionZEnabled = false;
+
         #endregion
 
         #region Constructors
@@ -279,17 +281,6 @@ namespace Seiya
         #endregion
 
         #region Observable Properties
-
-        private string _codeColor = "#2C5066";
-        public string CodeColor
-        {
-            get { return _codeColor; }
-            set
-            {
-                _codeColor = value;
-                OnPropertyChanged();
-            }
-        }
 
         private BitmapImage _logoImage;
         public BitmapImage LogoImage
@@ -1340,6 +1331,47 @@ namespace Seiya
             }            
         }
 
+
+        private string _codeColor = "#2C5066";
+        public string CodeColor
+        {
+            get { return _codeColor; }
+            set
+            {
+                _codeColor = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _transactionFileTypeContent = "X";
+        public string TransactionFileTypeContent
+        {
+            get { return _transactionFileTypeContent; }
+            set
+            {
+                _transactionFileTypeContent = value;
+                OnPropertyChanged();
+            }
+        }
+
+        public bool TransactionZEnabled
+        {
+            get { return _transactionZEnabled; }
+            set
+            {
+                _transactionZEnabled = value;
+                if (value)
+                {
+                    CodeColor = Constants.ColorCodeError;
+                    TransactionFileTypeContent = "Z";
+                }
+                else
+                {
+                    CodeColor = Constants.ColorCodeSave;
+                    TransactionFileTypeContent = "X";
+                }
+            }
+        }
         /// <summary>
         /// Hold search results
         /// </summary>
@@ -1670,7 +1702,7 @@ namespace Seiya
                     Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Transacciones Exportacion Completada");
                     break;
                 case "others":
-                    CurrentPage = "\\View\\CarRegistrationListPage.xaml";
+                    CurrentPage = "\\View\\CarRegistrationMainPage.xaml";
                     break;
                
             }
@@ -3788,7 +3820,8 @@ namespace Seiya
         internal void Execute_TransactionStartSearchCommand(object parameter)
         {
             //Inventory search method that returns a list of products for the datagrid
-            TransactionsSearchedEntries = new ObservableCollection<Transaction>(new Transaction(Constants.DataFolderPath + Constants.TransactionsMasterFileName, true, true).Search(TransactionsSearchText));
+            TransactionsSearchedEntries = TransactionZEnabled ? new ObservableCollection<Transaction>(new Transaction(Constants.DataFolderPath + Constants.TransactionsZFileName, true, true).Search(TransactionsSearchText)) :
+                new ObservableCollection<Transaction>(new Transaction(Constants.DataFolderPath + Constants.TransactionsXFileName, true, true).Search(TransactionsSearchText));
             //Log
             Log.Write(CurrentUser.Name, this.ToString() + " " + System.Reflection.MethodBase.GetCurrentMethod().Name, "Busqueda en Transacciones: " + TransactionsSearchText);
             TransactionsSearchText = "";
@@ -3853,6 +3886,30 @@ namespace Seiya
 
         internal bool CanExecute_TransactionDeleteCommand(object parameter)
         {
+            return true;
+        }
+        #endregion
+
+        #region ChangeTransactionFileTypeCommand
+
+        public ICommand ChangeTransactionFileTypeCommand { get { return _changeTransactionFileTypeCommand ?? (_changeTransactionFileTypeCommand = new DelegateCommand(Execute_ChangeTransactionFileTypeCommand, CanExecute_ChangeTransactionFileTypeCommand)); } }
+        private ICommand _changeTransactionFileTypeCommand;
+
+        internal void Execute_ChangeTransactionFileTypeCommand(object parameter)
+        {
+            if (TransactionZEnabled)
+            {
+                TransactionZEnabled = false;
+            }
+            else
+            {
+                TransactionZEnabled = true;
+            }
+        }
+
+        internal bool CanExecute_ChangeTransactionFileTypeCommand(object parameter)
+        {
+            //Add logic to check if the command can be executed (if any)
             return true;
         }
         #endregion
@@ -4740,6 +4797,8 @@ namespace Seiya
             SelectedOrder = null;
             ExpensesSearchedEntries = null;
             SelectedExpense = null;
+            TransactionsSearchedEntries = null;
+            SelectedTransaction = null;
         }
 
         private void ClearPaymentInput()

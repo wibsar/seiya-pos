@@ -24,6 +24,7 @@ namespace Seiya
         private static Product _manualProduct;
         private static ObservableCollection<string> _categoriesList;
         private bool _usdEnabled = false;
+        private bool _transactionZEnabled = false;
         #endregion
 
         #region Constructors
@@ -69,6 +70,17 @@ namespace Seiya
             set
             {
                 _currencyTypeContent = value;
+                OnPropertyChanged();
+            }
+        }
+
+        private string _transactionFileTypeContent = "X";
+        public string TransactionFileTypeContent
+        {
+            get { return _transactionFileTypeContent; }
+            set
+            {
+                _transactionFileTypeContent = value;
                 OnPropertyChanged();
             }
         }
@@ -197,6 +209,25 @@ namespace Seiya
                 {
                     CodeColor = Constants.ColorCodeSave;
                     CurrencyTypeContent = "Pesos";
+                }
+            }
+        }
+
+        public bool TransactionZEnabled
+        {
+            get { return _transactionZEnabled; }
+            set
+            {
+                _transactionZEnabled = value;
+                if (value)
+                {
+                    CodeColor = Constants.ColorCodeError;
+                    TransactionFileTypeContent = "Z";
+                }
+                else
+                {
+                    CodeColor = Constants.ColorCodeSave;
+                    TransactionFileTypeContent = "Y";
                 }
             }
         }

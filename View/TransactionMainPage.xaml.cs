@@ -25,7 +25,7 @@ namespace Seiya
             DataContext = MainWindowViewModel.GetInstance();
 
             InitializeComponent();
-            CustomersSearchTextBox.Focus();
+            TransactionsSearchTextBox.Focus();
         }
 
         private void KeyUpNoSymbolsEvent(object sender, KeyEventArgs e)
