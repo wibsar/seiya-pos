@@ -20,6 +20,7 @@ namespace Seiya
 
         private ObservableCollection<CarPart> _carPartsSearchedEntries;
         private CarPart _selectedCarPart;
+        private string _currentPage;
         #endregion
 
         #region Constructors
@@ -34,6 +35,7 @@ namespace Seiya
         public CarRegistrationViewModel()
         {
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
+
             _carPartsSearchedEntries = new ObservableCollection<CarPart>();
             _carPartsSearchedEntries.Add(new CarPart()
             {
@@ -61,6 +63,8 @@ namespace Seiya
                 Enabled = true,
                 TotalQuantityAvailable = 1
             });
+
+            CurrentPage = "\\View\\CarRegistrationInfoPage.xaml";
         }
         #endregion
 
@@ -86,6 +90,18 @@ namespace Seiya
             }
         }
 
+        /// <summary>
+        /// Holds current page
+        /// </summary>
+        public string CurrentPage
+        {
+            get { return _currentPage; }
+            set
+            {
+                _currentPage = value;
+                OnPropertyChanged();
+            }
+        }
         #endregion
 
         #region Methods
@@ -105,6 +121,60 @@ namespace Seiya
         }
 
         internal bool CanExecute_RegisterCarCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
+        #region ChangePageCommand
+        public ICommand ChangePageCommand { get { return _changePageCommand ?? (_changePageCommand = new DelegateCommand(Execute_ChangePageCommand, CanExecute_ChangePageCommand)); } }
+        private ICommand _changePageCommand;
+
+        internal void Execute_ChangePageCommand(object parameter)
+        {
+            switch ((string) parameter)
+            {
+                case "information":
+                    CurrentPage = "\\View\\CarRegistrationInfoPage.xaml";
+                    break;
+                case "search_list":
+                    CurrentPage = "\\View\\CarRegistrationListPage.xaml";
+                    break;
+                case "car_main":
+                    CurrentPage = "\\View\\CarRegistrationMainPage.xaml";
+                    break;
+            }
+        }
+
+        internal bool CanExecute_ChangePageCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
+        #region SearchListCommand
+
+        public ICommand SearchListCommand { get { return _searchListCommand ?? (_searchListCommand = new DelegateCommand(Execute_SearchListCommand, CanExecute_SearchListCommand)); } }
+        private ICommand _searchListCommand;
+
+        internal void Execute_SearchListCommand(object parameter)
+        {
+            //parameter is the button name
+            switch ((string)parameter)
+            {
+                case "todos":
+                    CurrentPage = "\\View\\CarRegistrationListPage.xaml";
+                    break;
+                case "search_list":
+                    CurrentPage = "\\View\\CarRegistrationListPage.xaml";
+                    break;
+                case "car_main":
+                    CurrentPage = "\\View\\CarRegistrationMainPage.xaml";
+                    break;
+            }
+        }
+
+        internal bool CanExecute_SearchListCommand(object parameter)
         {
             return true;
         }
