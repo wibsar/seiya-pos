@@ -21,42 +21,225 @@
             <Setter Property="Background" Value="#FFF0F0F0"></Setter>
             <Setter Property="HorizontalAlignment" Value="Left"></Setter>
             <Setter Property="MinHeight" Value="40"></Setter>
-
         </Style>
     </Page.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
-            <ColumnDefinition Width="8*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="10*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
-
         </Grid.RowDefinitions>
-        <StackPanel Grid.Row="1">
-            <Button HorizontalAlignment="Stretch">Car Info</Button>
-            <Button HorizontalAlignment="Stretch">Todos</Button>
-            <Button HorizontalAlignment="Stretch" Content="Carrocería"></Button>
-            <Button Content="Interior" HorizontalAlignment="Stretch"></Button>
-            <Button HorizontalAlignment="Stretch">
-                <TextBlock Text="Suspención Delatera"  FontSize="14" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
-            </Button>
-            <Button HorizontalAlignment="Stretch">
-                <TextBlock Text="Suspención Trasera" FontSize="14" TextWrapping="Wrap" TextAlignment="Center"></TextBlock>
-            </Button>
-            <Button Content="Cajuela" HorizontalAlignment="Stretch"></Button>
 
-        </StackPanel>
-        <Grid Column="1" Row="1" >
-            <Border BorderBrush="LightBlue" >
-                <Frame x:Name="Main" Source="{Binding CurrentPage}" NavigationUIVisibility="Hidden" Margin="-1,0,1.2,0">
-                </Frame>
-            </Border>
+        <!--Header Menu-->
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="8*"></ColumnDefinition>
+                <ColumnDefinition Width="6*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <TextBlock FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Text="REGISTRO DE CARRO"></TextBlock>
         </Grid>
-        <Grid Grid.Column="1" Grid.Row="2">
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".5*"></RowDefinition>
+                <RowDefinition Height="8*"></RowDefinition>
+                <RowDefinition Height="1.5*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <Grid Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                    <ColumnDefinition Width="*"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Grid Grid.Column="0" Grid.Row="0" Margin="10,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="VIN" VerticalAlignment="Bottom" Margin="10,0"></TextBlock>
+                        <TextBox Grid.Row="1" MinWidth="20" MaxHeight="40"></TextBox>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="0" Grid.Row="1" Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="MARCA" VerticalAlignment="Bottom" Margin="10,0"></TextBlock>
+                        <ComboBox Grid.Row="1" MinWidth="20" Margin="0,0,10,0" MaxHeight="40"></ComboBox>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="AÑO" VerticalAlignment="Bottom" Margin="10,0" ></TextBlock>
+                        <ComboBox Grid.Row="1" MinWidth="20" MaxHeight="40"></ComboBox>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="0" Grid.Row="2" Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="MODELO / VERSION" VerticalAlignment="Bottom" Margin="10,0"></TextBlock>
+                        <TextBox Grid.Row="1" MinWidth="20" Margin="0,0,10,0" MaxHeight="40"></TextBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="COLOR" VerticalAlignment="Bottom" Margin="10,0" ></TextBlock>
+                        <TextBox Grid.Row="1" MinWidth="20" MaxHeight="40"></TextBox>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="0" Grid.Row="3" Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="MOTOR" VerticalAlignment="Bottom" Margin="10,0"></TextBlock>
+                        <TextBox Grid.Row="1" MinWidth="20" Margin="0,0,10,0" MaxHeight="40"></TextBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="TRANSM" VerticalAlignment="Bottom" Margin="10,0" ></TextBlock>
+                        <ComboBox Grid.Row="1" MinWidth="20" MaxHeight="40"></ComboBox>
+                    </Grid>
+                </Grid>
+                <TextBlock Grid.Row="4" Text="UBICACION" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="10,0"></TextBlock>
+                <Grid Grid.Column="0" Grid.Row="5" Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="YONKE" VerticalAlignment="Bottom" Margin="10,0"></TextBlock>
+                        <ComboBox Grid.Row="1" MinWidth="20" Margin="0,0,10,0" MaxHeight="40"></ComboBox>
+                    </Grid>
+                    <Grid Grid.Column="1">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="PASILLO" VerticalAlignment="Bottom" Margin="10,0" ></TextBlock>
+                        <TextBox Grid.Row="1" MinWidth="20" MaxHeight="40"></TextBox>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="0" Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="COSTO" VerticalAlignment="Bottom" Margin="10,0"></TextBlock>
+                        <TextBox Grid.Row="1" MinWidth="20" Margin="0,0,10,0" MaxHeight="40"></TextBox>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="MONEDA" VerticalAlignment="Bottom" Margin="10,0" ></TextBlock>
+                        <ComboBox Grid.Row="1" MinWidth="20" MaxHeight="40"></ComboBox>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="1" Margin="10,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="COSTO DE IMPORTACION" VerticalAlignment="Bottom" Margin="10,0"></TextBlock>
+                        <TextBox Grid.Row="1" MinWidth="20" Margin="0,0,10,0" MaxHeight="40"></TextBox>
+                    </Grid>
+                    <Grid Grid.Column="2">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="MONEDA" VerticalAlignment="Bottom" Margin="10,0" ></TextBlock>
+                        <ComboBox Grid.Row="1" MinWidth="20" MaxHeight="40"></ComboBox>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="2" Margin="10,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="FECHA DE COMPRA" VerticalAlignment="Bottom" Margin="10,0"></TextBlock>
+                        <DatePicker Grid.Row="1" MinWidth="20" MaxHeight="40"></DatePicker>
+                    </Grid>
+                </Grid>
+                <Grid Grid.Column="1" Grid.Row="3" Margin="10,0">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"></RowDefinition>
+                            <RowDefinition Height="1.5*"></RowDefinition>
+                        </Grid.RowDefinitions>
+                        <TextBlock Text="LUGAR DE COMPRA" VerticalAlignment="Bottom" Margin="10,0"></TextBlock>
+                        <TextBox Grid.Row="1" MinWidth="20" MaxHeight="40"></TextBox>
+                    </Grid>
+                </Grid>
+            </Grid>
+        </Grid>
+      
+        <!-- footer menu -->
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5*"/>
                 <ColumnDefinition Width="*"/>
@@ -64,7 +247,7 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="menu" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center">
+            <Button Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="cancel" Background="{x:Null}" BorderBrush="{x:Null}" HorizontalAlignment="Center">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"></RowDefinition>
@@ -74,28 +257,16 @@
                     <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="Cancelar"></TextBlock>
                 </Grid>
             </Button>
-            <!--<Button Grid.Column="1" Command="{Binding ExpenseDeleteCommand}"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png"></Image>
-                    <TextBlock Grid.Row="1" Text="Eliminar" HorizontalAlignment="Center"></TextBlock>
-                </Grid>
-            </Button>
-            -->
-            <Button Grid.Column="3" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Center">
+            <Button Grid.Column="3" Background="{x:Null}" BorderBrush="{x:Null}"  HorizontalAlignment="Center" Command="{Binding ChangePageCommand}" CommandParameter="search_list">
                 <Grid>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="3*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
                     <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png"></Image>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="Guardar"></TextBlock>
+                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="Iniciar Registro"></TextBlock>
                 </Grid>
             </Button>
-
         </Grid>
     </Grid>
 </Page>

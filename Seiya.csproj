@@ -137,9 +137,6 @@
     <Compile Include="View\AnalysisMainPage.xaml.cs">
       <DependentUpon>AnalysisMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="View\CarRegistrationInfoPage.xaml.cs">
-      <DependentUpon>CarRegistrationInfoPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="View\CarRegistrationListPage.xaml.cs">
       <DependentUpon>CarRegistrationListPage.xaml</DependentUpon>
     </Compile>
@@ -253,10 +250,6 @@
     <Page Include="View\AnalysisMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CarRegistrationInfoPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\CarRegistrationListPage.xaml">
       <Generator>MSBuild:Compile</Generator>

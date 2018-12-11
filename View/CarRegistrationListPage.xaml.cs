@@ -22,7 +22,7 @@ namespace Seiya
     {
         public CarRegistrationListPage()
         {
-            this.DataContext = new CarRegistrationViewModel();
+            DataContext = CarRegistrationViewModel.GetInstance();
             InitializeComponent();
         }
     }

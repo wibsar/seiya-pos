@@ -29,6 +29,10 @@ namespace Seiya
         {
             if (_carRegistrationInstance == null)
                 _carRegistrationInstance = new CarRegistrationViewModel();
+            else
+            {
+                _carRegistrationInstance.CurrentPage = "\\View\\CarRegistrationInfoPage.xaml";
+            }
             return _carRegistrationInstance;
         }
 
@@ -66,6 +70,7 @@ namespace Seiya
 
             CurrentPage = "\\View\\CarRegistrationInfoPage.xaml";
         }
+
         #endregion
 
         #region Observable Properties
@@ -126,6 +131,43 @@ namespace Seiya
         }
         #endregion
 
+        #region ImportExportCarCommand
+        public ICommand ImportExportCarCommand { get { return _importExportCarCommand ?? (_importExportCarCommand = new DelegateCommand(Execute_ImportExportCarCommand, CanExecute_ImportExportCarCommand)); } }
+        private ICommand _importExportCarCommand;
+
+        internal void Execute_ImportExportCarCommand(object parameter)
+        {
+            if ((string) parameter == "import")
+            {
+
+            }
+            else if ((string) parameter == "export")
+            {
+
+            }
+        }
+
+        internal bool CanExecute_ImportExportCarCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
+        #region ViewDetailsPartCommand
+        public ICommand ViewDetailsPartCommand { get { return _viewDetailsPartCommand ?? (_viewDetailsPartCommand = new DelegateCommand(Execute_ViewDetailsPartCommand, CanExecute_ViewDetailsPartCommand)); } }
+        private ICommand _viewDetailsPartCommand;
+
+        internal void Execute_ViewDetailsPartCommand(object parameter)
+        {
+
+        }
+
+        internal bool CanExecute_ViewDetailsPartCommand(object parameter)
+        {
+            return true;
+        }
+        #endregion
+
         #region ChangePageCommand
         public ICommand ChangePageCommand { get { return _changePageCommand ?? (_changePageCommand = new DelegateCommand(Execute_ChangePageCommand, CanExecute_ChangePageCommand)); } }
         private ICommand _changePageCommand;
@@ -134,14 +176,14 @@ namespace Seiya
         {
             switch ((string) parameter)
             {
-                case "information":
-                    CurrentPage = "\\View\\CarRegistrationInfoPage.xaml";
+                case "cancel":
+                    MainWindowViewModel.GetInstance().CurrentPage = "\\View\\PosGeneralPage.xaml";
                     break;
                 case "search_list":
-                    CurrentPage = "\\View\\CarRegistrationListPage.xaml";
+                    MainWindowViewModel.GetInstance().CurrentPage = "\\View\\CarRegistrationListPage.xaml";
                     break;
                 case "car_main":
-                    CurrentPage = "\\View\\CarRegistrationMainPage.xaml";
+                    MainWindowViewModel.GetInstance().CurrentPage = "\\View\\CarRegistrationMainPage.xaml";
                     break;
             }
         }
@@ -162,14 +204,11 @@ namespace Seiya
             //parameter is the button name
             switch ((string)parameter)
             {
-                case "todos":
-                    CurrentPage = "\\View\\CarRegistrationListPage.xaml";
+                case "a":
                     break;
-                case "search_list":
-                    CurrentPage = "\\View\\CarRegistrationListPage.xaml";
+                case "b":
                     break;
-                case "car_main":
-                    CurrentPage = "\\View\\CarRegistrationMainPage.xaml";
+                case "c":
                     break;
             }
         }
