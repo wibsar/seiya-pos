@@ -4,8 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
+      xmlns:athena="clr-namespace:Athena;assembly=Athena"
       mc:Ignorable="d" 
-      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DataContext="{d:DesignInstance athena:MainWindowViewModel}"
       d:DesignHeight="600" d:DesignWidth="800"
       Title="ProductsListEditPage">
 
@@ -92,7 +93,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha arriba.png" VerticalAlignment="Center" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\flecha arriba.png" VerticalAlignment="Center" MinWidth="100"></Image>
                             <TextBlock Grid.Column="1" Text="Subir" VerticalAlignment="Center" Foreground="Gray" MinWidth="100"></TextBlock>
                         </Grid>
                     </Button>
@@ -102,7 +103,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\flecha abajo.png" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\flecha abajo.png" MinWidth="100"></Image>
                             <TextBlock Grid.Column="1" Text="Bajar" MinWidth="100" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
@@ -119,7 +120,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\delete.png" MinWidth="100"></Image>
                             <TextBlock Grid.Column="1" Text="Eliminar" VerticalAlignment="Center" MinWidth="100" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
@@ -129,7 +130,7 @@
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\Guardar.png" MinWidth="100"></Image>
                             <TextBlock Grid.Column="1" Text="Guardar" VerticalAlignment="Center" MinWidth="100" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
@@ -153,7 +154,7 @@
                     </Grid.ColumnDefinitions>
                     <TextBox Height="40" Margin="5" x:Name="NewCategoryItemTextBox" Text="{Binding NewCategoryItem, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent"/>
                     <Button Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding AddCategoryListCommand}" CommandParameter="{Binding NewCategoryItem}">
-                        <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
+                        <Image Source="..\Resources\Images\agregar.png"></Image>
                     </Button>
                 </Grid>
                 <!-- New Category Text Input -->

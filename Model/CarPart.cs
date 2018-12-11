@@ -41,7 +41,7 @@ namespace Seiya
                 if (ImageName != null)
                 {
                     bitmap.BeginInit();
-                    bitmap.UriSource = new Uri(@"C:\Projects\seiya-pos\Data\Images\" + ImageName);
+                    bitmap.UriSource = new Uri(@"..\Data\Images\" + ImageName);
                     bitmap.EndInit();
                     _image = bitmap;
                 }

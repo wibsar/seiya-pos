@@ -12,7 +12,7 @@
         <Style TargetType="{x:Type DataGrid}">
             <Setter Property="Background" Value="#FFF" />
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="../Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="AlternationCount" Value="2" />
             <Setter Property="VerticalGridLinesBrush" Value="#FFE8E8E8"></Setter>
             <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}"></Setter>
@@ -60,7 +60,7 @@
             <TextBlock FontSize="24" HorizontalAlignment="Left" VerticalAlignment="Center" Text="REGISTRO DE CARRO"></TextBlock>
             <TextBox Grid.Column="1" x:Name="CarPartSearchTextBox" AcceptsReturn="False" AcceptsTab="False" VerticalContentAlignment="Center"/>
             <Button Grid.Column="2" Command="{Binding SearchListCommand}" CommandParameter="{Binding ElementName=CarPartSearchTextBox}">
-                <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png"></Image>
+                <Image Margin="3" Source="/Resources/Images/lupa activa.png"></Image>
             </Button>
         </Grid>
         <Grid Row="1">
@@ -117,7 +117,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ImportExportCarCommand}" CommandParameter="import">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Export.png"></Image>
+                    <Image Source="..\Resources\Images\Export.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Exportar" ></TextBlock>
             </Grid>
@@ -127,7 +127,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ImportExportCarCommand}" CommandParameter="export">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Export.png"></Image>
+                    <Image Source="..\Resources\Images\Export.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Importar" ></TextBlock>
             </Grid>
@@ -137,7 +137,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ChangePageCommand}" CommandParameter="car_main">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png"></Image>
+                    <Image Source="..\Resources\Images\Cancel.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" Text="Cancelar"></TextBlock>
             </Grid>
@@ -147,7 +147,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ViewDetailsPartCommand}">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Detalles.png"></Image>
+                    <Image Source="..\Resources\Images\Detalles.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" Text="Detalle"></TextBlock>
             </Grid>
@@ -157,7 +157,7 @@
                     <RowDefinition Height="17"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding RegisterCarCommand}" CommandParameter="inventory_add">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image>
+                    <Image Source="..\Resources\Images\agregar.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" Text="Registrar"></TextBlock>
             </Grid>

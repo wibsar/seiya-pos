@@ -6,8 +6,9 @@
         xmlns:local="clr-namespace:Seiya"
         xmlns:m="using:Seiya"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+        xmlns:athena="clr-namespace:Athena;assembly=Athena"
         mc:Ignorable="d"
-        d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+        d:DataContext="{d:DesignInstance athena:MainWindowViewModel}"
         Title="Wibsar Retail" Height="700" Width="1050" FontFamily=".\Resources\Fonts\#Comfortaa">
 
     <Window.Resources>

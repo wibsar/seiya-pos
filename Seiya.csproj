@@ -466,7 +466,7 @@
     <Resource Include="Resources\Images\Transacciones.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\athena-pos\Athena\Athena.csproj">
+    <ProjectReference Include="..\athena-pos\Athena.csproj">
       <Project>{45602a13-6cc9-49e3-aa85-1173bdc160f2}</Project>
       <Name>Athena</Name>
     </ProjectReference>
