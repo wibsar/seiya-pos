@@ -9,7 +9,8 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Input;
-using Seiya.WpfBindingUtilities;
+using Athena;
+using Athena.WpfBindingUtilities;
 
 namespace Seiya
 {
@@ -41,32 +42,32 @@ namespace Seiya
             Thread.CurrentThread.CurrentCulture = new CultureInfo("es-MX");
 
             _carPartsSearchedEntries = new ObservableCollection<CarPart>();
-            _carPartsSearchedEntries.Add(new CarPart()
-            {
-                Id = 1,
-                Category = "interior",
-                Code = "123x",
-                Description = "Puerta",
-                Model = "Honda 1998",
-                Vin = "FDG43BDBSG1435",
-                Price = 100M,
-                PriceCurrency = CurrencyTypeEnum.USD,
-                Enabled = true,
-                TotalQuantityAvailable = 4
-            });
-            _carPartsSearchedEntries.Add(new CarPart()
-            {
-                Id = 1,
-                Category = "interior",
-                Code = "12343x",
-                Description = "Cofre",
-                Model = "Honda 1998",
-                Vin = "FDG43BDBSG1435",
-                Price = 150M,
-                PriceCurrency = CurrencyTypeEnum.USD,
-                Enabled = true,
-                TotalQuantityAvailable = 1
-            });
+            //_carPartsSearchedEntries.Add(new CarPart()
+            //{
+            //    Id = 1,
+            //    Category = "interior",
+            //    Code = "123x",
+            //    Description = "Puerta",
+            //    Model = "Honda 1998",
+            //    Vin = "FDG43BDBSG1435",
+            //    Price = 100M,
+            //    PriceCurrency = CurrencyTypeEnum.USD,
+            //    Enabled = true,
+            //    TotalQuantityAvailable = 4
+            //});
+            //_carPartsSearchedEntries.Add(new CarPart()
+            //{
+            //    Id = 1,
+            //    Category = "interior",
+            //    Code = "12343x",
+            //    Description = "Cofre",
+            //    Model = "Honda 1998",
+            //    Vin = "FDG43BDBSG1435",
+            //    Price = 150M,
+            //    PriceCurrency = CurrencyTypeEnum.USD,
+            //    Enabled = true,
+            //    TotalQuantityAvailable = 1
+            //});
 
             CurrentPage = "\\View\\CarRegistrationInfoPage.xaml";
         }
