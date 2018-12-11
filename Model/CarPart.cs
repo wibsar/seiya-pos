@@ -11,7 +11,7 @@ namespace Seiya
     /// <summary>
     /// Class for products to be used in the inventory and point of sale system
     /// </summary>
-    public class CarPart : Product
+    public class CarPart : DataBase
     {
         #region Fields
         private BitmapImage _image;
@@ -69,12 +69,12 @@ namespace Seiya
 
         #region Constructors
 
-        public CarPart()
+        public CarPart(string dbPath) : base(dbPath)
         {
-
+            
         }
 
-        public CarPart(CarPart car)
+        public CarPart(string dbPath, CarPart car) : base(dbPath)
         {
             //Basic
             //this.Id = product.Id;

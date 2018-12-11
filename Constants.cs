@@ -84,5 +84,6 @@ namespace Seiya
         //log
         public const string LogFileName = "Log.txt";
 
+        //Car Reltated files
     }
 }
