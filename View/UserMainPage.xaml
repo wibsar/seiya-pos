@@ -4,8 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
+      xmlns:athena="clr-namespace:Athena;assembly=Athena"
       mc:Ignorable="d" 
-      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DataContext="{d:DesignInstance athena:MainWindowViewModel}"
       d:DesignHeight="600" d:DesignWidth="800"
       Title="UserMainPage">
 
@@ -82,7 +83,7 @@
             <TextBlock FontSize="24" Text="USUARIOS"></TextBlock>
             <TextBox Grid.Column="1" x:Name="UsersSearchTextBox" Text="{Binding UsersSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False"/>
             <Button Grid.Column="2" Command="{Binding UserStartSearchCommand}" CommandParameter="{Binding UsersSearchText}">
-                <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png"></Image>
+                <Image Margin="3" Source="..\Resources\Images\lupa activa.png"></Image>
             </Button>
         </Grid>
 
@@ -112,7 +113,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ExportDataBaseCommand}" CommandParameter="save_users">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Export.png"></Image>
+                    <Image Source="..\Resources\Images\Export.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Exportar" ></TextBlock>
             </Grid>
@@ -123,7 +124,7 @@
                 </Grid.RowDefinitions>
 
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding UserAddNewItemCommand}" CommandParameter="user_add">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\agregar.png"></Image> </Button>
+                    <Image Source="..\Resources\Images\agregar.png"></Image> </Button>
                 <TextBlock Grid.Row="1" FontSize="16" Text="Agregar" HorizontalAlignment="Center"></TextBlock>
             </Grid>
 
@@ -134,7 +135,7 @@
                 </Grid.RowDefinitions>
 
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding UserUpdateCommand}" CommandParameter="user_details">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Detalles.png"></Image>
+                    <Image Source="..\Resources\Images\Detalles.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Detalle"></TextBlock>
             </Grid>

@@ -4,8 +4,9 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
+      xmlns:athena="clr-namespace:Athena;assembly=Athena"
       mc:Ignorable="d" 
-      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DataContext="{d:DesignInstance athena:MainWindowViewModel}"
       d:DesignHeight="600" d:DesignWidth="800"
       Title="CustomerMainPage">
     <Page.Resources>
@@ -81,7 +82,7 @@
             <Button Grid.Column="1" x:Name="TransactionsTypeToggle" Foreground="{Binding CodeColor, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ChangeTransactionFileTypeCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=TransactionsTypeToggle}" FontSize="18" Width="Auto" Margin="5,0,5,0"  BorderBrush="{x:Null}" Background="LightGray" Content="{Binding TransactionFileTypeContent}" HorizontalAlignment = "Stretch"  />
             <TextBox Grid.Column="2" x:Name="TransactionsSearchTextBox" Text="{Binding TransactionsSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="6,0" VerticalContentAlignment="Center"/>
             <Button Grid.Column="3" Background="White" Command="{Binding TransactionStartSearchCommand}" CommandParameter="x">
-                <Image Margin="3" Source="C:\Projects\seiya-pos\Resources\Images\lupa activa.png"></Image>
+                <Image Margin="3" Source="..\Resources\Images\lupa activa.png"></Image>
             </Button>
         </Grid>
 
@@ -117,7 +118,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ExportDataBaseCommand}" CommandParameter="save_transactions">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Export.png"></Image>
+                    <Image Source="..\Resources\Images\Export.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Exportar" ></TextBlock>
             </Grid>
@@ -129,7 +130,7 @@
                 </Grid.RowDefinitions>
 
                 <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding TransactionUpdateCommand}" CommandParameter="transaction_details">
-                    <Image Source="C:\Projects\seiya-pos\Resources\Images\Detalles.png"></Image>
+                    <Image Source="..\Resources\Images\Detalles.png"></Image>
                 </Button>
                 <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Detalle" ></TextBlock>
             </Grid>

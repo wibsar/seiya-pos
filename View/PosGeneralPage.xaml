@@ -7,8 +7,9 @@
       xmlns:local="clr-namespace:Seiya"
       xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
       xmlns:ie="http://schemas.microsoft.com/expression/2010/interactions"
+      xmlns:athena="clr-namespace:Athena;assembly=Athena"
       mc:Ignorable="d" 
-      d:DataContext="{d:DesignInstance local:PosGeneralPageViewModel}"
+      d:DataContext="{d:DesignInstance athena:PosGeneralPageViewModel}"
       d:DesignHeight="600" d:DesignWidth="800"
       Title="PosGeneralPage">
     <Page.Resources>

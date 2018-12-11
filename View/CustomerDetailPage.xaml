@@ -115,7 +115,7 @@
                         <RowDefinition Height="3*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png"></Image>
+                    <Image Grid.Row="0" Source="..\Resources\Images\delete.png"></Image>
                     <TextBlock Grid.Row="1" FontSize="16" Text="Eliminar" Margin="16,0,0,0"></TextBlock>
                 </Grid>
             </Button>-->

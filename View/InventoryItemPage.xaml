@@ -4,9 +4,10 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
+      xmlns:athena="clr-namespace:Athena;assembly=Athena"
       mc:Ignorable="d" 
       d:DesignHeight="600" d:DesignWidth="800"
-      d:DataContext="{d:DesignInstance local:MainWindowViewModel}"
+      d:DataContext="{d:DesignInstance athena:MainWindowViewModel}"
       Title="InventoryItemPage">
 
     <Page.Resources>
@@ -196,7 +197,7 @@
                                 <RowDefinition Height="3*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>                                
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\DeletePhoto.png"></Image>
+                            <Image Grid.Row="0" Source="..\Resources\Images\DeletePhoto.png"></Image>
                             <TextBlock Grid.Row="1" FontSize="16" Text="Eliminar Imagen" ></TextBlock>
                         </Grid>
                     </Button>
@@ -206,7 +207,7 @@
                                 <RowDefinition Height="3*"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\AddPhoto.png"></Image>
+                            <Image Grid.Row="0" Source="..\Resources\Images\AddPhoto.png"></Image>
                             <TextBlock Grid.Row="1" FontSize="16" Text="Cargar Imagen" ></TextBlock>
                             </Grid>
                     </Button>
@@ -229,7 +230,7 @@
                             <RowDefinition Height="3*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png" ></Image>
+                        <Image Grid.Row="0" Source="..\Resources\Images\Cancel.png" ></Image>
                         <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="Cancelar"></TextBlock>
                     </Grid>
                 </Button>
@@ -239,7 +240,7 @@
                             <RowDefinition Height="3*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\delete.png"></Image>
+                        <Image Grid.Row="0" Source="..\Resources\Images\delete.png"></Image>
                         <TextBlock Grid.Row="1" Text="Eliminar"></TextBlock>
                     </Grid>
                 </Button>
@@ -249,7 +250,7 @@
                             <RowDefinition Height="3*"></RowDefinition>
                             <RowDefinition Height="*"></RowDefinition>
                         </Grid.RowDefinitions>
-                        <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png"></Image>
+                        <Image Grid.Row="0" Source="..\Resources\Images\Guardar.png"></Image>
                         <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="Guardar"></TextBlock>
                     </Grid>
                 </Button>

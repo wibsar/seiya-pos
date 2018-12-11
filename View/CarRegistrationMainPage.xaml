@@ -253,7 +253,7 @@
                         <RowDefinition Height="3*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Cancel.png" ></Image>
+                    <Image Grid.Row="0" Source="..\Resources\Images\Cancel.png" ></Image>
                     <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="Cancelar"></TextBlock>
                 </Grid>
             </Button>
@@ -263,7 +263,7 @@
                         <RowDefinition Height="3*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="C:\Projects\seiya-pos\Resources\Images\Guardar.png"></Image>
+                    <Image Grid.Row="0" Source="..\Resources\Images\Guardar.png"></Image>
                     <TextBlock Grid.Row="1" HorizontalAlignment="Center" Text="Iniciar Registro"></TextBlock>
                 </Grid>
             </Button>
