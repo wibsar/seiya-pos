@@ -66,7 +66,7 @@
         <!-- Grid for header section -->
         <Grid Column="0" Row="0" Grid.ColumnSpan="2">
             <!-- Client logo -->
-            <Image Source="..\Data\Images\tulogo.png" HorizontalAlignment="Center" MaxWidth="500"  ></Image>
+            <Image Source="C:\Projects\seiya-pos\Data\Images\tulogo.png" HorizontalAlignment="Center" MaxWidth="500"  ></Image>
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>                    
@@ -74,7 +74,7 @@
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="menu">
                     <Grid>
-                        <Image Grid.Row="0" Source="..\Resources\Images\menu.png" Margin="5"></Image>
+                        <Image Grid.Row="0" Source="Resources\Images\menu.png" Margin="5"></Image>
                     </Grid>
                 </Button>
             </Grid>
@@ -102,7 +102,7 @@
                 
                 <Button Grid.Column="1" Command="{Binding LoginPageCommand}" CommandParameter="login">
                     <Grid>
-                        <Image Grid.Row="0" Source="..\Resources\Images\Usuario.png" Margin="5"></Image>
+                        <Image Grid.Row="0" Source="Resources\Images\Usuario.png" Margin="5"></Image>
                     </Grid>
                 </Button>
                 <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name}" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Right"  ></TextBlock>
@@ -133,17 +133,17 @@
 
                     <Grid Column="0" >
                         <Button Command="{Binding CartNumberClickCommand}" CommandParameter="1">
-                            <Image Source="..\Resources\Images\1 inactivo.png"></Image>
+                            <Image Source="Resources\Images\1 inactivo.png"></Image>
                         </Button>
                     </Grid>
                     <Grid Column="1">
                         <Button Command="{Binding CartNumberClickCommand}" CommandParameter="2">
-                            <Image Source="..\Resources\Images\2 inactivo.png"></Image>
+                            <Image Source="Resources\Images\2 inactivo.png"></Image>
                         </Button>
                     </Grid>
                     <Grid Column="2">
                         <Button Command="{Binding CartNumberClickCommand}" CommandParameter="3">
-                            <Image Source="..\Resources\Images\3 Inactivo.png"></Image>
+                            <Image Source="Resources\Images\3 Inactivo.png"></Image>
                         </Button>
                     </Grid>
                 </Grid>
@@ -222,7 +222,7 @@
                                 <RowDefinition Height="10"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="..\Resources\Images\linea roja.png"></Image>
+                            <Image Grid.Row="0" Source="Resources\Images\linea roja.png"></Image>
                             <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="General" FontSize="16"/>
                         </Grid>
                     </Button>
@@ -235,7 +235,7 @@
                                 <RowDefinition Height="10"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="..\Resources\Images\linea amarilla.png"></Image>
+                            <Image Grid.Row="0" Source="Resources\Images\linea amarilla.png"></Image>
                             <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageOneTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
@@ -248,7 +248,7 @@
                                 <RowDefinition Height="10"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="..\Resources\Images\linea morada.png"></Image>
+                            <Image Grid.Row="0" Source="Resources\Images\linea morada.png"></Image>
                             <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageTwoTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
@@ -261,7 +261,7 @@
                                 <RowDefinition Height="10"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="..\Resources\Images\linea verde.png"></Image>
+                            <Image Grid.Row="0" Source="Resources\Images\linea verde.png"></Image>
                             <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageThreeTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
@@ -287,7 +287,7 @@
                                 <RowDefinition Height="10"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="..\Resources\Images\linea azul.png"></Image>
+                            <Image Grid.Row="0" Source="Resources\Images\linea azul.png"></Image>
                             <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFiveTitle}" FontSize="16"/>
                         </Grid>
                     </Button>
@@ -312,7 +312,7 @@
                     </TextBox.InputBindings>
                 </TextBox>
                 <Button Command="{Binding SearchCodeCommand}" CommandParameter="{Binding Code}" Grid.Column="1" >
-                    <Image Source="..\Resources\Images\lupa activa.png" Margin="5"></Image>
+                    <Image Source="Resources\Images\lupa activa.png" Margin="5"></Image>
                 </Button>
             </Grid>
         </Grid>
