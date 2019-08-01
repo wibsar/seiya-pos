@@ -94,17 +94,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="Model\CarPart.cs" />
+    <Compile Include="Model\SystemConfiguration.cs" />
+    <Compile Include="Model\TypeDefinitions.cs" />
     <Compile Include="Properties\Annotations.cs" />
-    <Compile Include="ViewModel\CarRegistrationViewModel.cs" />
     <Compile Include="View\AnalysisMainPage.xaml.cs">
       <DependentUpon>AnalysisMainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CarRegistrationListPage.xaml.cs">
-      <DependentUpon>CarRegistrationListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="View\CarRegistrationMainPage.xaml.cs">
-      <DependentUpon>CarRegistrationMainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\PaymentPartialPage.xaml.cs">
       <DependentUpon>PaymentPartialPage.xaml</DependentUpon>
@@ -211,14 +205,6 @@
     <Page Include="View\AnalysisMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="View\CarRegistrationListPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="View\CarRegistrationMainPage.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
     </Page>
     <Page Include="View\PaymentPartialPage.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -466,12 +452,6 @@
     <Resource Include="Resources\Images\Transacciones.png" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\athena-pos\Athena.csproj">
-      <Project>{45602a13-6cc9-49e3-aa85-1173bdc160f2}</Project>
-      <Name>Athena</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Resources\Images\lupa activa.png" />
   </ItemGroup>
   <ItemGroup>
@@ -489,6 +469,19 @@
   <ItemGroup>
     <Resource Include="Resources\Images\Login logo.png" />
     <Resource Include="Resources\Images\Logo Wibsar Retail.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\shun-pos\Shun.csproj">
+      <Project>{8d4b1d4b-1276-4116-ade0-2363baee5fbd}</Project>
+      <Name>Shun</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\zeus-pos\Zeus.csproj">
+      <Project>{9521dbf7-db2d-4620-a16e-4e2e2c37fd50}</Project>
+      <Name>Zeus</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="ViewModel\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

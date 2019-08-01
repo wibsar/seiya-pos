@@ -5,7 +5,7 @@
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
       xmlns:System="clr-namespace:System;assembly=mscorlib"
-      xmlns:athena="clr-namespace:Athena;assembly=Athena"
+      xmlns:athena="clr-namespace:Zeus;assembly=Zeus"
       x:Class="Seiya.LoginPage"
       mc:Ignorable="d" 
       d:DataContext="{d:DesignInstance {x:Type athena:MainWindowViewModel}}"

@@ -13,7 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Athena;
+using Zeus;
 
 namespace Seiya
 {
@@ -22,7 +22,7 @@ namespace Seiya
         public ExchangeRatePage()
         {
             InitializeComponent();
-            DataContext = MainWindowViewModel.GetInstance();
+            DataContext = MainWindowViewModel.GetInstance(null, null);
         }
     }
 }

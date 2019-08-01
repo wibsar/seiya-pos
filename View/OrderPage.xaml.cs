@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Athena;
+using Zeus;
 
 namespace Seiya
 {
@@ -24,7 +24,7 @@ namespace Seiya
         public OrderPage()
         {
             InitializeComponent();
-            DataContext = MainWindowViewModel.GetInstance();
+            DataContext = MainWindowViewModel.GetInstance(null, null);
         }
 
         private void KeyUpNoSymbolsEvent(object sender, KeyEventArgs e)
@@ -32,7 +32,7 @@ namespace Seiya
             ((TextBox)sender).Text = Formatter.RemoveInvalidCharacters(((TextBox)sender).Text, out bool status);
             if (status)
             {
-                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Símbolo inválido!";
             }
         }
 
@@ -41,12 +41,12 @@ namespace Seiya
             ((TextBox)sender).Text = Formatter.RemoveInvalidCharacters(((TextBox)sender).Text, out var status);
             if (status)
             {
-                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Símbolo inválido!";
             }
             ((TextBox)sender).Text = Formatter.RemoveWhiteSpace(((TextBox)sender).Text, out status);
             if (status)
             {
-                MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Espacio inválido!";
             }
         }
     }

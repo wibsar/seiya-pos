@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using Athena;
+using Zeus;
 
 namespace Seiya
 {
@@ -24,7 +24,7 @@ namespace Seiya
         public UserDetailPage()
         {
             InitializeComponent();
-            DataContext = MainWindowViewModel.GetInstance();
+            DataContext = MainWindowViewModel.GetInstance(null, null);
         }
 
         private void KeyUpNoSymbolsEvent(object sender, KeyEventArgs e)
@@ -32,7 +32,7 @@ namespace Seiya
             ((TextBox)sender).Text = Formatter.RemoveInvalidCharacters(((TextBox)sender).Text, out bool status);
             if (status)
             {
-                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Símbolo inválido!";
             }
         }
 
@@ -41,12 +41,12 @@ namespace Seiya
             ((TextBox)sender).Text = Formatter.RemoveInvalidCharacters(((TextBox)sender).Text, out var status);
             if (status)
             {
-                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Símbolo inválido!";
             }
             ((TextBox)sender).Text = Formatter.RemoveWhiteSpace(((TextBox)sender).Text, out status);
             if (status)
             {
-                MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Espacio inválido!";
             }
         }
 
@@ -56,7 +56,7 @@ namespace Seiya
             Formatter.RemoveInvalidCharacters(password, out var status);
             if (status)
             {
-                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Símbolo inválido!";
                 ((PasswordBox) sender).Password = "";
                 return;
             }
@@ -64,12 +64,12 @@ namespace Seiya
             Formatter.RemoveWhiteSpace(password, out var spaceStatus);
             if (spaceStatus)
             {
-                MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Espacio inválido!";
                 ((PasswordBox)sender).Password = "";
                 return;
             }
 
-            MainWindowViewModel.GetInstance().UserTemporalItem.Password = password;
+            MainWindowViewModel.GetInstance(null, null).UserTemporalItem.Password = password;
         }
 
         private void PasswordVerificationBox_OnPasswordChanged(object sender, RoutedEventArgs e)
@@ -78,7 +78,7 @@ namespace Seiya
             Formatter.RemoveInvalidCharacters(password, out var status);
             if (status)
             {
-                MainWindowViewModel.GetInstance().Code = "Símbolo inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Símbolo inválido!";
                 ((PasswordBox)sender).Password = "";
                 return;
             }
@@ -86,12 +86,12 @@ namespace Seiya
             Formatter.RemoveWhiteSpace(password, out var spaceStatus);
             if (spaceStatus)
             {
-                MainWindowViewModel.GetInstance().Code = "Espacio inválido!";
+                MainWindowViewModel.GetInstance(null, null).Code = "Espacio inválido!";
                 ((PasswordBox)sender).Password = "";
                 return;
             }
 
-            MainWindowViewModel.GetInstance().UserTemporalItem.PasswordVerification = password;
+            MainWindowViewModel.GetInstance(null, null).UserTemporalItem.PasswordVerification = password;
         }
     }
 }
