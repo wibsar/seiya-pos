@@ -54,10 +54,10 @@ namespace Seiya
 
         public bool EmailTransactionsFileAfterEndSalesReport { get; set; } = true;
         public bool IntFlag { get; set; } = true;
-        public bool LocalCustomers { get; set; } = false;
-        public bool CloudCustomers { get; set; } = true;
-        public bool LocalInventory { get; set; } = false;
-        public bool CloudInventory { get; set; } = true;
+        public bool LocalCustomers { get; set; } = true;
+        public bool CloudCustomers { get; set; } = false;
+        public bool LocalInventory { get; set; } = true;
+        public bool CloudInventory { get; set; } = false;
 
     }
 }
