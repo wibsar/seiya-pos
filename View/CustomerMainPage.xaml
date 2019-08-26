@@ -90,14 +90,11 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header=" Id " IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header=" Nombre " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Code}" ClipboardContentBinding="{x:Null}" Header=" Nombre " IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Email}" ClipboardContentBinding="{x:Null}" Header=" Correo " IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Phone}" ClipboardContentBinding="{x:Null}" Header=" Telefono " IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding RegistrationDate}" ClipboardContentBinding="{x:Null}" Header=" Fecha de Registro " IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Rfc}" ClipboardContentBinding="{x:Null}" Header=" RFC " IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PointsAvailable}" ClipboardContentBinding="{x:Null}" Header=" Puntos Disponible s" IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding PointsUsed}" ClipboardContentBinding="{x:Null}" Header=" Puntos Usados " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding PointsAvailable}" ClipboardContentBinding="{x:Null}" Header=" Puntos Disponibles" IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding TotalVisits}" ClipboardContentBinding="{x:Null}" Header=" Visitas " IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding TotalSpent, StringFormat='${0}'}" ClipboardContentBinding="{x:Null}" Header=" Total Gastado " IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding LastVisitDate}" ClipboardContentBinding="{x:Null}" Header=" Ultima Visita " IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
