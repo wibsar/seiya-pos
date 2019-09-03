@@ -65,8 +65,8 @@
 
         <!-- Grid for header section -->
         <Grid Column="0" Row="0" Grid.ColumnSpan="2">
-            <!-- Client logo -->
-            <Image Source="C:\Projects\seiya-pos\Data\Images\tulogo.png" HorizontalAlignment="Center" MaxWidth="500"  ></Image>
+            <!-- Client logo :\Projects\seiya-pos\Data\Images\tulogo.png"-->
+            <Image Source="{Binding LogoImage}" HorizontalAlignment="Center" MaxWidth="500"  ></Image>
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"></ColumnDefinition>                    
@@ -274,7 +274,7 @@
                                 <RowDefinition Height="10"></RowDefinition>
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="..\Resources\Images\linea naranja.png"></Image>
+                            <Image Grid.Row="0" Source="Resources\Images\linea naranja.png"></Image>
                             <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFourTitle}" FontSize="16"/>
                         </Grid>
                     </Button>

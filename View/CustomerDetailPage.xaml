@@ -69,18 +69,22 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center">Registro de Usuario</TextBlock>
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center">Datos de Cliente</TextBlock>
                 <TextBlock Grid.Row="1" Text="Nombre:"></TextBlock>
                 <TextBlock Grid.Row="2" Text="Correo Electrónico"></TextBlock>
                 <TextBlock Grid.Row="3" Text="Código"></TextBlock>
-                <TextBlock Grid.Row="4" Text="Teléfono:"></TextBlock>
-                <TextBlock Grid.Row="5" Text="RFC:"></TextBlock>
-                <TextBlock Grid.Row="6" Text="Puntos Disponibles:"></TextBlock>
+                <TextBlock Grid.Row="4" Text="Teléfono"></TextBlock>
+                <TextBlock Grid.Row="5" Text="RFC"></TextBlock>
+                <TextBlock Grid.Row="6" Text="Puntos Disponibles"></TextBlock>
                 <TextBlock Grid.Row="7" Text="Puntos Usados"></TextBlock>
                 <TextBlock Grid.Row="8" Text="Numero de Visitas"></TextBlock>
-                <TextBlock Grid.Row="9" Text="Total Gastado:"></TextBlock>
+                <TextBlock Grid.Row="9" Text="Total Gastado"></TextBlock>
+                <TextBlock Grid.Row="10" Text="Registro"></TextBlock>
+                <TextBlock Grid.Row="11" Text="Ultima Visita"></TextBlock>
 
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Name}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.Email}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBox>
@@ -91,6 +95,9 @@
                 <TextBlock Grid.Row="7" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.PointsUsed}"></TextBlock>
                 <TextBlock Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalVisits}"></TextBlock>
                 <TextBlock Grid.Row="9" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.TotalSpent, StringFormat='${0}'}"></TextBlock>
+                <TextBlock Grid.Row="10" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.RegistrationDateString}"></TextBlock>
+                <TextBlock Grid.Row="11" Grid.Column="1" Margin="5" Text="{Binding CustomerTemporalItem.LastVisitDateString}"></TextBlock>
+
             </Grid>
         </Grid>
 
