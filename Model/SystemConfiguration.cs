@@ -10,7 +10,7 @@ namespace Seiya
     class SystemConfiguration : ISystemConfiguration
     {
         private string _server = "wibsarlicencias.csqn2onotlww.us-east-1.rds.amazonaws.com";
-        private string _dataBaseName = "ConteinerTest";
+        private string _dataBaseName = "EstrellaTest";
         private string _userId = "armoag";
         private string _password = "Yadira00";
         private string _customerTableName = "Clientes";
@@ -54,10 +54,10 @@ namespace Seiya
 
         public bool EmailTransactionsFileAfterEndSalesReport { get; set; } = true;
         public bool IntFlag { get; set; } = true;
-        public bool LocalCustomers { get; set; } = true;
-        public bool CloudCustomers { get; set; } = false;
-        public bool LocalInventory { get; set; } = true;
-        public bool CloudInventory { get; set; } = false;
+        public bool LocalCustomers { get; set; } = false;
+        public bool CloudCustomers { get; set; } = true;
+        public bool LocalInventory { get; set; } = false;
+        public bool CloudInventory { get; set; } = true;
 
     }
 }
