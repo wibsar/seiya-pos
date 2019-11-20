@@ -112,7 +112,7 @@
                             <TextBox Grid.Row="11" Grid.Column="1" Text="{Binding Website, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsNoSpaceEvent" Margin="0,5,5,0"></TextBox>
                             <TextBox Grid.Row="12" Grid.Column="1" Text="{Binding Comments, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="0,5,5,0"></TextBox>
                             <TextBox Grid.Row="13" Grid.Column="1" Text="{Binding FooterMessage, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" Margin="0,5,5,0"></TextBox>
-                            <DocumentViewer Document="{Binding Document, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="2" Grid.RowSpan="13"></DocumentViewer>
+                            <!--<DocumentViewer Document="{Binding Document, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Grid.Row="0" Grid.Column="2" Grid.RowSpan="13"></DocumentViewer>-->
                         </Grid>
                     </Grid>
                     <!--TAB Avanzado-->
@@ -228,17 +228,17 @@
                 <ColumnDefinition Width="3*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Background="#FFF3F3F3" BorderBrush="LightGray" Command="{Binding DocumentPreviewCommand}" HorizontalAlignment="Center" MinWidth="200" Margin="5" >
+            <!--<Button Grid.Column="0" Background="#FFF3F3F3" BorderBrush="LightGray" Command="{Binding DocumentPreviewCommand}" HorizontalAlignment="Center" MinWidth="200" Margin="5" >
                 <Grid Margin="5">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="29*"></ColumnDefinition>
                         <ColumnDefinition Width="21*"></ColumnDefinition>
                         <ColumnDefinition Width="27*"/>
                     </Grid.ColumnDefinitions>
-                    <Image Source="..\Resources\Images\lupa activa.png"></Image>
-                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Preview" Grid.ColumnSpan="2" ></TextBlock>
+                    --><!--<Image Source="..\Resources\Images\lupa activa.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Preview" Grid.ColumnSpan="2" ></TextBlock>--><!--
                 </Grid>
-            </Button>
+            </Button>-->
             <TextBlock Grid.Column="1" Foreground="LightGray" FontSize="18" HorizontalAlignment="Left" Margin="5,0,0,0" Text="{Binding Version}"></TextBlock>
             <Button Grid.Column="2" Background="#FFF3F3F3" BorderBrush="LightGray" Command="{Binding SystemSaveChangesCommand}" HorizontalAlignment="Center" MinWidth="200" Margin="5" >
                 <Grid Margin="5">

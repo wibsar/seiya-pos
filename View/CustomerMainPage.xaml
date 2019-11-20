@@ -90,7 +90,7 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding Id}" ClipboardContentBinding="{x:Null}" Header=" Id " IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Name}" ClipboardContentBinding="{x:Null}" Header=" Nombre " IsReadOnly="True"/>
-                <DataGridTextColumn Binding="{Binding Code}" ClipboardContentBinding="{x:Null}" Header=" Nombre " IsReadOnly="True"/>
+                <DataGridTextColumn Binding="{Binding Code}" ClipboardContentBinding="{x:Null}" Header=" Codigo " IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Email}" ClipboardContentBinding="{x:Null}" Header=" Correo " IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding Phone}" ClipboardContentBinding="{x:Null}" Header=" Telefono " IsReadOnly="True"/>
                 <DataGridTextColumn Binding="{Binding PointsAvailable}" ClipboardContentBinding="{x:Null}" Header=" Puntos Disponibles" IsReadOnly="True"/>
