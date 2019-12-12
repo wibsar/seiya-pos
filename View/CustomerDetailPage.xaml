@@ -43,7 +43,7 @@
         </Grid.RowDefinitions>
 
         <!-- header -->
-        <TextBlock Grid.Row="0" Text="DETALLE DE CLIENTE" FontSize="24" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock Grid.Row="0" Text="DETALLE DE CLIENTE" FontSize="24" HorizontalAlignment="Left" Margin="20,0"></TextBlock>
         
 
         <Grid Grid.Row="1" Background="White" Margin="5">

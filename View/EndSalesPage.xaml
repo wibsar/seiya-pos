@@ -48,7 +48,7 @@
         </Grid.RowDefinitions>
 
         <!-- header -->
-        <TextBlock Grid.Column="0" Text="CORTE DE CAJA" FontSize="24" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Column="0" Text="CORTE DE CAJA" FontSize="24" VerticalAlignment="Center" Margin="20,0"></TextBlock>
 
 
         <!-- Users input for quantities -->

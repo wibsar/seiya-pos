@@ -81,7 +81,7 @@
                 <ColumnDefinition Width="6*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock FontSize="24" VerticalAlignment="Center" Text="PEDIDOS"></TextBlock>
+            <TextBlock FontSize="24" VerticalAlignment="Center" Text="PEDIDOS" Margin="20,0" HorizontalAlignment="Left"></TextBlock>
             <TextBox Grid.Column="1" x:Name="OrdersSearchTextBox" Text="{Binding OrdersSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" VerticalContentAlignment="Center"/>
             <Button Grid.Column="2" Command="{Binding OrderStartSearchCommand}" CommandParameter="{Binding OrdersSearchText}">
                 <Image Margin="3" Source="..\Resources\Images\lupa activa.png"></Image>

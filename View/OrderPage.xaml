@@ -60,7 +60,7 @@
             <RowDefinition Height="12*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock Grid.Column="0" FontSize="24" VerticalAlignment="Center" Text="PEDIDOS"></TextBlock>
+        <TextBlock FontSize="24" VerticalAlignment="Center" Text="PEDIDO" Margin="20,0" HorizontalAlignment="Left"></TextBlock>
 
         <!-- Datos-->
         <Grid Grid.Column="0" Grid.Row="1">

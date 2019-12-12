@@ -78,7 +78,7 @@
                 <ColumnDefinition Width="6*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <TextBlock Text="CLIENTES" FontSize="24" VerticalAlignment="Center"></TextBlock>
+            <TextBlock Text="CLIENTES" FontSize="24" VerticalAlignment="Center" Margin="20,0"></TextBlock>
             <TextBox Grid.Column="1" x:Name="CustomersSearchTextBox" Text="{Binding CustomersSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Padding="6,0" VerticalContentAlignment="Center"/>
             <Button Grid.Column="2" Background="White" Command="{Binding CustomerStartSearchCommand}" CommandParameter="{Binding CustomersSearchText}">
                 <Image Margin="3" Source="..\Resources\Images\lupa activa.png"></Image>
