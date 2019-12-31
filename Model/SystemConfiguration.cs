@@ -15,6 +15,7 @@ namespace Seiya
         private string _password = "Yadira00";
         private string _customerTableName = "Clientes";
         private string _inventoryTableName = "Inventario";
+        private string _queueTableName = "Queue";
         
         public string Server
         {
@@ -51,6 +52,11 @@ namespace Seiya
             get { return _inventoryTableName; }
             set { _inventoryTableName = value; }
         }
+        public string QueueTableName
+        {
+            get { return _queueTableName; }
+            set { _queueTableName = value; }
+        }
 
         public bool EmailTransactionsFileAfterEndSalesReport { get; set; } = true;
         public bool IntFlag { get; set; } = true;
@@ -58,6 +64,7 @@ namespace Seiya
         public bool CloudCustomers { get; set; } = true;
         public bool LocalInventory { get; set; } = false;
         public bool CloudInventory { get; set; } = true;
-
+        public bool IndirectPrice { get; set; } = false;
+        public SystemTypeEnum SystemType { get; set; }
     }
 }

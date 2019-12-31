@@ -43,7 +43,7 @@
             <RowDefinition Height="1.5*"></RowDefinition>
         </Grid.RowDefinitions>
         <!-- header -->
-        <TextBlock Grid.Row="0" Text="TIPO DE CAMBIO" FontSize="24" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Row="0" Text="TIPO DE CAMBIO" FontSize="24" VerticalAlignment="Center" Margin="20,0"></TextBlock>
 
         <Grid Grid.Row="1" Grid.Column="0" Background="White" Margin="50,10,50,50">
             <Grid.RowDefinitions>
