@@ -7,7 +7,7 @@
     <ProjectGuid>{8173DDBC-BAAC-43A1-B1DA-F819DBD5DDA6}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>Seiya</RootNamespace>
-    <AssemblyName>Seiya</AssemblyName>
+    <AssemblyName>Wibsar Retail</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -49,8 +49,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>
-    </ApplicationIcon>
+    <ApplicationIcon>icon retail.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="GenericParsing">
@@ -485,6 +484,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Images\printer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="icon retail.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
