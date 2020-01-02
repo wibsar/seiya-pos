@@ -10,7 +10,7 @@ namespace Seiya
     class SystemConfiguration : ISystemConfiguration
     {
         private string _server = "wibsarlicencias.csqn2onotlww.us-east-1.rds.amazonaws.com";
-        private string _dataBaseName = "EstrellaTest";
+        private string _dataBaseName = "Estrella";
         private string _userId = "armoag";
         private string _password = "Yadira00";
         private string _customerTableName = "Clientes";

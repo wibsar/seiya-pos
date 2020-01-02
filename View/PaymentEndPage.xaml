@@ -4,33 +4,34 @@
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
       xmlns:local="clr-namespace:Seiya"
-      xmlns:athena="clr-namespace:Zeus;assembly=Zeus"
+      xmlns:Zeus="clr-namespace:Zeus;assembly=Zeus"
       mc:Ignorable="d" 
-      d:DataContext="{d:DesignInstance athena:MainWindowViewModel}"
+      d:DataContext="{d:DesignInstance Zeus:MainWindowViewModel}"
       d:DesignHeight="600" d:DesignWidth="800"
       Title="PaymentPage"
       FontFamily="..\Resources\Fonts\#Comfortaa">
 
     <Page.Resources>
+        <Zeus:StringFormatConverter x:Key="StringFormatConverter"></Zeus:StringFormatConverter>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
@@ -41,19 +42,19 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>            
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>            
-            <RowDefinition Height="2.8*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--Display client information-->
         <Grid Grid.Row="0">
-            <TextBlock Text="{Binding CurrentCustomer.Name}" HorizontalAlignment="Center" Foreground="Gray"></TextBlock>
+            <TextBlock Text="{Binding CurrentCustomer.Name, StringFormat='Cliente: {0}'}" HorizontalAlignment="Center" Foreground="Gray"></TextBlock>
         </Grid>
-      
-        
+
+
         <!--Diplay Totals-->
         <Grid Grid.Row="1" ShowGridLines="False">
             <Grid.ColumnDefinitions>
@@ -66,8 +67,8 @@
             </Grid.RowDefinitions>
             <TextBlock Grid.Column="0" Grid.Row="0" Text="Puntos Obtenidos" Foreground="Gray" HorizontalAlignment="Center" ></TextBlock>
             <TextBlock Grid.Column="1" Grid.Row="0" Text="Puntos Disponibles" Foreground="Gray" HorizontalAlignment="Center" ></TextBlock>
-            <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,5,2.5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Text="{Binding PaymentPointsReceived}"></TextBlock>
-            <TextBlock Grid.Column="1" Grid.Row="1" Margin="2.5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Text="{Binding CurrentCustomer.PointsAvailable}"></TextBlock>
+            <TextBlock Grid.Column="0" Grid.Row="1" Margin="5,5,2.5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Text="{Binding PaymentPointsReceived, Converter={StaticResource StringFormatConverter}, StringFormat=N2}"></TextBlock>
+            <TextBlock Grid.Column="1" Grid.Row="1" Margin="2.5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="24" Text="{Binding CurrentCustomer.PointsAvailable, StringFormat=N2, Converter={StaticResource StringFormatConverter} }"></TextBlock>
         </Grid>
         <!--Separador-->
         <TextBlock Grid.Row="2" Background="#FFECECEC" Height="2" VerticalAlignment="Top"></TextBlock>
@@ -88,7 +89,7 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Column="0" Grid.Row="0" Text="Recibido en Pesos" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" ></TextBlock>
@@ -104,17 +105,16 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="Cambio en Pesos" Foreground="Gray" HorizontalAlignment="Center" FontSize="24" ></TextBlock>
-                <TextBlock Grid.Column="1" Grid.Row="0" Text="Cambio en Dólar" Foreground="Gray" HorizontalAlignment="Center" FontSize="24" ></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="0" Text="Cambio en Pesos" Foreground="Gray" HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Bottom" ></TextBlock>
+                <TextBlock Grid.Column="1" Grid.Row="0" Text="Cambio en Dólar" Foreground="Gray" HorizontalAlignment="Center" FontSize="24" VerticalAlignment="Bottom" ></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="1" Foreground="#FFD10202" Margin="5,5,2.5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Text="{Binding PaymentChangeMXN, StringFormat='${0}'}"></TextBlock>
                 <TextBlock Grid.Column="1" Grid.Row="1" Foreground="#FF009E2B" Margin="2.5,5,5,5" HorizontalAlignment="Center" VerticalAlignment="Top" FontSize="36" Text="{Binding PaymentChangeUSD, StringFormat='${0}'}"></TextBlock>
             </Grid>
         </Grid>
         <Button Grid.Row="4" x:Name="EndTransactionBtn" FontSize="24" FontWeight="Bold" Foreground="DarkGreen" Background="#FF8BD48B" Content="TERMINAR" Command="{Binding ChangePageCommand}" CommandParameter="end_transaction" BorderBrush="{x:Null}"></Button>
-        
-        
     </Grid>
 </Page>
+

@@ -14,13 +14,16 @@
     <Window.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="Background" Value="White"></Setter>
+            <!--Cambio Color-->
+            <Setter Property="Margin" Value="1"></Setter>
+            <Setter Property="Foreground" Value="#2C5066"></Setter>
         </Style>
         <Style TargetType="TextBox">
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
@@ -34,10 +37,10 @@
         <Style TargetType="{x:Type ListBox}">
             <Setter Property="Background" Value="#FFF" />
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
-            <Setter Property="AlternationCount" Value="2" />          
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="AlternationCount" Value="2" />
         </Style>
-        <Style TargetType="{x:Type ListBoxItem}">            
+        <Style TargetType="{x:Type ListBoxItem}">
             <Style.Triggers>
                 <Trigger Property="ItemsControl.AlternationIndex" Value="0">
                     <Setter Property="Background" Value="White"></Setter>
@@ -46,70 +49,70 @@
                     <Setter Property="Background" Value="WhiteSmoke"></Setter>
                 </Trigger>
             </Style.Triggers>
-        </Style>       
-        
+        </Style>
+
     </Window.Resources>
 
     <!-- Main Window Grid -->
-    <Grid ShowGridLines="False" Margin="5">
+    <Grid ShowGridLines="False" Margin="5" Background="White">
+        <!--Cambio Color-->
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="63*"></ColumnDefinition>
+            <ColumnDefinition Width="992*"/>
+            <ColumnDefinition Width="527*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height=".1*"></RowDefinition>
-            <RowDefinition Height="10*"></RowDefinition>
+            <RowDefinition Height="15*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- Grid for header section -->
-        <Grid Column="0" Row="0" Grid.ColumnSpan="2">
-            <!-- Client logo :\Projects\seiya-pos\Data\Images\tulogo.png"-->
-            <Image Source="{Binding LogoImage}" HorizontalAlignment="Center" MaxWidth="500"  ></Image>
+        <Grid Column="0" Row="0" Grid.ColumnSpan="3" >
+            <!-- Client logo -->
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>                    
+                    <ColumnDefinition Width="*"></ColumnDefinition>
                     <ColumnDefinition Width="8*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
                 <Button Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="menu">
-                    <Grid>
-                        <Image Grid.Row="0" Source="Resources\Images\menu.png" Margin="5"></Image>
+                    <Grid Margin="10">
+                        <Image Grid.Row="0" Source="Resources\Images\menu.png"></Image>
                     </Grid>
                 </Button>
             </Grid>
         </Grid>
-        <!-- Linea gris -->
-        <TextBlock Grid.Row="1" Height="1" Background="#FFECECEC"></TextBlock>
-        <TextBlock Grid.Row="1" Grid.Column="1" Height="1" Background="#FFECECEC"></TextBlock>
+
+        <TextBlock Grid.Row="1" Grid.Column="2" Height="1" Background="#FFECECEC" Margin="0,378"></TextBlock>
         <!-- Grid for category boxes -->
-        <Grid Column="0" Row="2" >
+        <Grid Column="0" Row="1" Grid.ColumnSpan="2" >
             <!-- Need to bind the source to choose page depending on selection-->
             <Border BorderBrush="LightBlue" >
-                <Frame x:Name="Main" Source="{Binding CurrentPage}"  NavigationUIVisibility="Hidden" Margin="-1,0,1.2,0">
+                <Frame x:Name="Main" Source="{Binding CurrentPage}"  NavigationUIVisibility="Hidden" Margin="-1,0,1.2,0" Background="White">
                 </Frame>
             </Border>
         </Grid>
-        <TextBlock Grid.Column="1" Grid.Row="0" ></TextBlock>
+        <TextBlock Grid.Column="2" Grid.Row="0" Margin="0,15" ></TextBlock>
 
-        <Grid Column="1" Row="0">
+        <Grid Grid.Column="2" Row="0">
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
-                   
+
                     <ColumnDefinition Width="7*"></ColumnDefinition>
                     <ColumnDefinition Width="*"></ColumnDefinition>
                 </Grid.ColumnDefinitions>
-                
+
                 <Button Grid.Column="1" Command="{Binding LoginPageCommand}" CommandParameter="login">
-                    <Grid>
-                        <Image Grid.Row="0" Source="Resources\Images\Usuario.png" Margin="5"></Image>
+                    <Grid Margin="10">
+                        <Image Grid.Row="0" Source="Resources\Images\Usuario.png"></Image>
                     </Grid>
                 </Button>
-                <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name}" Foreground="Gray" VerticalAlignment="Center" HorizontalAlignment="Right"  ></TextBlock>
+                <TextBlock Grid.Column="0" Text="{Binding CurrentUser.Name}" VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="24" ></TextBlock>
+                <!--Cambio Color de Gray a White-->
             </Grid>
         </Grid>
         <!-- Grid for checkout section -->
-        <Grid Column="1" Row="2">
+        <Grid Grid.Column="2" Row="1">
 
             <Grid >
                 <Grid.ColumnDefinitions>
@@ -149,18 +152,18 @@
                 </Grid>
 
                 <!-- List of products -->
-                <ListBox x:Name ="ProductListBox" Grid.Row="1" BorderBrush="#FFECECEC" ItemsSource="{Binding CurrentCartProducts, Mode=TwoWay}" SelectedItem="{Binding SelectedCartProduct, Mode=TwoWay}">
+                <ListBox x:Name ="ProductListBox" Grid.Row="1" ItemsSource="{Binding CurrentCartProducts, Mode=TwoWay}" SelectedItem="{Binding SelectedCartProduct, Mode=TwoWay}" Background="#F0F0F0" Margin="1">
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel>
-                                <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch" FontSize="18" Foreground="#FF0E2D3B"></TextBlock>
-                                <TextBlock Text="{Binding Category}" HorizontalAlignment="Stretch" FontSize="14" Foreground="Gray"></TextBlock>
+                                <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch" FontSize="24" Foreground="#FF0E2D3B"></TextBlock>
+                                <TextBlock Text="{Binding Category}" HorizontalAlignment="Stretch" FontSize="16" Foreground="Gray"></TextBlock>
                                 <StackPanel Orientation="Horizontal">
-                                    <TextBlock Text="{Binding LastQuantitySold}" HorizontalAlignment="Left" FontSize="18" Foreground="#FF0074FF"></TextBlock>
-                                    <TextBlock Text=" x " FontSize="14" Foreground="gray" VerticalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="{Binding Price, StringFormat='${0}'}" FontSize="18" Foreground="#FF0E2D3B"></TextBlock>
+                                    <TextBlock Text="{Binding LastQuantitySold}" HorizontalAlignment="Left" FontSize="24" Foreground="#FF0074FF"></TextBlock>
+                                    <TextBlock Text=" x " FontSize="16" Foreground="gray" VerticalAlignment="Center"></TextBlock>
+                                    <TextBlock Text="{Binding Price, StringFormat='${0}'}" FontSize="24" Foreground="#FF0E2D3B"></TextBlock>
                                     <TextBlock Text="  =  " FontSize="14" Foreground="gray" VerticalAlignment="Center"></TextBlock>
-                                    <TextBlock Text="{Binding LastAmountSold, StringFormat='${0}'}" FontSize="18" Foreground="#FF00BB00"></TextBlock>
+                                    <TextBlock Text="{Binding LastAmountSold, StringFormat='${0}'}" FontSize="24" Foreground="#FF00BB00"></TextBlock>
                                 </StackPanel>
                             </StackPanel>
                         </DataTemplate>
@@ -174,35 +177,39 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
 
                     <Grid Column="0">
-                        <Button Content ="-" FontSize="30" Command="{Binding SubtractFromProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem, Mode=TwoWay}" ></Button>
+                        <Button Content ="-" FontSize="30" Command="{Binding SubtractFromProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem, Mode=TwoWay}"></Button>
                     </Grid>
                     <Grid Column="1">
                         <Button Content ="+" FontSize="30" Command="{Binding AddToProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem}" ></Button>
                     </Grid>
                     <Grid Column="2">
-                        <Button Content ="%" FontSize="20" Command="{Binding ApplyDiscountToProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem}" ></Button>
+                        <Button Content ="%" FontSize="20" Command="{Binding ApplyDiscountToProductListCommand}" CommandParameter="{Binding ElementName=ProductListBox, Path=SelectedItem}"></Button>
                     </Grid>
                     <Grid Column="3">
-                        <Button Content ="Limpiar" Command="{Binding ClearCurrentProductListCommand}"></Button>
+                        <Button Content ="C" Command="{Binding ClearCurrentProductListCommand}"></Button>
                     </Grid>
                     <Grid Column="4">
                         <Button Content ="Inv" Command="{Binding ChangePageCommand}" CommandParameter="inventory"></Button>
+                    </Grid>
+                    <Grid Column="5">
+                        <Button Content ="Ped" Command="{Binding ChangePageCommand}" CommandParameter="orders"></Button>
                     </Grid>
                 </Grid>
                 <!-- Bottom for price display and payment -->
                 <Grid Row="3" ShowGridLines="True">
                     <Button Command="{Binding ChangePageCommand}" CommandParameter="payment" BorderBrush="{x:Null}"  FontSize="24" Background="Red" Margin="0,0,0,1">
-                        <TextBlock Grid.Column="1" Text="{Binding PaymentTotalMXN, Mode=TwoWay, StringFormat='Pagar: ${0}'}" FontSize="24" VerticalAlignment="Center" Margin="5" Foreground="White" ></TextBlock>                       
+                        <TextBlock Grid.Column="1" Text="{Binding PaymentTotalMXN, Mode=TwoWay, StringFormat='Pagar: ${0}'}" FontSize="24" VerticalAlignment="Center" Margin="5" Foreground="White" ></TextBlock>
                     </Button>
                 </Grid>
             </Grid>
         </Grid>
 
         <!-- Grid for categories selection -->
-        <Grid Column="0" Row="3" >
+        <Grid Column="0" Grid.Row="2" Grid.ColumnSpan="2" >
 
             <Grid ShowGridLines="False" Margin="0,0,5,0">
                 <Grid.ColumnDefinitions>
@@ -215,7 +222,7 @@
                 </Grid.ColumnDefinitions>
 
 
-                <Grid Column="0" Margin="0,0,2,0">
+                <Grid Column="0" Margin="0,0,1,0">
                     <Button Command="{Binding ChangePageCommand}" CommandParameter="general">
                         <Grid>
                             <Grid.RowDefinitions>
@@ -223,7 +230,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="Resources\Images\linea roja.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="General" FontSize="16"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="General" FontSize="18"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -236,7 +243,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="Resources\Images\linea amarilla.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageOneTitle}" FontSize="16"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageOneTitle}" FontSize="18"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -249,7 +256,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="Resources\Images\linea morada.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageTwoTitle}" FontSize="16"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageTwoTitle}" FontSize="18"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -262,7 +269,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="Resources\Images\linea verde.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageThreeTitle}" FontSize="16"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageThreeTitle}" FontSize="18"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -275,7 +282,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="Resources\Images\linea naranja.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFourTitle}" FontSize="16"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFourTitle}" FontSize="18"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -288,7 +295,7 @@
                                 <RowDefinition Height="*"></RowDefinition>
                             </Grid.RowDefinitions>
                             <Image Grid.Row="0" Source="Resources\Images\linea azul.png"></Image>
-                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFiveTitle}" FontSize="16"/>
+                            <TextBlock Grid.Row="1" HorizontalAlignment="Center" Margin="0,10,0,0" Text="{Binding PageFiveTitle}" FontSize="18"/>
                         </Grid>
                     </Button>
                 </Grid>
@@ -296,7 +303,7 @@
         </Grid>
 
         <!-- Grid for scan or search code box -->
-        <Grid Column="1" Row="3">
+        <Grid Grid.Column="2" Grid.Row="2">
             <Grid ShowGridLines="False">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="3*"></ColumnDefinition>
@@ -305,18 +312,16 @@
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox x:Name="txtCode" Grid.Column="0" Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" GotFocus="TxtCode_OnMouseLeftButtonDown" VerticalAlignment="Center" Height="30" Foreground="{Binding CodeColor}">
+                <TextBox x:Name="txtCode" Grid.Column="0" Text="{Binding Code, UpdateSourceTrigger=PropertyChanged}" GotFocus="TxtCode_OnMouseLeftButtonDown" VerticalAlignment="Center" Height="40" Foreground="{Binding CodeColor}">
                     <TextBox.InputBindings>
                         <!--MouseBinding MouseAction="LeftClick" Command="{Binding CodeLeftClickClearCommand}"></ -->
                         <KeyBinding Command="{Binding SearchCodeCommand}" Key="Enter" CommandParameter="{Binding Code}"></KeyBinding>
                     </TextBox.InputBindings>
                 </TextBox>
-                <Button Command="{Binding SearchCodeCommand}" CommandParameter="{Binding Code}" Grid.Column="1" >
+                <Button Command="{Binding SearchCodeCommand}" CommandParameter="{Binding Code}" Grid.Column="1" Height="51" VerticalAlignment="Bottom" >
                     <Image Source="Resources\Images\lupa activa.png" Margin="5"></Image>
                 </Button>
             </Grid>
         </Grid>
     </Grid>
-
 </Window>
-

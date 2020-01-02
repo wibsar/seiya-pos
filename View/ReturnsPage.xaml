@@ -13,28 +13,32 @@
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
         <Style TargetType="DatePicker">
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
         <Style x:Key="StyleCalendar" TargetType="{x:Type Calendar}">
@@ -49,19 +53,19 @@
             </Setter>
         </Style>
     </Page.Resources>
-    
+
     <Grid ShowGridLines="false" Background="White">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".5*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- header -->
-        <TextBlock Grid.Row="0" Text="DEVOLUCION" FontSize="24" VerticalAlignment="Center"></TextBlock>
+        <TextBlock Grid.Row="0" Text="DEVOLUCION" FontSize="24" VerticalAlignment="Center" Margin="20,0"></TextBlock>
 
         <!-- Return Info -->
         <Grid Grid.Row="1" Background="White" Margin="5">
@@ -84,9 +88,10 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height=".5*"></RowDefinition>
                     <RowDefinition Height="2*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Grid.Column="0" FontSize="18" Text="Registro de Devolución" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
+                <TextBlock Grid.Row="0" Grid.Column="0" Text="Registro de Devolución" Foreground="Gray" Grid.ColumnSpan="2" Margin="0,4" HorizontalAlignment="Center"></TextBlock>
                 <TextBlock Grid.Row="1" Grid.Column="0" Text="No. de Ticket de Compra"></TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="0" Text="Fecha de Compra"></TextBlock>
                 <TextBlock Grid.Row="3" Grid.Column="0" Text="Nombre Cliente"></TextBlock>
@@ -103,7 +108,7 @@
 
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="3*"/>                
+                <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
@@ -118,15 +123,14 @@
                 <TextBlock Grid.Column="1" Margin="5,0,0,0" FontSize="20" Foreground="Red" HorizontalAlignment="Left" Text="{Binding ReturnID, Mode=TwoWay}"></TextBlock>
             </Grid>
 
-            <Button Grid.Column="2" Command="{Binding ReturnSaveChangesCommand}"  Background="{x:Null}" BorderBrush="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-
-                    <Image Grid.Row="0" Source="..\Resources\Images\Guardar.png"></Image>
-                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" >Guardar</TextBlock>
+            <Button Grid.Column="2" Command="{Binding ReturnSaveChangesCommand}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\Guardar.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Guardar" ></TextBlock>
                 </Grid>
             </Button>
         </Grid>

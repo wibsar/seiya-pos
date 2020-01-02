@@ -12,31 +12,35 @@
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
-
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
         </Style>
 
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
         <Style TargetType="{x:Type DataGrid}">
             <Setter Property="Background" Value="#FFF" />
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="AlternationCount" Value="2" />
             <Setter Property="VerticalGridLinesBrush" Value="#FFE8E8E8"></Setter>
             <Setter Property="HorizontalGridLinesBrush" Value="{x:Null}"></Setter>
@@ -68,9 +72,9 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".5*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
 
         </Grid.RowDefinitions>
 
@@ -82,8 +86,12 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
             <TextBlock FontSize="24" VerticalAlignment="Center" Text="PEDIDOS" Margin="20,0" HorizontalAlignment="Left"></TextBlock>
-            <TextBox Grid.Column="1" x:Name="OrdersSearchTextBox" Text="{Binding OrdersSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" VerticalContentAlignment="Center"/>
-            <Button Grid.Column="2" Command="{Binding OrderStartSearchCommand}" CommandParameter="{Binding OrdersSearchText}">
+            <TextBox Grid.Column="1" Height="40" x:Name="OrdersSearchTextBox" Text="{Binding OrdersSearchText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" VerticalContentAlignment="Center">
+                <TextBox.InputBindings>
+                    <KeyBinding Command="{Binding OrderStartSearchCommand}" CommandParameter="{Binding OrdersSearchText}" Key="Enter"></KeyBinding>
+                </TextBox.InputBindings>
+            </TextBox>
+            <Button Grid.Column="2" Command="{Binding OrderStartSearchCommand}" CommandParameter="{Binding OrdersSearchText}" Margin="1">
                 <Image Margin="3" Source="..\Resources\Images\lupa activa.png"></Image>
             </Button>
         </Grid>
@@ -104,48 +112,46 @@
                 <DataGridTextColumn Binding="{Binding Category}" ClipboardContentBinding="{x:Null}" Header=" Categoria " IsReadOnly="True"/>
             </DataGrid.Columns>
         </DataGrid>
-
-        <!-- Inventory options -->
-        <Grid Grid.Row="2" ShowGridLines="False" Margin="0,3,0,0">
+        <!-- footer menu -->
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="5*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+
             </Grid.ColumnDefinitions>
-            
-            <Grid Grid.Column="0" HorizontalAlignment="Left" Margin="20,0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding ExportDataBaseCommand}" CommandParameter="save_orders">
+            <Button Grid.Column="0" Command="{Binding ExportDataBaseCommand}" CommandParameter="save_orders" HorizontalAlignment="Left" MinWidth="200" Margin="20,10">
+                <Grid Margin="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
                     <Image Source="..\Resources\Images\Export.png"></Image>
-                </Button>
-                <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Exportar" ></TextBlock>
-            </Grid>
-            <Grid Grid.Column="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="3*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding OrderAddNewItemCommand}" CommandParameter="order_add">
-                    <Image Source="..\Resources\Images\agregar.png"></Image> </Button>
-                <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" Text="Agregar"></TextBlock>
-            </Grid>
-
-            <Grid Grid.Column="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="4*"></RowDefinition>
-                    <RowDefinition Height="*"></RowDefinition>
-                </Grid.RowDefinitions>
-
-                <Button Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding OrderUpdateCommand}" CommandParameter="order_details">
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Exportar" ></TextBlock>
+                </Grid>
+            </Button>
+            <Button Grid.Column="2" Command="{Binding OrderAddNewItemCommand}" CommandParameter="order_add">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\Agregar.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Nuevo" ></TextBlock>
+                </Grid>
+            </Button>
+            <Button Grid.Column="3" Command="{Binding OrderUpdateCommand}" CommandParameter="order_details">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
                     <Image Source="..\Resources\Images\Detalles.png"></Image>
-                </Button>
-                <TextBlock TextAlignment="Center" Grid.Row="1" FontSize="16" >Detalle</TextBlock>
-            </Grid>
-
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Detalles" ></TextBlock>
+                </Grid>
+            </Button>
         </Grid>
+
     </Grid>
 </Page>

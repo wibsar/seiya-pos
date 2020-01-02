@@ -12,28 +12,28 @@
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>           
+            <Setter Property="FontSize" Value="24"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="32"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="32"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
 
 
-    <Grid ShowGridLines="false" Background="White">        
+    <Grid ShowGridLines="false" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
@@ -42,23 +42,23 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
         <!-- header -->
-        <TextBlock Grid.Row="0" Text="SOPORTE TECNICO" FontSize="24" VerticalAlignment="Top"></TextBlock>
+        <TextBlock Grid.Row="0" Text="SOPORTE TECNICO" FontSize="24" VerticalAlignment="Top" Margin="20,0"></TextBlock>
 
-                  <!-- User's Guide -->
-            <Button Grid.Row="1" Command="{Binding ChangePageCommand}" CommandParameter="users_guide" Background="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="..\Resources\Images\Manual.png" HorizontalAlignment="Center" Margin="0,0,0,15"></Image>
-                    <TextBlock Grid.Row="1" Text="Guía de Usuario" FontSize="20"  HorizontalAlignment="Center"></TextBlock>
-                </Grid>
-            </Button>
+        <!-- User's Guide -->
+        <Button Grid.Row="1" Command="{Binding ChangePageCommand}" CommandParameter="users_guide" Background="{x:Null}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Source="..\Resources\Images\Manual.png" HorizontalAlignment="Center" Margin="0,0,0,15"></Image>
+                <TextBlock Grid.Row="1" Text="Guía de Usuario"  HorizontalAlignment="Center"></TextBlock>
+            </Grid>
+        </Button>
 
-       
-        <TextBlock Grid.Row="2" Text="Contacto" VerticalAlignment="Bottom" HorizontalAlignment="Center" FontSize="20" ></TextBlock>
-        <TextBlock Grid.Row="3" HorizontalAlignment="Center" FontSize="20" VerticalAlignment="Top">
+
+        <TextBlock Grid.Row="2" Text="Contacto" VerticalAlignment="Bottom" HorizontalAlignment="Center" ></TextBlock>
+        <TextBlock Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Top">
             <Hyperlink NavigateUri="mailto:soporte@wibsar.com?subject=Soporte Técnico&amp;" RequestNavigate="OnNavigate">soporte@wibsar.com</Hyperlink>
         </TextBlock>
         <Grid Grid.Row="4" HorizontalAlignment="Center">
@@ -66,7 +66,7 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Image Source="..\Resources\Images\LOGO WIBSAR.png" Margin=" 20,20,0,20" HorizontalAlignment="Right"></Image>
+            <Image Source="..\Resources\Images\LOGO WIBSAR.png" Margin="0,50" HorizontalAlignment="Right"></Image>
             <TextBlock Grid.Column="1" FontSize="20" Margin="10,0,0,0">
                 <Hyperlink NavigateUri="http://wibsar.com" RequestNavigate="Hyperlink_OnRequestNavigate">www.wibsar.com</Hyperlink>
             </TextBlock>

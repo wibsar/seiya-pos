@@ -14,23 +14,23 @@
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
@@ -41,19 +41,19 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"></RowDefinition>            
+            <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="2*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>            
-            <RowDefinition Height="2.8*"></RowDefinition>
+            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!--Display client information-->
         <Grid Grid.Row="0">
-            <TextBlock Text="{Binding CurrentCustomer.Name}" HorizontalAlignment="Center" Foreground="Gray"></TextBlock>
+            <TextBlock Text="{Binding CurrentCustomer.Name, StringFormat='Cliente: {0}'}" HorizontalAlignment="Center" Foreground="Gray"></TextBlock>
         </Grid>
-      
-        
+
+
         <!--Diplay Totals-->
         <Grid Grid.Row="1" ShowGridLines="False">
             <Grid.ColumnDefinitions>
@@ -89,7 +89,6 @@
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Grid.Row="0" Grid.Column ="0" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Bottom" Text="Efectivo Pesos"></TextBlock>
@@ -123,7 +122,7 @@
             </Grid>
         </Grid>
         <Button Grid.Row="4" FontSize="24" FontWeight="Bold" Foreground="DarkGreen" Background="#FF8BD48B" Content="PROCESAR PAGO PARCIAL" Command="{Binding ChangePageCommand}" CommandParameter="Parcial" BorderBrush="{x:Null}" Click="Button_Click"></Button>
-        
-        
+
+
     </Grid>
 </Page>

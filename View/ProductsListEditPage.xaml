@@ -13,7 +13,7 @@
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
@@ -23,12 +23,12 @@
             <Setter Property="Foreground" Value="#2C5066"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>            
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
@@ -36,7 +36,7 @@
         <Style TargetType="{x:Type ListBox}">
             <Setter Property="Background" Value="#FFF" />
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="AlternationCount" Value="2" />
         </Style>
         <Style TargetType="{x:Type ListBoxItem}">
@@ -141,44 +141,44 @@
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <ListBox x:Name ="ProductListBox" Grid.Row="0" Margin="5" FontSize="18" ItemsSource="{Binding CurrentPageListProducts}" SelectedItem="{Binding SelectedPageListProduct, Mode=TwoWay}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
                                 <TextBlock Text="{Binding Description}" HorizontalAlignment="Stretch" Foreground="#2C5066"></TextBlock>
-                            
-                            <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
+
+                                <StackPanel Orientation="Horizontal" Margin="0,0,0,10">
                                     <TextBlock Text="{Binding Category}" HorizontalAlignment="Stretch" Foreground="LightGray"></TextBlock>
                                     <TextBlock Text="    "></TextBlock>
                                     <TextBlock Text="{Binding Price, StringFormat='${0}'}" Foreground="Green"></TextBlock>
-                                <TextBlock Text=" "></TextBlock>
-                                <TextBlock Text="{Binding PriceCurrency}" FontSize="14" VerticalAlignment="Bottom" Foreground="LightGray"></TextBlock>
+                                    <TextBlock Text=" "></TextBlock>
+                                    <TextBlock Text="{Binding PriceCurrency}" FontSize="14" VerticalAlignment="Bottom" Foreground="LightGray"></TextBlock>
+                                </StackPanel>
                             </StackPanel>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Command="{Binding MoveUpListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="0,0,0,2.5" >
+                    <Button Grid.Column="0" Command="{Binding MoveUpListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="50,10" >
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="..\Resources\Images\flecha arriba.png" VerticalAlignment="Center" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\flecha arriba.png" VerticalAlignment="Center" MinWidth="100" Margin="1"></Image>
                             <TextBlock Grid.Column="1" Text="Subir" VerticalAlignment="Center" HorizontalAlignment="Left" MinWidth="100"  Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Command="{Binding MoveDownListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="0,0,0,2.5">
+                    <Button Grid.Column="1" Command="{Binding MoveDownListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="50,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="..\Resources\Images\flecha abajo.png" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\flecha abajo.png" MinWidth="100" Margin="1"></Image>
                             <TextBlock Grid.Column="1" Text="Bajar"  VerticalAlignment="Center" MinWidth="100" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
@@ -188,23 +188,23 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Command="{Binding DeleteListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="0,2.5,0,0">
+                    <Button Grid.Column="0" Command="{Binding DeleteListItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=ProductListBox}" Margin="50,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="..\Resources\Images\delete.png" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\delete.png" MinWidth="100" Margin="11"></Image>
                             <TextBlock Grid.Column="1" Text="Eliminar" VerticalAlignment="Center" MinWidth="100"  Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Command="{Binding SaveChangesProductListCommand}" CommandParameter="{Binding CurrentSelectedItemsListPageFileName}" Margin="0,2.5,0,0">
+                    <Button Grid.Column="1" Command="{Binding SaveChangesProductListCommand}" CommandParameter="{Binding CurrentSelectedItemsListPageFileName}" Margin="50,10">
                         <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="..\Resources\Images\Guardar.png" MinWidth="100"></Image>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="..\Resources\Images\Guardar.png" MinWidth="100" Margin="1"></Image>
                             <TextBlock Grid.Column="1" Text="Guardar" VerticalAlignment="Center" Foreground="Gray" MinWidth="100"></TextBlock>
                         </Grid>
                     </Button>
@@ -261,7 +261,7 @@
                     <TextBlock Grid.Row="3" Margin="10,2.5,5,2.5" Foreground="Gray" Text="{Binding SelectedPageListProduct.Category}"></TextBlock>
                     <TextBlock Grid.Row="4" Margin="10,2.5,5,2.5" Foreground="Gray" Text="{Binding SelectedPageListProduct.Price, StringFormat='${0}'}"></TextBlock>
                     <TextBlock Grid.Row="5" Margin="10,2.5,5,5" Foreground="Gray" Text="{Binding SelectedPageListProduct.PriceCurrency}"></TextBlock>
-            </Grid>
+                </Grid>
                 <Grid Grid.Column="0" Grid.Row="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="*"></RowDefinition>
@@ -269,7 +269,7 @@
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" VerticalAlignment="Center" Text="Nombre del Grupo"></TextBlock>
                     <TextBlock Grid.Row="1" VerticalAlignment="Center" Text="Agregar Código"></TextBlock>
-        </Grid>
+                </Grid>
 
                 <Grid Grid.Column="1" Grid.Row="0">
                     <Grid.RowDefinitions>
@@ -278,18 +278,21 @@
                     </Grid.RowDefinitions>
                     <TextBox Grid.Row="0" Name="ListNameTxtBox" Text="{Binding CurrentPageListTitle}" KeyUp="KeyUpNoSymbolsEvent" Height="30" Margin="5"/>
                     <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
+                        <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="3*"></ColumnDefinition>
-                <ColumnDefinition Width="*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-                        <Button Grid.Column="1" Command="{Binding AddListItemCommand}" CommandParameter="{Binding ElementName=AddToListTxtBox}" Margin="0,0,5,0">
+                            <ColumnDefinition Width="*"></ColumnDefinition>
+                        </Grid.ColumnDefinitions>
+                        <Button Grid.Column="1" Command="{Binding AddListItemCommand}" CommandParameter="{Binding ElementName=AddToListTxtBox}" Margin="10">
                             <Image Source="..\Resources\Images\agregar.png"></Image>
                         </Button>
-                        <TextBox Grid.Column="0" x:Name="AddToListTxtBox" KeyUp="KeyUpNoSymbolsEvent" Height="30" Margin="5"/>
+                        <TextBox Grid.Column="0" x:Name="AddToListTxtBox" KeyUp="KeyUpNoSymbolsEvent" Height="30" Margin="5">
+                            <TextBox.InputBindings>
+                                <KeyBinding Command="{Binding AddListItemCommand}" CommandParameter="{Binding ElementName=AddToListTxtBox}"></KeyBinding>
+                            </TextBox.InputBindings>
+                        </TextBox>
                     </Grid>
                 </Grid>
             </Grid>
         </Grid>
     </Grid>
-
 </Page>

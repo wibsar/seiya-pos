@@ -10,31 +10,36 @@
       d:DesignHeight="600" d:DesignWidth="800"
       Title="OrderPage">
 
+
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
             <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="28"></Setter>
         </Style>
         <Style TargetType="DatePickerTextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
         <Style x:Key="StyleCalendar" TargetType="{x:Type Calendar}">
@@ -51,186 +56,179 @@
     </Page.Resources>
 
     <Grid Background="white">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="3*"></ColumnDefinition>
-            <ColumnDefinition Width="2*"></ColumnDefinition>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="12*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <TextBlock FontSize="24" VerticalAlignment="Center" Text="PEDIDO" Margin="20,0" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock Grid.Column="0" FontSize="24" VerticalAlignment="Center" Text="PEDIDO" Margin="20,0"></TextBlock>
 
         <!-- Datos-->
-        <Grid Grid.Column="0" Grid.Row="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="2*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
-            </Grid.RowDefinitions>
-
-            <!-- List of Product properties -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+                <ColumnDefinition Width="*"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
             <Grid Grid.Column="0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height=".4*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height=".4*"></RowDefinition>
-
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"></ColumnDefinition>
-                    <ColumnDefinition Width="1.8*"></ColumnDefinition>
-                </Grid.ColumnDefinitions>
-
-                <TextBlock Grid.Column="0" Grid.Row="0" Text="No. de Folio"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="1" Text="Cliente"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="2" Text="Título"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="3" Text="Fecha Entrega"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="4" Text="Categoría"></TextBlock>
-
-                <TextBlock Grid.Column="0" Grid.Row="5" Background="LightGray" Height="2" ></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="6" Text="Monto Total"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="7" Text="Anticipo"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="8" Text="Ticket Anticipo"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="9" Text="Moneda"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="10" Background="LightGray" Height="2" ></TextBlock>
-
-                <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding OrderTemporalItem.OrderTicketNumber}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
-                <TextBox Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding OrderTemporalItem.Customer}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="2" Text="{Binding OrderTemporalItem.Title}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
-                <DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding OrderTemporalItem.DueDate}" Margin="2" FirstDayOfWeek="Monday" Text="1/1/2018" VerticalContentAlignment="Center" BorderBrush="#FFB2B2B2" CalendarStyle="{StaticResource StyleCalendar}" Background="{x:Null}"></DatePicker>
-                <TextBox Grid.Column="1" Grid.Row="4" Margin="2" Text="{Binding OrderTemporalItem.Category}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
-
-                <TextBlock Grid.Column="1" Grid.Row="5" Background="LightGray" Height="2" Margin="0"></TextBlock>
-                <TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding OrderTemporalItem.TotalAmount, StringFormat='${0}'}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
-                <TextBox Grid.Column="1" Grid.Row="7" Margin="2" Text="{Binding OrderTemporalItem.TotalPrePaid, StringFormat='${0}'}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
-                <TextBox Grid.Column="1" Grid.Row="8" Margin="2" Text="{Binding OrderTemporalItem.PrePaidTicketNumber}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
-                <ComboBox Grid.Column="1" Grid.Row="9" Margin="2" ItemsSource="{Binding CurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding OrderTemporalItem.CurrencyType, Mode=TwoWay}" FontSize="20" VerticalContentAlignment="Center" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
-                <!-- <TextBox Grid.Column="1" Grid.Row="9" Margin="2" Text="{Binding OrderTemporalItem.TotalDue}"></TextBox> -->
-                <TextBlock Grid.Column="1" Grid.Row="10" Background="LightGray" Height="2" Margin="0"></TextBlock>
-
-            </Grid>
-            <Grid Grid.Row="1">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height="4*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="0" Text="Descripción" Margin="2"></TextBlock>
-                <TextBox Grid.Row="1" Text="{Binding OrderTemporalItem.Description}" KeyUp="KeyUpNoSymbolsEvent" TextWrapping="Wrap" VerticalContentAlignment="Top" Margin="2"></TextBox>
-                <Grid Grid.Row ="2">
+
+                <!-- List of Product properties -->
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height=".4*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height="2*"></RowDefinition>
+                        <RowDefinition Height=".4*"></RowDefinition>
+
+                    </Grid.RowDefinitions>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="2*"></ColumnDefinition>
+                        <ColumnDefinition Width="1.8*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <!--<TextBlock Grid.Column="0" Text="{Binding ProgressMessage, Mode=TwoWay}" Foreground="Green"></TextBlock>
-                    <ProgressBar Grid.Column ="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Value="{Binding ProgressBarValue, Mode=TwoWay}" Background="White" Margin="2"/>-->
+
+                    <TextBlock Grid.Column="0" Grid.Row="0" Text="No. de Folio"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="1" Text="Cliente"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="2" Text="Título"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="3" Text="Fecha Entrega"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="4" Text="Categoría"></TextBlock>
+
+                    <TextBlock Grid.Column="0" Grid.Row="5" Background="LightGray" Height="2" ></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="6" Text="Monto Total"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="7" Text="Anticipo"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="8" Text="Ticket Anticipo"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="9" Text="Moneda"></TextBlock>
+                    <TextBlock Grid.Column="0" Grid.Row="10" Background="LightGray" Height="2" ></TextBlock>
+
+                    <TextBox Grid.Column="1" Grid.Row="0" Margin="2" Text="{Binding OrderTemporalItem.OrderTicketNumber}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="1" Margin="2" Text="{Binding OrderTemporalItem.Customer}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="2" Margin="2" Text="{Binding OrderTemporalItem.Title}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                    <DatePicker Grid.Column="1" Grid.Row="3" SelectedDate="{Binding OrderTemporalItem.DueDate}" Margin="2" FirstDayOfWeek="Monday" Text="1/1/2018" VerticalContentAlignment="Center" BorderBrush="#FFB2B2B2" CalendarStyle="{StaticResource StyleCalendar}" Background="{x:Null}"></DatePicker>
+                    <TextBox Grid.Column="1" Grid.Row="4" Margin="2" Text="{Binding OrderTemporalItem.Category}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+
+                    <TextBlock Grid.Column="1" Grid.Row="5" Background="LightGray" Height="2" Margin="0"></TextBlock>
+                    <TextBox Grid.Column="1" Grid.Row="6" Margin="2" Text="{Binding OrderTemporalItem.TotalAmount, StringFormat='${0}'}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="7" Margin="2" Text="{Binding OrderTemporalItem.TotalPrePaid, StringFormat='${0}'}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                    <TextBox Grid.Column="1" Grid.Row="8" Margin="2" Text="{Binding OrderTemporalItem.PrePaidTicketNumber}" KeyUp="KeyUpNoSymbolsEvent"></TextBox>
+                    <ComboBox Grid.Column="1" Grid.Row="9" Margin="2" ItemsSource="{Binding CurrencyTypes, Mode=TwoWay}" SelectedItem="{Binding OrderTemporalItem.CurrencyType, Mode=TwoWay}" FontSize="20" VerticalContentAlignment="Center" FontFamily="/Dohko;component/Resources/Fonts/#Comfortaa" Foreground="#FF224458"></ComboBox>
+                    <!-- <TextBox Grid.Column="1" Grid.Row="9" Margin="2" Text="{Binding OrderTemporalItem.TotalDue}"></TextBox> -->
+                    <TextBlock Grid.Column="1" Grid.Row="10" Background="LightGray" Height="2" Margin="0"></TextBlock>
+
                 </Grid>
-            </Grid>
-            <!-- Inputs for Product properties -->
-        </Grid>
-
-        <Grid Grid.Column="1" Grid.Row="1">
-            <!-- Product image holder, cancel and save button -->
-
-
-            <!-- Browse or delete a picture buttons-->
-
-            <Grid Grid.Row="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="10*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="2*"></RowDefinition>
-                    <RowDefinition Height="2.5*"></RowDefinition>
-                </Grid.RowDefinitions>
-                <!-- Image holder -->
-                <Image Grid.Row="0" Visibility="Visible" Stretch="Uniform" Source="{Binding OrderImage, Mode=TwoWay}"></Image>
                 <Grid Grid.Row="1">
-
-                    <!-- Camera Controls -->
-                    <Grid Grid.Row="1">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="4*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" Text="Descripción" Margin="2"></TextBlock>
+                    <TextBox Grid.Row="1" FontSize="16" Text="{Binding OrderTemporalItem.Description}" KeyUp="KeyUpNoSymbolsEvent" TextWrapping="Wrap" VerticalContentAlignment="Top" Margin="2"></TextBox>
+                    <!--<Grid Grid.Row ="2">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"></ColumnDefinition>
-                            <ColumnDefinition Width="*"></ColumnDefinition>
+                            <ColumnDefinition Width="2*"></ColumnDefinition>
                         </Grid.ColumnDefinitions>
-
-                        <Button Grid.Column="0" Command="{Binding OrderItemImageCommand}" CommandParameter="remove" Background="{x:Null}" BorderBrush="{x:Null}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="3*"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="..\Resources\Images\DeletePhoto.png"></Image>
-                                <TextBlock Grid.Row="1" FontSize="16" Text="Eliminar Imagen" ></TextBlock>
-                            </Grid>
-                        </Button>
-                        <Button Grid.Column="1" Command="{Binding OrderItemImageCommand}" CommandParameter="add" Background="{x:Null}" BorderBrush="{x:Null}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="3*"></RowDefinition>
-                                    <RowDefinition Height="*"></RowDefinition>
-                                </Grid.RowDefinitions>
-                                <Image Grid.Row="0" Source="..\Resources\Images\AddPhoto.png"></Image>
-                                <TextBlock Grid.Row="1" FontSize="16" Text="Cargar Imagen" ></TextBlock>
-                            </Grid>
-                        </Button>
-
-                    </Grid>
-
+                        <TextBlock Grid.Column="0" Text="{Binding ProgressMessage, Mode=TwoWay}" Foreground="Green"></TextBlock>
+                    <ProgressBar Grid.Column ="1"  HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Value="{Binding ProgressBarValue, Mode=TwoWay}" Background="White" Margin="2"/>
+                    </Grid>-->
                 </Grid>
 
-
-
-                <Grid Grid.Row="3">
+            </Grid>
+            <Grid Grid.Column="1" >
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Image Grid.Row="0" Visibility="Visible" Stretch="Uniform" Source="{Binding OrderImage, Mode=TwoWay}"></Image>
+                <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
-                        <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-
-                    <Button Grid.Column="0" Command="{Binding ChangePageCommand}" CommandParameter="orders" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="..\Resources\Images\Cancel.png" ></Image>
-                            <TextBlock HorizontalAlignment="Center" Grid.Row="1" Foreground="#FF224458">Cancelar</TextBlock>
+                    <Button Grid.Column="0" Command="{Binding OrderItemImageCommand}" CommandParameter="remove" VerticalAlignment="Top" MinWidth="200" MaxHeight="80" Margin="20,5">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="..\Resources\Images\DeletePhoto.png"></Image>
+                            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="14" Text="Eliminar Imagen" ></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Command="{Binding OrderDeleteCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="..\Resources\Images\delete.png"></Image>
-                            <TextBlock Grid.Row="1" Text="Eliminar" Foreground="#FF224458" Margin="16,0,0,0"></TextBlock>
-                        </Grid>
-                    </Button>
-                    <Button Grid.Column="2" Command="{Binding OrderSaveChangesCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
-                        <Grid>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="3*"></RowDefinition>
-                                <RowDefinition Height="*"></RowDefinition>
-                            </Grid.RowDefinitions>
-                            <Image Grid.Row="0" Source="..\Resources\Images\Guardar.png"></Image>
-                            <TextBlock Grid.Row="1" Foreground="#FF224458" HorizontalAlignment="Center" >Guardar</TextBlock>
+                    <Button Grid.Column="1" Command="{Binding OrderItemImageCommand}" CommandParameter="add" VerticalAlignment="Top" MinWidth="200" MaxHeight="80" Margin="20,5">
+                        <Grid Margin="5">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="..\Resources\Images\AddPhoto.png"></Image>
+                            <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="14" Text="Agregar Imagen" ></TextBlock>
                         </Grid>
                     </Button>
                 </Grid>
             </Grid>
-
         </Grid>
+        <!-- footer menu -->
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
+            <Button Grid.Column="0" Command="{Binding OrderSendCommand}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\Export.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Repetir Envio" ></TextBlock>
+                </Grid>
+            </Button>
 
+            <Button Grid.Column="2" Command="{Binding ChangePageCommand}" CommandParameter="orders">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\Cancel.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Cancelar" ></TextBlock>
+                </Grid>
+            </Button>
+            <Button Grid.Column="3" Command="{Binding OrderDeleteCommand}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\Delete.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Cancelar" ></TextBlock>
+                </Grid>
+            </Button>
+            <Button Grid.Column="4" Command="{Binding OrderSaveChangesCommand}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\guardar.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Guardar" ></TextBlock>
+                </Grid>
+            </Button>
+        </Grid>
     </Grid>
 </Page>

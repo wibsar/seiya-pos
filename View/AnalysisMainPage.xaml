@@ -16,12 +16,13 @@
         </Style>
         <Style TargetType="Button">
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="Margin" Value="30"></Setter>
         </Style>
-            <Style TargetType="TextBlock">
+        <Style TargetType="TextBlock">
             <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="32"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
@@ -30,12 +31,19 @@
     <Grid ShowGridLines="false" Background="White">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="20*"></RowDefinition>           
-            
+            <RowDefinition Height="20*"></RowDefinition>
+
         </Grid.RowDefinitions>
         <!-- header -->
-        <TextBlock Grid.Row="0" Text="ANALISIS" FontSize="24" VerticalAlignment="Top"></TextBlock>
-        <Grid Grid.Row="1">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Text="ANALISIS" FontSize="24" VerticalAlignment="Center" Margin="20,0">
+            </TextBlock>
+        </Grid>
+
+        <Grid Grid.Row="1" Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
@@ -55,21 +63,10 @@
                         <RowDefinition Height="4*"></RowDefinition>
                         <RowDefinition Height="*"></RowDefinition>
                     </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="/Resources/Images/Transacciones.png"></Image>
-                    <TextBlock Grid.Row="1" Text="Transacciones" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom"></TextBlock>
-                </Grid>
-            </Button>
-            <Button Grid.Row="0" Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="save_transactions" BorderBrush="{x:Null}" Background="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="/Resources/Images/Transacciones.png"></Image>
-                    <TextBlock Grid.Row="1" Text="Exportar Transacciones" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Bottom"></TextBlock>
+                    <Image Grid.Row="0" Source="..\Resources\Images\Transacciones.png"></Image>
+                    <TextBlock Grid.Row="1" Text="Transacciones" HorizontalAlignment="Center" VerticalAlignment="Bottom"></TextBlock>
                 </Grid>
             </Button>
         </Grid>
-       
     </Grid>
 </Page>

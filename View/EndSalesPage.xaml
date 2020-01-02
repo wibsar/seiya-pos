@@ -13,23 +13,28 @@
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Margin" Value="10,0"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="28"></Setter>
             <Setter Property="TextAlignment" Value="Center"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
 
@@ -42,9 +47,9 @@
             <ColumnDefinition Width="1.5*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".5*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- header -->
@@ -75,42 +80,57 @@
                 </Grid.RowDefinitions>
                 <Rectangle Grid.Row="0">
                     <Rectangle.Fill>
-                        <SolidColorBrush Color="#FFB4E3FF"></SolidColorBrush>
+                        <SolidColorBrush Color="#FFD86F32"></SolidColorBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <TextBlock Grid.Row="0" TextAlignment="Center" Text="PESOS" FontSize="18" FontWeight="Bold" Foreground="#FF383838" Margin="0,4,0,0" VerticalAlignment="Top"/>
+                <TextBlock Grid.Row="0" TextAlignment="Center" Text="PESOS" FontSize="24" FontWeight="Bold" Foreground="#FF383838" VerticalAlignment="Center"/>
                 <TextBlock Grid.Row="1" TextAlignment="Right" Text="$ 1,000  x " ></TextBlock>
-                <TextBlock Grid.Row="2" TextAlignment="Right" Background="#FFECECEC" Text="$ 500  x "></TextBlock>
+                <Rectangle Grid.Row="2">
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#FFECECEC"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="2" TextAlignment="Right" Text="$ 500  x "></TextBlock>
                 <TextBlock Grid.Row="3" TextAlignment="Right" Text="$ 200  x " ></TextBlock>
-                <TextBlock Grid.Row="4" TextAlignment="Right" Background="#FFECECEC" Text="$ 100  x " ></TextBlock>
+                <Rectangle Grid.Row="4" >
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#FFECECEC"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="4" TextAlignment="Right" Text="$ 100  x " ></TextBlock>
                 <TextBlock Grid.Row="5" TextAlignment="Right" Text="$ 50  x " ></TextBlock>
-                <TextBlock Grid.Row="6" TextAlignment="Right" Background="#FFECECEC" Text="$ 20  x " ></TextBlock>
+                <Rectangle Grid.Row="6" >
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#FFECECEC"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="6" TextAlignment="Right" Text="$ 20  x " ></TextBlock>
                 <TextBlock Grid.Row="7" TextAlignment="Right" Text="Monedas " FontWeight="Bold" ></TextBlock>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="0" Margin="0,5">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="28*"></RowDefinition>
-                    <RowDefinition Height="29*"></RowDefinition>
-                    <RowDefinition Height="28*"></RowDefinition>
-                    <RowDefinition Height="29*"></RowDefinition>
-                    <RowDefinition Height="28*"></RowDefinition>
-                    <RowDefinition Height="29"></RowDefinition>
-                    <RowDefinition Height="28*"></RowDefinition>
-                    <RowDefinition Height="29*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <Rectangle Grid.Row="0" >
                     <Rectangle.Fill>
-                        <SolidColorBrush Color="#FFB4E3FF"></SolidColorBrush>
+                        <SolidColorBrush Color="#FFD86F32"></SolidColorBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <TextBlock Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Text="CANTIDAD" FontSize="18" Foreground="#FF383838"/>
+                <TextBlock Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Text="CANTIDAD" FontSize="24" Foreground="#FF383838"/>
                 <TextBox Grid.Row="1" Text="{Binding MxnPeso1000, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBox Grid.Row="2" Text="{Binding MxnPeso500, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC"></TextBox>
                 <TextBox Grid.Row="3" Text="{Binding MxnPeso200, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBox Grid.Row="4" Text="{Binding MxnPeso100, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC" TextChanged="TextBox_TextChanged"></TextBox>
                 <TextBox Grid.Row="5" Text="{Binding MxnPeso50, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBox Grid.Row="6" Text="{Binding MxnPeso20, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC"></TextBox>
-                <TextBox Grid.Row="7" Text="{Binding MxnPesoCoinsTotal}" BorderBrush="#FF0073B6" BorderThickness="2px"></TextBox>
+                <TextBox Grid.Row="7" Text="{Binding MxnPesoCoinsTotal}" BorderBrush="#FFD86F32" BorderThickness="2px"></TextBox>
             </Grid>
             <!-- USD panel -->
             <Grid Grid.Column="0" Grid.Row="1" Margin="0,5">
@@ -126,16 +146,31 @@
                 </Grid.RowDefinitions>
                 <Rectangle Grid.Row="0" >
                     <Rectangle.Fill>
-                        <SolidColorBrush Color="#FFB8F0B0"></SolidColorBrush>
+                        <SolidColorBrush Color="#FF69BD5D"></SolidColorBrush>
                     </Rectangle.Fill>
                 </Rectangle>
-                <TextBlock Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Text="DOLAR" FontSize="18" Foreground="#FF383838"/>
+                <TextBlock Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Text="DOLAR" FontSize="24" Foreground="#FF383838"/>
                 <TextBlock Grid.Row="1"  TextAlignment="Right" Text="$ 100  x "></TextBlock>
-                <TextBlock Grid.Row="2"  TextAlignment="Right" Background="#FFECECEC" Text="$ 50  x "></TextBlock>
+                <Rectangle Grid.Row="2" >
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#FFECECEC"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="2"  TextAlignment="Right" Text="$ 50  x "></TextBlock>
                 <TextBlock Grid.Row="3"  TextAlignment="Right" Text="$ 20  x "></TextBlock>
-                <TextBlock Grid.Row="4"  TextAlignment="Right" Background="#FFECECEC" Text="$ 10  x "></TextBlock>
+                <Rectangle Grid.Row="4" >
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#FFECECEC"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="4"  TextAlignment="Right" Text="$ 10  x "></TextBlock>
                 <TextBlock Grid.Row="5"  TextAlignment="Right" Text="$ 5  x "></TextBlock>
-                <TextBlock Grid.Row="6"  TextAlignment="Right" Background="#FFECECEC" Text="$ 1  x "></TextBlock>
+                <Rectangle Grid.Row="6" >
+                    <Rectangle.Fill>
+                        <SolidColorBrush Color="#FFECECEC"></SolidColorBrush>
+                    </Rectangle.Fill>
+                </Rectangle>
+                <TextBlock Grid.Row="6"  TextAlignment="Right" Text="$ 1  x "></TextBlock>
                 <TextBlock Grid.Row="7"  TextAlignment="Right" Text="Monedas " FontWeight="Bold" Foreground="#FF590C0C"></TextBlock>
             </Grid>
             <Grid Grid.Column="1" Grid.Row="1" Margin="0,5">
@@ -151,7 +186,7 @@
                 </Grid.RowDefinitions>
                 <Rectangle Grid.Row="0" >
                     <Rectangle.Fill>
-                        <SolidColorBrush Color="#FFB8F0B0"></SolidColorBrush>
+                        <SolidColorBrush Color="#FF69BD5D"></SolidColorBrush>
                     </Rectangle.Fill>
                 </Rectangle>
                 <TextBlock Grid.Row="0" TextAlignment="Center" FontWeight="Bold" Text="CANTIDAD" Foreground="#FF383838"/>
@@ -161,7 +196,7 @@
                 <TextBox Grid.Row="4" Text="{Binding UsdDollar10, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC"></TextBox>
                 <TextBox Grid.Row="5" Text="{Binding UsdDollar5, UpdateSourceTrigger=PropertyChanged}"></TextBox>
                 <TextBox Grid.Row="6" Text="{Binding UsdDollar1, UpdateSourceTrigger=PropertyChanged}" Background="#FFECECEC"></TextBox>
-                <TextBox Grid.Row="7" Text="{Binding UsdDollarCoinsTotal}" BorderBrush="#FF1CCD00" BorderThickness="2px"></TextBox>
+                <TextBox Grid.Row="7" Text="{Binding UsdDollarCoinsTotal}" BorderBrush="#FF69BD5D" BorderThickness="2px"></TextBox>
             </Grid>
         </Grid>
 
@@ -259,11 +294,11 @@
             </Grid.RowDefinitions>
             <Rectangle Grid.Row="0" >
                 <Rectangle.Fill>
-                    <SolidColorBrush Color="#FFFFBDBD"></SolidColorBrush>
+                    <SolidColorBrush Color="#FF3B5165"></SolidColorBrush>
                 </Rectangle.Fill>
             </Rectangle>
-            <TextBlock Grid.Row="0" TextAlignment="Center" Text="COMENTARIOS" FontWeight="Bold" Foreground="#FF383838"/>
-            <TextBox Grid.Row="1" Text="{Binding Comments, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" TextWrapping="Wrap" TextAlignment="Left"></TextBox>
+            <TextBlock Grid.Row="0" TextAlignment="Center" Text="COMENTARIOS" Foreground="#FFF" VerticalAlignment="Center"/>
+            <TextBox Grid.Row="1" FontSize="16" Text="{Binding Comments, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" TextWrapping="Wrap" TextAlignment="Left"></TextBox>
         </Grid>
 
         <!-- Buttons for sales report type -->
@@ -272,26 +307,30 @@
                 <ColumnDefinition Width="*"></ColumnDefinition>
                 <ColumnDefinition Width="*"></ColumnDefinition>
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="0"  Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="x" BorderBrush="{x:Null}" Background="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="/Seiya;component/Resources/Images/Cortex.png"></Image>
-                    <TextBlock Grid.Row="1" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="16" HorizontalAlignment="Center" Text="Corte X"></TextBlock>
+
+            <Button Grid.Column="0" Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="x" Margin="20,5">
+                <Grid Margin="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\CorteX.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" Text="Corte X" ></TextBlock>
                 </Grid>
             </Button>
-            <Button Grid.Column="1" BorderBrush="{x:Null}" Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="z" Background="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="4*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="..\Resources\Images\Cortez.png"></Image>
-                    <TextBlock Grid.Row="1" HorizontalAlignment="Center" FontSize="16" Text="Corte Z"></TextBlock>
+
+            <Button Grid.Column="1" Command="{Binding GenerateEndOfDaySalesReportCommand}" CommandParameter="z" MinWidth="200" Margin="20,5">
+                <Grid Margin="15">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\Cortez.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" Text="Corte Z" ></TextBlock>
                 </Grid>
             </Button>
+
+
         </Grid>
     </Grid>
 </Page>

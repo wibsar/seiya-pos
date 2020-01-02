@@ -15,33 +15,38 @@
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Margin" Value="5"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
 
     <Grid Background="White" ShowGridLines="False">
+        <Grid.InputBindings>
+            <KeyBinding Command ="{Binding ClickEnterCommand}" CommandParameter="{Binding ElementName=CurrencyTypeToggle}" Key="OemPlus"></KeyBinding>
+        </Grid.InputBindings>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
+            <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="*"></RowDefinition>
             <RowDefinition Height="6*"></RowDefinition>
         </Grid.RowDefinitions>
@@ -54,7 +59,7 @@
                     <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="Gray" Padding="10,0,0,0" Text="Descripción" VerticalAlignment="Bottom"/>
-                <TextBox Padding="auto"  FontWeight="Bold" FontSize="24" Grid.Row="1" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent"/>
+                <TextBox Padding="auto"  FontWeight="Bold" FontSize="24" Grid.Row="1" Text="{Binding Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" TabIndex="1" Margin="5"/>
             </Grid>
         </Grid>
 
@@ -70,13 +75,14 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <TextBlock Foreground="Gray" Padding="10,0,0,0" Grid.Row="0" VerticalAlignment="Bottom" Text="Precio"/>
-                <TextBox VerticalContentAlignment="Center" Grid.Row="1" Text="{Binding Price , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" FontWeight="Bold" FontSize="24" Margin="5,0"></TextBox>
-                <Button Grid.Column="1" Grid.Row="1" x:Name="CurrencyTypeToggle" Foreground="{Binding CodeColor, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ChangeCurrencyCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=CurrencyTypeToggle}" FontSize="18" Width="Auto" Margin="5,0,5,0"  BorderBrush="{x:Null}" Background="LightGray" Content="{Binding CurrencyTypeContent}" HorizontalAlignment = "Stretch"  />
+                <TextBox VerticalContentAlignment="Center" Grid.Column="0" Grid.Row="1" Text="{Binding Price , Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" AcceptsReturn="False" AcceptsTab="False" FontWeight="Bold" FontSize="24" Margin="5" TabIndex="2"></TextBox>
+                <Button Grid.Column="1" Grid.Row="1" x:Name="CurrencyTypeToggle" Foreground="{Binding CodeColor, UpdateSourceTrigger=PropertyChanged}" Command="{Binding ChangeCurrencyCommand, UpdateSourceTrigger=PropertyChanged}" CommandParameter="{Binding ElementName=CurrencyTypeToggle}" 
+                        FontSize="18" Width="Auto" Margin="5,0,5,0"  BorderBrush="{x:Null}" Background="LightGray" Content="{Binding CurrencyTypeContent}" HorizontalAlignment = "Stretch"/>
             </Grid>
         </Grid>
 
         <!-- Grid for manual number input-->
-        <Grid Column="0" Row="1" ShowGridLines="False" Margin="0,5,0,0">
+        <Grid Column="0" Row="1" RowSpan="2" ShowGridLines="False" Margin="0,5,0,0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="67*"></ColumnDefinition>
                 <ColumnDefinition Width="66*"></ColumnDefinition>
@@ -102,26 +108,33 @@
             <Button Grid.Column="2" Grid.Row="1" Content="6" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="6"  FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
             <Button Grid.Column="2" Grid.Row="2" Content="3" Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="3"  FontSize="36" Background="#FFE8E8E8" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
             <Button Grid.Column="2" Grid.Row="3" Content="." Command="{Binding EnterKeyPadNumberCommand}" CommandParameter="."  FontSize="36" Background="LightGray" BorderBrush="White" Foreground="#FF224458" Grid.ColumnSpan="2"></Button>
-
         </Grid>
 
+        <Grid Row="1" Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock Foreground="Gray" Padding="10,0,0,0" Text="Vendedor" VerticalAlignment="Bottom"/>
+            <TextBox Padding="auto" Margin="5" FontWeight="Bold" FontSize="24" Grid.Row="1" Text="{Binding Seller, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" TabIndex="3"/>
+        </Grid>
         <!-- Grid for categories selection-->
-        <Grid Column="1" Row="1">
+        <Grid Column="1" Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="199*"/>
                 <ColumnDefinition Width="48*"/>
                 <ColumnDefinition Width="20*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
-                <RowDefinition Height="3*"></RowDefinition>
-                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="255*"></RowDefinition>
+                <RowDefinition Height="100*"></RowDefinition>
             </Grid.RowDefinitions>
 
             <!-- Category List-->
-            <ListBox  x:Name="lstCategories" Grid.Row="0" Margin="5" ItemsSource="{Binding CategoriesList, Mode=TwoWay}" SelectedItem="{Binding Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="White" BorderBrush="LightGray" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="18" Grid.ColumnSpan="3"/>
+            <ListBox  x:Name="lstCategories" Grid.Row="0" Margin="5,5,5,10" ItemsSource="{Binding CategoriesList, Mode=TwoWay}" SelectedItem="{Binding Category, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="White" 
+                      BorderBrush="LightGray" FontFamily="/Dohko;component/Resources/Fonts/#Comfortaa" FontSize="24" Grid.ColumnSpan="3" TabIndex="4"/>
             <!-- Enter -->
-            <Button Grid.Row="1" Content="Enter" Command ="{Binding ClickEnterCommand}" CommandParameter="{Binding ElementName=CurrencyTypeToggle}" FontSize="36" Foreground="white" Background="#FF3B96B6" BorderBrush="White" Margin="5,1,5,0" Grid.ColumnSpan="3"></Button>
+            <Button Grid.Column="0" Grid.Row="1" Content="Enter" Command ="{Binding ClickEnterCommand}" CommandParameter="{Binding ElementName=CurrencyTypeToggle}" FontSize="36" Foreground="white" Background="#FF3B96B6" BorderBrush="White" Grid.ColumnSpan="3" TabIndex="5" Margin="5,0,5,5"></Button>
         </Grid>
-
     </Grid>
 </Page>

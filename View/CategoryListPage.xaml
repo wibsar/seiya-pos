@@ -9,26 +9,23 @@
       d:DataContext="{d:DesignInstance athena:MainWindowViewModel}"
       d:DesignHeight="600" d:DesignWidth="800"
       Title="ProductsListEditPage">
-
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="C:\Projects\wibsar-pos-solution\seiya-pos\Resources\Fonts\Comfortaa-Regular.ttf"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
             <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Background" Value="White"></Setter>
             <Setter Property="Foreground" Value="#2C5066"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
             <Setter Property="FontSize" Value="18"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
@@ -36,7 +33,6 @@
         <Style TargetType="{x:Type ListBox}">
             <Setter Property="Background" Value="#FFF" />
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="AlternationCount" Value="2" />
         </Style>
         <Style TargetType="{x:Type ListBoxItem}">
@@ -58,12 +54,12 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
+            <RowDefinition Height="16*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- Title -->
         <Grid>
-            <TextBlock Grid.Row="0" Text="CATEGORIAS DE PRODUCTOS" FontSize="24" HorizontalAlignment="Left"></TextBlock>
+            <TextBlock Grid.Row="0" Text="CATEGORIAS DE PRODUCTOS" FontSize="24" VerticalAlignment="Center" Margin="20,0"></TextBlock>
         </Grid>
 
         <!-- Table of inventory items found based on the search -->
@@ -80,30 +76,30 @@
                     <RowDefinition Height="*"></RowDefinition>
                     <RowDefinition Height="1*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <ListBox x:Name ="CategoryListBox" Grid.Row="0" Margin="5" ItemsSource="{Binding CurrentCategoryList}" SelectedItem="{Binding SelectedCategoryItem, Mode=TwoWay}" FontFamily="/Seiya;component/Resources/Fonts/#Comfortaa" FontSize="20"></ListBox>
+                <ListBox x:Name ="CategoryListBox" Grid.Row="0" Margin="5" ItemsSource="{Binding CurrentCategoryList}" SelectedItem="{Binding SelectedCategoryItem, Mode=TwoWay}" FontFamily="/Dohko;component/Resources/Fonts/#Comfortaa" FontSize="20"></ListBox>
                 <!-- Up and Down Buttons -->
                 <Grid Grid.Row="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Command="{Binding MoveUpCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="0,0,0,2.5">
+                    <Button Grid.Column="0" Command="{Binding MoveUpCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="50,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="..\Resources\Images\flecha arriba.png" VerticalAlignment="Center" MinWidth="100"></Image>
-                            <TextBlock Grid.Column="1" Text="Subir" VerticalAlignment="Center" Foreground="Gray" MinWidth="100"></TextBlock>
+                            <Image Grid.Column="0" Source="..\Resources\Images\flecha arriba.png" VerticalAlignment="Center" MinWidth="100" Margin="1"></Image>
+                            <TextBlock Grid.Column="1" Text="Subir" VerticalAlignment="Center" Foreground="Gray" MinWidth="100" FontSize="18"></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Command="{Binding MoveDownCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="0,0,0,2.5">
+                    <Button Grid.Column="1" Command="{Binding MoveDownCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="50,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="..\Resources\Images\flecha abajo.png" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\flecha abajo.png" MinWidth="100" Margin="1"></Image>
                             <TextBlock Grid.Column="1" Text="Bajar" MinWidth="100" VerticalAlignment="Center" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
@@ -114,23 +110,23 @@
                         <ColumnDefinition Width="*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <Button Grid.Column="0" Command="{Binding DeleteCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="0,2.5,0,0">
+                    <Button Grid.Column="0" Command="{Binding DeleteCategoryItemCommand}" CommandParameter="{Binding SelectedIndex, ElementName=CategoryListBox}" Margin="50,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="..\Resources\Images\delete.png" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\delete.png" MinWidth="100" Margin="1"></Image>
                             <TextBlock Grid.Column="1" Text="Eliminar" VerticalAlignment="Center" MinWidth="100" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
-                    <Button Grid.Column="1" Command="{Binding SaveChangesCategoryListCommand}" Margin="0,2.5,0,0">
+                    <Button Grid.Column="1" Command="{Binding SaveChangesCategoryListCommand}" Margin="50,10">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                                 <ColumnDefinition Width="*"></ColumnDefinition>
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Column="0" Source="..\Resources\Images\Guardar.png" MinWidth="100"></Image>
+                            <Image Grid.Column="0" Source="..\Resources\Images\Guardar.png" MinWidth="100" Margin="1"></Image>
                             <TextBlock Grid.Column="1" Text="Guardar" VerticalAlignment="Center" MinWidth="100" Foreground="Gray"></TextBlock>
                         </Grid>
                     </Button>
@@ -138,23 +134,38 @@
             </Grid>
 
             <Grid Grid.Row="0" Grid.Column="1" Margin="10,0,5,0">
-                
+
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="1.5*"></RowDefinition>
                     <RowDefinition Height="*"></RowDefinition>
-                    <RowDefinition Height=".74*"></RowDefinition>
-                    <RowDefinition Height="3*"></RowDefinition>
+                    <RowDefinition Height=".5*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBlock Grid.Row="1" FontSize="24" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Center" Text="Agregar Categoría"></TextBlock>
+                <TextBlock Grid.Row="0" FontSize="24" Foreground="Gray" HorizontalAlignment="Center" VerticalAlignment="Top" Text="Agregar Categoría"></TextBlock>
                 <!-- New Category Text -->
-                <Grid Grid.Row="2">
+                <Grid Grid.Row="0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="2*"></ColumnDefinition>
                         <ColumnDefinition Width="*"></ColumnDefinition>
                     </Grid.ColumnDefinitions>
-                    <TextBox Height="40" Margin="5" x:Name="NewCategoryItemTextBox" Text="{Binding NewCategoryItem, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent"/>
-                    <Button Grid.Column="1" Background="{x:Null}" BorderBrush="{x:Null}" Command="{Binding AddCategoryListCommand}" CommandParameter="{Binding NewCategoryItem}">
-                        <Image Source="..\Resources\Images\agregar.png"></Image>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"></RowDefinition>
+                        <RowDefinition Height="*"></RowDefinition>
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" FontSize="24" Foreground="Gray" HorizontalAlignment="Left" Text="Nombre" Margin="5,0" VerticalAlignment="Bottom"></TextBlock>
+                    <TextBox Grid.Column="0" Grid.Row="1" Height="40" Margin="5,20,5,0" x:Name="NewCategoryItemTextBox" Text="{Binding NewCategoryItem, UpdateSourceTrigger=PropertyChanged}" KeyUp="KeyUpNoSymbolsEvent" VerticalAlignment="Top" RenderTransformOrigin="0.497,1.392">
+                        <TextBox.InputBindings>
+                            <KeyBinding Command="{Binding AddCategoryListCommand}" CommandParameter="{Binding NewCategoryItem}" Key="Enter"></KeyBinding>
+                        </TextBox.InputBindings>
+                    </TextBox>
+                    <!--<Button Grid.Column="1" Margin="5" Grid.Row="1" Height="40" Background="#FFF3F3F3" VerticalAlignment="Top" BorderBrush="LightGray" Command="{Binding AddCategoryListCommand}" CommandParameter="{Binding NewCategoryItem}" Content="Agregar"></Button>-->
+                    <Button Grid.Column="1" Grid.Row="1" Command="{Binding AddCategoryListCommand}" CommandParameter="{Binding NewCategoryItem}" VerticalAlignment="Top" Height="69" Margin="5,5,0,0" HorizontalAlignment="Left" Width="82">
+                        <Grid Margin="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Source="..\Resources\Images\Agregar.png"></Image>
+                        </Grid>
                     </Button>
                 </Grid>
                 <!-- New Category Text Input -->

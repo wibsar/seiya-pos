@@ -12,22 +12,27 @@
     <Page.Resources>
         <Style TargetType="Page">
             <Setter Property="Foreground" Value="#2C5066" />
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="Background" Value="White"></Setter>
         </Style>
         <Style TargetType="Button">
-            <Setter Property="BorderBrush" Value="White"></Setter>
-            <Setter Property="FontSize" Value="14"></Setter>
+            <Setter Property="BorderBrush" Value="{x:Null}"></Setter>
+            <Setter Property="FontSize" Value="16"></Setter>
+            <Setter Property="Background" Value="White"></Setter>
+            <Setter Property="Margin" Value="10"></Setter>
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="200"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
         </Style>
         <Style TargetType="TextBox">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalContentAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
         </Style>
         <Style TargetType="TextBlock">
-            <Setter Property="FontFamily" Value="/Seiya;component/Resources/Fonts/#Comfortaa"></Setter>
+            <Setter Property="FontFamily" Value="/Dohko;component/Resources/Fonts/#Comfortaa"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
-            <Setter Property="FontSize" Value="18"></Setter>
+            <Setter Property="FontSize" Value="24"></Setter>
             <Setter Property="Foreground" Value="#2C5066" />
         </Style>
     </Page.Resources>
@@ -37,13 +42,13 @@
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height=".5*"></RowDefinition>
-            <RowDefinition Height="8*"></RowDefinition>
-            <RowDefinition Height="1.5*"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+            <RowDefinition Height="14*"></RowDefinition>
+            <RowDefinition Height="2*"></RowDefinition>
         </Grid.RowDefinitions>
 
         <!-- header -->
-        <TextBlock Grid.Row="0" Text="TRANSACCION" FontSize="24" HorizontalAlignment="Left"></TextBlock>
+        <TextBlock Grid.Row="0" Margin="20,0" Text="TRANSACCION" FontSize="24" HorizontalAlignment="Left"></TextBlock>
 
 
         <Grid Grid.Row="1" Background="White" Margin="5">
@@ -59,19 +64,21 @@
 
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="36"></RowDefinition>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
-                    <RowDefinition Height="36*"></RowDefinition>
-                    <RowDefinition Height="37*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="*"></RowDefinition>
+                    <RowDefinition Height="5*"></RowDefinition>
                 </Grid.RowDefinitions>
 
                 <TextBlock Grid.Column="0" Grid.Row="0" VerticalAlignment="Center" Foreground="Gray" Grid.ColumnSpan="2" HorizontalAlignment="Center">Detalles</TextBlock>
@@ -85,8 +92,9 @@
                 <TextBlock Grid.Column="0" Grid.Row="8" Text="Fecha de Venta:"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="9" Text="Cliente:"></TextBlock>
                 <TextBlock Grid.Column="0" Grid.Row="10" Text="Usuario:"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="11" Text="Tipo Venta:"></TextBlock>
-                <TextBlock Grid.Column="0" Grid.Row="12" Text="Método de Pago:"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="11" Text="Vendedor:"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="12" Text="Tipo Venta:"></TextBlock>
+                <TextBlock Grid.Column="0" Grid.Row="13" Text="Método de Pago:"></TextBlock>
 
                 <TextBlock Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ReceiptNumber}" KeyUp="KeyUpNoSymbolsEvent"></TextBlock>
                 <TextBlock Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.ProductCode}" KeyUp="KeyUpNoSymbolsNoSpaceEvent"></TextBlock>
@@ -98,11 +106,12 @@
                 <TextBlock Grid.Row="8" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.TransactionDate}"></TextBlock>
                 <TextBlock Grid.Row="9" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.CustomerName}"></TextBlock>
                 <TextBlock Grid.Row="10" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.UserName}"></TextBlock>
-                <TextBlock Grid.Row="11" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.SaleType}"></TextBlock>
-                <TextBlock Grid.Row="12" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.PaymentType}"></TextBlock>
+                <TextBlock Grid.Row="11" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.SellerName}"></TextBlock>
+                <TextBlock Grid.Row="12" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.SaleType}"></TextBlock>
+                <TextBlock Grid.Row="13" Grid.Column="1" Margin="5" Text="{Binding TransactionTemporalItem.PaymentType}"></TextBlock>
             </Grid>
         </Grid>
-
+        <!-- footer menu -->
         <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="2*"/>
@@ -111,37 +120,36 @@
                 <ColumnDefinition Width="*"/>
 
             </Grid.ColumnDefinitions>
-            <Button Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="transactions" Background="{x:Null}" BorderBrush="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="..\Resources\Images\Cancel.png" ></Image>
-                    <TextBlock Text="Cancelar" HorizontalAlignment="Center" Grid.Row="1" FontSize="16"></TextBlock>
+            <Button Grid.Column="1" Command="{Binding ChangePageCommand}" CommandParameter="transactions">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\Cancel.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Cancelar" ></TextBlock>
                 </Grid>
             </Button>
-            <Button Grid.Column="2" Command="{Binding TransactionDeleteCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="..\Resources\Images\delete.png"></Image>
-                    <TextBlock Grid.Row="1" FontSize="16" Text="Eliminar" Margin="16,0,0,0"></TextBlock>
+            <Button Grid.Column="2" Command="{Binding TransactionDeleteCommand}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\Delete.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Eliminar" ></TextBlock>
                 </Grid>
             </Button>
-            <Button Grid.Column="3" Command="{Binding TransactionSaveChangesCommand}" Background="{x:Null}" BorderBrush="{x:Null}">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="3*"></RowDefinition>
-                        <RowDefinition Height="*"></RowDefinition>
-                    </Grid.RowDefinitions>
-                    <Image Grid.Row="0" Source="..\Resources\Images\Guardar.png"></Image>
-                    <TextBlock Grid.Row="1" FontSize="16" HorizontalAlignment="Center" >Guardar</TextBlock>
+            <Button Grid.Column="3" Command="{Binding TransactionSaveChangesCommand}">
+                <Grid Margin="5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"></ColumnDefinition>
+                        <ColumnDefinition Width="3*"></ColumnDefinition>
+                    </Grid.ColumnDefinitions>
+                    <Image Source="..\Resources\Images\guardar.png"></Image>
+                    <TextBlock VerticalAlignment="Center" Margin="10,0,0,0" Grid.Column="1" Background="{x:Null}" FontSize="18" Text="Guardar" ></TextBlock>
                 </Grid>
             </Button>
-
         </Grid>
     </Grid>
 </Page>
